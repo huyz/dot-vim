@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # huyz 2011-07-02
 # Download & compile packages
 
@@ -187,10 +188,10 @@ fi
 
 ### Clone read-only git repos
 
-[ -d gundo.vim ] || git clone https://github.com/sjl/gundo.vim.git
-[ -d minibufexpl.vim ] || git clone https://github.com/fholgado/minibufexpl.vim.git
-[ -d nerdcommenter ] || git clone https://github.com/scrooloose/nerdcommenter.git
-[ -d snipmate.vim ] || git clone https://github.com/msanders/snipmate.vim.git
+[ -d gundo.vim ] || git clone http://github.com/sjl/gundo.vim.git
+[ -d minibufexpl.vim ] || git clone http://github.com/fholgado/minibufexpl.vim.git
+[ -d nerdcommenter ] || git clone http://github.com/scrooloose/nerdcommenter.git
+[ -d snipmate.vim ] || git clone http://github.com/msanders/snipmate.vim.git
 [ -d vim-gnupg ] || git clone git://gitorious.org/vim-gnupg/vim-gnupg.git
 
 # vim-solarized is contained within the larger repository solarized, so check
@@ -199,7 +200,7 @@ if [ ! -h vim-colors-solarized ]; then
   if [ -d ~/git/solarized ]; then
     ln -s ~/git/solarized/vim-colors-solarized .
   else
-    [ -d solarized ] || git clone https://github.com/altercation/solarized.git
+    [ -d solarized ] || git clone http://github.com/altercation/solarized.git
     ln -s solarized/vim-colors-solarized .
   fi
 fi
