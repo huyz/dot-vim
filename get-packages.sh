@@ -39,7 +39,7 @@ cd ~/.vim/packages || exit 40
 # The latest version updated March 18th, 2003 is not accessible online, so we
 # check it in
 #[ -e rcs-menu.vim ] || wget -O rcs-menu.vim 'http://www.vim.org/scripts/download_script.php?src_id=59'
-[ -h ../plugin/rcs-menu.vim ] || ln -s ../packages/rcs-menu.vim ../plugin/.
+#[ -h ../plugin/rcs-menu.vim ] || ln -s ../packages/rcs-menu.vim ../plugin/.
 
 [ -d less.vim ] || git clone git@github.com:huyz/less.vim.git
 [ -h ../macros/less.vim ] || ln -s ../packages/less.vim/less.vim ../macros/.
