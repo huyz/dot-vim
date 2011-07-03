@@ -130,7 +130,7 @@ EnhancedCommentify : Comments/Decomments based on file type
 *   `\/u`          :   Decomment line(s)
 *   `\/<space>`    :   Toggles commenting of current line and goes to next line
 
-Align : Aligns 
+Align           : Aligns text into columns around delimiters
 
 *   `\t=`       : Align line or selection around '=' signs
 *   `:Align :`  : Align line around ':' (or arbitrary characters)
