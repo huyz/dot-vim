@@ -12,14 +12,8 @@ Features:
 *   Sane set of options.
 *   Supports function and control keys of popular terminals.
 *   Functions to cycle through different textwidths, virtual-edit modes,
-    visual editing aids.
-*   Function to cycle among different methods of handling long lines:
-    -   wrap, no showbreak [default]
-    -   wrap, showbreak, linebreak
-    -   nowrap, showbreak, linebreak
-*   Script for running a `less`-like pager using vim with full syntax
-    highlighting
-*   Installs the plugins, with proper patches
+    visual editing aids, methods of displaying/handling long lines.
+*   Installs nice plugins, sometimes with patches
     *   [pathogen](http://www.vim.org/scripts/script.php?script_id=2332) -
         autoloads plugins from their own individual directories under
         `bundle/`
@@ -29,33 +23,32 @@ Features:
         buffer explorer at all times
     *   [snipmate](http://www.vim.org/scripts/script.php?script_id=2540) - TextMate-style snippets
     *   [closetag](http://www.vim.org/scripts/script.php?script_id=13)
-        - Functions and mappings to close open HTML/XML tags
+        \- functions and mappings to close open HTML/XML tags
     *   [NERDCommenter](http://www.vim.org/scripts/script.php?script_id=1218)
-        - code commenting for many file types
+        \- code commenting for many file types
     *   [EnhancedCommentify](http://www.vim.org/scripts/script.php?script_id=23)
-        - code commenting (alternative style)
+        \- code commenting (alternative style)
     *   [Align](http://www.vim.org/scripts/script.php?script_id=294) - Helps
         align text, equations, tables, etc.
     *   [AutoAlign](http://www.vim.org/scripts/script.php?script_id=884) -
-	Automatically align as you type in certain languages, e.g. C, C++, HTML,
+	automatically aligns as you type in certain languages, e.g. C, C++, HTML,
 	vim.
     *   [table](http://www.vim.org/scripts/script.php?script_id=769) - smarter
         [table editing](http://vim.wikia.com/wiki/Smarter_Table_Editing_II)
     *   [Gist.vim](http://www.vim.org/scripts/script.php?script_id=2423) -
         post buffers or selected text to https://gist.github.com/
     *   [vim-gnupg](http://gitorious.org/vim-gnupg) - transparent editing of GPG-encrypted files
-    *   [rcs-menu](http://lanzarotta.tripod.com/vim.html) - Interface to RCS version control system
-    *   [gundo](http://sjl.bitbucket.org/gundo.vim/) - Visualize undo tree
-        (requires vim to be compiled with Python 2.4+)
+    *   [rcs-menu](http://lanzarotta.tripod.com/vim.html) - interface to RCS version control system
+    *   [gundo](http://sjl.bitbucket.org/gundo.vim/) - visualize undo tree
+        [requires vim to be compiled with Python 2.4+]
     *   [less.vim](https://github.com/huyz/less.vim) - my improved version of
         less.{vim,sh} distributed with vim for paging through files/stdin with
         full syntax highlighting
     *   [vimball](http://www.vim.org/scripts/script.php?script_id=1502) -
         weird vim-based archiver that is required to install some a few
-        plugins, mainly Align.  Largely deprecated by pathogen.
+        plugins, mainly Align and AutoAlign.  Largely deprecated by pathogen.
 *   Installs the color scheme:
     *   [Solarized](http://ethanschoonover.com/solarized/vim-colors-solarized)
-        color scheme
 *   Installs the syntax highlighting scripts for:
     *   [spamassassin](http://www.vim.org/scripts/script.php?script_id=2617&rating=helpful)
 
@@ -74,14 +67,15 @@ Vim Quick-Reference
 
 ### General tips ###
 
-These are useful commands that are easy to forget because they're rarely
-needed.
+These are useful commands that are easy to forget because they're needed only
+occasionally.
 
 *   `g:`  `q/`  `q?`    :   Open comand-line window (`^F` if already in command-line)
-*   `\`.`               :   Jump to last modification
+*   ``\`.``             :   Jump to last modification
 *   `gv`                :   Reselect last visual selection
 *   `ga`                :   ASCII/Unicode value of current character
-*   `viw` `cis` `dap` `yab`: Operations on word, inner sentence, paragraph, () block
+*   `viw` `cis` `dap` `yab` `ci'` `ci"` ``ci` ``
+    : Operations on word, inner sentence, paragraph, () block, quoted strings
 *   `/<C-R><C-W>`       :   Pull current word into search
 *   `/<C-R>"`           :   Pull in last yank
 *   `[I`                :   Show lines that match current word
@@ -102,7 +96,7 @@ needed.
 
 ### My own mappings ###
 
-I tend to forgot I defined these mappings
+I tend to forgot I defined these mappings:
 
 *   `<C-k>` `<C-j>`  : Quick switch between split windows
 *   `<C-w><C-q>`     : Closes buffer without messing up split window
@@ -110,49 +104,58 @@ I tend to forgot I defined these mappings
 *   `\t0`            : Discard consecutive blank lines
 *   `Q` `gq` `<M-q>` : Format by `par`, vim, or emacs-style
 *   `<Meta>q`        : Reformat paragraph (like emacs)
-*   `S` instead 's'  : For perl-compatible regexp
+*   `:S` instead `:s` : For perl-compatible regexp
 
 ### Plugins I installed ###
 
 bufexplorer     :   Easily select open buffers
+
 *   `\be`       :   launch
 *   `\bs`       :   split and launch
 
 closetag        :   Closes HTML/XML tabs
+
 *   `<C-_>`     :   close nearest open tag
 
 NERD commenter  :   Comments/Decomments based on file type
+
 *   `\c/`       :   Comment line(s) with alignment
 *   `\cu`       :   Decomment line(s)
 *   `\c<Space>` :   Toggles commenting of current line and goes to next line
 
 EnhancedCommentify : Comments/Decomments based on file type
+
 *   `\//`          :   Comment line(s) (Unlike NERD, puts comment in column 1)
 *   `\/u`          :   Decomment line(s)
 *   `\/<space>`    :   Toggles commenting of current line and goes to next line
 
 Align : Aligns 
+
 *   `\t=`       : Align line or selection around '=' signs
-:   `:Align :`  : Align line around ':' characters (or arbitrary signs)
+*   `:Align :`  : Align line around ':' (or arbitrary characters)
 *   `\tsp`      : Align line or selection around whitespace, i.e. align "words"
 *   `\acom`	: Align comments
 *   `\Htd`	: Align HTML tables
 
 table                 :   Table editing/navigation 
-*   `\th              :   select header
+
+*   `\th`             :   select header
 *   `<Tab>` `<S-Tab>` :   navigate between fields
-*   `\ta`             :   toggle on off
+*   `\ta`             :   toggle on/off
 
 Gist                 : post buffers or selected text to https://gist.github.com/
+
 *   `:Gist`          : post entire buffer
-*   `:`<,`>Gist -p`  : post entire buffer to a private gist
-*   `:`<,`>Gist -a`  : post selected text anonymously
+*   `:Gist -p`  : post entire buffer to a private gist
+*   ``:`<,`>Gist -a``  : post selected text anonymously
 *   `:Gist -e`       : edit gist
 
 Gundo           : Shows undo tree
+
 *   `:GundoToggle`
 
 vimspell        :   Spell checks (live for certain files) [deprecated]
+
 *   `\ss`       : write file, spellcheck file & highlight spelling mistakes.
 *   `\sA`       : start autospell mode.
 *   `\sq`       : return to normal syntax coloring and disable auto spell checking.
