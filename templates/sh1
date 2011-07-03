@@ -1,0 +1,64 @@
+#!/bin/sh
+
+
+#############################################################################
+### Configuration
+
+### Command paths (Full or relative paths accepted)
+
+### Preferences
+
+# [Optional] Turns on debugging
+DEBUG=1
+
+### End of configuration
+#############################################################################
+
+
+#############################################################################
+### Init
+
+arg0="${0##*/}"
+
+### Usage
+
+usage()
+{
+  cat <<END >&2
+Usage: $arg0 [-h] [-o] [-a arg] [file...]
+       -h: get help
+       -o: option
+       -a arg: option with argument
+END
+  exit 1
+}
+
+### Option defaults
+
+opt_option=
+opt_arg=default
+
+### Options
+
+opts=`getopt -o hoa: -n "$arg0" -- "$@"`
+[ $? != 0 ] && usage
+eval set -- "$opts"
+
+while true; do
+  case "$1" in
+    -h) usage ;;
+    -o) opt_option=1; shift ;;
+    -a) opt_arg="$2"; shift 2 ;;
+    --) shift ; break ;;
+  esac
+done
+
+
+#############################################################################
+### Main
+
+
+### Local Variables:
+### coding: utf-8
+### End:
+### vim:set ai et sts=2 sw=2 tw=0 fileencoding=utf-8:

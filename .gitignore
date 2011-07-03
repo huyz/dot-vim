@@ -1,0 +1,10 @@
+.vimrc.post
+.netrwhist
+
+### My generated directories
+
+autoload
+bundle
+macros
+plugin
+syntax

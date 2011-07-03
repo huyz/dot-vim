@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<!-- @User@ @Date@ -->
+<!-- Copyright (C) @Year@ Huy Z  http://huyz.us/ -->
+
+<html>
+<head>
+    <title> </title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <!--<link rel=stylesheet href="style.css" title="Default style" type="text/css" media="screen" />-->
+</head>
+
+<script>
+<!--
+
+
+// -->
+</script>
+<noscript>
+</noscript>
+
+<body>
+<style>
+    body {
+        font-family: "Helvetica Neue", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important;
+        font-size: 14px;
+        line-height: 21px;
+        color: #333;
+        margin: 20px 30px;
+    }
+    code, pre, textarea, tt {
+        font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif !important;
+        font-size: 12px;
+        line-height: 18px;
+        color: black;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+    a         { text-decoration: none;      color: #537d7b }
+    a:visited { text-decoration: none;      color: #98855b }
+    a:hover   { text-decoration: underline; color: #a34d32 }
+</style>
+</body>
+</html>
+
+
+<!-- Local Variables: -->
+<!-- coding: utf-8 -->
+<!-- End: -->
+<!-- vim:set ai et sts=4 sw=4 tw=0 fileencoding=utf-8: -->
