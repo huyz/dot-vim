@@ -60,6 +60,7 @@ Files
 *   `.vimrc` - main initialization file.  It has to be symlinked to `~/.vimrc`
 *   `.vimrc.post` - contains personal commands invoked after `.vimrc`.  You
     can create this file with your own customizations here.
+*   `setup.sh` - sets up the files to be ready for vim.
 *   `get-packages.sh` - downloads and installs needed vim packages.
 
 Vim Quick-Reference
