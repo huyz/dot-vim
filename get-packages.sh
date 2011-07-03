@@ -1,9 +1,10 @@
 #!/bin/sh
-
 # huyz 2011-07-02
 # Download & compile packages
 
 ### Configuration
+
+umask 022
 
 ### End of configuration
 
