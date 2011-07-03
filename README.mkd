@@ -71,7 +71,7 @@ Vim Quick-Reference
 These are useful commands that are easy to forget because they're needed only
 occasionally.
 
-*   `g:`  `q/`  `q?`    :   Open comand-line window (`^F` if already in command-line)
+*   `q:`  `q/`  `q?`    :   Open comand-line window (`^F` if already in command-line)
 *   ``\`.``             :   Jump to last modification
 *   `gv`                :   Reselect last visual selection
 *   `ga`                :   ASCII/Unicode value of current character
