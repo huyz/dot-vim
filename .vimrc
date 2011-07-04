@@ -335,7 +335,7 @@ else
   function! ZCycleEditDisplay()
     if !&list && !&number
       set list number
-    elseif &list && &number
+    elseif &list && &number && &cursorcolumn
       set cursorcolumn cursorline
     else
       set nolist nonumber nocursorcolumn nocursorline
