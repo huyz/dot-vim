@@ -78,6 +78,7 @@ map \<TAB>> \_do_:%s/^\(\s*\)/\1\1/<CR>\_done_
 
 " Inserts current date at insertion point.
 imap \-d <C-R>=strftime("%Y-%m-%d")<CR>
+iab CRE: CREATED: <C-R>=$LOGNAME<CR> \-d<CR>UPDATED: <C-R>=$LOGNAME<CR> \-d
 
 """ RCS macros & mappings
 
@@ -187,6 +188,14 @@ nnoremap <C-x>+ <C-w>=
 cnoremap <C-g> <C-c>
 
 """ General mappings
+
+" Case-insensitive search (doesn't make sense to set 'ignorecase'
+" as it's dangerous for substitutions)
+" NOTE: \v isn't completely like perl, even with the basics, because
+" the charaters <>= would be considered special
+" NOTE: set in .vimrc.post because this may confuser users
+"nnoremap / /\c
+"nnoremap ? ?\c
 
 " Move faster between split windows
 nnoremap <C-k> <C-w>k
@@ -310,6 +319,8 @@ function! ZToggleVirtualEdit()
   endif
 endfunction
 
+" Cycle different editing aids: displaying invisible characters, line numbers
+" highlight line/columns
 function! ZCycleEditDisplay()
   if !&list && !&number && !&relativenumber
     set list number
@@ -425,9 +436,13 @@ set errorformat=%f:%l:\ %m,\"%f\"\\,%*[^0-9]%l:\ %m
 " Paths to search for the find commands
 set path+=~/include,~/*/include
 
+""" Internationalization options
+
+language messages en_US.UTF-8 " Use English menus at all times
+
 """ Misc options
 
-set keywordprg=man      " Command when hitting K: default to man
+set keywordprg=man            " Command when hitting K: default to man
 
 """ File-detection options
 
@@ -467,13 +482,13 @@ let java_highlight_functions = 1
 " If defined, enhance with bash syntax (unless overridden by b:is_kornshell)
 let is_bash = 1
 
-" FIXME:
-"   - See improvements at http://vim.wikia.com/wiki/Highlighting_whitespaces_at_end_of_line
-"   - Doesn't work if TERM=xterm-256color
 " Highlight whitespace at end of line
 " (if there's more than one extra one or more than two extra ones in
 " the case of after a dot, so we don't get too much feedback as we type)
 " http://www.vim.org/tips/tip.php?tip_id=396
+" FIXME:
+"   - See improvements at http://vim.wikia.com/wiki/Highlighting_whitespaces_at_end_of_line
+"   - Doesn't work if TERM=xterm-256color
 highlight WhitespaceEOL term=reverse ctermfg=red ctermbg=NONE cterm=underline guifg=red guibg=NONE gui=underline
 " NOTE: lookbehind prevents matching on spaces at beginning of line
 match WhitespaceEOL /\([^.!? \t]\@<=\|[.!?]\s\)\s\s\+$/
@@ -495,10 +510,23 @@ if &t_Co > 2 || has("gui_running") " If we have color
   " Turn on syntax highlighting
   syntax on
 
+  " Turn on solarized colorscheme
+  " NOTE: Set in .vimrc.post
+  "colorscheme solarized
+
 else " If we don't have color
   " Highlighting for monochrome screens (with underlines and crap) sucks
   syntax off
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Hacks
+
+" XXX Experimental
+" Make fileencoding work in modelines
+" http://vim.wikia.com/wiki/How_to_make_fileencoding_work_in_the_modeline
+"au BufReadPost * let b:reloadcheck = 1
+"au BufWinEnter * if exists('b:reloadcheck') | unlet b:reloadcheck | if &mod != 0 && &fenc != "" | exe 'e! ++enc=' . &fenc | endif | endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options
@@ -535,6 +563,18 @@ nmap \ss :nunmap \ss<CR>:let spell_insert_mode=1<CR>:runtime macros/vimspell.vim
 
 let g:snippets_dir = "~/.vim/bundle/snipmate.vim/snippets"
 
+
+""" vim-gnupg
+
+" NOTE: set in .vimrc.post
+"let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
+
+""" Gist
+
+" NOTE: set in .vimrc.post
+"let g:github_user  = "YOUR_GITHUB_USERNAME"
+"let g:github_token = "YOUR_GITHUB_API_TOKEN"
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugins
 
@@ -554,4 +594,4 @@ if filereadable(expand("~/.vim/.vimrc.post"))
   source ~/.vim/.vimrc.post
 endif
 
-" vim:set ai et sts=2 sw=2 tw=0 fileencoding=utf-8:
+" vim:set ai et sts=2 sw=2 tw=0:
