@@ -170,6 +170,10 @@ vimspell        :   Spell checks (live for certain files) [deprecated]
 *   `\sa`       : accept word for this session only.
 *   `\s?`       : check for alternatives.
 
+Comments
+--------
+You can submit feedback on [GitHub](https://github.com/huyz/dot-vim/issues)
+or [my blog](http://huyz.us/).
 
 MIT License
 -----------
