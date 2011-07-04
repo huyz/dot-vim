@@ -3,8 +3,10 @@ huy'z ~/.vim\* files
 
 These are my `~/.vim*` files with customizations, integrating many of the tips
 n' tricks from the net.
-Customizing vim is indispensable because new releases try too hard to maintain
+Customizing vim is essential because new releases try too hard to maintain
 backward compatibility.
+
+Suggestions are appreciated.
 
 Features:
 
