@@ -59,4 +59,4 @@ usage() if $opt_help;
 ### Local Variables:
 ### coding: utf-8
 ### End:
-### vim:set ai et sts=2 sw=2 tw=0 fileencoding=utf-8:
+### vim:set ai et sts=2 sw=2 tw=0:
