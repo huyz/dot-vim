@@ -321,15 +321,27 @@ endfunction
 
 " Cycle different editing aids: displaying invisible characters, line numbers
 " highlight line/columns
-function! ZCycleEditDisplay()
-  if !&list && !&number && !&relativenumber
-    set list number
-  elseif &list && &number && !&relativenumber
-    set relativenumber cursorcolumn cursorline
-  else
-    set nolist nonumber norelativenumber nocursorcolumn nocursorline
-  endif
-endfunction
+if v:version >= 703
+  function! ZCycleEditDisplay()
+    if !&list && !&number && !&relativenumber
+      set list number
+    elseif &list && &number && !&relativenumber
+      set relativenumber cursorcolumn cursorline
+    else
+      set nolist nonumber norelativenumber nocursorcolumn nocursorline
+    endif
+  endfunction
+else
+  function! ZCycleEditDisplay()
+    if !&list && !&number
+      set list number
+    elseif &list && &number
+      set cursorcolumn cursorline
+    else
+      set nolist nonumber nocursorcolumn nocursorline
+    endif
+  endfunction
+endif
 
 
 """ Typo Corrections
