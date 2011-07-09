@@ -36,6 +36,8 @@ cd ~/.vim/packages || exit 40
 [ -h ../plugin/gist.vim ] || ln -s ../packages/gist.vim ../plugin/.
 [ -e spamassassin.vim ] || wget -O spamassassin.vim 'http://www.vim.org/scripts/download_script.php?src_id=15948'
 [ -h ../syntax/spamassassin.vim ] || ln -s ../packages/spamassassin.vim ../syntax/.
+[ -e outline.vim ] || wget -O outline.vim 'http://www.vim.org/scripts/download_script.php?src_id=6852'
+[ -h ../syntax/outline.vim ] || ln -s ../packages/outline.vim ../syntax/.
 
 # The latest version updated March 18th, 2003 is not accessible online, so we
 # check it in
