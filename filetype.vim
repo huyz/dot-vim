@@ -14,6 +14,7 @@ augroup filetype
   au BufNewFile,BufRead /*/Mail/DRAFTS/* setf mail|setlocal tw=0
   au BufNewFile,BufRead /*/News/Score   setf slrnsc
   au BufNewFile,BufRead /*/jboss/conf/*/*.conf setf xml
+  au BufNewFile,BufRead *.json          set filetype=json foldmethod=syntax 
   au BufNewFile,BufRead *.mrc           setf mhonarc
   au BufNewFile,BufRead *.moin          setf moin
   au BufNewFile,BufRead *.wiki          setf moin
