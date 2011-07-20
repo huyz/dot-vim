@@ -197,6 +197,10 @@ cnoremap <C-g> <C-c>
 "nnoremap / /\c
 "nnoremap ? ?\c
 
+" Folding http://vim.wikia.com/wiki/Folding
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
+vnoremap <Space> zf
+
 " Move faster between split windows
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
@@ -447,6 +451,19 @@ set errorformat=%f:%l:\ %m,\"%f\"\\,%*[^0-9]%l:\ %m
 
 " Paths to search for the find commands
 set path+=~/include,~/*/include
+
+""" Folding
+
+set foldmethod=syntax
+set foldlevelstart=1
+let javaScript_fold    = 1
+let perl_fold          = 1
+let php_folding        = 1
+let r_syntax_folding   = 1
+let ruby_fold          = 1
+let sh_fold_enabled    = 1
+let vimsyn_folding     = 'af'
+let xml_syntax_folding = 1
 
 """ Internationalization options
 
