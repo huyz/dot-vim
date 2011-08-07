@@ -95,7 +95,7 @@ if [ ! -d EnhancedCommentify-2.3 ]; then
                  \ 'ruby\|screen\|sed\|sm\|snnsnet\|snnspat\|snnsres\|spec\|'.
                  \ 'squid\|terminfo\|tidy\|tli\|tsscl\|vgrindefs\|vrml\|'.
 -                \ 'wget\|wml\|xf86conf\|xmath\)$'
-+                \ 'wget\|wml\|xf86conf\|xmath\|elinks\|links\|mailcap\)$' " huyz 2011-07-03
++                \ 'wget\|wml\|xf86conf\|xmath\|elinks\|links\|mailcap\|coffee\)$' " huyz 2011-08-07
          let b:ECcommentOpen = '#'
          let b:ECcommentClose = ''
      elseif fileType == 'webmacro'
