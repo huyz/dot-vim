@@ -46,6 +46,8 @@ Features:
     *   [less.vim](https://github.com/huyz/less.vim) - my improved version of
         less.{vim,sh} distributed with vim for paging through files/stdin with
         full syntax highlighting
+    *   [vim-coffee-script](https://github.com/kchmck/vim-coffee-script) -
+        CoffeeScript support
     *   [vimball](http://www.vim.org/scripts/script.php?script_id=1502) -
         weird vim-based archiver that is required to install some a few
         plugins, mainly Align and AutoAlign.  Largely deprecated by pathogen.
