@@ -198,6 +198,7 @@ fi
 [ -d nerdcommenter ] || git clone http://github.com/scrooloose/nerdcommenter.git
 [ -d snipmate.vim ] || git clone http://github.com/msanders/snipmate.vim.git
 [ -d vim-gnupg ] || git clone git://gitorious.org/vim-gnupg/vim-gnupg.git
+[ -d vim-coffee-script ] || git clone git://github.com/kchmck/vim-coffee-script.git
 
 # vim-solarized is contained within the larger repository solarized, so check
 # first for the global location
