@@ -473,7 +473,22 @@ language messages en_US.UTF-8 " Use English menus at all times
 
 set keywordprg=man            " Command when hitting K: default to man
 
-""" File-detection options
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Plugins
+" NOTE: this must run before `filetype plugin indent on` in order to pick
+" up new file types in bundle, CoffeeScript
+
+" Distributed plugins
+runtime macros/matchit.vim
+
+" Load up all the bundles with pathogen
+if filereadable(expand("~/.vim/autoload/pathogen.vim")) ||
+ \ filereadable(expand("$MEHOME/.vim/autoload/pathogen.vim"))
+  call pathogen#runtime_append_all_bundles()
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Filetype-detection options
 
 " Enable file type detection, as per vimrc_example.vim
 if has("autocmd")
@@ -603,18 +618,6 @@ let g:snippets_dir = "~/.vim/bundle/snipmate.vim/snippets"
 " NOTE: set in .vimrc.post
 "let g:github_user  = "YOUR_GITHUB_USERNAME"
 "let g:github_token = "YOUR_GITHUB_API_TOKEN"
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Plugins
-
-" Distributed plugins
-runtime macros/matchit.vim
-
-" Load up all the bundles with pathogen
-if filereadable(expand("~/.vim/autoload/pathogen.vim")) ||
- \ filereadable(expand("$MEHOME/.vim/autoload/pathogen.vim"))
-  call pathogen#runtime_append_all_bundles()
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
