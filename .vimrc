@@ -327,20 +327,30 @@ endfunction
 " highlight line/columns
 if v:version >= 703
   function! ZCycleEditDisplay()
-    if !&list && !&number && !&relativenumber
-      set list number
-    elseif &list && &number && !&relativenumber
-      set relativenumber cursorcolumn cursorline
+    if     !&list && !&number && !&relativenumber && !&cursorcolumn && !&cursorline
+      set number
+    elseif !&list &&  &number && !&relativenumber && !&cursorcolumn && !&cursorline
+      set relativenumber
+    elseif !&list && !&number &&  &relativenumber && !&cursorcolumn && !&cursorline
+      set number cursorcolumn cursorline
+    elseif !&list &&  &number && !&relativenumber &&  &cursorcolumn &&  &cursorline
+      set relativenumber
+    elseif !&list && !&number &&  &relativenumber &&  &cursorcolumn &&  &cursorline
+      set number list
+    elseif  &list &&  &number && !&relativenumber &&  &cursorcolumn &&  &cursorline
+      set relativenumber
     else
       set nolist nonumber norelativenumber nocursorcolumn nocursorline
     endif
   endfunction
 else
   function! ZCycleEditDisplay()
-    if !&list && !&number
-      set list number
-    elseif &list && &number && !&cursorcolumn
+    if     !&list && !&number && !&cursorcolumn && !&cursorline
+      set number
+    elseif !&list &&  &number && !&cursorcolumn && !&cursorline
       set cursorcolumn cursorline
+    elseif !&list &&  &number &&  &cursorcolumn &&  &cursorline
+      set list
     else
       set nolist nonumber nocursorcolumn nocursorline
     endif
