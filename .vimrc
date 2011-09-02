@@ -144,18 +144,21 @@ imap \-#m #video/mpeg; name="x.mpg" [] x.mpg<Esc>F#fxs
 nnoremap <Home> 1G
 nnoremap <End> G
 
+" Use arrows to navigate wrapped lines
+nnoremap <Up> gk
+nnoremap <Down> gj
 " Handle wrapped lines more intuitively by reversing meaning
 " (Use arrow keys for old behavior)
-nnoremap k gk
-nnoremap j gj
-nnoremap gk k
-nnoremap gj j
-nnoremap 0 g0
-nnoremap ^ g^
-nnoremap $ g$
-nnoremap g0 0
-nnoremap g^ ^
-nnoremap g$ $
+"nnoremap k gk
+"nnoremap j gj
+"nnoremap gk k
+"nnoremap gj j
+"nnoremap 0 g0
+"nnoremap ^ g^
+"nnoremap $ g$
+"nnoremap g0 0
+"nnoremap g^ ^
+"nnoremap g$ $
 
 """ Paragraph formatting mappings (and to override annoying default mappings)
 
