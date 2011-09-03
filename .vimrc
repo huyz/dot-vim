@@ -485,6 +485,7 @@ language messages en_US.UTF-8 " Use English menus at all times
 """ Misc options
 
 set keywordprg=man            " Command when hitting K: default to man
+set mouse=a                   " Enable the mouse where possible. (Great for Tagbar)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugins
