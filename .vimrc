@@ -330,32 +330,32 @@ endfunction
 " highlight line/columns
 if v:version >= 703
   function! ZCycleEditDisplay()
-    if     !&list && !&number && !&relativenumber && !&cursorcolumn && !&cursorline
+    if     !&list && !&number && !&relativenumber && !&cursorcolumn
       set number
-    elseif !&list &&  &number && !&relativenumber && !&cursorcolumn && !&cursorline
+    elseif !&list &&  &number && !&relativenumber && !&cursorcolumn
       set relativenumber
-    elseif !&list && !&number &&  &relativenumber && !&cursorcolumn && !&cursorline
-      set number cursorcolumn cursorline
-    elseif !&list &&  &number && !&relativenumber &&  &cursorcolumn &&  &cursorline
+    elseif !&list && !&number &&  &relativenumber && !&cursorcolumn
+      set number cursorcolumn
+    elseif !&list &&  &number && !&relativenumber &&  &cursorcolumn
       set relativenumber
-    elseif !&list && !&number &&  &relativenumber &&  &cursorcolumn &&  &cursorline
+    elseif !&list && !&number &&  &relativenumber &&  &cursorcolumn
       set number list
-    elseif  &list &&  &number && !&relativenumber &&  &cursorcolumn &&  &cursorline
+    elseif  &list &&  &number && !&relativenumber &&  &cursorcolumn
       set relativenumber
     else
-      set nolist nonumber norelativenumber nocursorcolumn nocursorline
+      set nolist nonumber norelativenumber nocursorcolumn
     endif
   endfunction
 else
   function! ZCycleEditDisplay()
-    if     !&list && !&number && !&cursorcolumn && !&cursorline
+    if     !&list && !&number && !&cursorcolumn
       set number
-    elseif !&list &&  &number && !&cursorcolumn && !&cursorline
-      set cursorcolumn cursorline
-    elseif !&list &&  &number &&  &cursorcolumn &&  &cursorline
+    elseif !&list &&  &number && !&cursorcolumn
+      set cursorcolumn
+    elseif !&list &&  &number &&  &cursorcolumn
       set list
     else
-      set nolist nonumber nocursorcolumn nocursorline
+      set nolist nonumber nocursorcolumn
     endif
   endfunction
 endif
