@@ -182,6 +182,11 @@ or [my blog](http://huyz.us/).
 Installation
 ------------
 
+Requires:
+
+* curl
+* gpg [only for me, huyz]
+
 ```
 mkdir ~/git
 git clone https://github.com/huyz/dot-vim.git
