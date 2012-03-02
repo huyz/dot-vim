@@ -193,7 +193,7 @@ Installation
 Requires:
 
 * curl
-* gpg [only for me (huyz)]
+* gpg [only for me, huyz]
 
 ```
 [ -d ~/git ] || mkdir ~/git
