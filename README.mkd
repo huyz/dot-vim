@@ -195,10 +195,14 @@ Requires:
 * curl
 * gpg [only for me (huyz)]
 
-1.  Make sure you don't have an `~/.vim` directory, or `~/.vimrc` or
-    `~/.exrc` files
-1.  Run `./setup.sh` inside the directory
-
+```
+[ -d ~/git ] || mkdir ~/git
+git clone https://github.com/huyz/dot-vim.git
+[ -d ~/.vim ] && mv ~/.vim ~/.vim-OLD
+ln -s ~/git/dot-vim ~/.vim
+cd ~/.vim
+./setup.sh
+```
 
 Comments
 --------
