@@ -176,6 +176,17 @@ Comments
 You can submit feedback on [GitHub](https://github.com/huyz/dot-vim/issues)
 or [my blog](http://huyz.us/).
 
+Installation
+------------
+
+```
+mkdir ~/git
+git clone https://github.com/huyz/dot-vim.git
+ln -s ~/git/dot-vim ~/.vim
+cd ~/.vim
+./setup.sh
+```
+
 MIT License
 -----------
 
