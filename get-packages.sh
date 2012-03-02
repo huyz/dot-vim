@@ -2,6 +2,8 @@
 # huyz 2011-07-02
 # Download & compile packages
 
+alias git='git -c user.name="huyz" -c user.email=h-git@huyz.us'
+
 ### Configuration
 
 umask 022
@@ -222,7 +224,7 @@ fi
 if [ ! -d Align ]; then
   # Align generates errors because it expects to close a window
   mkdir Align &&
-    vim -e -T dumb -c "let g:vimball_home = '$PWD/Align' | e Align.vba.gz | so % | quit" >&/dev/null
+    vim -e -T dumb -c "let g:vimball_home = '$PWD/Align' | e Align.vba.gz | so % | quit" >/dev/null 2>&1
 fi
 
 ### AutoAlign
@@ -231,7 +233,7 @@ fi
 if [ ! -d AutoAlign ]; then
   # AutoAlign generates errors because it expects to close a window
   mkdir AutoAlign &&
-    vim -e -T dumb -c "let g:vimball_home = '$PWD/AutoAlign' | e AutoAlign.vba.gz | so % | quit" >&/dev/null
+    vim -e -T dumb -c "let g:vimball_home = '$PWD/AutoAlign' | e AutoAlign.vba.gz | so % | quit" >/dev/null 2>&1
 fi
 
 #############################################################################
