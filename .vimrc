@@ -144,18 +144,21 @@ imap \-#m #video/mpeg; name="x.mpg" [] x.mpg<Esc>F#fxs
 nnoremap <Home> 1G
 nnoremap <End> G
 
+" Use arrows to navigate wrapped lines
+nnoremap <Up> gk
+nnoremap <Down> gj
 " Handle wrapped lines more intuitively by reversing meaning
 " (Use arrow keys for old behavior)
-nnoremap k gk
-nnoremap j gj
-nnoremap gk k
-nnoremap gj j
-nnoremap 0 g0
-nnoremap ^ g^
-nnoremap $ g$
-nnoremap g0 0
-nnoremap g^ ^
-nnoremap g$ $
+"nnoremap k gk
+"nnoremap j gj
+"nnoremap gk k
+"nnoremap gj j
+"nnoremap 0 g0
+"nnoremap ^ g^
+"nnoremap $ g$
+"nnoremap g0 0
+"nnoremap g^ ^
+"nnoremap g$ $
 
 """ Paragraph formatting mappings (and to override annoying default mappings)
 
@@ -196,6 +199,10 @@ cnoremap <C-g> <C-c>
 " NOTE: set in .vimrc.post because this may confuser users
 "nnoremap / /\c
 "nnoremap ? ?\c
+
+" Folding http://vim.wikia.com/wiki/Folding
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
+vnoremap <Space> zf
 
 " Move faster between split windows
 nnoremap <C-k> <C-w>k
@@ -323,22 +330,32 @@ endfunction
 " highlight line/columns
 if v:version >= 703
   function! ZCycleEditDisplay()
-    if !&list && !&number && !&relativenumber
-      set list number
-    elseif &list && &number && !&relativenumber
-      set relativenumber cursorcolumn cursorline
+    if     !&list && !&number && !&relativenumber && !&cursorcolumn
+      set number
+    elseif !&list &&  &number && !&relativenumber && !&cursorcolumn
+      set relativenumber
+    elseif !&list && !&number &&  &relativenumber && !&cursorcolumn
+      set number cursorcolumn
+    elseif !&list &&  &number && !&relativenumber &&  &cursorcolumn
+      set relativenumber
+    elseif !&list && !&number &&  &relativenumber &&  &cursorcolumn
+      set number list
+    elseif  &list &&  &number && !&relativenumber &&  &cursorcolumn
+      set relativenumber
     else
-      set nolist nonumber norelativenumber nocursorcolumn nocursorline
+      set nolist nonumber norelativenumber nocursorcolumn
     endif
   endfunction
 else
   function! ZCycleEditDisplay()
-    if !&list && !&number
-      set list number
-    elseif &list && &number && !&cursorcolumn
-      set cursorcolumn cursorline
+    if     !&list && !&number && !&cursorcolumn
+      set number
+    elseif !&list &&  &number && !&cursorcolumn
+      set cursorcolumn
+    elseif !&list &&  &number &&  &cursorcolumn
+      set list
     else
-      set nolist nonumber nocursorcolumn nocursorline
+      set nolist nonumber nocursorcolumn
     endif
   endfunction
 endif
@@ -448,6 +465,19 @@ set errorformat=%f:%l:\ %m,\"%f\"\\,%*[^0-9]%l:\ %m
 " Paths to search for the find commands
 set path+=~/include,~/*/include
 
+""" Folding
+
+set foldmethod=syntax
+set foldlevelstart=1
+let javaScript_fold    = 1
+let perl_fold          = 1
+let php_folding        = 1
+let r_syntax_folding   = 1
+let ruby_fold          = 1
+let sh_fold_enabled    = 1
+let vimsyn_folding     = 'af'
+let xml_syntax_folding = 1
+
 """ Internationalization options
 
 language messages en_US.UTF-8 " Use English menus at all times
@@ -455,8 +485,24 @@ language messages en_US.UTF-8 " Use English menus at all times
 """ Misc options
 
 set keywordprg=man            " Command when hitting K: default to man
+set mouse=a                   " Enable the mouse where possible. (Great for Tagbar)
 
-""" File-detection options
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Plugins
+" NOTE: this must run before `filetype plugin indent on` in order to pick
+" up new file types in bundle, CoffeeScript
+
+" Distributed plugins
+runtime macros/matchit.vim
+
+" Load up all the bundles with pathogen
+if filereadable(expand("~/.vim/autoload/pathogen.vim")) ||
+ \ filereadable(expand("$MEHOME/.vim/autoload/pathogen.vim"))
+  call pathogen#runtime_append_all_bundles()
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Filetype-detection options
 
 " Enable file type detection, as per vimrc_example.vim
 if has("autocmd")
@@ -586,18 +632,6 @@ let g:snippets_dir = "~/.vim/bundle/snipmate.vim/snippets"
 " NOTE: set in .vimrc.post
 "let g:github_user  = "YOUR_GITHUB_USERNAME"
 "let g:github_token = "YOUR_GITHUB_API_TOKEN"
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Plugins
-
-" Distributed plugins
-runtime macros/matchit.vim
-
-" Load up all the bundles with pathogen
-if filereadable(expand("~/.vim/autoload/pathogen.vim")) ||
- \ filereadable(expand("$MEHOME/.vim/autoload/pathogen.vim"))
-  call pathogen#runtime_append_all_bundles()
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

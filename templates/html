@@ -7,14 +7,12 @@
 <head>
     <title> </title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <!--<link rel=stylesheet href="style.css" title="Default style" type="text/css" media="screen" />-->
+    <!--<link rel=stylesheet type="text/css" media="screen" title="Default style" href="style.css" />-->
 </head>
 
 <script>
-<!--
 
 
-// -->
 </script>
 <noscript>
 </noscript>
@@ -22,7 +20,7 @@
 <body>
 <style>
     body {
-        font-family: "Helvetica Neue", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important;
+        font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif !important;
         font-size: 14px;
         line-height: 21px;
         color: #333;

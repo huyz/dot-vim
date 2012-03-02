@@ -38,6 +38,8 @@ cd ~/.vim/packages || exit 40
 [ -h ../syntax/spamassassin.vim ] || ln -s ../packages/spamassassin.vim ../syntax/.
 [ -e outline.vim ] || wget -O outline.vim 'http://www.vim.org/scripts/download_script.php?src_id=6852'
 [ -h ../syntax/outline.vim ] || ln -s ../packages/outline.vim ../syntax/.
+[ -e json.vim ] || wget -O json.vim 'http://www.vim.org/scripts/download_script.php?src_id=10853'
+[ -h ../syntax/json.vim ] || ln -s ../packages/json.vim ../syntax/.
 
 # The latest version updated March 18th, 2003 is not accessible online, so we
 # check it in
@@ -93,7 +95,7 @@ if [ ! -d EnhancedCommentify-2.3 ]; then
                  \ 'ruby\|screen\|sed\|sm\|snnsnet\|snnspat\|snnsres\|spec\|'.
                  \ 'squid\|terminfo\|tidy\|tli\|tsscl\|vgrindefs\|vrml\|'.
 -                \ 'wget\|wml\|xf86conf\|xmath\)$'
-+                \ 'wget\|wml\|xf86conf\|xmath\|elinks\|links\|mailcap\)$' " huyz 2011-07-03
++                \ 'wget\|wml\|xf86conf\|xmath\|elinks\|links\|mailcap\|coffee\)$' " huyz 2011-08-07
          let b:ECcommentOpen = '#'
          let b:ECcommentClose = ''
      elseif fileType == 'webmacro'
@@ -196,6 +198,8 @@ fi
 [ -d nerdcommenter ] || git clone http://github.com/scrooloose/nerdcommenter.git
 [ -d snipmate.vim ] || git clone http://github.com/msanders/snipmate.vim.git
 [ -d vim-gnupg ] || git clone git://gitorious.org/vim-gnupg/vim-gnupg.git
+[ -d vim-coffee-script ] || git clone git://github.com/kchmck/vim-coffee-script.git
+[ -d tagbar ] || git clone git://github.com/majutsushi/tagbar.git
 
 # vim-solarized is contained within the larger repository solarized, so check
 # first for the global location
