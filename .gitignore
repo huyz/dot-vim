@@ -1,5 +1,8 @@
 .vimrc.post
 .netrwhist
+*.swp
+*.swo
+*.swn
 
 ### My generated directories
 
