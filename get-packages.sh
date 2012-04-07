@@ -68,6 +68,28 @@ if [ ! -d vimball ]; then
     fi
 fi
 
+### jade archive
+
+[ -e jade.zip ] || wget -O jade.zip 'http://www.vim.org/scripts/download_script.php?src_id=13895'
+if [ ! -d jade ]; then
+  mkdir jade &&
+    if cd jade; then
+      unzip ../jade.zip
+      cd ..
+    fi
+fi
+
+### stylus archive
+
+[ -e stylus.zip ] || wget -O stylus.zip 'http://www.vim.org/scripts/download_script.php?src_id=16593'
+if [ ! -d stylus ]; then
+  mkdir stylus &&
+    if cd stylus; then
+      unzip ../stylus.zip
+      cd ..
+    fi
+fi
+
 ### bufexplorer archive
 
 [ -e bufexplorer.zip ] || wget -O bufexplorer.zip 'http://www.vim.org/scripts/download_script.php?src_id=14208'

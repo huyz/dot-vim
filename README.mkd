@@ -54,9 +54,11 @@ Features:
 *   Installs the color scheme:
     *   [Solarized](http://ethanschoonover.com/solarized/vim-colors-solarized)
 *   Installs the syntax highlighting scripts for:
+    *   [jade](http://www.vim.org/scripts/script.php?script_id=3192)
     *   [json](http://www.vim.org/scripts/script.php?script_id=1945)
-    *   [spamassassin](http://www.vim.org/scripts/script.php?script_id=2617&rating=helpful)
     *   [outline](http://www.vim.org/scripts/script.php?script_id=1266) - to use fold-mode with emacs org-mode files.
+    *   [spamassassin](http://www.vim.org/scripts/script.php?script_id=2617&rating=helpful)
+    *   [stylus](http://www.vim.org/scripts/script.php?script_id=3513)
 
 Files
 -----
