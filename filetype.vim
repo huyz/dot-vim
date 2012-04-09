@@ -17,6 +17,7 @@ augroup filetype
   au BufNewFile,BufRead *.jade          setf jade
   au BufNewFile,BufRead *.json          set filetype=json foldmethod=syntax 
   au BufNewFile,BufReadPost *.coffee    setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
+  au BufNewFile,BufRead *.less          setf lesscss
   au BufNewFile,BufRead *.mrc           setf mhonarc
   au BufNewFile,BufRead *.moin          setf moin
   au BufNewFile,BufRead *.stylus        setf stylus
