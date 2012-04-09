@@ -468,7 +468,7 @@ set path+=~/include,~/*/include
 """ Folding
 
 set foldmethod=syntax
-set foldlevelstart=1
+set foldlevelstart=99
 let javaScript_fold    = 1
 let perl_fold          = 1
 let php_folding        = 1
