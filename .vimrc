@@ -72,7 +72,7 @@ nmap \t0 \_do_:v/./.,/./-1join<CR>\_done_
 
 " Halve the indentation of the file, assuming spaces
 " NOTE: makes sense only with expandtab on
-map \<TAB>< \_do_:%!unexpand -t 2<CR>:%!expand -t 1<CR>\_done_
+map \<TAB>< \_do_:%!unexpand --first-only -t 2<CR>:%!expand -i -t 1<CR>\_done_
 " Double the indentation of the file, assuming spaces
 map \<TAB>> \_do_:%s/^\(\s*\)/\1\1/<CR>\_done_
 
