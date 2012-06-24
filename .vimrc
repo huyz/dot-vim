@@ -467,7 +467,9 @@ set path+=~/include,~/*/include
 
 """ Folding
 
-set foldmethod=syntax
+" 2012-06-24 vim 7.3 seems to have a bug that makes this option slow everything down
+"set foldmethod=syntax
+set foldmethod=manual
 set foldlevelstart=99
 let javaScript_fold    = 1
 let perl_fold          = 1
