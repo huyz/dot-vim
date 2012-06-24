@@ -25,11 +25,11 @@ map \o2 :set nonu
 map \o9 :set list
 map \o0 :set nolist
 " Deprecated by vim5's :set ts=2<CR>:retab<CR>
-map \t2 :%!expand -t 2
+map \t2 :%!expand -i -t 2
 " Deprecated by vim5's :set ts=4<CR>:retab<CR>
-map \t4 :%!expand -t 4
+map \t4 :%!expand -i -t 4
 " Deprecated by vim5's :set ts=8<CR>:retab<CR>
-map \t8 :%!expand -t 8
+map \t8 :%!expand -i -t 8
 "
 """ Function key mappings
 map \f1 \c1
