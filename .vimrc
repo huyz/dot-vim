@@ -243,7 +243,8 @@ nmap \o8 :call ZToggleVirtualEdit()<CR>
 nmap \f8 \o8
 
 nmap \o9 :call ZCycleEditDisplay()<CR>
-nmap \o0 :!elinks -default-mime-type "text/html" file://%<CR>
+"nmap \o0 :!elinks -default-mime-type "text/html" file://%<CR>
+nmap \o0 :set wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=120<CR>
 
 nmap <F1> \f0
 nmap <F2> \f2
@@ -282,7 +283,7 @@ vmap <ESC>[Z <S-Tab>
 " showbreak : left-fringe indicator
 function! ZCycleWrap()
   if &wrap && &showbreak == ""
-    set linebreak showbreak=…
+    set wrap linebreak showbreak=…
     echo "  wrap   linebreak showbreak=…"
   elseif &wrap && &showbreak != ""
     set nowrap nolinebreak showbreak=
@@ -578,6 +579,10 @@ else " If we don't have color
   " Highlighting for monochrome screens (with underlines and crap) sucks
   syntax off
 endif
+
+""" Column highlight
+
+hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Hacks
