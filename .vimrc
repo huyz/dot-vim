@@ -596,6 +596,10 @@ hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options
 
+""" BufExplorer
+
+let g:bufExplorerSortBy='fullpath'   " Sort by full file path name.
+
 """ NERDcommenter options
 
 map <Leader>c/ <plug>NERDCommenterAlignBoth
