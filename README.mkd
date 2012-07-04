@@ -19,6 +19,8 @@ Features:
     *   [pathogen](http://www.vim.org/scripts/script.php?script_id=2332) -
         autoloads plugins from their own individual directories under
         `bundle/`
+    *   [yankring](http://www.vim.org/scripts/script.php?script_id=1234) -
+        allows you to paste then ctrl-P through a history of yanks
     *   [bufexplorer](http://www.vim.org/scripts/script.php?script_id=42) -
         buffer explorer/browser
     *   [MiniBufExplorer](http://fholgado.com/minibufexpl) - shows small

@@ -103,6 +103,17 @@ if [ ! -d bufexplorer ]; then
     fi
 fi
 
+### yankring archive
+
+[ -e yankring.zip ] || wget -O yankring.zip 'http://www.vim.org/scripts/download_script.php?src_id=17721'
+if [ ! -d yankring ]; then
+  mkdir yankring &&
+    if cd yankring; then
+      unzip ../yankring.zip
+      cd ..
+    fi
+fi
+
 ### EnhancedCommentify archive
 
 [ -e EnhancedCommentify-2.3.tar.gz ] || wget -O EnhancedCommentify-2.3.tar.gz 'http://www.vim.org/scripts/download_script.php?src_id=8319'
