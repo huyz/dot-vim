@@ -244,7 +244,11 @@ nmap \f8 \o8
 
 nmap \o9 :call ZCycleEditDisplay()<CR>
 "nmap \o0 :!elinks -default-mime-type "text/html" file://%<CR>
-nmap \o0 :set wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=120<CR>
+nmap \o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=120<CR>
+
+" Invoke plugins
+nmap \s1 :CtrlP<CR>
+nmap \s2 :BufExplorer<CR>
 
 nmap <F1> \f0
 nmap <F2> \f2
@@ -256,6 +260,8 @@ nmap <F7> \f7
 nmap <F8> \f8
 nmap <F9> \f9
 nmap <F10> \f0
+nmap <F11> \s1
+nmap <F12> \s2
 
 " Make pastetoggle also work in insert mode
 set pastetoggle=<f5>
@@ -582,7 +588,11 @@ endif
 
 """ Column highlight
 
-hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
+if &background == 'light'
+  hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
+else
+  hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Hacks
