@@ -25,6 +25,7 @@ Features:
         buffer explorer/browser
     *   [MiniBufExplorer](http://fholgado.com/minibufexpl) - shows small
         buffer explorer at all times
+    *   [CtrlP](https://github.com/kien/ctrlp.vim/) - fuzzy file finder
     *   [snipmate](http://www.vim.org/scripts/script.php?script_id=2540) - TextMate-style snippets
     *   [closetag](http://www.vim.org/scripts/script.php?script_id=13)
         \- functions and mappings to close open HTML/XML tags
