@@ -606,6 +606,10 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options
 
+""" YankRing
+
+let g:yankring_history_dir = '~/.vim'
+
 """ BufExplorer
 
 let g:bufExplorerSortBy='fullpath'   " Sort by full file path name.
