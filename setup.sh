@@ -23,4 +23,4 @@ cd $GIT
 ./get-packages.sh
 
 # This is only for me
-[ -e .vimrc.post ] || gpg -d -o .vimrc.post .vimrc.post.gpg && touch -r .vimrc.post.gpg .vimrc.post
+[ -e .vimrc.post.gpg && ! -e .vimrc.post ] || gpg -d -o .vimrc.post .vimrc.post.gpg && touch -r .vimrc.post.gpg .vimrc.post
