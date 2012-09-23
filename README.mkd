@@ -180,26 +180,23 @@ vimspell        :   Spell checks (live for certain files) [deprecated]
 *   `\sa`       : accept word for this session only.
 *   `\s?`       : check for alternatives.
 
-Comments
---------
-You can submit feedback on [GitHub](https://github.com/huyz/dot-vim/issues)
-or [my blog](http://huyz.us/).
-
 Installation
 ------------
 
 Requires:
 
 * curl
-* gpg [only for me, huyz]
+* gpg [only for me (huyz)]
 
-```
-mkdir ~/git
-git clone https://github.com/huyz/dot-vim.git
-ln -s ~/git/dot-vim ~/.vim
-cd ~/.vim
-./setup.sh
-```
+1.  Make sure you don't have an `~/.vim` directory, or `~/.vimrc` or
+    `~/.exrc` files
+1.  Run `./setup.sh` inside the directory
+
+
+Comments
+--------
+You can submit feedback on [GitHub](https://github.com/huyz/dot-vim/issues)
+or [my blog](http://huyz.us/).
 
 MIT License
 -----------
