@@ -42,7 +42,7 @@ Features:
         [table editing](http://vim.wikia.com/wiki/Smarter_Table_Editing_II)
     *   [Gist.vim](http://www.vim.org/scripts/script.php?script_id=2423) -
         post buffers or selected text to https://gist.github.com/
-    *   [vim-gnupg](http://gitorious.org/vim-gnupg) - transparent editing of GPG-encrypted files
+    *   [vim-gnupg](https://github.com/jamessan/vim-gnupg) - transparent editing of GPG-encrypted files
     *   [vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify) - format
         JS, HTML, CSS files with js-beautify
     *   [rcs-menu](http://lanzarotta.tripod.com/vim.html) - interface to RCS version control system

@@ -234,7 +234,7 @@ fi
 [ -d minibufexpl.vim ] || git clone http://github.com/fholgado/minibufexpl.vim.git
 [ -d nerdcommenter ] || git clone http://github.com/scrooloose/nerdcommenter.git
 [ -d snipmate.vim ] || git clone http://github.com/msanders/snipmate.vim.git
-[ -d vim-gnupg ] || git clone git://gitorious.org/vim-gnupg/vim-gnupg.git
+[ -d vim-gnupg ] || git clone git://github.com/jamessan/vim-gnupg.git
 [ -d vim-coffee-script ] || git clone git://github.com/kchmck/vim-coffee-script.git
 [ -d tagbar ] || git clone git://github.com/majutsushi/tagbar.git
 [ -d ctrlp.vim ] || git clone git://github.com/kien/ctrlp.vim.git
