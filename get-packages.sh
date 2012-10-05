@@ -237,7 +237,14 @@ fi
 [ -d vim-gnupg ] || git clone git://gitorious.org/vim-gnupg/vim-gnupg.git
 [ -d vim-coffee-script ] || git clone git://github.com/kchmck/vim-coffee-script.git
 [ -d tagbar ] || git clone git://github.com/majutsushi/tagbar.git
-[ -d cltrp ] || git clone git://github.com/kien/ctrlp.vim.git
+[ -d ctrlp.vim ] || git clone git://github.com/kien/ctrlp.vim.git
+[ -d vim-jsbeautify ] || {
+  git clone git://github.com/maksimr/vim-jsbeautify.git
+  if cd vim-jsbeautify; then
+    git submodule update --init --recursive
+    cd ..
+  fi
+}
 
 # vim-solarized is contained within the larger repository solarized, so check
 # first for the global location

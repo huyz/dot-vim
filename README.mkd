@@ -43,6 +43,8 @@ Features:
     *   [Gist.vim](http://www.vim.org/scripts/script.php?script_id=2423) -
         post buffers or selected text to https://gist.github.com/
     *   [vim-gnupg](http://gitorious.org/vim-gnupg) - transparent editing of GPG-encrypted files
+    *   [vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify) - format
+        JS, HTML, CSS files with js-beautify
     *   [rcs-menu](http://lanzarotta.tripod.com/vim.html) - interface to RCS version control system
     *   [gundo](http://sjl.bitbucket.org/gundo.vim/) - visualize undo tree
         [requires vim to be compiled with Python 2.4+]
@@ -166,6 +168,10 @@ Gist                 : post buffers or selected text to https://gist.github.com/
 Gundo           : Shows undo tree
 
 *   `:GundoToggle`
+
+vim-jsbeautify
+
+*   `\B`            : beautify JS, HTML, or CSS, depending on filetype
 
 vimspell        :   Spell checks (live for certain files) [deprecated]
 

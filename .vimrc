@@ -646,7 +646,6 @@ nmap \ss :nunmap \ss<CR>:let spell_insert_mode=1<CR>:runtime macros/vimspell.vim
 
 let g:snippets_dir = "~/.vim/bundle/snipmate.vim/snippets"
 
-
 """ vim-gnupg
 
 " NOTE: set in .vimrc.post
@@ -657,6 +656,16 @@ let g:snippets_dir = "~/.vim/bundle/snipmate.vim/snippets"
 " NOTE: set in .vimrc.post
 "let g:github_user  = "YOUR_GITHUB_USERNAME"
 "let g:github_token = "YOUR_GITHUB_API_TOKEN"
+
+""" vim-jsbeautify
+
+let g:jsbeautify   = {'indent_size': 2, 'indent_char': ' ', 'indent_with_tabs': 0, 'preserve_newlines': 1, 'max_preserve_newlines': 10, 'jslint_happy': 0, 'brace_style': 'collapse', 'keep_array_indentation': 1, 'keep_function_indentation': 1, 'eval_code': 0, 'unescape_strings': 0}
+"let g:htmlbeautify = {'indent_size': 2, 'indent_char': ' ', 'max_char': 78, 'brace_style': 'expand', 'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u']}
+"let g:cssbeautify  = {'indent_size': 2, 'indent_char': ' '}
+map <Leader>bj <plug>NERDCommenterAlignBoth
+autocmd FileType javascript noremap <buffer>   <Leader>B  :call JsBeautify()<cr>
+autocmd FileType html noremap <buffer>   <Leader>B  :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer>   <Leader>B  :call CSSBeautify()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
