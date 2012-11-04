@@ -46,44 +46,45 @@ command! -range -nargs=+ S call s:Substitute(<q-args>, <line1>, <line2>)
 
 " Support for macros
 " (Remembers the last search, removes the highlight, and recovers old position)
-noremap \_do_ :let hls=@/<CR>
-noremap \_done_ :let @/=hls<CR>:nohl<CR><C-O>
+noremap <Leader>_do_ :let hls=@/<CR>
+noremap <Leader>_done_ :let @/=hls<CR>:nohl<CR><C-O>
 
 " Underlines the current line with '~', '-', '=' characters (good for markdown)
-map \~ \_do_Yp:s/./\~/g<CR>\_done_
-map \- \_do_Yp:s/./-/g<CR>\_done_
-map \= \_do_Yp:s/./=/g<CR>\_done_
+map <Leader>~ <Leader>_do_Yp:s/./\~/g<CR><Leader>_done_
+map <Leader>- <Leader>_do_Yp:s/./-/g<CR><Leader>_done_
+map <Leader>= <Leader>_do_Yp:s/./=/g<CR><Leader>_done_
 
 " Inserts a row of '*' characters up to the 78th column
-imap \-** <Esc>80a*<Esc>78\|C
+imap <Leader>-** <Esc>80a*<Esc>78\|C
 " Inserts a row of '#' characters up to the 78th column
-imap \-## <Esc>80a#<Esc>78\|C
+imap <Leader>-## <Esc>80a#<Esc>78\|C
 " Inserts a row of '-' characters up to the 78th column
-imap \-- <Esc>80a-<Esc>78\|C
+imap <Leader>-- <Esc>80a-<Esc>78\|C
 " Inserts a row of '- ' characters up to the 78th column
-imap \-<Space> <Esc>40a- <Esc>78\|C
+imap <Leader>-<Space> <Esc>40a- <Esc>78\|C
 
 " Swap words
 " http://www.vim.org/tips/tip.php?tip_id=329
-nmap \lh \_do_"_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<CR>\_done_
+nmap <Leader>lh <Leader>_do_"_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<CR><Leader>_done_
 
 " Discard consecutive blank lines
-nmap \t0 \_do_:v/./.,/./-1join<CR>\_done_
+nmap <Leader>t0 <Leader>_do_:v/./.,/./-1join<CR><Leader>_done_
 
 " Halve the indentation of the file, assuming spaces
 " NOTE: makes sense only with expandtab on
-map \<TAB>< \_do_:%!unexpand --first-only -t 2<CR>:%!expand -i -t 1<CR>\_done_
+" TODO: doesn't work on mac
+map <Leader><TAB>< <Leader>_do_:%!unexpand --first-only -t 2<CR>:%!expand --initial -t 1<CR><Leader>_done_
 " Double the indentation of the file, assuming spaces
-map \<TAB>> \_do_:%s/^\(\s*\)/\1\1/<CR>\_done_
+map <Leader><TAB>> <Leader>_do_:%s/^\(\s*\)/\1\1/<CR><Leader>_done_
 
 " Inserts current date at insertion point.
-imap \-d <C-R>=strftime("%Y-%m-%d")<CR>
-iab CRE: CREATED: <C-R>=$LOGNAME<CR> \-d<CR>UPDATED: <C-R>=$LOGNAME<CR> \-d
+imap <Leader>-d <C-R>=strftime("%Y-%m-%d")<CR>
+iab CRE: CREATED: <C-R>=$LOGNAME<CR> <Leader>-d<CR>UPDATED: <C-R>=$LOGNAME<CR> <Leader>-d
 
 """ RCS macros & mappings
 
 inoreab RCSID $RCSfile<C-V>$ $Revision<C-V>$ $Date<C-V>$
-nnoremap \reco :!reco "<C-R>%"<CR>
+nnoremap <Leader>reco :!reco "<C-R>%"<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Programming mappings
@@ -91,50 +92,50 @@ nnoremap \reco :!reco "<C-R>%"<CR>
 """ Support mappings for templates.
 
 " Do necessary replacements
-map \_t_s :%s/@User *@/\=$LOGNAME/ge \| %s/@Date *@/\=strftime("%Y-%m-%d")/ge \| %s/@Year *@/\=strftime("%Y")/ge <CR>
-map \_t_z 1G/Filename:<CR>:nohl<CR>A
+map <Leader>_t_s :%s/@User *@/\=$LOGNAME/ge \| %s/@Date *@/\=strftime("%Y-%m-%d")/ge \| %s/@Year *@/\=strftime("%Y")/ge <CR>
+map <Leader>_t_z 1G/Filename:<CR>:nohl<CR>A
 
 """ Inserts templates, replaces a few things, and sets file type
 
-imap \-tt  <Esc>:-1r $HOME/.vim/templates/header<CR>\_t_s
-imap \-th  <Esc>:-1r $HOME/.vim/templates/html<CR>\_t_s:setf html<CR>
-imap \-tp  <Esc>:-1r $HOME/.vim/templates/perl<CR>o\-tt:setf perl<CR>\_t_z
-imap \-ts0 <Esc>:-1r $HOME/.vim/templates/script<CR>o\-tt\_t_z
-imap \-ts1 <Esc>:-1r $HOME/.vim/templates/sh1<CR>o\-tt:setf sh<CR>\_t_z
-imap \-ts2 <Esc>:-1r $HOME/.vim/templates/sh2<CR>o\-tt:setf sh<CR>\_t_z
-imap \-tz1 <Esc>:-1r $HOME/.vim/templates/zsh1<CR>o\-tt:setf zsh<CR>\_t_z
-imap \-tz2 <Esc>:-1r $HOME/.vim/templates/zsh2<CR>o\-tt:setf zsh<CR>\_t_z
+imap <Leader>-tt  <Esc>:-1r $HOME/.vim/templates/header<CR><Leader>_t_s
+imap <Leader>-th  <Esc>:-1r $HOME/.vim/templates/html<CR><Leader>_t_s:setf html<CR>
+imap <Leader>-tp  <Esc>:-1r $HOME/.vim/templates/perl<CR>o<Leader>-tt:setf perl<CR><Leader>_t_z
+imap <Leader>-ts0 <Esc>:-1r $HOME/.vim/templates/script<CR>o<Leader>-tt<Leader>_t_z
+imap <Leader>-ts1 <Esc>:-1r $HOME/.vim/templates/sh1<CR>o<Leader>-tt:setf sh<CR><Leader>_t_z
+imap <Leader>-ts2 <Esc>:-1r $HOME/.vim/templates/sh2<CR>o<Leader>-tt:setf sh<CR><Leader>_t_z
+imap <Leader>-tz1 <Esc>:-1r $HOME/.vim/templates/zsh1<CR>o<Leader>-tt:setf zsh<CR><Leader>_t_z
+imap <Leader>-tz2 <Esc>:-1r $HOME/.vim/templates/zsh2<CR>o<Leader>-tt:setf zsh<CR><Leader>_t_z
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Mail mappings (for MH)
 
 """ repl mappings
 " Attempts to undo quoting done by replies
-map \> 1G:/^---/+1,$g/^[ ]*[^> ]/-1j:%g/^---/+1,$s/^[ ]*>[ ]\(>[ ]\)*//g<CR>
+map <Leader>> 1G:/^---/+1,$g/^[ ]*[^> ]/-1j:%g/^---/+1,$s/^[ ]*>[ ]\(>[ ]\)*//g<CR>
 " Opens the file replied to (Can't rely on MH's @ link because we will
 " be in a diff directory because of compeditor or the cwd might not even be
 " writable).
-map \e@ :new $editalt<CR>
+map <Leader>e@ :new $editalt<CR>
 " Puts in an Fcc based on the current draft
 " NOTE: There's gotta be a way to not re-read the whole file so we can set a
 " mark
-map \ef :%! getfcc - 2>/dev/null<CR>
+map <Leader>ef :%! getfcc - 2>/dev/null<CR>
 " Appends plain-text version of MH HTML body
 " (used in conjunction with my repl zsh function that creates this file)
-map \@ Gdd:r ~/tmp/@@<CR>
+map <Leader>@ Gdd:r ~/tmp/@@<CR>
 
 """ comp/repl/forw mappings
 " Invokes buildmimeproc on given email
-map \em :%! `mhparam buildmimeproc` -<CR>
+map <Leader>em :%! `mhparam buildmimeproc` -<CR>
 " Quotes lines starting with '#' to differentiate from MIME directives
-map \+# :%s/^#/##/<CR>
+map <Leader>+# :%s/^#/##/<CR>
 " Inserts an example "type" directive for reference.
 " After typing this macro, you should be able to type the real name, then
 " hit ',' and then hit '.'.  This will change both 'x's quickly.
-imap \-#a #application/octet-stream; name="x_exe" [] x_exe<Esc>F#fxcw
-imap \-#g #image/gif; name="x.gif" [] x.gif<Esc>F#fxs
-imap \-#j #image/jpg; name="x.jpg" [] x.jpg<Esc>F#fxs
-imap \-#m #video/mpeg; name="x.mpg" [] x.mpg<Esc>F#fxs
+imap <Leader>-#a #application/octet-stream; name="x_exe" [] x_exe<Esc>F#fxcw
+imap <Leader>-#g #image/gif; name="x.gif" [] x.gif<Esc>F#fxs
+imap <Leader>-#j #image/jpg; name="x.jpg" [] x.jpg<Esc>F#fxs
+imap <Leader>-#m #video/mpeg; name="x.mpg" [] x.mpg<Esc>F#fxs
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Key Mappings
@@ -218,9 +219,9 @@ noremap! <C-z> <Esc><C-z>
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <C-o>:w<CR>
 " Edits .vimrc
-nnoremap \vi :e ~/.vimrc<CR>
+nnoremap <Leader>vi :e ~/.vimrc<CR>
 " Re-sources .vimrc
-nnoremap \so :so ~/.vimrc<CR>
+nnoremap <Leader>so :so ~/.vimrc<CR>
 
 " Indents blocks
 "nmap <Tab> >>
@@ -231,37 +232,42 @@ nnoremap \so :so ~/.vimrc<CR>
 """ Function key mappings (like in .exrc, but more portable)
 
 " Override the ~/.exrc defaults to be smarter
-nmap \c1 :set et<CR>:set sts=2 sw=2<CR>
-nmap \c2 :set et<CR>:set sts=4 sw=2<CR>
-nmap \c3 :set et<CR>:set sts=8 sw=4<CR>
-nmap \c4 :set noet<CR>:set sts=8 sw=8<CR>
-nmap \o5 :set invpaste<CR>:set paste?<CR>
-nmap \o6 :call ZCycleWrap()<CR>
-nmap \o7 :call ZCycleTextwidth()<CR>
-nmap \f7 \o7
-nmap \o8 :call ZToggleVirtualEdit()<CR>
-nmap \f8 \o8
+nmap <Leader>c1 :set et<CR>:set sts=2 sw=2<CR>
+nmap <Leader>c2 :set et<CR>:set sts=4 sw=2<CR>
+nmap <Leader>c3 :set et<CR>:set sts=8 sw=4<CR>
+nmap <Leader>c4 :set noet<CR>:set sts=8 sw=8<CR>
+nmap <Leader>o5 :set invpaste<CR>:set paste?<CR>
+nmap <Leader>o6 :call ZCycleWrap()<CR>
+nmap <Leader>o7 :call ZCycleTextwidth()<CR>
+nmap <Leader>f7 <Leader>o7
+nmap <Leader>o8 :call ZToggleVirtualEdit()<CR>
+nmap <Leader>f8 <Leader>o8
 
-nmap \o9 :call ZCycleEditDisplay()<CR>
-"nmap \o0 :!elinks -default-mime-type "text/html" file://%<CR>
-nmap \o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=120<CR>
+nmap <Leader>o9 :call ZCycleEditDisplay()<CR>
+"nmap <Leader>o0 :!elinks -default-mime-type "text/html" file://%<CR>
+nmap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=120<CR>
 
 " Invoke plugins
-nmap \s1 :CtrlP<CR>
-nmap \s2 :BufExplorer<CR>
+nmap <Leader>s1 :BufExplorer<CR>
+nmap <Leader>s2 :CtrlP<CR>
+nmap <Leader>s3 :CtrlP .<CR>
 
-nmap <F1> \f0
-nmap <F2> \f2
-nmap <F3> \f3
-nmap <F4> \f4
-nmap <F5> \f5
-nmap <F6> \f6
-nmap <F7> \f7
-nmap <F8> \f8
-nmap <F9> \f9
-nmap <F10> \f0
-nmap <F11> \s1
-nmap <F12> \s2
+nmap <F1> <Leader>f0
+nmap <F2> <Leader>f2
+nmap <F3> <Leader>f3
+nmap <F4> <Leader>f4
+nmap <F5> <Leader>f5
+nmap <F6> <Leader>f6
+nmap <F7> <Leader>f7
+nmap <F8> <Leader>f8
+nmap <F9> <Leader>f9
+nmap <F10> <Leader>f0
+nmap <F11> <Leader>s1
+nmap <F12> <Leader>s2
+
+"nmap <C-Q>1 <Leader>s1
+"nmap <C-Q>2 <Leader>s2
+"nmap <C-Q>3 <Leader>s3
 
 " Make pastetoggle also work in insert mode
 set pastetoggle=<f5>
@@ -640,7 +646,7 @@ let spell_options     = "-S -C -W 2"
 " Turn off this hack because it can get annoying
 let spell_insert_mode = 0
 " Don't read the slow-loading vimspell until the user wants to use it
-nmap \ss :nunmap \ss<CR>:let spell_insert_mode=1<CR>:runtime macros/vimspell.vim<CR>\ss
+nmap <Leader>ss :nunmap <Leader>ss<CR>:let spell_insert_mode=1<CR>:runtime macros/vimspell.vim<CR><Leader>ss
 
 """ snipMate options
 
