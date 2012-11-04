@@ -248,9 +248,10 @@ nmap <Leader>o9 :call ZCycleEditDisplay()<CR>
 nmap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=120<CR>
 
 " Invoke plugins
-nmap <Leader>s1 :BufExplorer<CR>
+nmap <Leader>s1 :CtrlPBuffer<CR>
 nmap <Leader>s2 :CtrlP<CR>
 nmap <Leader>s3 :CtrlP .<CR>
+nmap <Leader>s0 :BufExplorer<CR>
 
 nmap <F1> <Leader>f0
 nmap <F2> <Leader>f2
