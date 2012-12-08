@@ -108,6 +108,7 @@ occasionally.
                       typed by hitting control-v and then control-r or -m)
 *   `:bufdo exe "normal :%s,^,\<C-R>%,\<CR>"` : same as above
 *   `:verbose set history?` : Find where an option is set
+*   `:w !sudo tee %`    :   Save the current file with sudo privileges
 
 ### My own mappings ###
 
