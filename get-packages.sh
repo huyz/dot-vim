@@ -238,13 +238,7 @@ fi
 [ -d vim-coffee-script ] || git clone git://github.com/kchmck/vim-coffee-script.git
 [ -d tagbar ] || git clone git://github.com/majutsushi/tagbar.git
 [ -d ctrlp.vim ] || git clone git://github.com/kien/ctrlp.vim.git
-[ -d vim-jsbeautify ] || {
-  git clone git://github.com/maksimr/vim-jsbeautify.git
-  if cd vim-jsbeautify; then
-    git submodule update --init --recursive
-    cd ..
-  fi
-}
+[ -d vim-jsbeautify ] || git clone --recursive git://github.com/maksimr/vim-jsbeautify.git
 
 # vim-solarized is contained within the larger repository solarized, so check
 # first for the global location
@@ -283,3 +277,5 @@ fi
 ### Generate helptags for docs
 
 vim -e -T dumb -c "call pathogen#helptags() | quit"
+
+exit 0
