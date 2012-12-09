@@ -23,4 +23,10 @@ cd $GIT
 ./get-packages.sh
 
 # This is only for me
-[ -e .vimrc.post.gpg && ! -e .vimrc.post ] || gpg -d -o .vimrc.post .vimrc.post.gpg && touch -r .vimrc.post.gpg .vimrc.post
+if [ -e .vimrc.post.gpg -a ! -e .vimrc.post ]; then
+  if command -v gpg >/dev/null 2>&1; then 
+    gpg -d -o .vimrc.post .vimrc.post.gpg && touch -r .vimrc.post.gpg .vimrc.post
+  else
+    echo "Warning: gpg not found.  Cannot decrypt .vimrc.post.gpg" >&2
+  fi
+fi
