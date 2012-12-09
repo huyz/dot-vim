@@ -14,6 +14,7 @@ cd ~
 [ -h ~/.vim ] || ln -s $GIT .vim
 [ -h ~/.vimrc ] || ln -s $GIT/.vimrc .
 [ -h ~/.exrc ] || ln -s $GIT/.exrc .
+[ -h ~/.editorconfig ] || ln -s $GIT/.editorconfig .
 
 [ -d ~/bin ] || mkdir ~/bin
 [ -d ~/bin -a -h ~/bin/m ] || ln -s $GIT/bin/m ~/bin/.

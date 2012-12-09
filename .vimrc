@@ -666,7 +666,7 @@ let g:snippets_dir = "~/.vim/bundle/snipmate.vim/snippets"
 
 """ vim-jsbeautify
 
-let g:jsbeautify   = {'indent_size': 2, 'indent_char': ' ', 'indent_with_tabs': 0, 'preserve_newlines': 1, 'max_preserve_newlines': 10, 'jslint_happy': 0, 'brace_style': 'collapse', 'keep_array_indentation': 1, 'keep_function_indentation': 1, 'eval_code': 0, 'unescape_strings': 0}
+"let g:jsbeautify   = {'indent_size': 2, 'indent_char': ' ', 'indent_with_tabs': 0, 'preserve_newlines': 1, 'max_preserve_newlines': 10, 'jslint_happy': 0, 'brace_style': 'collapse', 'keep_array_indentation': 1, 'keep_function_indentation': 1, 'eval_code': 0, 'unescape_strings': 0}
 "let g:htmlbeautify = {'indent_size': 2, 'indent_char': ' ', 'max_char': 78, 'brace_style': 'expand', 'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u']}
 "let g:cssbeautify  = {'indent_size': 2, 'indent_char': ' '}
 map <Leader>bj <plug>NERDCommenterAlignBoth
