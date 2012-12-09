@@ -20,7 +20,7 @@ cd ~
 
 cd $GIT
 
-./get-packages.sh
+sh ./get-packages.sh
 
 # This is only for me
 if [ -e .vimrc.post.gpg -a ! -e .vimrc.post ]; then
