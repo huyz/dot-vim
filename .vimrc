@@ -349,7 +349,7 @@ if v:version >= 703
     elseif !&list &&  &number && !&relativenumber && !&cursorcolumn
       set relativenumber
     elseif !&list && !&number &&  &relativenumber && !&cursorcolumn
-      set number cursorcolumn
+      set number cursorcolumn cursorline
     elseif !&list &&  &number && !&relativenumber &&  &cursorcolumn
       set relativenumber
     elseif !&list && !&number &&  &relativenumber &&  &cursorcolumn
@@ -357,7 +357,7 @@ if v:version >= 703
     elseif  &list &&  &number && !&relativenumber &&  &cursorcolumn
       set relativenumber
     else
-      set nolist nonumber norelativenumber nocursorcolumn
+      set nolist nonumber norelativenumber nocursorcolumn nocursorline
     endif
   endfunction
 else
@@ -365,11 +365,11 @@ else
     if     !&list && !&number && !&cursorcolumn
       set number
     elseif !&list &&  &number && !&cursorcolumn
-      set cursorcolumn
+      set cursorcolumn cursorline
     elseif !&list &&  &number &&  &cursorcolumn
       set list
     else
-      set nolist nonumber nocursorcolumn
+      set nolist nonumber nocursorcolumn cursorline
     endif
   endfunction
 endif
