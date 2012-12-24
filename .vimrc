@@ -11,20 +11,40 @@
 "   automatically load some of my settings.  Just ignore it.
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Allow ~/.vim to be anywhere (based on location of .vimrc)
+""" To enable, invoke: vim -u /path/to/portable/vim/.vimrc
+
+" what is the name of the directory containing this file?
+let $MYVIM = expand('<sfile>:p:h')
+
+" If .vimrc is from ~, then we assume ~/.vim as usual
+if $MYVIM == $HOME
+  let $MYVIM = expand("$HOME/.vim")
+else
+  " set default 'runtimepath' (without ~/.vim folders)
+  let &runtimepath = printf('%s/vimfiles,%s,%s/vimfiles/after', $VIM, $VIMRUNTIME, $VIM)
+
+  " add the directory to 'runtimepath'
+  let &runtimepath = printf('%s,%s,%s/after', $MYVIM, &runtimepath, $MYVIM)
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use Vim settings, rather then Vi settings (much better!).
 " NOTE: This must be first, because it changes other options as a side effect.
 set nocompatible
 
 " Load up any custom initializations before this file
-if filereadable(expand("~/.vim/.vimrc.pre"))
-  source ~/.vim/.vimrc.pre
+if filereadable(expand("$MYVIM/.vimrc.pre"))
+  source $MYVIM/.vimrc.pre
 endif
 
 """ Standard vi settings are shared with vi in ~/.exrc
 
 if filereadable(expand("$MEHOME/.exrc"))
   source $MEHOME/.exrc
+elseif filereadable(expand("$MYVIM/.exrc"))
+  source $MYVIM/.exrc
 elseif filereadable(expand("~/.exrc"))
   source ~/.exrc
 endif
@@ -97,14 +117,14 @@ map <Leader>_t_z 1G/Filename:<CR>:nohl<CR>A
 
 """ Inserts templates, replaces a few things, and sets file type
 
-imap <Leader>-tt  <Esc>:-1r $HOME/.vim/templates/header<CR><Leader>_t_s
-imap <Leader>-th  <Esc>:-1r $HOME/.vim/templates/html<CR><Leader>_t_s:setf html<CR>
-imap <Leader>-tp  <Esc>:-1r $HOME/.vim/templates/perl<CR>o<Leader>-tt:setf perl<CR><Leader>_t_z
-imap <Leader>-ts0 <Esc>:-1r $HOME/.vim/templates/script<CR>o<Leader>-tt<Leader>_t_z
-imap <Leader>-ts1 <Esc>:-1r $HOME/.vim/templates/sh1<CR>o<Leader>-tt:setf sh<CR><Leader>_t_z
-imap <Leader>-ts2 <Esc>:-1r $HOME/.vim/templates/sh2<CR>o<Leader>-tt:setf sh<CR><Leader>_t_z
-imap <Leader>-tz1 <Esc>:-1r $HOME/.vim/templates/zsh1<CR>o<Leader>-tt:setf zsh<CR><Leader>_t_z
-imap <Leader>-tz2 <Esc>:-1r $HOME/.vim/templates/zsh2<CR>o<Leader>-tt:setf zsh<CR><Leader>_t_z
+imap <Leader>-tt  <Esc>:-1r $MYVIM/templates/header<CR><Leader>_t_s
+imap <Leader>-th  <Esc>:-1r $MYVIM/templates/html<CR><Leader>_t_s:setf html<CR>
+imap <Leader>-tp  <Esc>:-1r $MYVIM/templates/perl<CR>o<Leader>-tt:setf perl<CR><Leader>_t_z
+imap <Leader>-ts0 <Esc>:-1r $MYVIM/templates/script<CR>o<Leader>-tt<Leader>_t_z
+imap <Leader>-ts1 <Esc>:-1r $MYVIM/templates/sh1<CR>o<Leader>-tt:setf sh<CR><Leader>_t_z
+imap <Leader>-ts2 <Esc>:-1r $MYVIM/templates/sh2<CR>o<Leader>-tt:setf sh<CR><Leader>_t_z
+imap <Leader>-tz1 <Esc>:-1r $MYVIM/templates/zsh1<CR>o<Leader>-tt:setf zsh<CR><Leader>_t_z
+imap <Leader>-tz2 <Esc>:-1r $MYVIM/templates/zsh2<CR>o<Leader>-tt:setf zsh<CR><Leader>_t_z
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Mail mappings (for MH)
@@ -219,9 +239,9 @@ noremap! <C-z> <Esc><C-z>
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <C-o>:w<CR>
 " Edits .vimrc
-nnoremap <Leader>vi :e ~/.vimrc<CR>
+nnoremap <Leader>vi :e $MYVIM/.vimrc<CR>
 " Re-sources .vimrc
-nnoremap <Leader>so :so ~/.vimrc<CR>
+nnoremap <Leader>so :so $MYVIM/.vimrc<CR>
 
 " Indents blocks
 "nmap <Tab> >>
@@ -512,7 +532,7 @@ set mouse=a                   " Enable the mouse where possible. (Great for Tagb
 runtime macros/matchit.vim
 
 " Load up all the bundles with pathogen
-if filereadable(expand("~/.vim/autoload/pathogen.vim")) ||
+if filereadable(expand("$MYVIM/autoload/pathogen.vim")) ||
  \ filereadable(expand("$MEHOME/.vim/autoload/pathogen.vim"))
   call pathogen#runtime_append_all_bundles()
 endif
@@ -680,8 +700,8 @@ autocmd FileType css noremap <buffer>   <Leader>B  :call CSSBeautify()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load up any custom initializations after this file
-if filereadable(expand("~/.vim/.vimrc.post"))
-  source ~/.vim/.vimrc.post
+if filereadable(expand("$MYVIM/.vimrc.post"))
+  source $MYVIM/.vimrc.post
 endif
 
 " vim:set ai et sts=2 sw=2 tw=0:
