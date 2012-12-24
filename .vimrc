@@ -563,9 +563,12 @@ let is_bash = 1
 " FIXME:
 "   - See improvements at http://vim.wikia.com/wiki/Highlighting_whitespaces_at_end_of_line
 "   - Doesn't work if TERM=xterm-256color
-highlight WhitespaceEOL term=reverse ctermfg=red ctermbg=NONE cterm=underline guifg=red guibg=NONE gui=underline
-" NOTE: lookbehind prevents matching on spaces at beginning of line
-match WhitespaceEOL /\([^.!? \t]\@<=\|[.!?]\s\)\s\s\+$/
+function! HighlightWhitespaceEOL()
+  highlight WhitespaceEOL term=reverse ctermfg=red ctermbg=NONE cterm=underline guifg=red guibg=NONE gui=underline
+  " NOTE: lookbehind prevents matching on spaces at beginning of line
+  match WhitespaceEOL /\([^.!? \t]\@<=\|[.!?]\s\)\s\s\+$/
+endfunction
+call HighlightWhitespaceEOL()
 
 
 """ Enable Syntax-highlighting options
