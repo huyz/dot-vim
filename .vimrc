@@ -273,7 +273,7 @@ nmap <Leader>s2 :CtrlP<CR>
 nmap <Leader>s3 :CtrlP .<CR>
 nmap <Leader>s0 :BufExplorer<CR>
 
-nmap <F1> <Leader>f0
+nmap <F1> <Leader>f1
 nmap <F2> <Leader>f2
 nmap <F3> <Leader>f3
 nmap <F4> <Leader>f4
@@ -369,7 +369,7 @@ if v:version >= 703
     elseif !&list &&  &number && !&relativenumber && !&cursorcolumn
       set relativenumber
     elseif !&list && !&number &&  &relativenumber && !&cursorcolumn
-      set number cursorcolumn
+      set number cursorcolumn cursorline
     elseif !&list &&  &number && !&relativenumber &&  &cursorcolumn
       set relativenumber
     elseif !&list && !&number &&  &relativenumber &&  &cursorcolumn
@@ -377,7 +377,7 @@ if v:version >= 703
     elseif  &list &&  &number && !&relativenumber &&  &cursorcolumn
       set relativenumber
     else
-      set nolist nonumber norelativenumber nocursorcolumn
+      set nolist nonumber norelativenumber nocursorcolumn nocursorline
     endif
   endfunction
 else
@@ -385,11 +385,11 @@ else
     if     !&list && !&number && !&cursorcolumn
       set number
     elseif !&list &&  &number && !&cursorcolumn
-      set cursorcolumn
+      set cursorcolumn cursorline
     elseif !&list &&  &number &&  &cursorcolumn
       set list
     else
-      set nolist nonumber nocursorcolumn
+      set nolist nonumber nocursorcolumn nocursorline
     endif
   endfunction
 endif
@@ -623,6 +623,7 @@ if &background == 'light'
 else
   hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
 endif
+set colorcolumn=+2,120
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Hacks
