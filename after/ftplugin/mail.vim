@@ -4,8 +4,6 @@
 " Disable autoindent
 setlocal noai
 
-" 2011-05-28 Leave hard autowrap at default 72
-"setlocal tw=0
 " Break lines at word boundaries
 setlocal linebreak
 

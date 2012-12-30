@@ -623,7 +623,7 @@ if &background == 'light'
 else
   hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
 endif
-if v:version >= 730
+if v:version >= 703
   set colorcolumn=+2,120
 endif
 
