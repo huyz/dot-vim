@@ -700,6 +700,9 @@ autocmd FileType javascript noremap <buffer>   <Leader>B  :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer>   <Leader>B  :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer>   <Leader>B  :call CSSBeautify()<cr>
 
+""" vim-indent-guides
+let g:indent_guides_enable_on_vim_startup = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load up any custom initializations after this file

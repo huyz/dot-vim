@@ -239,6 +239,7 @@ fi
 [ -d tagbar ] || git clone git://github.com/majutsushi/tagbar.git
 [ -d ctrlp.vim ] || git clone git://github.com/kien/ctrlp.vim.git
 [ -d vim-jsbeautify ] || git clone --recursive git://github.com/maksimr/vim-jsbeautify.git
+[ -d vim-indent-guides ] || git clone git://github.com/nathanaelkane/vim-indent-guides.git
 
 # vim-solarized is contained within the larger repository solarized, so check
 # first for the global location
