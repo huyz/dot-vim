@@ -7,6 +7,7 @@ alias git='git -c user.name="huyz" -c user.email=h-git@huyz.us'
 ### Configuration
 
 umask 022
+GIT_CLONE_ARGS="--depth 1"
 
 ### End of configuration
 
@@ -28,7 +29,7 @@ done
 cd ~/.vim/packages || exit 40
 
 # Clone pathogen
-[ -d vim-pathogen ] || git clone git://github.com/tpope/vim-pathogen.git
+[ -d vim-pathogen ] || git clone $GIT_CLONE_ARGS git://github.com/tpope/vim-pathogen.git
 [ -h ../autoload/pathogen.vim ] || ln -s ../packages/vim-pathogen/autoload/pathogen.vim ../autoload/.
 
 # Scripts
@@ -50,7 +51,7 @@ cd ~/.vim/packages || exit 40
 #[ -e rcs-menu.vim ] || wget -O rcs-menu.vim 'http://www.vim.org/scripts/download_script.php?src_id=59'
 #[ -h ../plugin/rcs-menu.vim ] || ln -s ../packages/rcs-menu.vim ../plugin/.
 
-[ -d less.vim ] || git clone git@github.com:huyz/less.vim.git
+[ -d less.vim ] || git clone $GIT_CLONE_ARGS git@github.com:huyz/less.vim.git
 [ -h ../macros/less.vim ] || ln -s ../packages/less.vim/less.vim ../macros/.
 [ -h ../bin/m ] || ln -s ../packages/less.vim/m ../bin/.
 
@@ -230,16 +231,16 @@ fi
 
 ### Clone read-only git repos
 
-[ -d gundo.vim ] || git clone http://github.com/sjl/gundo.vim.git
-[ -d minibufexpl.vim ] || git clone http://github.com/fholgado/minibufexpl.vim.git
-[ -d nerdcommenter ] || git clone http://github.com/scrooloose/nerdcommenter.git
-[ -d snipmate.vim ] || git clone http://github.com/msanders/snipmate.vim.git
-[ -d vim-gnupg ] || git clone git://github.com/jamessan/vim-gnupg.git
-[ -d vim-coffee-script ] || git clone git://github.com/kchmck/vim-coffee-script.git
-[ -d tagbar ] || git clone git://github.com/majutsushi/tagbar.git
-[ -d ctrlp.vim ] || git clone git://github.com/kien/ctrlp.vim.git
-[ -d vim-jsbeautify ] || git clone --recursive git://github.com/maksimr/vim-jsbeautify.git
-[ -d vim-indent-guides ] || git clone git://github.com/nathanaelkane/vim-indent-guides.git
+[ -d gundo.vim ] || git clone $GIT_CLONE_ARGS http://github.com/sjl/gundo.vim.git
+[ -d minibufexpl.vim ] || git clone $GIT_CLONE_ARGS http://github.com/fholgado/minibufexpl.vim.git
+[ -d nerdcommenter ] || git clone $GIT_CLONE_ARGS http://github.com/scrooloose/nerdcommenter.git
+[ -d snipmate.vim ] || git clone $GIT_CLONE_ARGS http://github.com/msanders/snipmate.vim.git
+[ -d vim-gnupg ] || git clone $GIT_CLONE_ARGS git://github.com/jamessan/vim-gnupg.git
+[ -d vim-coffee-script ] || git clone $GIT_CLONE_ARGS git://github.com/kchmck/vim-coffee-script.git
+[ -d tagbar ] || git clone $GIT_CLONE_ARGS git://github.com/majutsushi/tagbar.git
+[ -d ctrlp.vim ] || git clone $GIT_CLONE_ARGS git://github.com/kien/ctrlp.vim.git
+[ -d vim-jsbeautify ] || git clone $GIT_CLONE_ARGS --recursive git://github.com/maksimr/vim-jsbeautify.git
+[ -d vim-indent-guides ] || git clone $GIT_CLONE_ARGS git://github.com/nathanaelkane/vim-indent-guides.git
 
 # vim-solarized is contained within the larger repository solarized, so check
 # first for the global location
@@ -247,7 +248,7 @@ if [ ! -h vim-colors-solarized ]; then
   if [ -d ~/git/solarized ]; then
     ln -s ~/git/solarized/vim-colors-solarized .
   else
-    [ -d solarized ] || git clone http://github.com/altercation/solarized.git
+    [ -d solarized ] || git clone $GIT_CLONE_ARGS http://github.com/altercation/solarized.git
     ln -s solarized/vim-colors-solarized .
   fi
 fi
