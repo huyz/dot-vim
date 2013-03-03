@@ -9,26 +9,26 @@ root = true  ; top-most EditorConfig file
 end_of_line = lf
 insert_final_newline = true
 
-[*.js]
+[**.js]
 ; Path to the external file format
 ; The default is taken from the lib folder inside the folder extension.
-;vim:path=~/.vim/bundle/js-beautify/beautify.js
+vim:path=~/.vim/bundle/vim-jsbeautify/plugin/lib/beautify.js
 ; Javascript interpreter to be invoked by default 'node'
-bin=node
+;bin=node
 indent_style = space
 indent_size = 2
 
-[*.css]
-path=~/.vim/bundle/js-beautify/beautify-css.js
+[**.css]
+vim:path=~/.vim/bundle/vim-jsbeautify/plugin/lib/beautify-css.js
 indent_style = space
 indent_size = 2
 
-[*.html]
-;vim:path=~/.vim/bundle/js-beautify/beautify-html.js
+[**.html]
+vim:path=~/.vim/bundle/vim-jsbeautify/plugin/lib/beautify-html.js
 ; ;vim:max_char=78:brace_style=expand
 indent_style = space
 indent_size = 4
 
-[*.py]
-indent_style = space
-indent_size = 4
+;[**.py]
+;indent_style = space
+;indent_size = 4
