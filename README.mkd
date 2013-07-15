@@ -123,6 +123,7 @@ I tend to forgot I defined these mappings:
 *   `Q` `gq` `<M-q>` : Format by `par`, vim, or emacs-style
 *   `<Meta>q`        : Reformat paragraph (like emacs)
 *   `:S` instead `:s` : For perl-compatible regexp
+*   `<C-s>`          : Save buffer
 
 ### Plugins I installed ###
 
@@ -188,6 +189,23 @@ vimspell        :   Spell checks (live for certain files) [deprecated]
 *   `\su`       : insert word under cursor as lowercase into directory.
 *   `\sa`       : accept word for this session only.
 *   `\s?`       : check for alternatives.
+
+CtrlP
+
+*   `F11`       : quickly switch buffer
+*   `F12`       : quickly switch file
+
+yankring
+
+*   `\cN`       : (After pasting) rotate through other items in the clipboard
+*   `\cP`       : (After pasting) rotate backward
+
+Multiple Cursors
+
+*   `\cQ`       : Start multiple cursor mode
+*   `\cN`       : Select current
+*   `\cP`       : Unselect current
+*   `\cX`       : Skip current
 
 Installation
 ------------

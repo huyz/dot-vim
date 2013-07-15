@@ -639,9 +639,19 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options
 
+""" CtrlP
+
+" Reserve Ctrl-P for Yankring
+let g:ctrlp_map = '<C-Q>'
+
 """ YankRing
 
 let g:yankring_history_dir = '~/.vim'
+
+""" Multiple Cursors
+
+" Override CtrlP binding because it uses F11 and F12
+let g:multi_cursor_start_key = '<C-Q>'
 
 """ BufExplorer
 
