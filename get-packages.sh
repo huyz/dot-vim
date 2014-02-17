@@ -231,17 +231,18 @@ fi
 
 ### Clone read-only git repos
 
-[ -d gundo.vim ] || git clone $GIT_CLONE_ARGS http://github.com/sjl/gundo.vim.git
-[ -d minibufexpl.vim ] || git clone $GIT_CLONE_ARGS http://github.com/fholgado/minibufexpl.vim.git
-[ -d nerdcommenter ] || git clone $GIT_CLONE_ARGS http://github.com/scrooloose/nerdcommenter.git
-[ -d snipmate.vim ] || git clone $GIT_CLONE_ARGS http://github.com/msanders/snipmate.vim.git
-[ -d vim-gnupg ] || git clone $GIT_CLONE_ARGS git://github.com/jamessan/vim-gnupg.git
-[ -d vim-coffee-script ] || git clone $GIT_CLONE_ARGS git://github.com/kchmck/vim-coffee-script.git
-[ -d tagbar ] || git clone $GIT_CLONE_ARGS git://github.com/majutsushi/tagbar.git
-[ -d ctrlp.vim ] || git clone $GIT_CLONE_ARGS git://github.com/kien/ctrlp.vim.git
-[ -d vim-jsbeautify ] || git clone $GIT_CLONE_ARGS --recursive git://github.com/maksimr/vim-jsbeautify.git
-[ -d vim-indent-guides ] || git clone $GIT_CLONE_ARGS git://github.com/nathanaelkane/vim-indent-guides.git
+[ -d gundo.vim ] || git clone $GIT_CLONE_ARGS https://github.com/sjl/gundo.vim.git
+[ -d minibufexpl.vim ] || git clone $GIT_CLONE_ARGS https://github.com/fholgado/minibufexpl.vim.git
+[ -d nerdcommenter ] || git clone $GIT_CLONE_ARGS https://github.com/scrooloose/nerdcommenter.git
+[ -d snipmate.vim ] || git clone $GIT_CLONE_ARGS https://github.com/msanders/snipmate.vim.git
+[ -d vim-gnupg ] || git clone $GIT_CLONE_ARGS https://github.com/jamessan/vim-gnupg.git
+[ -d vim-coffee-script ] || git clone $GIT_CLONE_ARGS https://github.com/kchmck/vim-coffee-script.git
+[ -d tagbar ] || git clone $GIT_CLONE_ARGS https://github.com/majutsushi/tagbar.git
+[ -d ctrlp.vim ] || git clone $GIT_CLONE_ARGS https://github.com/kien/ctrlp.vim.git
+[ -d vim-jsbeautify ] || git clone $GIT_CLONE_ARGS --recursive https://github.com/maksimr/vim-jsbeautify.git
+[ -d vim-indent-guides ] || git clone $GIT_CLONE_ARGS https://github.com/nathanaelkane/vim-indent-guides.git
 [ -d vim-multiple-cursors ] || git clone $GIT_CLONE_ARGS https://github.com/terryma/vim-multiple-cursors.git
+[ -d vim-golang ] || git clone $GIT_CLONE_ARGS https://github.com/jnwhiteh/vim-golang.git
 
 # vim-solarized is contained within the larger repository solarized, so check
 # first for the global location
