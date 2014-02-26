@@ -58,6 +58,8 @@ Features:
         plugins, mainly Align and AutoAlign.  Largely deprecated by pathogen.
     *   [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides)
         - visually displaying indent levels in code
+    *   [vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors)
+        - Sublime Text's multiple selection editing feature
 *   Installs the color scheme:
     *   [Solarized](http://ethanschoonover.com/solarized/vim-colors-solarized)
 *   Installs the syntax highlighting scripts for:
