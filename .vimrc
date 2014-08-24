@@ -658,6 +658,11 @@ let g:multi_cursor_start_key = '<C-Q>'
 
 let g:bufExplorerSortBy='fullpath'   " Sort by full file path name.
 
+""" miniBufExpl
+
+let g:miniBufExplSplitBelow=0  " Put new window above
+                               " current or on the
+                               " left for vertical split
 """ NERDcommenter options
 
 map <Leader>c/ <plug>NERDCommenterAlignBoth
