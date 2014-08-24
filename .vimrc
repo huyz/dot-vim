@@ -251,28 +251,43 @@ nnoremap <Leader>so :so $MYVIM/.vimrc<CR>
 
 """ Function key mappings (like in .exrc, but more portable)
 
-" Override the ~/.exrc defaults to be smarter
-nmap <Leader>c1 :set et<CR>:set sts=2 sw=2<CR>
-nmap <Leader>c2 :set et<CR>:set sts=4 sw=2<CR>
-nmap <Leader>c3 :set et<CR>:set sts=8 sw=4<CR>
-nmap <Leader>c4 :set noet<CR>:set sts=8 sw=8<CR>
-nmap <Leader>o5 :set invpaste<CR>:set paste?<CR>
-nmap <Leader>o6 :call ZCycleWrap()<CR>
-nmap <Leader>o7 :call ZCycleTextwidth()<CR>
-nmap <Leader>f7 <Leader>o7
-nmap <Leader>o8 :call ZToggleVirtualEdit()<CR>
-nmap <Leader>f8 <Leader>o8
+" Different tab settings
+nmap <Leader>t1 :set et<CR>:set sts=2 sw=2<CR>
+nmap <Leader>t2 :set et<CR>:set sts=4 sw=2<CR>
+nmap <Leader>t3 :set et<CR>:set sts=8 sw=4<CR>
+nmap <Leader>t4 :set noet<CR>:set sts=8 sw=8<CR>
 
-nmap <Leader>o9 :call ZCycleEditDisplay()<CR>
-"nmap <Leader>o0 :!elinks -default-mime-type "text/html" file://%<CR>
+" Different options
 nmap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=120<CR>
+nmap <Leader>o1 :set invpaste<CR>:set paste?<CR>
+nmap <Leader>o2 :call ZCycleWrap()<CR>
+nmap <Leader>o3 :call ZCycleTextwidth()<CR>
+nmap <Leader>o4 :call ZToggleVirtualEdit()<CR>
+nmap <Leader>o5 :call ZCycleEditDisplay()<CR>
+"nmap <Leader>o6 :!elinks -default-mime-type "text/html" file://%<CR>
 
 " Invoke plugins
-nmap <Leader>s1 :CtrlPBuffer<CR>
-nmap <Leader>s2 :CtrlP<CR>
-nmap <Leader>s3 :CtrlP .<CR>
-nmap <Leader>s0 :BufExplorer<CR>
+nmap <Leader>p1 :CtrlPBuffer<CR>
+nmap <Leader>p2 :CtrlP<CR>
+nmap <Leader>p3 :CtrlP .<CR>
+nmap <Leader>p5 :NERDTreeToggle<CR>
+nmap <Leader>p0 :BufExplorer<CR>
 
+" Current mappings we want quick access to
+nmap <Leader>f1 <Leader>t1
+nmap <Leader>f2 <Leader>t2
+nmap <Leader>f3 <Leader>t3
+nmap <Leader>f4 <Leader>o0
+nmap <Leader>f5 <Leader>o1
+nmap <Leader>f6 <Leader>o2
+nmap <Leader>f7 <Leader>o3
+nmap <Leader>f8 <Leader>o4
+nmap <Leader>f9 <Leader>o5
+nmap <Leader>f0 <Leader>p1
+nmap <Leader>F1 <Leader>p2
+nmap <Leader>F2 <Leader>p5
+
+" Normal function key mappings (these don't change)
 nmap <F1> <Leader>f1
 nmap <F2> <Leader>f2
 nmap <F3> <Leader>f3
@@ -283,8 +298,8 @@ nmap <F7> <Leader>f7
 nmap <F8> <Leader>f8
 nmap <F9> <Leader>f9
 nmap <F10> <Leader>f0
-nmap <F11> <Leader>s1
-nmap <F12> <Leader>s2
+nmap <F11> <Leader>F1
+nmap <F12> <Leader>F2
 
 "nmap <C-Q>1 <Leader>s1
 "nmap <C-Q>2 <Leader>s2

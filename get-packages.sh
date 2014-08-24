@@ -232,6 +232,7 @@ fi
 [ -d gundo.vim ] || git clone $GIT_CLONE_ARGS https://github.com/sjl/gundo.vim.git
 [ -d minibufexpl.vim ] || git clone $GIT_CLONE_ARGS https://github.com/fholgado/minibufexpl.vim.git
 [ -d nerdcommenter ] || git clone $GIT_CLONE_ARGS https://github.com/scrooloose/nerdcommenter.git
+[ -d nerdtree ] || git clone $GIT_CLONE_ARGS https://github.com/scrooloose/nerdtree.git
 [ -d snipmate.vim ] || git clone $GIT_CLONE_ARGS https://github.com/msanders/snipmate.vim.git
 [ -d vim-gnupg ] || git clone $GIT_CLONE_ARGS https://github.com/jamessan/vim-gnupg.git
 [ -d vim-coffee-script ] || git clone $GIT_CLONE_ARGS https://github.com/kchmck/vim-coffee-script.git
