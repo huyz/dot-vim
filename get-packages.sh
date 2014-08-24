@@ -241,6 +241,7 @@ fi
 [ -d vim-indent-guides ] || git clone $GIT_CLONE_ARGS https://github.com/nathanaelkane/vim-indent-guides.git
 [ -d vim-multiple-cursors ] || git clone $GIT_CLONE_ARGS https://github.com/terryma/vim-multiple-cursors.git
 [ -d vim-golang ] || git clone $GIT_CLONE_ARGS https://github.com/jnwhiteh/vim-golang.git
+[ -d committia.vim ] || git clone $GIT_CLONE_ARGS https://github.com/rhysd/committia.vim.git
 [ -d vim-less ] || git clone $GIT_CLONE_ARGS https://github.com/groenewege/vim-less.git
 
 # vim-solarized is contained within the larger repository solarized, so check
