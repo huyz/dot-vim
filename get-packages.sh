@@ -43,8 +43,6 @@ cd ~/.vim/packages || exit 40
 [ -h ../syntax/outline.vim ] || ln -s ../packages/outline.vim ../syntax/.
 [ -e json.vim ] || wget -O json.vim 'http://www.vim.org/scripts/download_script.php?src_id=10853'
 [ -h ../syntax/json.vim ] || ln -s ../packages/json.vim ../syntax/.
-[ -e lesscss.vim ] || wget -O lesscss.vim 'http://leafo.net/lessphp/vim/less.vim'
-[ -h ../syntax/lesscss.vim ] || ln -s ../packages/lesscss.vim ../syntax/.
 
 # The latest version updated March 18th, 2003 is not accessible online, so we
 # check it in
@@ -243,6 +241,7 @@ fi
 [ -d vim-indent-guides ] || git clone $GIT_CLONE_ARGS https://github.com/nathanaelkane/vim-indent-guides.git
 [ -d vim-multiple-cursors ] || git clone $GIT_CLONE_ARGS https://github.com/terryma/vim-multiple-cursors.git
 [ -d vim-golang ] || git clone $GIT_CLONE_ARGS https://github.com/jnwhiteh/vim-golang.git
+[ -d vim-less ] || git clone $GIT_CLONE_ARGS https://github.com/groenewege/vim-less.git
 
 # vim-solarized is contained within the larger repository solarized, so check
 # first for the global location
