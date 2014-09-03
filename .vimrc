@@ -675,9 +675,15 @@ let g:bufExplorerSortBy='fullpath'   " Sort by full file path name.
 
 """ miniBufExpl
 
+" Disable miniBufExpl if in VimR
+if has("gui_vimr") 
+  let g:miniBufExplorerMoreThanOne=99
+endif
+
 let g:miniBufExplSplitBelow=0  " Put new window above
                                " current or on the
                                " left for vertical split
+
 """ NERDcommenter options
 
 map <Leader>c/ <plug>NERDCommenterAlignBoth
