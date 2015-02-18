@@ -64,6 +64,9 @@ command! -range -nargs=+ S call s:Substitute(<q-args>, <line1>, <line2>)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Misc macros & mappings
 
+" Select last pasted block
+nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
+
 " Support for macros
 " (Remembers the last search, removes the highlight, and recovers old position)
 noremap <Leader>_do_ :let hls=@/<CR>
@@ -347,7 +350,7 @@ function! ZCycleTextwidth()
   if &textwidth == 0
     set textwidth=78
   elseif &textwidth == 78
-    set textwidth=110
+    set textwidth=118
   else
     set textwidth=0
   endif
