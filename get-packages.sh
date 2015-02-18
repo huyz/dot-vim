@@ -240,10 +240,13 @@ fi
 [ -d ctrlp.vim ] || git clone $GIT_CLONE_ARGS https://github.com/kien/ctrlp.vim.git
 [ -d vim-jsbeautify ] || git clone $GIT_CLONE_ARGS --recursive https://github.com/maksimr/vim-jsbeautify.git
 [ -d vim-indent-guides ] || git clone $GIT_CLONE_ARGS https://github.com/nathanaelkane/vim-indent-guides.git
-[ -d vim-multiple-cursors ] || git clone $GIT_CLONE_ARGS https://github.com/terryma/vim-multiple-cursors.git
+[ -d vim-over ] || git clone $GIT_CLONE_ARGS https://github.com/osyo-manga/vim-over.git
 [ -d vim-golang ] || git clone $GIT_CLONE_ARGS https://github.com/jnwhiteh/vim-golang.git
 [ -d committia.vim ] || git clone $GIT_CLONE_ARGS https://github.com/rhysd/committia.vim.git
 [ -d vim-less ] || git clone $GIT_CLONE_ARGS https://github.com/groenewege/vim-less.git
+[ -d vim-airline ] || git clone $GIT_CLONE_ARGS https://github.com/bling/vim-airline
+[ -d vim-gitgutter ] || git clone $GIT_CLONE_ARGS https://github.com/airblade/vim-gitgutter.git
+[ -d syntastic ] || git clone $GIT_CLONE_ARGS https://github.com/scrooloose/syntastic.git
 
 # vim-solarized is contained within the larger repository solarized, so check
 # first for the global location
