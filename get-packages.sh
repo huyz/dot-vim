@@ -247,6 +247,7 @@ fi
 [ -d vim-airline ] || git clone $GIT_CLONE_ARGS https://github.com/bling/vim-airline
 [ -d vim-gitgutter ] || git clone $GIT_CLONE_ARGS https://github.com/airblade/vim-gitgutter.git
 [ -d syntastic ] || git clone $GIT_CLONE_ARGS https://github.com/scrooloose/syntastic.git
+[ -d vim-surround ] || git clone $GIT_CLONE_ARGS https://github.com/tpope/vim-surround.git
 
 # vim-solarized is contained within the larger repository solarized, so check
 # first for the global location

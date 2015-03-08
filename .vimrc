@@ -64,6 +64,9 @@ command! -range -nargs=+ S call s:Substitute(<q-args>, <line1>, <line2>)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Misc macros & mappings
 
+" Right after yanking a block, paste and move cursor to end
+nnoremap Q ']gpk
+
 " Select last pasted block
 nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 
@@ -191,9 +194,9 @@ nnoremap <Esc>q m`gqip``
 " FIXME: can't get this to work -- cursor position is wrong at end of line
 "inoremap <Esc>q <C-o>m`<C-o>gqip<C-o>``
 
-" Use Q for par formating (we don't need Ex mode which is annoying)
+" Use Q for par formating
 " NOTE: regular formatting is still done with gq
-noremap Q !par -w<CR>
+vnoremap Q !par -w<CR>
 
 """ Emacs mappings (and also to replace the useless and dangerous ^A and ^X)
 
@@ -661,16 +664,12 @@ endif
 """ CtrlP
 
 " Reserve Ctrl-P for Yankring
-let g:ctrlp_map = '<C-Q>'
+" Override CtrlP binding because it uses F11 and F12
+"let g:ctrlp_map = '<C-Q>'
 
 """ YankRing
 
 let g:yankring_history_dir = '~/.vim'
-
-""" Multiple Cursors
-
-" Override CtrlP binding because it uses F11 and F12
-let g:multi_cursor_start_key = '<C-Q>'
 
 """ BufExplorer
 
