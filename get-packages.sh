@@ -266,7 +266,7 @@ fi
 
 ### Align
 
-[ -e Align.vba.gz -o -e Align.vba ] || wget -O Align.vba.gz 'http://www.vim.org/scripts/download_script.php?src_id=10110'
+[ -e Align.vba.gz -o -e Align.vba ] || wget -O Align.vba.gz 'http://www.vim.org/scripts/download_script.php?src_id=19633'
 if [ ! -d Align ]; then
   # Align generates errors because it expects to close a window
   mkdir Align &&
@@ -275,11 +275,47 @@ fi
 
 ### AutoAlign
 
-[ -e AutoAlign.vba.gz -o -e AutoAlign.vba ] || wget -O AutoAlign.vba.gz 'http://www.vim.org/scripts/download_script.php?src_id=7510'
+[ -e AutoAlign.vba.gz -o -e AutoAlign.vba ] || wget -O AutoAlign.vba.gz 'http://www.vim.org/scripts/download_script.php?src_id=21105'
 if [ ! -d AutoAlign ]; then
   # AutoAlign generates errors because it expects to close a window
   mkdir AutoAlign &&
     vim -e -T dumb -c "let g:vimball_home = '$PWD/AutoAlign' | e AutoAlign.vba.gz | so % | quit" >/dev/null 2>&1
+fi
+
+### CamelCaseMotion
+
+[ -e camelcasemotion.vba.gz -o -e camelcasemotion.vba ] || wget -O camelcasemotion.vba.gz 'http://www.vim.org/scripts/download_script.php?src_id=16854'
+if [ ! -d camelcasemotion ]; then
+  # camelcasemotion generates errors because it expects to close a window
+  mkdir camelcasemotion &&
+    vim -e -T dumb -c "let g:vimball_home = '$PWD/camelcasemotion' | e camelcasemotion.vba.gz | so % | quit" >/dev/null 2>&1
+fi
+
+### ingo-library (required by CompleteHelper)
+
+[ -e ingo-library.vmb.gz -o -e ingo-library.vmb ] || wget -O ingo-library.vmb.gz 'http://www.vim.org/scripts/download_script.php?src_id=22895'
+if [ ! -d ingo-library ]; then
+  # ingo-library generates errors because it expects to close a window
+  mkdir ingo-library &&
+    vim -e -T dumb -c "let g:vimball_home = '$PWD/ingo-library' | e ingo-library.vmb.gz | so % | quit" >/dev/null 2>&1
+fi
+
+### CompleteHelper (required by CamelCaseComplete)
+
+[ -e CompleteHelper.vmb.gz -o -e CompleteHelper.vmb ] || wget -O CompleteHelper.vmb.gz 'http://www.vim.org/scripts/download_script.php?src_id=22724'
+if [ ! -d CompleteHelper ]; then
+  # CompleteHelper generates errors because it expects to close a window
+  mkdir CompleteHelper &&
+    vim -e -T dumb -c "let g:vimball_home = '$PWD/CompleteHelper' | e CompleteHelper.vmb.gz | so % | quit" >/dev/null 2>&1
+fi
+
+### CamelCaseComplete
+
+[ -e CamelCaseComplete.vmb.gz -o -e CamelCaseComplete.vmb ] || wget -O CamelCaseComplete.vmb.gz 'http://www.vim.org/scripts/download_script.php?src_id=21213'
+if [ ! -d CamelCaseComplete ]; then
+  # CamelCaseComplete generates errors because it expects to close a window
+  mkdir CamelCaseComplete &&
+    vim -e -T dumb -c "let g:vimball_home = '$PWD/CamelCaseComplete' | e CamelCaseComplete.vmb.gz | so % | quit" >/dev/null 2>&1
 fi
 
 #############################################################################

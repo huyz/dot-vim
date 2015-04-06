@@ -62,6 +62,11 @@ Features:
         - Preview substitution
     *   [vim-surround](https://github.com/tpope/vim-surround.git)
         - Quick commands for inserting, deleting, changing quotes and the like
+    *   [camelcasemotion](http://www.vim.org/scripts/script.php?script_id=1905)
+        - provides motions through camel-case and underscore-notated words
+    *   [CamelCaseComplete](http://www.vim.org/scripts/script.php?script_id=3915)
+        - completes identifiers by just typing initials of camel-case or
+          underscore-delimited keywords
 *   Installs the color scheme:
     *   [Solarized](http://ethanschoonover.com/solarized/vim-colors-solarized)
 *   Installs the syntax highlighting scripts for:
@@ -219,6 +224,17 @@ vim-surround
 *   `dst`       : delete surrounding tags
 *   `cs't`      : change surrounding quotes to tag with prompt
 *   `csw(`      : shortcut for `ysiw(`b
+
+camelcasemotion
+
+*   `,w` `,b` `,e`  : like regular motions but respecting word boundaries
+*   `ci,w` `di,w`   : like regular change/delete but respecting word boundaries
+*   `c2i,b` `y2i,b` `v2i,b` : change/yank/select the current word and previous word
+
+CamelCaseComplete
+
+*   `Ccc<C-X><C-C>` : completes on camel-case or underscore-delimited words
+    (note that case of first letter matters)
 
 Installation
 ------------

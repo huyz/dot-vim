@@ -753,6 +753,12 @@ let g:syntastic_auto_loc_list            = 1
 let g:syntastic_check_on_open            = 1
 let g:syntastic_check_on_wq              = 0
 
+""" CamelCaseComplete
+
+" disable the removal of the (mostly useless) completion base when there 
+" are no matches
+let g:CamelCaseComplete_FindStartMark = '' 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load up any custom initializations after this file
