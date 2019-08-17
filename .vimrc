@@ -265,7 +265,7 @@ nmap <Leader>t4 :set noet<CR>:set sts=8 sw=8<CR>
 
 " Different options
 nmap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=120<CR>
-nmap <Leader>o1 :set invpaste<CR>:set paste?<CR>
+nmap <Leader>o1 :set invpaste<CR>:GitGutterToggle<CR>:set paste?<CR>
 nmap <Leader>o2 :call ZCycleWrap()<CR>
 nmap <Leader>o3 :call ZCycleTextwidth()<CR>
 nmap <Leader>o4 :call ZToggleVirtualEdit()<CR>
@@ -619,7 +619,7 @@ if &t_Co > 2 || has("gui_running") " If we have color
 
   " Set background based on our environment variable with a default of light
   " (we default to light because dark colors on black are easier to see
-  " then light colors on white)
+  " than light colors on white)
   if $user_background == "dark"
     set background=dark
   else
