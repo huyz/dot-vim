@@ -276,6 +276,7 @@ nmap <Leader>o5 :call ZCycleEditDisplay()<CR>
 nmap <Leader>p1 :CtrlPBuffer<CR>
 nmap <Leader>p2 :CtrlP<CR>
 nmap <Leader>p3 :CtrlP .<CR>
+nmap <Leader>p4 :FZF<CR>
 nmap <Leader>p5 :NERDTreeToggle<CR>
 nmap <Leader>p0 :BufExplorer<CR>
 
@@ -289,8 +290,8 @@ nmap <Leader>f6 <Leader>o2
 nmap <Leader>f7 <Leader>o3
 nmap <Leader>f8 <Leader>o4
 nmap <Leader>f9 <Leader>o5
-nmap <Leader>f0 <Leader>p1
-nmap <Leader>F1 <Leader>p2
+nmap <Leader>f0 <Leader>p2
+nmap <Leader>F1 <Leader>p4
 nmap <Leader>F2 <Leader>p5
 
 " Normal function key mappings (these don't change)
@@ -675,6 +676,14 @@ endif
 let g:miniBufExplSplitBelow=0  " Put new window above
                                " current or on the
                                " left for vertical split
+
+""" CtrlP
+
+let g:ctrlp_cmd = 'CtrlPBuffer'
+
+""" fzf
+
+set rtp+=~/.fzf
 
 """ NERDcommenter options
 

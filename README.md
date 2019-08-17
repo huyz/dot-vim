@@ -24,6 +24,7 @@ Features:
     *   [MiniBufExplorer](http://fholgado.com/minibufexpl) - shows small
         buffer explorer at all times
     *   [CtrlP](https://github.com/kien/ctrlp.vim/) - fuzzy file finder
+    *   [fzf](https://github.com/junegunn/fzf#as-vim-plugin) -  A command-line fuzzy finder
     *   [snipmate](http://www.vim.org/scripts/script.php?script_id=2540) - TextMate-style snippets
     *   [closetag](http://www.vim.org/scripts/script.php?script_id=13)
         \- functions and mappings to close open HTML/XML tags
@@ -184,8 +185,15 @@ vimspell        :   Spell checks (live for certain files) [deprecated]
 
 CtrlP
 
-*   `F11`       : quickly switch buffer
-*   `F12`       : quickly switch file
+*   `<C-P>`     : switch buffer
+*   `<C-P><C-B>` : find file
+*   `<C-P><C-F>` : find MRU file
+*   `F10`       : switch buffer
+*   `F11`       : find file
+
+FZF
+
+*   `F11`       : find file
 
 vim-surround
 
