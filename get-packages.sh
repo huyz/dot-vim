@@ -143,7 +143,7 @@ fi
 [ -d vim-gnupg ] || git clone $GIT_CLONE_ARGS https://github.com/jamessan/vim-gnupg.git
 [ -d tagbar ] || git clone $GIT_CLONE_ARGS https://github.com/majutsushi/tagbar.git
 [ -d ctrlp.vim ] || git clone $GIT_CLONE_ARGS https://github.com/kien/ctrlp.vim.git
-[ -d ~/.fzf ] || git clone $GIT_CLONE_ARGS https://github.com/junegunn/fzf.git
+[ -d ~/.fzf ] || git clone $GIT_CLONE_ARGS https://github.com/junegunn/fzf.git ~/.fzf
 [ -d vim-indent-guides ] || git clone $GIT_CLONE_ARGS https://github.com/nathanaelkane/vim-indent-guides.git
 [ -d vim-less ] || git clone $GIT_CLONE_ARGS https://github.com/groenewege/vim-less.git
 [ -d vim-airline ] || git clone $GIT_CLONE_ARGS https://github.com/bling/vim-airline
