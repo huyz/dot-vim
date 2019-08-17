@@ -144,7 +144,6 @@ fi
 [ -d tagbar ] || git clone $GIT_CLONE_ARGS https://github.com/majutsushi/tagbar.git
 [ -d ctrlp.vim ] || git clone $GIT_CLONE_ARGS https://github.com/kien/ctrlp.vim.git
 [ -d vim-indent-guides ] || git clone $GIT_CLONE_ARGS https://github.com/nathanaelkane/vim-indent-guides.git
-[ -d committia.vim ] || git clone $GIT_CLONE_ARGS https://github.com/rhysd/committia.vim.git
 [ -d vim-less ] || git clone $GIT_CLONE_ARGS https://github.com/groenewege/vim-less.git
 [ -d vim-airline ] || git clone $GIT_CLONE_ARGS https://github.com/bling/vim-airline
 [ -d vim-gitgutter ] || git clone $GIT_CLONE_ARGS https://github.com/airblade/vim-gitgutter.git
