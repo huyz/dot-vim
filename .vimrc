@@ -556,7 +556,7 @@ runtime macros/matchit.vim
 " Load up all the bundles with pathogen
 if filereadable(expand("$MYVIM/autoload/pathogen.vim")) ||
  \ filereadable(expand("$MEHOME/.vim/autoload/pathogen.vim"))
-  call pathogen#runtime_append_all_bundles()
+  call pathogen#infect()
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
