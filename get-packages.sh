@@ -35,8 +35,6 @@ cd ~/.vim/packages || exit 40
 # Scripts
 [ -e closetag.vim ] || wget -O closetag.vim 'http://www.vim.org/scripts/download_script.php?src_id=4318'
 [ -h ../plugin/closetag.vim ] || ln -s ../packages/closetag.vim ../plugin/.
-[ -e gist.vim ] || wget -O gist.vim 'http://www.vim.org/scripts/download_script.php?src_id=15897'
-[ -h ../plugin/gist.vim ] || ln -s ../packages/gist.vim ../plugin/.
 [ -e spamassassin.vim ] || wget -O spamassassin.vim 'http://www.vim.org/scripts/download_script.php?src_id=15948'
 [ -h ../syntax/spamassassin.vim ] || ln -s ../packages/spamassassin.vim ../syntax/.
 [ -e outline.vim ] || wget -O outline.vim 'http://www.vim.org/scripts/download_script.php?src_id=6852'
@@ -248,6 +246,9 @@ fi
 [ -d vim-gitgutter ] || git clone $GIT_CLONE_ARGS https://github.com/airblade/vim-gitgutter.git
 [ -d syntastic ] || git clone $GIT_CLONE_ARGS https://github.com/scrooloose/syntastic.git
 [ -d vim-surround ] || git clone $GIT_CLONE_ARGS https://github.com/tpope/vim-surround.git
+
+[ -d webapi-vim ] || git clone $GIT_CLONE_ARGS https://github.com/mattn/webapi-vim.git
+[ -d gist-vim ] || git clone $GIT_CLONE_ARGS https://github.com/mattn/gist-vim.git
 
 # vim-solarized is contained within the larger repository solarized, so check
 # first for the global location
