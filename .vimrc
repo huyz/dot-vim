@@ -353,7 +353,7 @@ function! ZCycleTextwidth()
   if &textwidth == 0
     set textwidth=78
   elseif &textwidth == 78
-    set textwidth=118
+    set textwidth=98
   else
     set textwidth=0
   endif
@@ -752,6 +752,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list            = 1
 let g:syntastic_check_on_open            = 1
 let g:syntastic_check_on_wq              = 0
+let g:syntastic_python_pylint_post_args  = "--max-line-length=100"
 
 """ CamelCaseComplete
 
