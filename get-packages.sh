@@ -39,8 +39,6 @@ cd ~/.vim/packages || exit 40
 [ -h ../syntax/spamassassin.vim ] || ln -s ../packages/spamassassin.vim ../syntax/.
 [ -e outline.vim ] || wget -O outline.vim 'http://www.vim.org/scripts/download_script.php?src_id=6852'
 [ -h ../syntax/outline.vim ] || ln -s ../packages/outline.vim ../syntax/.
-[ -e json.vim ] || wget -O json.vim 'http://www.vim.org/scripts/download_script.php?src_id=10853'
-[ -h ../syntax/json.vim ] || ln -s ../packages/json.vim ../syntax/.
 
 # The latest version updated March 18th, 2003 is not accessible online, so we
 # check it in
@@ -227,13 +225,13 @@ fi
 
 ### Clone read-only git repos
 
+[ -d vim-json ] || git clone $GIT_CLONE_ARGS https://github.com/elzr/vim-json.git
 [ -d gundo.vim ] || git clone $GIT_CLONE_ARGS https://github.com/sjl/gundo.vim.git
 [ -d minibufexpl.vim ] || git clone $GIT_CLONE_ARGS https://github.com/fholgado/minibufexpl.vim.git
 [ -d nerdcommenter ] || git clone $GIT_CLONE_ARGS https://github.com/scrooloose/nerdcommenter.git
 [ -d nerdtree ] || git clone $GIT_CLONE_ARGS https://github.com/scrooloose/nerdtree.git
 [ -d snipmate.vim ] || git clone $GIT_CLONE_ARGS https://github.com/msanders/snipmate.vim.git
 [ -d vim-gnupg ] || git clone $GIT_CLONE_ARGS https://github.com/jamessan/vim-gnupg.git
-[ -d vim-coffee-script ] || git clone $GIT_CLONE_ARGS https://github.com/kchmck/vim-coffee-script.git
 [ -d tagbar ] || git clone $GIT_CLONE_ARGS https://github.com/majutsushi/tagbar.git
 [ -d ctrlp.vim ] || git clone $GIT_CLONE_ARGS https://github.com/kien/ctrlp.vim.git
 [ -d vim-jsbeautify ] || git clone $GIT_CLONE_ARGS --recursive https://github.com/maksimr/vim-jsbeautify.git
@@ -246,6 +244,7 @@ fi
 [ -d vim-gitgutter ] || git clone $GIT_CLONE_ARGS https://github.com/airblade/vim-gitgutter.git
 [ -d syntastic ] || git clone $GIT_CLONE_ARGS https://github.com/scrooloose/syntastic.git
 [ -d vim-surround ] || git clone $GIT_CLONE_ARGS https://github.com/tpope/vim-surround.git
+[ -d vim-easymotions ] || git clone $GIT_CLONE_ARGS https://github.com/easymotion/vim-easymotion.git
 
 [ -d webapi-vim ] || git clone $GIT_CLONE_ARGS https://github.com/mattn/webapi-vim.git
 [ -d gist-vim ] || git clone $GIT_CLONE_ARGS https://github.com/mattn/gist-vim.git
