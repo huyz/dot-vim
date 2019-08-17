@@ -38,8 +38,8 @@ Features:
     *   [AutoAlign](http://www.vim.org/scripts/script.php?script_id=884) -
 	automatically aligns as you type in certain languages, e.g. C, C++, HTML,
 	vim.
-    *   [table](http://www.vim.org/scripts/script.php?script_id=769) - smarter
-        [table editing](http://vim.wikia.com/wiki/Smarter_Table_Editing_II)
+    *   [vim-table-mode](https://github.com/dhruvasagar/vim-table-mode) -
+        instant table creation
     *   [Gist.vim](http://www.vim.org/scripts/script.php?script_id=2423) -
         post buffers or selected text to https://gist.github.com/
     *   [vim-gnupg](https://github.com/jamessan/vim-gnupg) - transparent editing of GPG-encrypted files
@@ -168,11 +168,9 @@ Align           : Aligns text into columns around delimiters
 *   `\acom`	: Align comments
 *   `\Htd`	: Align HTML tables
 
-table                 :   Table editing/navigation 
+table-mode            :   Table editing
 
-*   `\th`             :   select header
-*   `<Tab>` `<S-Tab>` :   navigate between fields
-*   `\ta`             :   toggle on/off
+*   `\tm`             :   Toggle table mode
 
 Gist                 : post buffers or selected text to https://gist.github.com/
 

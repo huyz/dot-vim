@@ -165,64 +165,6 @@ if [ ! -d EnhancedCommentify-2.3 ]; then
 END
 fi
 
-### table archive
-
-[ -e table.zip ] || wget -O table.zip 'http://www.vim.org/scripts/download_script.php?src_id=2322'
-[ ! -d table/plugin ] && mkdir -p table/plugin
-if [ ! -e table/plugin/table.vim ]; then
-  if cd table/plugin; then
-    unzip ../../table.zip table.vim
-    perl -pi.DIST -e 's/\r$//' table.vim
-    # Patch for useful messages
-    patch -p1 <<END
---- a/table.vim    2003-11-10 12:12:15.000000000 -0800
-+++ b/table.vim    2003-11-10 14:45:51.000000000 -0800
-@@ -31,6 +31,8 @@
-     let s:heading = TrimWS(ExpandTabs(getline(".")))
- 
-     if !ValidHeading(s:heading)
-+        " huyz 2003-11-10
-+        echoerr 'Tablemode: invalid heading'
-         return 
-     endif
- 
-@@ -65,6 +67,8 @@
- func! TableToggle()
- 
-     if !ValidHeading(s:heading)
-+        " huyz 2003-11-10
-+        echoerr 'Tablemode: invalid heading.  Did you select one yet?'
-         return 
-     endif
- 
-@@ -89,6 +93,8 @@
-     inoremap <silent> <Tab>    <C-O>:call NextField(1)<CR>
-     nnoremap <silent> <S-Tab>  :call PrevField()<CR>
-     inoremap <silent> <S-Tab>  <C-O>:call PrevField()<CR>
-+    " huyz 2003-11-10
-+    echo 'Tablemode: enabled'
- endfunc
- 
- " Function: Disable Maps
-@@ -101,6 +107,8 @@
-     iunmap <Tab>
-     nunmap <S-Tab>
-     iunmap <S-Tab>
-+    " huyz 2003-11-10
-+    echo 'Tablemode: disabled'
- endfunc
-END
-    cd ../..
-  fi
-fi
-if [ ! -d table/doc ]; then
-  mkdir -p table/doc &&
-    if cd table/doc; then
-      unzip ../../table.zip table.txt
-      cd ../..
-    fi
-fi
-
 ### Clone read-only git repos
 
 [ -d vim-json ] || git clone $GIT_CLONE_ARGS https://github.com/elzr/vim-json.git
@@ -244,7 +186,8 @@ fi
 [ -d vim-gitgutter ] || git clone $GIT_CLONE_ARGS https://github.com/airblade/vim-gitgutter.git
 [ -d syntastic ] || git clone $GIT_CLONE_ARGS https://github.com/scrooloose/syntastic.git
 [ -d vim-surround ] || git clone $GIT_CLONE_ARGS https://github.com/tpope/vim-surround.git
-[ -d vim-easymotions ] || git clone $GIT_CLONE_ARGS https://github.com/easymotion/vim-easymotion.git
+[ -d vim-easymotion ] || git clone $GIT_CLONE_ARGS https://github.com/easymotion/vim-easymotion.git
+[ -d vim-table-mode ] || git clone $GIT_CLONE_ARGS https://github.com/dhruvasagar/vim-table-mode.git
 
 [ -d webapi-vim ] || git clone $GIT_CLONE_ARGS https://github.com/mattn/webapi-vim.git
 [ -d gist-vim ] || git clone $GIT_CLONE_ARGS https://github.com/mattn/gist-vim.git
