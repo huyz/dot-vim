@@ -65,28 +65,6 @@ if [ ! -d vimball ]; then
     fi
 fi
 
-### jade archive
-
-[ -e jade.zip ] || wget -O jade.zip 'http://www.vim.org/scripts/download_script.php?src_id=13895'
-if [ ! -d jade ]; then
-  mkdir jade &&
-    if cd jade; then
-      unzip ../jade.zip
-      cd ..
-    fi
-fi
-
-### stylus archive
-
-[ -e stylus.zip ] || wget -O stylus.zip 'http://www.vim.org/scripts/download_script.php?src_id=16593'
-if [ ! -d stylus ]; then
-  mkdir stylus &&
-    if cd stylus; then
-      unzip ../stylus.zip
-      cd ..
-    fi
-fi
-
 ### bufexplorer archive
 
 [ -e bufexplorer.zip ] || wget -O bufexplorer.zip 'http://www.vim.org/scripts/download_script.php?src_id=14208'
@@ -94,17 +72,6 @@ if [ ! -d bufexplorer ]; then
   mkdir bufexplorer &&
     if cd bufexplorer; then
       unzip ../bufexplorer.zip
-      cd ..
-    fi
-fi
-
-### yankring archive
-
-[ -e yankring.zip ] || wget -O yankring.zip 'http://www.vim.org/scripts/download_script.php?src_id=17721'
-if [ ! -d yankring ]; then
-  mkdir yankring &&
-    if cd yankring; then
-      unzip ../yankring.zip
       cd ..
     fi
 fi
@@ -176,10 +143,7 @@ fi
 [ -d vim-gnupg ] || git clone $GIT_CLONE_ARGS https://github.com/jamessan/vim-gnupg.git
 [ -d tagbar ] || git clone $GIT_CLONE_ARGS https://github.com/majutsushi/tagbar.git
 [ -d ctrlp.vim ] || git clone $GIT_CLONE_ARGS https://github.com/kien/ctrlp.vim.git
-[ -d vim-jsbeautify ] || git clone $GIT_CLONE_ARGS --recursive https://github.com/maksimr/vim-jsbeautify.git
 [ -d vim-indent-guides ] || git clone $GIT_CLONE_ARGS https://github.com/nathanaelkane/vim-indent-guides.git
-[ -d vim-over ] || git clone $GIT_CLONE_ARGS https://github.com/osyo-manga/vim-over.git
-[ -d vim-golang ] || git clone $GIT_CLONE_ARGS https://github.com/jnwhiteh/vim-golang.git
 [ -d committia.vim ] || git clone $GIT_CLONE_ARGS https://github.com/rhysd/committia.vim.git
 [ -d vim-less ] || git clone $GIT_CLONE_ARGS https://github.com/groenewege/vim-less.git
 [ -d vim-airline ] || git clone $GIT_CLONE_ARGS https://github.com/bling/vim-airline
@@ -188,6 +152,7 @@ fi
 [ -d vim-surround ] || git clone $GIT_CLONE_ARGS https://github.com/tpope/vim-surround.git
 [ -d vim-easymotion ] || git clone $GIT_CLONE_ARGS https://github.com/easymotion/vim-easymotion.git
 [ -d vim-table-mode ] || git clone $GIT_CLONE_ARGS https://github.com/dhruvasagar/vim-table-mode.git
+[ -d vim-multiple-cursors ] || git clone $GIT_CLONE_ARGS https://github.com/terryma/vim-multiple-cursors.git
 
 [ -d webapi-vim ] || git clone $GIT_CLONE_ARGS https://github.com/mattn/webapi-vim.git
 [ -d gist-vim ] || git clone $GIT_CLONE_ARGS https://github.com/mattn/gist-vim.git

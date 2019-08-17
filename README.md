@@ -19,8 +19,6 @@ Features:
     *   [pathogen](http://www.vim.org/scripts/script.php?script_id=2332) -
         autoloads plugins from their own individual directories under
         `bundle/`
-    *   [yankring](http://www.vim.org/scripts/script.php?script_id=1234) -
-        allows you to paste then ctrl-P through a history of yanks
     *   [bufexplorer](http://www.vim.org/scripts/script.php?script_id=42) -
         buffer explorer/browser
     *   [MiniBufExplorer](http://fholgado.com/minibufexpl) - shows small
@@ -43,8 +41,6 @@ Features:
     *   [Gist.vim](http://www.vim.org/scripts/script.php?script_id=2423) -
         post buffers or selected text to https://gist.github.com/
     *   [vim-gnupg](https://github.com/jamessan/vim-gnupg) - transparent editing of GPG-encrypted files
-    *   [vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify) - format
-        JS, HTML, CSS files with js-beautify
     *   [rcs-menu](http://lanzarotta.tripod.com/vim.html) - interface to RCS version control system
     *   [vim-json](https://github.com/elzr/vim-json) - better JSON for Vim
     *   [gundo](http://sjl.bitbucket.org/gundo.vim/) - visualize undo tree
@@ -52,31 +48,21 @@ Features:
     *   [less.vim](https://github.com/huyz/less.vim) - my improved version of
         less.{vim,sh} distributed with vim for paging through files/stdin with
         full syntax highlighting
-    *   [vim-coffee-script](https://github.com/kchmck/vim-coffee-script) -
-        CoffeeScript support
     *   [vimball](http://www.vim.org/scripts/script.php?script_id=1502) -
         weird vim-based archiver that is required to install some a few
         plugins, mainly Align and AutoAlign.  Largely deprecated by pathogen.
     *   [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides)
         - visually displaying indent levels in code
-    *   [vim-over](https://github.com/osyo-manga/vim-over)
-        - Preview substitution
     *   [vim-surround](https://github.com/tpope/vim-surround.git)
         - Quick commands for inserting, deleting, changing quotes and the like
     *   [camelcasemotion](http://www.vim.org/scripts/script.php?script_id=1905)
         - provides motions through camel-case and underscore-notated words
-    *   [CamelCaseComplete](http://www.vim.org/scripts/script.php?script_id=3915)
-        - completes identifiers by just typing initials of camel-case or
-          underscore-delimited keywords
 *   Installs the color scheme:
     *   [Solarized](http://ethanschoonover.com/solarized/vim-colors-solarized)
 *   Installs the syntax highlighting scripts for:
-    *   [jade](http://www.vim.org/scripts/script.php?script_id=3192)
-    *   [golang](https://github.com/jnwhiteh/vim-golang)
     *   [lesscss](http://leafo.net/lessphp/vim/less.vim)
     *   [outline](http://www.vim.org/scripts/script.php?script_id=1266) - to use fold-mode with emacs org-mode files.
     *   [spamassassin](http://www.vim.org/scripts/script.php?script_id=2617&rating=helpful)
-    *   [stylus](http://www.vim.org/scripts/script.php?script_id=3513)
 
 Files
 -----
@@ -183,10 +169,6 @@ Gundo           : Shows undo tree
 
 *   `:GundoToggle`
 
-vim-jsbeautify
-
-*   `\B`            : beautify JS, HTML, or CSS, depending on filetype
-
 vimspell        :   Spell checks (live for certain files) [deprecated]
 
 *   `\ss`       : write file, spellcheck file & highlight spelling mistakes.
@@ -204,11 +186,6 @@ CtrlP
 
 *   `F11`       : quickly switch buffer
 *   `F12`       : quickly switch file
-
-yankring
-
-*   `\cN`       : (After pasting) rotate through other items in the clipboard
-*   `\cP`       : (After pasting) rotate backward
 
 vim-surround
 
@@ -229,10 +206,6 @@ camelcasemotion
 *   `ci,w` `di,w`   : like regular change/delete but respecting word boundaries
 *   `c2i,b` `y2i,b` `v2i,b` : change/yank/select the current word and previous word
 
-CamelCaseComplete
-
-*   `Ccc<C-X><C-C>` : completes on camel-case or underscore-delimited words
-    (note that case of first letter matters)
 
 Installation
 ------------

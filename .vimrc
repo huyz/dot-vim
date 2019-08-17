@@ -661,16 +661,6 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options
 
-""" CtrlP
-
-" Reserve Ctrl-P for Yankring
-" Override CtrlP binding because it uses F11 and F12
-"let g:ctrlp_map = '<C-Q>'
-
-""" YankRing
-
-let g:yankring_history_dir = '~/.vim'
-
 """ BufExplorer
 
 let g:bufExplorerSortBy='fullpath'   " Sort by full file path name.
@@ -729,15 +719,6 @@ let g:snippets_dir = "~/.vim/bundle/snipmate.vim/snippets"
 " NOTE: set in .vimrc.post
 "let g:github_user  = "YOUR_GITHUB_USERNAME"
 "let g:github_token = "YOUR_GITHUB_API_TOKEN"
-
-""" vim-jsbeautify
-
-"let g:jsbeautify   = {'indent_size': 2, 'indent_char': ' ', 'indent_with_tabs': 0, 'preserve_newlines': 1, 'max_preserve_newlines': 10, 'jslint_happy': 0, 'brace_style': 'collapse', 'keep_array_indentation': 1, 'keep_function_indentation': 1, 'eval_code': 0, 'unescape_strings': 0}
-"let g:htmlbeautify = {'indent_size': 2, 'indent_char': ' ', 'max_char': 78, 'brace_style': 'expand', 'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u']}
-"let g:cssbeautify  = {'indent_size': 2, 'indent_char': ' '}
-autocmd FileType javascript,json noremap <buffer> <Leader>B :call JsBeautify()<cr>
-autocmd FileType html            noremap <buffer> <Leader>B :call HtmlBeautify()<cr>
-autocmd FileType css             noremap <buffer> <Leader>B :call CSSBeautify()<cr>
 
 """ vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
