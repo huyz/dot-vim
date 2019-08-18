@@ -741,18 +741,6 @@ let g:ctrlp_custom_ignore = {
 
 let g:ctrlp_max_files = 20000
 
-""" EnhancedCommentify options
-
-"" Pad the comment with a space
-"let EnhCommentifyPretty = "yes"
-" Align the comment close
-let EnhCommentifyAlignRight   = "yes"
-" Bases type of comment on first line of block, not necessarily filetype
-" (This helps for embedded languages: CSS in HTML, Perl in VimL)
-let EnhCommentifyUseSyntax    = "yes"
-" Set our own bindings inside EnhancedCommentify.vim
-let EnhCommentifyUserBindings = "yes"
-
 """ fzf
 
 set rtp+=~/.fzf

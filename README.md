@@ -23,7 +23,7 @@ cd ~/.vim
 
 # Mapping Quick Reference
 
-### General tips ###
+## General tips
 
 These are useful commands that are easy to forget because they're needed only
 occasionally.
@@ -53,7 +53,7 @@ occasionally.
 *   `:verbose set history?` : Find where an option is set
 *   `:w !sudo tee %`    :   Save the current file with sudo privileges
 
-### My own mappings ###
+## My own mappings
 
 I tend to forgot I defined these mappings:
 
@@ -68,50 +68,71 @@ I tend to forgot I defined these mappings:
 *   `:S` instead `:s` : For perl-compatible regexp
 *   `<C-s>`          : Save buffer
 
-### Plugins I installed ###
+## Plugins I installed
 
-CamelCaseMotion
+### CamelCaseMotion
 
 *   `,w` `,b` `,e`  : like regular motions but respecting word boundaries
 *   `ci,w` `di,w`   : like regular change/delete but respecting word boundaries
 *   `c2i,b` `y2i,b` `v2i,b` : change/yank/select the current word and previous word
 
-CtrlP
+### CtrlP
 
 *   `<C-P>`     : switch buffer
 *   `<C-P><C-B>` : find file
 *   `<C-P><C-F>` : find MRU file
 *   `F10`       : switch buffer
+
+### emmet-vim
+
+| Command  | Description         |
+|----------|---------------------|
+| `<C-Y>,` | Expand abbreviation |
+
+### easy-align
+
+TODO
+
+### fzf
+
 *   `F11`       : find file
 
-fzf
-
-*   `F11`       : find file
-
-Gist                 : post buffers or selected text to https://gist.github.com/
+### Gist                 : post buffers or selected text to https://gist.github.com/
 
 *   `:Gist`          : post entire buffer
 *   `:Gist -p`  : post entire buffer to a private gist
 *   ``:`<,`>Gist -a``  : post selected text anonymously
 *   `:Gist -e`       : edit gist
 
-Gundo           : Shows undo tree
+### Gundo           : Shows undo tree
 
 *   `:GundoToggle`
 
-table-mode            :   Table editing
+### multiple-cursors
 
-*   `\tm`             :   Toggle table mode
+| Command | Description        |
+|---------|--------------------|
+| `<C-n>` | Start multicursor  |
+| `<C-x>` | Skip current match |
+| `<C-p>` | Undo current match |
 
-vim-surround
+### surround
 
 *   `ysiw'`     : surround inner word with single quotes
 *   `yss)`      : surround sentence with parentheses and no space
 *   `ys2w(`     : surround next 2 words with parentheses and spaces
 *   `ySS{`      : surround sentence with braces on their own lines
 *   v\_`S{`     : in line visual mode, surround lines with braces on their own lines
-*   v\_`gS|`    : in block visual mode, surround each line with bars, with
-                  alignment
+*   v\_`gS|`    : in block visual mode, surround each line with bars, with alignment
 *   `dst`       : delete surrounding tags
 *   `cs't`      : change surrounding quotes to tag with prompt
 *   `csw(`      : shortcut for `ysiw(`b
+
+### table-mode            :   Table editing
+
+*   `\tm`             :   Toggle table mode
+
+### tcomment
+
+TODO
+
