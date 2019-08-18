@@ -13,6 +13,7 @@ GIT=$PWD
 cd ~
 [ -h ~/.vim ] || ln -s $GIT .vim
 [ -h ~/.vimrc ] || ln -s $GIT/.vimrc .
+[ -h ~/.gvimrc ] || ln -s $GIT/.gvimrc .
 [ -h ~/.exrc ] || ln -s $GIT/.exrc .
 [ -h ~/.editorconfig ] || ln -s $GIT/.editorconfig .
 
