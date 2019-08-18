@@ -584,7 +584,8 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
-Plug 'fholgado/minibufexpl.vim'
+" 2019-08-18 Has an annoying sizing bug and is no longer maintained
+"Plug 'fholgado/minibufexpl.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sjl/gundo.vim'
 
@@ -724,29 +725,21 @@ endif
 
 let g:bufExplorerSortBy='fullpath'   " Sort by full file path name.
 
-""" miniBufExpl
+""" CamelCaseMotion
 
-" Disable miniBufExpl if in VimR
-if has("gui_vimr") 
-  let g:miniBufExplorerMoreThanOne=99
-endif
-
-let g:miniBufExplSplitBelow=0  " Put new window above
-                               " current or on the
-                               " left for vertical split
+let g:camelcasemotion_key = ','
 
 """ CtrlP
 
 let g:ctrlp_cmd = 'CtrlPBuffer'
 
-""" fzf
+"set wildignore+=/tmp/,.so,.swp,*.zip
+let g:ctrlp_custom_ignore = {
+ \ 'dir':  '\v[\/](\.(git|hg|svn)|.venv|venv.*|node_modules)$',
+ \ 'file': '\v\.(pyc|class|DS_Store)$',
+ \ }
 
-set rtp+=~/.fzf
-
-""" NERDcommenter options
-
-map <Leader>c/ <plug>NERDCommenterAlignBoth
-"map <Leader>bj <plug>NERDCommenterAlignBoth
+let g:ctrlp_max_files = 20000
 
 """ EnhancedCommentify options
 
@@ -760,26 +753,9 @@ let EnhCommentifyUseSyntax    = "yes"
 " Set our own bindings inside EnhancedCommentify.vim
 let EnhCommentifyUserBindings = "yes"
 
-""" vimspell options
-" Deprecated: should use built-in spelling instead
+""" fzf
 
-" Restrict filetypes of automatic spellchecking
-let spell_auto_type   = "tex,mail,text,html,sgml,otl,cvs"
-" Arguments for ispell: sort by probable order, allow compound words
-let spell_options     = "-S -C -W 2"
-" Turn off this hack because it can get annoying
-let spell_insert_mode = 0
-" Don't read the slow-loading vimspell until the user wants to use it
-nmap <Leader>ss :nunmap <Leader>ss<CR>:let spell_insert_mode=1<CR>:runtime macros/vimspell.vim<CR><Leader>ss
-
-""" snipMate options
-
-let g:snippets_dir = "~/.vim/bundle/snipmate.vim/snippets"
-
-""" vim-gnupg
-
-" NOTE: set in .vimrc.post
-"let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
+set rtp+=~/.fzf
 
 """ Gist
 
@@ -787,8 +763,21 @@ let g:snippets_dir = "~/.vim/bundle/snipmate.vim/snippets"
 "let g:github_user  = "YOUR_GITHUB_USERNAME"
 "let g:github_token = "YOUR_GITHUB_API_TOKEN"
 
-""" vim-indent-guides
-let g:indent_guides_enable_on_vim_startup = 1
+""" miniBufExpl
+
+" Disable miniBufExpl if in VimR
+if has("gui_vimr") 
+  let g:miniBufExplorerMoreThanOne=99
+endif
+
+let g:miniBufExplSplitBelow=0  " Put new window above
+                               " current or on the
+                               " left for vertical split
+
+""" NERDcommenter options
+
+map <Leader>c/ <plug>NERDCommenterAlignBoth
+"map <Leader>bj <plug>NERDCommenterAlignBoth
 
 """ syntastic
 
@@ -801,6 +790,14 @@ let g:syntastic_auto_loc_list            = 1
 let g:syntastic_check_on_open            = 1
 let g:syntastic_check_on_wq              = 0
 let g:syntastic_python_pylint_post_args  = "--max-line-length=100"
+
+""" vim-gnupg
+
+" NOTE: set in .vimrc.post
+"let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
+
+""" vim-indent-guides
+let g:indent_guides_enable_on_vim_startup = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

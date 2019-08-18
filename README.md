@@ -1,72 +1,4 @@
-huy'z ~/.vim\* files
-====================
-
-These are my `~/.vim*` files with customizations, integrating many of the tips
-n' tricks from the net.
-Customizing vim is essential because new releases try too hard to maintain
-backward compatibility.
-
-Suggestions are appreciated.
-
-Features:
-
-*   Supports vim 7.x
-*   Sane set of options.
-*   Supports function and control keys of popular terminals.
-*   Functions to cycle through different textwidths, virtual-edit modes,
-    visual editing aids, methods of displaying/handling long lines.
-*   Installs nice plugins, sometimes with patches
-    *   [pathogen](http://www.vim.org/scripts/script.php?script_id=2332) -
-        autoloads plugins from their own individual directories under
-        `bundle/`
-    *   [bufexplorer](http://www.vim.org/scripts/script.php?script_id=42) -
-        buffer explorer/browser
-    *   [MiniBufExplorer](http://fholgado.com/minibufexpl) - shows small
-        buffer explorer at all times
-    *   [CtrlP](https://github.com/kien/ctrlp.vim/) - fuzzy file finder
-    *   [fzf](https://github.com/junegunn/fzf#as-vim-plugin) -  A command-line fuzzy finder
-    *   [snipmate](http://www.vim.org/scripts/script.php?script_id=2540) - TextMate-style snippets
-    *   [closetag](http://www.vim.org/scripts/script.php?script_id=13)
-        \- functions and mappings to close open HTML/XML tags
-    *   [NERDCommenter](http://www.vim.org/scripts/script.php?script_id=1218)
-        \- code commenting for many file types
-    *   [EnhancedCommentify](http://www.vim.org/scripts/script.php?script_id=23)
-        \- code commenting (alternative style)
-    *   [Align](http://www.vim.org/scripts/script.php?script_id=294) - Helps
-        align text, equations, tables, etc.
-    *   [AutoAlign](http://www.vim.org/scripts/script.php?script_id=884) -
-	automatically aligns as you type in certain languages, e.g. C, C++, HTML,
-	vim.
-    *   [vim-table-mode](https://github.com/dhruvasagar/vim-table-mode) -
-        instant table creation
-    *   [Gist.vim](http://www.vim.org/scripts/script.php?script_id=2423) -
-        post buffers or selected text to https://gist.github.com/
-    *   [vim-gnupg](https://github.com/jamessan/vim-gnupg) - transparent editing of GPG-encrypted files
-    *   [rcs-menu](http://lanzarotta.tripod.com/vim.html) - interface to RCS version control system
-    *   [vim-json](https://github.com/elzr/vim-json) - better JSON for Vim
-    *   [gundo](http://sjl.bitbucket.org/gundo.vim/) - visualize undo tree
-        [requires vim to be compiled with Python 2.4+]
-    *   [less.vim](https://github.com/huyz/less.vim) - my improved version of
-        less.{vim,sh} distributed with vim for paging through files/stdin with
-        full syntax highlighting
-    *   [vimball](http://www.vim.org/scripts/script.php?script_id=1502) -
-        weird vim-based archiver that is required to install some a few
-        plugins, mainly Align and AutoAlign.  Largely deprecated by pathogen.
-    *   [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides)
-        - visually displaying indent levels in code
-    *   [vim-surround](https://github.com/tpope/vim-surround.git)
-        - Quick commands for inserting, deleting, changing quotes and the like
-    *   [camelcasemotion](http://www.vim.org/scripts/script.php?script_id=1905)
-        - provides motions through camel-case and underscore-notated words
-*   Installs the color scheme:
-    *   [Solarized](http://ethanschoonover.com/solarized/vim-colors-solarized)
-*   Installs the syntax highlighting scripts for:
-    *   [lesscss](http://leafo.net/lessphp/vim/less.vim)
-    *   [outline](http://www.vim.org/scripts/script.php?script_id=1266) - to use fold-mode with emacs org-mode files.
-    *   [spamassassin](http://www.vim.org/scripts/script.php?script_id=2617&rating=helpful)
-
-Files
------
+# Files
 
 *   `.exrc` - basic initialization file for the original ex/vi, in case vim isn't
     installed.  It has to be symlinked to `~/.exrc`
@@ -74,10 +6,22 @@ Files
 *   `.vimrc.post` - contains personal commands invoked after `.vimrc`.  You
     can create this file with your own customizations here.
 *   `setup.sh` - sets up the files to be ready for vim.
-*   `get-packages.sh` - downloads and installs needed vim packages.
 
-Vim Quick-Reference
--------------------
+# Installation
+
+Requires:
+
+* curl
+* gpg [just for my private .vimrc.post.gpg]
+
+```
+[ -d ~/.vim ] && mv ~/.vim ~/.vim-OLD
+git clone https://github.com/huyz/dot-vim.git .vim
+cd ~/.vim
+./setup.sh
+```
+
+# Mapping Quick Reference
 
 ### General tips ###
 
@@ -126,38 +70,23 @@ I tend to forgot I defined these mappings:
 
 ### Plugins I installed ###
 
-bufexplorer     :   Easily select open buffers
+CamelCaseMotion
 
-*   `\be`       :   launch
-*   `\bs`       :   split and launch
+*   `,w` `,b` `,e`  : like regular motions but respecting word boundaries
+*   `ci,w` `di,w`   : like regular change/delete but respecting word boundaries
+*   `c2i,b` `y2i,b` `v2i,b` : change/yank/select the current word and previous word
 
-closetag        :   Closes HTML/XML tabs
+CtrlP
 
-*   `<C-_>`     :   close nearest open tag
+*   `<C-P>`     : switch buffer
+*   `<C-P><C-B>` : find file
+*   `<C-P><C-F>` : find MRU file
+*   `F10`       : switch buffer
+*   `F11`       : find file
 
-NERD commenter  :   Comments/Decomments based on file type
+fzf
 
-*   `\c/`       :   Comment line(s) with alignment
-*   `\cu`       :   Decomment line(s)
-*   `\c<Space>` :   Toggles commenting of current line and goes to next line
-
-EnhancedCommentify : Comments/Decomments based on file type
-
-*   `\//`          :   Comment line(s) (Unlike NERD, puts comment in column 1)
-*   `\/u`          :   Decomment line(s)
-*   `\/<space>`    :   Toggles commenting of current line and goes to next line
-
-Align           : Aligns text into columns around delimiters
-
-*   `\t=`       : Align line or selection around '=' signs
-*   `:Align :`  : Align line around ':' (or arbitrary characters)
-*   `\tsp`      : Align line or selection around whitespace, i.e. align "words"
-*   `\acom`	: Align comments
-*   `\Htd`	: Align HTML tables
-
-table-mode            :   Table editing
-
-*   `\tm`             :   Toggle table mode
+*   `F11`       : find file
 
 Gist                 : post buffers or selected text to https://gist.github.com/
 
@@ -170,30 +99,9 @@ Gundo           : Shows undo tree
 
 *   `:GundoToggle`
 
-vimspell        :   Spell checks (live for certain files) [deprecated]
+table-mode            :   Table editing
 
-*   `\ss`       : write file, spellcheck file & highlight spelling mistakes.
-*   `\sA`       : start autospell mode.
-*   `\sq`       : return to normal syntax coloring and disable auto spell checking.
-*   `\sl`       : switch between languages.
-*   `\sn`       : go to next error.
-*   `\sp`       : go to previous error.
-*   `\si`       : insert word under cursor into directory.
-*   `\su`       : insert word under cursor as lowercase into directory.
-*   `\sa`       : accept word for this session only.
-*   `\s?`       : check for alternatives.
-
-CtrlP
-
-*   `<C-P>`     : switch buffer
-*   `<C-P><C-B>` : find file
-*   `<C-P><C-F>` : find MRU file
-*   `F10`       : switch buffer
-*   `F11`       : find file
-
-FZF
-
-*   `F11`       : find file
+*   `\tm`             :   Toggle table mode
 
 vim-surround
 
@@ -207,56 +115,3 @@ vim-surround
 *   `dst`       : delete surrounding tags
 *   `cs't`      : change surrounding quotes to tag with prompt
 *   `csw(`      : shortcut for `ysiw(`b
-
-camelcasemotion
-
-*   `,w` `,b` `,e`  : like regular motions but respecting word boundaries
-*   `ci,w` `di,w`   : like regular change/delete but respecting word boundaries
-*   `c2i,b` `y2i,b` `v2i,b` : change/yank/select the current word and previous word
-
-
-Installation
-------------
-
-Requires:
-
-* curl
-* gpg [only for me, huyz]
-
-```
-[ -d ~/git ] || mkdir ~/git
-git clone https://github.com/huyz/dot-vim.git
-[ -d ~/.vim ] && mv ~/.vim ~/.vim-OLD
-ln -s ~/git/dot-vim ~/.vim
-cd ~/.vim
-./setup.sh
-```
-
-Comments
---------
-You can submit feedback on [GitHub](https://github.com/huyz/dot-vim/issues)
-or [my blog](http://huyz.us/).
-
-MIT License
------------
-
-Non-stolen parts are  Copyright (C) 2011 Huy Z
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
