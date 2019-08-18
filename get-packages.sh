@@ -2,7 +2,7 @@
 # huyz 2011-07-02
 # Download & compile packages
 
-alias git='git -c user.name="huyz" -c user.email=h-git@huyz.us'
+alias git='git -c user.name="huyz" -c user.email=huyz@users.noreply.github.com'
 
 ### Configuration
 
@@ -14,6 +14,7 @@ GIT_CLONE_ARGS="--depth 1"
 
 cd ~/.vim || exit 10
 
+# Hmm, looks like I no longer use this
 [ -x ~/.vim/bin/vimruntime.sh ] || exit 20
 VIMRUNTIME=$(~/.vim/bin/vimruntime.sh)
 
@@ -53,17 +54,6 @@ cd ~/.vim/packages || exit 40
 ### Pathogen-loaded bundles
 
 cd ~/.vim/bundle || exit 50
-
-### vimball
-
-[ -e vimball.tar.gz ] || wget -O vimball.tar.gz 'http://www.vim.org/scripts/download_script.php?src_id=15362'
-if [ ! -d vimball ]; then
-  mkdir vimball &&
-    if cd vimball; then
-      tar -xvf ../vimball.tar.gz
-      cd ..
-    fi
-fi
 
 ### bufexplorer archive
 
@@ -157,74 +147,7 @@ fi
 [ -d webapi-vim ] || git clone $GIT_CLONE_ARGS https://github.com/mattn/webapi-vim.git
 [ -d gist-vim ] || git clone $GIT_CLONE_ARGS https://github.com/mattn/gist-vim.git
 
-# vim-solarized is contained within the larger repository solarized, so check
-# first for the global location
-if [ ! -h vim-colors-solarized ]; then
-  if [ -d ~/git/solarized ]; then
-    ln -s ~/git/solarized/vim-colors-solarized .
-  else
-    [ -d solarized ] || git clone $GIT_CLONE_ARGS http://github.com/altercation/solarized.git
-    ln -s solarized/vim-colors-solarized .
-  fi
-fi
-
-
-#############################################################################
-### Vimball
-
-### Align
-
-[ -e Align.vba.gz -o -e Align.vba ] || wget -O Align.vba.gz 'http://www.vim.org/scripts/download_script.php?src_id=19633'
-if [ ! -d Align ]; then
-  # Align generates errors because it expects to close a window
-  mkdir Align &&
-    vim -e -T dumb -c "let g:vimball_home = '$PWD/Align' | e Align.vba.gz | so % | quit" >/dev/null 2>&1
-fi
-
-### AutoAlign
-
-[ -e AutoAlign.vba.gz -o -e AutoAlign.vba ] || wget -O AutoAlign.vba.gz 'http://www.vim.org/scripts/download_script.php?src_id=21105'
-if [ ! -d AutoAlign ]; then
-  # AutoAlign generates errors because it expects to close a window
-  mkdir AutoAlign &&
-    vim -e -T dumb -c "let g:vimball_home = '$PWD/AutoAlign' | e AutoAlign.vba.gz | so % | quit" >/dev/null 2>&1
-fi
-
-### CamelCaseMotion
-
-[ -e camelcasemotion.vba.gz -o -e camelcasemotion.vba ] || wget -O camelcasemotion.vba.gz 'http://www.vim.org/scripts/download_script.php?src_id=16854'
-if [ ! -d camelcasemotion ]; then
-  # camelcasemotion generates errors because it expects to close a window
-  mkdir camelcasemotion &&
-    vim -e -T dumb -c "let g:vimball_home = '$PWD/camelcasemotion' | e camelcasemotion.vba.gz | so % | quit" >/dev/null 2>&1
-fi
-
-### ingo-library (required by CompleteHelper)
-
-[ -e ingo-library.vmb.gz -o -e ingo-library.vmb ] || wget -O ingo-library.vmb.gz 'http://www.vim.org/scripts/download_script.php?src_id=22895'
-if [ ! -d ingo-library ]; then
-  # ingo-library generates errors because it expects to close a window
-  mkdir ingo-library &&
-    vim -e -T dumb -c "let g:vimball_home = '$PWD/ingo-library' | e ingo-library.vmb.gz | so % | quit" >/dev/null 2>&1
-fi
-
-### CompleteHelper (required by CamelCaseComplete)
-
-[ -e CompleteHelper.vmb.gz -o -e CompleteHelper.vmb ] || wget -O CompleteHelper.vmb.gz 'http://www.vim.org/scripts/download_script.php?src_id=22724'
-if [ ! -d CompleteHelper ]; then
-  # CompleteHelper generates errors because it expects to close a window
-  mkdir CompleteHelper &&
-    vim -e -T dumb -c "let g:vimball_home = '$PWD/CompleteHelper' | e CompleteHelper.vmb.gz | so % | quit" >/dev/null 2>&1
-fi
-
-### CamelCaseComplete
-
-[ -e CamelCaseComplete.vmb.gz -o -e CamelCaseComplete.vmb ] || wget -O CamelCaseComplete.vmb.gz 'http://www.vim.org/scripts/download_script.php?src_id=21213'
-if [ ! -d CamelCaseComplete ]; then
-  # CamelCaseComplete generates errors because it expects to close a window
-  mkdir CamelCaseComplete &&
-    vim -e -T dumb -c "let g:vimball_home = '$PWD/CamelCaseComplete' | e CamelCaseComplete.vmb.gz | so % | quit" >/dev/null 2>&1
-fi
+[ -d solarized ] || git clone $GIT_CLONE_ARGS http://github.com/altercation/vim-colors-solarized.git
 
 #############################################################################
 ### Generate helptags for docs
