@@ -16,12 +16,10 @@ cd ~
 [ -h ~/.exrc ] || ln -s $GIT/.exrc .
 [ -h ~/.editorconfig ] || ln -s $GIT/.editorconfig .
 
-[ -d ~/bin ] || mkdir ~/bin
-[ -d ~/bin -a -h ~/bin/m ] || ln -s $GIT/bin/m ~/bin/.
+#[ -d ~/bin ] || mkdir ~/bin
+#[ -d ~/bin -a -h ~/bin/m ] || ln -s $GIT/bin/m ~/bin/.
 
 cd $GIT
-
-sh ./get-packages.sh
 
 # This is only for me
 if [ -e .vimrc.post.gpg -a ! -e .vimrc.post ]; then

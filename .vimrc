@@ -551,14 +551,72 @@ set mouse=a                   " Enable the mouse where possible. (Great for Tagb
 " NOTE: this must run before `filetype plugin indent on` in order to pick
 " up new file types in bundle, CoffeeScript
 
-" Distributed plugins
+" Built-in plugins
 runtime macros/matchit.vim
 
-" Load up all the bundles with pathogen
-if filereadable(expand("$MYVIM/autoload/pathogen.vim")) ||
- \ filereadable(expand("$MEHOME/.vim/autoload/pathogen.vim"))
-  call pathogen#infect()
+" Deprecated: 2019-08-18 switching to vim-plug
+"" Load up all the bundles with pathogen
+"if filereadable(expand("$MYVIM/autoload/pathogen.vim")) ||
+" \ filereadable(expand("$MEHOME/.vim/autoload/pathogen.vim"))
+"  call pathogen#infect()
+"endif
+
+" Automatically install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+
+" Dependencies
+" webapi-vim is required by gist-vim and optional for emmet-vim
+Plug 'mattn/webapi-vim'
+
+" UI
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'airblade/vim-gitgutter'
+Plug 'fholgado/minibufexpl.vim'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'sjl/gundo.vim'
+
+" Files
+Plug 'kien/ctrlp.vim'
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Text
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'easymotion/vim-easymotion'
+Plug 'bkad/CamelCaseMotion'
+Plug 'junegunn/vim-easy-align'
+Plug 'dhruvasagar/vim-table-mode'
+
+" Dev
+Plug 'scrooloose/syntastic'
+Plug 'tomtom/tcomment_vim'
+Plug 'alvan/vim-closetag', { 'for': ['html', 'js', 'jsx', 'ts', 'xml'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'jsx', 'ts'] }
+Plug 'elzr/vim-json', { 'for': 'json' }
+
+" External sites
+Plug 'mattn/gist-vim'
+
+" Misc
+Plug 'jamessan/vim-gnupg'
+
+" Initialize plugin system
+call plug#end()
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Filetype-detection options
