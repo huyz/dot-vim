@@ -697,10 +697,6 @@ if &t_Co > 2 || has("gui_running") " If we have color
   " Turn on syntax highlighting
   syntax on
 
-  " Turn on solarized colorscheme
-  " NOTE: Set in .vimrc.post
-  "colorscheme solarized
-
 else " If we don't have color
   " Highlighting for monochrome screens (with underlines and crap) sucks
   syntax off
@@ -806,7 +802,6 @@ if has("gui_running")
 elseif &t_Co == 256
   " We abuse the semantics of TERM=xterm-256color here: " If we have 256 colors, we assume the terminal has the Solarized palette
   " even though, ironically, we use end up just using 16 colors.
-  set background=dark
   colorscheme solarized
   call HighlightWhitespaceEOL()
 endif
