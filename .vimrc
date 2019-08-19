@@ -416,7 +416,6 @@ else
   endfunction
 endif
 
-
 """ Typo Corrections
 
 " I hold <shift> too long when typing ':'
@@ -425,6 +424,15 @@ command! Q q
 command! Qa qa
 command! QA qa
 command! W w
+
+""" Mappings
+
+" Case-insensitive search (doesn't make sense to set 'ignorecase'
+" as it's dangerous for substitutions)
+" NOTE: \v isn't completely like perl, even with the basics, because
+" the charaters <>= are now special that weren't with perl
+nnoremap / /\c
+nnoremap ? ?\c
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Options
@@ -786,6 +794,42 @@ let g:syntastic_python_pylint_post_args  = "--max-line-length=100"
 
 """ vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Solarized
+
+""" Color scheme
+
+if has("gui_running") 
+  colorscheme solarized
+
+elseif &t_Co == 256
+  " We abuse the semantics of TERM=xterm-256color here: " If we have 256 colors, we assume the terminal has the Solarized palette
+  " even though, ironically, we use end up just using 16 colors.
+  set background=dark
+  colorscheme solarized
+  call HighlightWhitespaceEOL()
+endif
+
+""" vim-gitgutter colors
+
+if &background == 'dark'
+  highlight SignColumn ctermbg=0 guibg=darkgrey
+else
+  highlight SignColumn ctermbg=12 guibg=#eee8d5
+endif
+
+""" vim-indent-guides
+
+let g:indent_guides_auto_colors = 0
+" Colors chosen for solarized colorscheme
+if &background == "dark"
+  "highlight IndentGuidesOdd  guibg=darkgrey
+  highlight IndentGuidesEven guibg=#073642     ctermbg=black
+else
+  "highlight IndentGuidesOdd                  ctermbg=white
+  highlight IndentGuidesEven guibg=white     ctermbg=lightgrey
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
