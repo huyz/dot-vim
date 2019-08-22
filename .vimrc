@@ -80,6 +80,9 @@ map <Leader>~ <Leader>_do_Yp:s/./\~/g<CR><Leader>_done_
 map <Leader>- <Leader>_do_Yp:s/./-/g<CR><Leader>_done_
 map <Leader>= <Leader>_do_Yp:s/./=/g<CR><Leader>_done_
 
+" Quotes with backticks (useful for Markdown-style code words)
+nnoremap <Leader>` ciw`<C-R>-`<Esc>
+
 " Inserts a row of '*' characters up to the 78th column
 imap <Leader>-** <Esc>80a*<Esc>78\|C
 " Inserts a row of '#' characters up to the 78th column
