@@ -614,9 +614,10 @@ Plug 'dhruvasagar/vim-table-mode'
 " Dev
 Plug 'scrooloose/syntastic'
 Plug 'tomtom/tcomment_vim'
-Plug 'alvan/vim-closetag', { 'for': ['html', 'js', 'jsx', 'ts', 'xml'] }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'jsx', 'ts'] }
+Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'jsx', 'typescript'] }
 Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 
 " External sites
 Plug 'mattn/gist-vim'
