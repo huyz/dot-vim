@@ -28,15 +28,18 @@ cd ~/.vim
 These are useful commands that are easy to forget because they're needed only
 occasionally.
 
+*   `cgn` + `.`         :   Incrementally change matches
 *   `q:`  `q/`  `q?`    :   Open comand-line window (`^F` if already in command-line)
 *   ``\`.``             :   Jump to last modification
 *   `gv`                :   Reselect last visual selection
 *   `ga`                :   ASCII/Unicode value of current character
-*   `viw` `cis` `dap` `yab` `ci'` `ci"` ``ci` ``
-    : Operations on word, inner sentence, paragraph, () block, quoted strings
+*   `viw` `cis` `dap` `yab` `ci'` `cit` `dat` ``ci` ``
+    : Operations on word, inner sentence, paragraph, () block, quoted strings,
+      html tags
 *   `/<C-R><C-W>`       :   Pull current word into search
 *   `/<C-R>"`           :   Pull in last yank
 *   `[I`                :   Show lines that match current word
+*   ```[ `` or `` `]``  :   Go to beginning/end of last change
 *   `<C-X><C-L>`        :   Line complete, then hit `<C-n>` and `<C-p>`
 *   `<C-X><C-K>`        :   Starts dictionary completion, then hit `<C-n>` and `<C-p>`
 *   `==`                :   Reindent line(s)
