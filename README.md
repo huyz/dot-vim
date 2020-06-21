@@ -94,11 +94,11 @@ I tend to forgot I defined these mappings:
 
 ### easy-align
 
-| Command    | Description                                              |
-| ---------- | ---------------------                                    |
-| v\_`ga\| ` | in line visual mode, start aligning around `|` character |
-| `gaip=`    | start aligning for inner paragraph                       |
-| `\\`       | In Github-Flavored Markdown file, re-align current table |
+| Command    | Description                                               |
+| ---------- | ---------------------                                     |
+| v\_`ga\| ` | in line visual mode, start aligning around `\|` character |
+| `gaip=`    | start aligning for inner paragraph                        |
+| V_`\\`     | In Github-Flavored Markdown file, re-align current table  |
 
 ### fzf
 
@@ -135,7 +135,7 @@ I tend to forgot I defined these mappings:
 | v\_`gS\|` | in block visual mode, surround each line with bars, with alignment |
 | `dst`     | delete surrounding tags                                            |
 | `cs't`    | change surrounding quotes to tag with prompt                       |
-| `csw(`    | shortcut for `ysiw(`b                                              |
+| `csw(`    | shortcut for `ysiw(`                                               |
 
 ### table-mode            =   Table editing
 
