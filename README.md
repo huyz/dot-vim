@@ -94,7 +94,10 @@ I tend to forgot I defined these mappings:
 
 ### easy-align
 
-TODO
+| Command    | Description                                              |
+| ---------- | ---------------------                                    |
+| v\_`ga\| ` | in line visual mode, start aligning around `|` character |
+| `gaip=`    | start aligning for inner paragraph                       |
 
 ### fzf
 
