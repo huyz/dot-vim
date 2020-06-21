@@ -1,11 +1,11 @@
 # Files
 
-*   `.exrc` - basic initialization file for the original ex/vi, in case vim isn't
-    installed.  It has to be symlinked to `~/.exrc`
-*   `.vimrc` - main initialization file.  It has to be symlinked to `~/.vimrc`
-*   `.vimrc.post` - contains personal commands invoked after `.vimrc`.  You
-    can create this file with your own customizations here.
-*   `setup.sh` - sets up the files to be ready for vim.
+| File          | Description |
+| ---           | --- |
+| `.exrc`       | basic initialization file for the original ex/vi, in case vim isn't installed.  It has to be symlinked to `~/.exrc` |
+| `.vimrc`      | main initialization file.  It has to be symlinked to `~/.vimrc`
+| `.vimrc.post` | contains personal commands invoked after `.vimrc`.  You can create this file with your own customizations here.     |
+| `setup.sh`    | sets up the files to be ready for vim.                                                                              |
 
 # Installation
 
@@ -121,19 +121,21 @@ TODO
 
 ### surround
 
-*   `ysiw'`     : surround inner word with single quotes
-*   `yss)`      : surround sentence with parentheses and no space
-*   `ys2w(`     : surround next 2 words with parentheses and spaces
-*   `ySS{`      : surround sentence with braces on their own lines
-*   v\_`S{`     : in line visual mode, surround lines with braces on their own lines
-*   v\_`gS|`    : in block visual mode, surround each line with bars, with alignment
-*   `dst`       : delete surrounding tags
-*   `cs't`      : change surrounding quotes to tag with prompt
-*   `csw(`      : shortcut for `ysiw(`b
+| Command   | Description                                                        |
+| --------- | --------------------                                               |
+| `ysiw'`   | surround inner word with single quotes                             |
+| `yss)`    | surround sentence with parentheses and no space                    |
+| `ys2w(`   | surround next 2 words with parentheses and spaces                  |
+| `ySS{`    | surround sentence with braces on their own lines                   |
+| v\_`S{`   | in line visual mode, surround lines with braces on their own lines |
+| v\_`gS\|` | in block visual mode, surround each line with bars, with alignment |
+| `dst`     | delete surrounding tags                                            |
+| `cs't`    | change surrounding quotes to tag with prompt                       |
+| `csw(`    | shortcut for `ysiw(`b                                              |
 
-### table-mode            :   Table editing
+### table-mode            =   Table editing
 
-*   `\tm`             :   Toggle table mode
+*   `\tm`             =   Toggle table mode
 
 ### tcomment
 
