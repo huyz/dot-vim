@@ -98,6 +98,7 @@ I tend to forgot I defined these mappings:
 | ---------- | ---------------------                                    |
 | v\_`ga\| ` | in line visual mode, start aligning around `|` character |
 | `gaip=`    | start aligning for inner paragraph                       |
+| `\\`       | In Github-Flavored Markdown file, re-align current table |
 
 ### fzf
 
