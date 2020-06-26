@@ -94,11 +94,11 @@ I tend to forgot I defined these mappings:
 
 ### easy-align
 
-| Command    | Description                                               |
-| ---------- | ---------------------                                     |
-| v\_`ga\| ` | in line visual mode, start aligning around `\|` character |
-| `gaip=`    | start aligning for inner paragraph                        |
-| V_`\\`     | In Github-Flavored Markdown file, re-align current table  |
+| Command    | Description                                                    |
+| ---------- | ---------------------                                          |
+| V\_`ga= `  | in line visual mode, start aligning around first `=` character |
+| `gaip=`    | start aligning for inner paragraph                             |
+| V\_`\\`    | In Github-Flavored Markdown file, re-align current table       |
 
 ### fzf
 
