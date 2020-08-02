@@ -267,7 +267,7 @@ nmap <Leader>t3 :set et<CR>:set sts=8 sw=4<CR>
 nmap <Leader>t4 :set noet<CR>:set sts=8 sw=8<CR>
 
 " Different options
-nmap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=120<CR>
+nmap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=+1,80,100,120<CR>
 nmap <Leader>o1 :set invpaste<CR>:GitGutterToggle<CR>:set paste?<CR>
 nmap <Leader>o2 :call ZCycleWrap()<CR>
 nmap <Leader>o3 :call ZCycleTextwidth()<CR>
@@ -355,8 +355,8 @@ endfunction
 " Cycle textwidth
 function! ZCycleTextwidth()
   if &textwidth == 0
-    set textwidth=78
-  elseif &textwidth == 78
+    set textwidth=79
+  elseif &textwidth == 79
     set textwidth=98
   else
     set textwidth=0
@@ -637,20 +637,11 @@ call plug#end()
 
 " Enable file type detection, as per vimrc_example.vim
 if has("autocmd")
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
+  " Load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
 endif
 
 if has("autocmd")
-  " For all text files set 'textwidth' to 78 characters so that lines
-  " are broken at whitespace when hitting the 78th column
-  " Deprecated: 2011-05-26 Don't like this anymore -- every mailreader and
-  " editor can wrap properly these days
-  "autocmd FileType text setlocal textwidth=78
-
   " When editing a file, always jump to the last known cursor position
   " (as saved in the session info found in ~/.viminfo),
   " but don't do it when the position is invalid or when inside an event handler
@@ -715,7 +706,7 @@ else
   hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
 endif
 if v:version >= 703
-  set colorcolumn=+2,120
+  set colorcolumn=+1,80,100,120
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
