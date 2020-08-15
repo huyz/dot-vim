@@ -471,7 +471,8 @@ set ttyfast             " Connection is fast, so redraw well
 set visualbell          " Don't beep
 
 " Define how ':set list' will give visual cues
-set listchars=tab:>-,eol:$,precedes:<,extends:>
+set listchars=tab:»\ ,trail:·,nbsp:⎵,precedes:<,extends:>
+
 
 """ Split window options
 
