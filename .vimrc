@@ -616,6 +616,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'dhruvasagar/vim-table-mode'
 
 " Dev
+Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/syntastic'
 Plug 'tomtom/tcomment_vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
