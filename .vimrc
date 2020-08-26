@@ -566,13 +566,6 @@ set mouse=a                   " Enable the mouse where possible. (Great for Tagb
 " Built-in plugins
 runtime macros/matchit.vim
 
-" Deprecated: 2019-08-18 switching to vim-plug
-"" Load up all the bundles with pathogen
-"if filereadable(expand("$MYVIM/autoload/pathogen.vim")) ||
-" \ filereadable(expand("$MEHOME/.vim/autoload/pathogen.vim"))
-"  call pathogen#infect()
-"endif
-
 " Automatically install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
