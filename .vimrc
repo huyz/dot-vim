@@ -591,7 +591,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'mattn/webapi-vim'
 
 " UI
-Plug 'altercation/vim-colors-solarized'
+Plug 'joshdick/onedark.vim'
 Plug 'bling/vim-airline'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
@@ -615,6 +615,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'dhruvasagar/vim-table-mode'
 
 " Dev
+Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/syntastic'
 Plug 'tomtom/tcomment_vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
@@ -659,63 +660,6 @@ if has("autocmd")
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \  exe "normal g`\"" |
     \ endif
-endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Syntax highlighting
-
-""" Options
-
-let java_highlight_functions = 1
-
-" If defined, enhance with bash syntax (unless overridden by b:is_kornshell)
-let is_bash = 1
-
-" Highlight whitespace at end of line
-" (if there's more than one extra one or more than two extra ones in
-" the case of after a dot, so we don't get too much feedback as we type)
-" http://www.vim.org/tips/tip.php?tip_id=396
-" FIXME:
-"   - See improvements at http://vim.wikia.com/wiki/Highlighting_whitespaces_at_end_of_line
-"   - Doesn't work if TERM=xterm-256color
-function! HighlightWhitespaceEOL()
-  highlight WhitespaceEOL term=reverse ctermfg=red ctermbg=NONE cterm=underline guifg=red guibg=NONE gui=underline
-  " NOTE: lookbehind prevents matching on spaces at beginning of line
-  match WhitespaceEOL /\([^.!? \t]\@<=\|[.!?]\s\)\s\s\+$/
-endfunction
-call HighlightWhitespaceEOL()
-
-
-""" Enable Syntax-highlighting options
-
-if &t_Co > 2 || has("gui_running") " If we have color
-
-  " Set background based on our environment variable with a default of light
-  " (we default to light because dark colors on black are easier to see
-  " than light colors on white)
-  if $user_background == "dark"
-    set background=dark
-  else
-    set background=light
-  endif
-
-  " Turn on syntax highlighting
-  syntax on
-
-else " If we don't have color
-  " Highlighting for monochrome screens (with underlines and crap) sucks
-  syntax off
-endif
-
-""" Column highlight
-
-if &background == 'light'
-  hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
-else
-  hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
-endif
-if v:version >= 703
-  set colorcolumn=+2,120
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -803,41 +747,113 @@ nmap ga <Plug>(EasyAlign)
 "let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
 
 """ vim-indent-guides
-let g:indent_guides_enable_on_vim_startup = 1
+" 2015-10-21 Doesn't work for Dragos
+" "let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_enable_on_vim_startup = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Solarized
+""" Syntax highlighting
 
-""" Color scheme
+""" Options
 
-if has("gui_running") 
-  colorscheme solarized
+let java_highlight_functions = 1
 
-elseif &t_Co == 256
-  " We abuse the semantics of TERM=xterm-256color here: " If we have 256 colors, we assume the terminal has the Solarized palette
-  " even though, ironically, we use end up just using 16 colors.
-  colorscheme solarized
-  call HighlightWhitespaceEOL()
+" If defined, enhance with bash syntax (unless overridden by b:is_kornshell)
+let is_bash = 1
+
+""" Enable Syntax-highlighting options
+
+if &t_Co > 2 || has("gui_running") " If we have color
+
+  " Set background based on our environment variable with a default of light
+  " (we default to light because dark colors on black are easier to see
+  " than light colors on white)
+  if $user_background == "dark"
+    set background=dark
+  else
+    set background=light
+  endif
+
+  " Turn on syntax highlighting
+  syntax on
+
+else " If we don't have color
+  " Highlighting for monochrome screens (with underlines and crap) sucks
+  syntax off
 endif
 
-""" vim-gitgutter colors
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Colorscheme: onedark
 
-if &background == 'dark'
-  highlight SignColumn ctermbg=0 guibg=darkgrey
+let g:onedark_terminal_italics = 0
+
+colorscheme onedark
+
+" Don't know why I have ot override this for the background to be right
+highlight Normal ctermbg=black
+
+" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """ Colorscheme: Solarized
+"
+" """ Color scheme
+"
+" if has("gui_running") 
+"   colorscheme onedark
+"
+" elseif &t_Co == 256
+"   " We abuse the semantics of TERM=xterm-256color here: " If we have 256 colors, we assume the terminal has the Solarized palette
+"   " even though, ironically, we use end up just using 16 colors.
+"   colorscheme onedark
+"   call HighlightWhitespaceEOL()
+" endif
+"
+" """ vim-gitgutter colors
+"
+" if &background == 'dark'
+"   highlight SignColumn ctermbg=0 guibg=darkgrey
+" else
+"   highlight SignColumn ctermbg=12 guibg=#eee8d5
+" endif
+"
+" """ vim-indent-guides
+"
+" let g:indent_guides_auto_colors = 0
+" " Colors chosen for solarized colorscheme
+" if &background == "dark"
+"   "highlight IndentGuidesOdd  guibg=darkgrey
+"   highlight IndentGuidesEven guibg=#073642     ctermbg=black
+" else
+"   "highlight IndentGuidesOdd                  ctermbg=white
+"   highlight IndentGuidesEven guibg=white     ctermbg=lightgrey
+" endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Syntax highlighting overrides
+
+" Highlight whitespace at end of line
+" (if there's more than one extra one or more than two extra ones in
+" the case of after a dot, so we don't get too much feedback as we type)
+" http://www.vim.org/tips/tip.php?tip_id=396
+" FIXME:
+"   - See improvements at http://vim.wikia.com/wiki/Highlighting_whitespaces_at_end_of_line
+"   - Doesn't work if TERM=xterm-256color
+function! HighlightWhitespaceEOL()
+  highlight WhitespaceEOL term=reverse ctermfg=red ctermbg=NONE cterm=underline guifg=red guibg=NONE gui=underline
+  " NOTE: lookbehind prevents matching on spaces at beginning of line
+  match WhitespaceEOL /\([^.!? \t]\@<=\|[.!?]\s\)\s\s\+$/
+endfunction
+call HighlightWhitespaceEOL()
+
+
+""" Column highlight
+
+if &background == 'light'
+  hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
 else
-  highlight SignColumn ctermbg=12 guibg=#eee8d5
+  hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
 endif
-
-""" vim-indent-guides
-
-let g:indent_guides_auto_colors = 0
-" Colors chosen for solarized colorscheme
-if &background == "dark"
-  "highlight IndentGuidesOdd  guibg=darkgrey
-  highlight IndentGuidesEven guibg=#073642     ctermbg=black
-else
-  "highlight IndentGuidesOdd                  ctermbg=white
-  highlight IndentGuidesEven guibg=white     ctermbg=lightgrey
+if v:version >= 703
+  set colorcolumn=+2,120
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
