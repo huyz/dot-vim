@@ -267,7 +267,7 @@ nmap <Leader>t3 :set et<CR>:set sts=8 sw=4<CR>
 nmap <Leader>t4 :set noet<CR>:set sts=8 sw=8<CR>
 
 " Different options
-nmap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=120<CR>
+nmap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=+1,80,100,120<CR>
 nmap <Leader>o1 :set invpaste<CR>:GitGutterToggle<CR>:set paste?<CR>
 nmap <Leader>o2 :call ZCycleWrap()<CR>
 nmap <Leader>o3 :call ZCycleTextwidth()<CR>
@@ -355,8 +355,8 @@ endfunction
 " Cycle textwidth
 function! ZCycleTextwidth()
   if &textwidth == 0
-    set textwidth=78
-  elseif &textwidth == 78
+    set textwidth=79
+  elseif &textwidth == 79
     set textwidth=98
   else
     set textwidth=0
@@ -471,7 +471,8 @@ set ttyfast             " Connection is fast, so redraw well
 set visualbell          " Don't beep
 
 " Define how ':set list' will give visual cues
-set listchars=tab:>-,eol:$,precedes:<,extends:>
+set listchars=tab:»\ ,trail:·,nbsp:⎵,precedes:<,extends:>
+
 
 """ Split window options
 
@@ -616,6 +617,7 @@ Plug 'dhruvasagar/vim-table-mode'
 
 " Dev
 Plug 'sheerun/vim-polyglot'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/syntastic'
 Plug 'tomtom/tcomment_vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
@@ -638,20 +640,11 @@ call plug#end()
 
 " Enable file type detection, as per vimrc_example.vim
 if has("autocmd")
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
+  " Load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
 endif
 
 if has("autocmd")
-  " For all text files set 'textwidth' to 78 characters so that lines
-  " are broken at whitespace when hitting the 78th column
-  " Deprecated: 2011-05-26 Don't like this anymore -- every mailreader and
-  " editor can wrap properly these days
-  "autocmd FileType text setlocal textwidth=78
-
   " When editing a file, always jump to the last known cursor position
   " (as saved in the session info found in ~/.viminfo),
   " but don't do it when the position is invalid or when inside an event handler
@@ -660,6 +653,63 @@ if has("autocmd")
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \  exe "normal g`\"" |
     \ endif
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Syntax highlighting
+
+""" Options
+
+let java_highlight_functions = 1
+
+" If defined, enhance with bash syntax (unless overridden by b:is_kornshell)
+let is_bash = 1
+
+" Highlight whitespace at end of line
+" (if there's more than one extra one or more than two extra ones in
+" the case of after a dot, so we don't get too much feedback as we type)
+" http://www.vim.org/tips/tip.php?tip_id=396
+" FIXME:
+"   - See improvements at http://vim.wikia.com/wiki/Highlighting_whitespaces_at_end_of_line
+"   - Doesn't work if TERM=xterm-256color
+function! HighlightWhitespaceEOL()
+  highlight WhitespaceEOL term=reverse ctermfg=red ctermbg=NONE cterm=underline guifg=red guibg=NONE gui=underline
+  " NOTE: lookbehind prevents matching on spaces at beginning of line
+  match WhitespaceEOL /\([^.!? \t]\@<=\|[.!?]\s\)\s\s\+$/
+endfunction
+call HighlightWhitespaceEOL()
+
+
+""" Enable Syntax-highlighting options
+
+if &t_Co > 2 || has("gui_running") " If we have color
+
+  " Set background based on our environment variable with a default of light
+  " (we default to light because dark colors on black are easier to see
+  " than light colors on white)
+  if $user_background == "dark"
+    set background=dark
+  else
+    set background=light
+  endif
+
+  " Turn on syntax highlighting
+  syntax on
+
+else " If we don't have color
+  " Highlighting for monochrome screens (with underlines and crap) sucks
+  syntax off
+endif
+
+""" Column highlight
+
+if &background == 'light'
+  hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
+else
+  hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
+endif
+if v:version >= 703
+  set colorcolumn=+1,80,100,120
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
