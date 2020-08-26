@@ -655,63 +655,6 @@ if has("autocmd")
     \ endif
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Syntax highlighting
-
-""" Options
-
-let java_highlight_functions = 1
-
-" If defined, enhance with bash syntax (unless overridden by b:is_kornshell)
-let is_bash = 1
-
-" Highlight whitespace at end of line
-" (if there's more than one extra one or more than two extra ones in
-" the case of after a dot, so we don't get too much feedback as we type)
-" http://www.vim.org/tips/tip.php?tip_id=396
-" FIXME:
-"   - See improvements at http://vim.wikia.com/wiki/Highlighting_whitespaces_at_end_of_line
-"   - Doesn't work if TERM=xterm-256color
-function! HighlightWhitespaceEOL()
-  highlight WhitespaceEOL term=reverse ctermfg=red ctermbg=NONE cterm=underline guifg=red guibg=NONE gui=underline
-  " NOTE: lookbehind prevents matching on spaces at beginning of line
-  match WhitespaceEOL /\([^.!? \t]\@<=\|[.!?]\s\)\s\s\+$/
-endfunction
-call HighlightWhitespaceEOL()
-
-
-""" Enable Syntax-highlighting options
-
-if &t_Co > 2 || has("gui_running") " If we have color
-
-  " Set background based on our environment variable with a default of light
-  " (we default to light because dark colors on black are easier to see
-  " than light colors on white)
-  if $user_background == "dark"
-    set background=dark
-  else
-    set background=light
-  endif
-
-  " Turn on syntax highlighting
-  syntax on
-
-else " If we don't have color
-  " Highlighting for monochrome screens (with underlines and crap) sucks
-  syntax off
-endif
-
-""" Column highlight
-
-if &background == 'light'
-  hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
-else
-  hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
-endif
-if v:version >= 703
-  set colorcolumn=+1,80,100,120
-endif
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Hacks
 
@@ -736,7 +679,7 @@ let g:camelcasemotion_key = ','
 
 let g:ctrlp_cmd = 'CtrlPBuffer'
 
-"set wildignore+=/tmp/,.so,.swp,*.zip
+"set wildignore+=/tmp/,.so,.so p,*.zip
 let g:ctrlp_custom_ignore = {
  \ 'dir':  '\v[\/](\.(git|hg|svn)|.venv|venv.*|node_modules)$',
  \ 'file': '\v\.(pyc|class|DS_Store)$',
@@ -840,7 +783,7 @@ let g:onedark_terminal_italics = 0
 colorscheme onedark
 
 " Don't know why I have ot override this for the background to be right
-highlight Normal ctermbg=black
+"highlight Normal ctermbg=black
 
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """ Colorscheme: Solarized
@@ -857,17 +800,18 @@ highlight Normal ctermbg=black
 "   call HighlightWhitespaceEOL()
 " endif
 "
-" """ vim-gitgutter colors
-"
-" if &background == 'dark'
-"   highlight SignColumn ctermbg=0 guibg=darkgrey
-" else
-"   highlight SignColumn ctermbg=12 guibg=#eee8d5
-" endif
-"
-" """ vim-indent-guides
-"
-" let g:indent_guides_auto_colors = 0
+""" vim-gitgutter colors
+
+if &background == 'dark'
+  highlight SignColumn ctermbg=0 guibg=black
+else
+  highlight SignColumn ctermbg=12 guibg=#eee8d5
+endif
+
+""" vim-indent-guides
+
+let g:indent_guides_auto_colors = 1
+
 " " Colors chosen for solarized colorscheme
 " if &background == "dark"
 "   "highlight IndentGuidesOdd  guibg=darkgrey
@@ -893,17 +837,18 @@ function! HighlightWhitespaceEOL()
   match WhitespaceEOL /\([^.!? \t]\@<=\|[.!?]\s\)\s\s\+$/
 endfunction
 call HighlightWhitespaceEOL()
+" Test:  
 
 
 """ Column highlight
 
-if &background == 'light'
-  hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
-else
-  hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
-endif
+" if &background == 'light'
+"   hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
+" else
+"   hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
+" endif
 if v:version >= 703
-  set colorcolumn=+2,120
+  set colorcolumn=+1,80,100,120
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
