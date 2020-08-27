@@ -731,6 +731,10 @@ nmap ga <Plug>(EasyAlign)
 " NOTE: set in .vimrc.post
 "let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
 
+""" vim-indent-guides
+
+let g:indent_guides_enable_on_vim_startup = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntax highlighting
 
@@ -746,8 +750,8 @@ let is_bash = 1
 if &t_Co > 2 || has("gui_running") " If we have color
 
   " Set background based on our environment variable with a default of light
-  " (we default to light because dark colors on black are easier to see
-  " than light colors on white)
+  " (we default to light because dark colors on white are easier to see
+  " than light colors on black)
   if $user_background == "dark"
     set background=dark
   else
@@ -787,7 +791,6 @@ endif
 
 """ vim-indent-guides
 
-let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 1
 
 " " Colors chosen for solarized colorscheme
@@ -821,9 +824,9 @@ call HighlightWhitespaceEOL()
 """ Column highlight
 
 if &background == 'dark'
-  hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
+  highlight ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
 else
-  hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
+  highlight ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
 endif
 if v:version >= 703
   set colorcolumn=+1,80,100,120
