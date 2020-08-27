@@ -585,7 +585,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'mattn/webapi-vim'
 
 " UI
-Plug 'joshdick/onedark.vim'
 Plug 'bling/vim-airline'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
@@ -732,10 +731,6 @@ nmap ga <Plug>(EasyAlign)
 " NOTE: set in .vimrc.post
 "let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
 
-""" vim-indent-guides
-
-let g:indent_guides_enable_on_vim_startup = 1
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntax highlighting
 
@@ -767,16 +762,6 @@ else " If we don't have color
   syntax off
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Colorscheme: onedark
-
-let g:onedark_terminal_italics = 0
-
-colorscheme onedark
-
-" Don't know why I have ot override this for the background to be right
-"highlight Normal ctermbg=black
-
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """ Colorscheme: Solarized
 "
@@ -794,14 +779,15 @@ colorscheme onedark
 "
 """ vim-gitgutter colors
 
-if &background == 'dark'
-  highlight SignColumn ctermbg=0 guibg=black
-else
-  highlight SignColumn ctermbg=12 guibg=#eee8d5
-endif
+" if &background == 'dark'
+"   highlight SignColumn ctermbg=darkgrey guibg=black
+" else
+"   highlight SignColumn ctermbg=12 guibg=#eee8d5
+" endif
 
 """ vim-indent-guides
 
+let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 1
 
 " " Colors chosen for solarized colorscheme
@@ -834,11 +820,11 @@ call HighlightWhitespaceEOL()
 
 """ Column highlight
 
-" if &background == 'light'
-"   hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
-" else
-"   hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
-" endif
+if &background == 'dark'
+  hi ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
+else
+  hi ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
+endif
 if v:version >= 703
   set colorcolumn=+1,80,100,120
 endif
