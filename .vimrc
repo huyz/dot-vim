@@ -353,8 +353,8 @@ endfunction
 " Cycle textwidth
 function! ZCycleTextwidth()
   if &textwidth == 0
-    set textwidth=79
-  elseif &textwidth == 79
+    set textwidth=78
+  elseif &textwidth == 78
     set textwidth=98
   else
     set textwidth=0
