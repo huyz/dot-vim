@@ -573,6 +573,10 @@ call plug#begin('~/.vim/plugged')
 " webapi-vim is required by gist-vim and optional for emmet-vim
 Plug 'mattn/webapi-vim'
 
+" Colorscheme
+Plug 'L-TChen/auto-dark-mode.vim'
+Plug 'chriskempson/base16-vim'
+
 " UI
 Plug 'bling/vim-airline'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -755,41 +759,55 @@ else " If we don't have color
   syntax off
 endif
 
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """ Colorscheme: Solarized
-"
-" """ Color scheme
-"
-" if has("gui_running") 
-"   colorscheme onedark
-"
-" elseif &t_Co == 256
-"   " We abuse the semantics of TERM=xterm-256color here: " If we have 256 colors, we assume the terminal has the Solarized palette
-"   " even though, ironically, we use end up just using 16 colors.
-"   colorscheme onedark
-"   call HighlightWhitespaceEOL()
-" endif
-"
-""" vim-gitgutter colors
 
-" if &background == 'dark'
-"   highlight SignColumn ctermbg=darkgrey guibg=black
-" else
-"   highlight SignColumn ctermbg=12 guibg=#eee8d5
-" endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Color schemes
 
-""" vim-indent-guides
+if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
+  set termguicolors
+endif
 
-let g:indent_guides_auto_colors = 1
+function! SetBackgroundDark()
+  colorscheme base16-tomorrow-night
 
-" " Colors chosen for solarized colorscheme
-" if &background == "dark"
-"   "highlight IndentGuidesOdd  guibg=darkgrey
-"   highlight IndentGuidesEven guibg=#073642     ctermbg=black
-" else
-"   "highlight IndentGuidesOdd                  ctermbg=white
-"   highlight IndentGuidesEven guibg=white     ctermbg=lightgrey
-" endif
+  highlight ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
+  " For reference: Auto colors by g:indent_guides_auto_colors=1
+  "highlight IndentGuidesOdd ctermfg=242 ctermbg=0 guifg=grey15 guibg=grey30
+  "highlight IndentGuidesEven ctermfg=0 ctermbg=242 guifg=grey30 guibg=grey15
+  " FIXME: can't get guibg to take effect on startup
+  highlight IndentGuidesEven guibg=grey23
+
+  set background=dark
+  echo "  background=dark"
+endfunction
+
+function! SetBackgroundLight()
+  colorscheme base16-tomorrow
+
+  highlight ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
+  " For reference: Auto colors by g:indent_guides_auto_colors=1
+  " Auto colors by g:indent_guides_auto_colors=1
+  "highlight IndentGuidesOdd ctermfg=7 ctermbg=15 guifg=grey70 guibg=grey85
+  "highlight IndentGuidesEven ctermfg=15 ctermbg=7 guifg=grey85 guibg=grey70
+
+  set background=light
+  echo "  background=light"
+endfunction
+
+function! ToggleBackground()
+  if &background == "dark"
+    call SetBackgroundLight()
+  else
+    call SetBackgroundDark()
+  endif
+endfunction
+nnoremap <silent> <Leader>b :call ToggleBackground()<CR>
+
+if &background == 'dark'
+  call SetBackgroundDark()
+else
+  call SetBackgroundLight()
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntax highlighting overrides
@@ -812,11 +830,6 @@ call HighlightWhitespaceEOL()
 
 """ Column highlight
 
-if &background == 'dark'
-  highlight ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
-else
-  highlight ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
-endif
 if v:version >= 703
   set colorcolumn=+1,80,100,120
 endif
