@@ -728,13 +728,6 @@ nmap ga <Plug>(EasyAlign)
 
 let g:indent_guides_enable_on_vim_startup = 1
 
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """ Colorscheme: Default
-
-" Colorscheme must be defined if let g:indent_guides_auto_colors = 1
-" NOTE: set background must happen after colorscheme
-colorscheme default
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntax highlighting
 
