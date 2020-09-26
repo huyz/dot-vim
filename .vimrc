@@ -763,13 +763,11 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Color schemes
 
-if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
-  set termguicolors
-endif
-
 function! SetBackgroundDark()
-  colorscheme base16-tomorrow-night
+  execute 'colorscheme ' . g:colorscheme_dark
+  set background=dark
 
+  " NOTE: this needs to be after setting background
   highlight ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
   " For reference: Auto colors by g:indent_guides_auto_colors=1
   "highlight IndentGuidesOdd ctermfg=242 ctermbg=0 guifg=grey15 guibg=grey30
@@ -777,13 +775,14 @@ function! SetBackgroundDark()
   " FIXME: can't get guibg to take effect on startup
   highlight IndentGuidesEven guibg=grey23
 
-  set background=dark
   echo "  background=dark"
 endfunction
 
 function! SetBackgroundLight()
-  colorscheme base16-tomorrow
+  execute 'colorscheme ' . g:colorscheme_light
+  echo "  background=light"
 
+  " NOTE: this needs to be after setting background
   highlight ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
   " For reference: Auto colors by g:indent_guides_auto_colors=1
   " Auto colors by g:indent_guides_auto_colors=1
@@ -791,7 +790,6 @@ function! SetBackgroundLight()
   "highlight IndentGuidesEven ctermfg=15 ctermbg=7 guifg=grey85 guibg=grey70
 
   set background=light
-  echo "  background=light"
 endfunction
 
 function! ToggleBackground()
@@ -802,6 +800,16 @@ function! ToggleBackground()
   endif
 endfunction
 nnoremap <silent> <Leader>b :call ToggleBackground()<CR>
+
+" Startup
+if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
+  set termguicolors
+  let g:colorscheme_dark = "base16-tomorrow-night"
+  let g:colorscheme_light = "base16-tomorrow"
+else
+  let g:colorscheme_dark = "default"
+  let g:colorscheme_light = "default"
+endif
 
 if &background == 'dark'
   call SetBackgroundDark()
