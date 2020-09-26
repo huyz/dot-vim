@@ -768,7 +768,7 @@ function! SetBackgroundDark()
   set background=dark
 
   " NOTE: this needs to be after setting background
-  highlight ColorColumn term=reverse ctermbg=darkgrey guibg=darkgrey
+  highlight ColorColumn term=reverse ctermbg=darkgrey guibg=grey25
   " For reference: Auto colors by g:indent_guides_auto_colors=1
   "highlight IndentGuidesOdd ctermfg=242 ctermbg=0 guifg=grey15 guibg=grey30
   "highlight IndentGuidesEven ctermfg=0 ctermbg=242 guifg=grey30 guibg=grey15
@@ -783,7 +783,7 @@ function! SetBackgroundLight()
   echo "  background=light"
 
   " NOTE: this needs to be after setting background
-  highlight ColorColumn term=reverse ctermbg=lightgrey guibg=lightgrey
+  highlight ColorColumn term=reverse ctermbg=lightgrey guibg=grey75
   " For reference: Auto colors by g:indent_guides_auto_colors=1
   " Auto colors by g:indent_guides_auto_colors=1
   "highlight IndentGuidesOdd ctermfg=7 ctermbg=15 guifg=grey70 guibg=grey85
