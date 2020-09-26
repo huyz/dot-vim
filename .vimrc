@@ -1,8 +1,6 @@
-" Vim initialization file
+" 
 " Created:  huyz 1995-05-06
-" Revamped: huyz 2011-05-26
 " Requires: vim 7 and later
-" TODO: check out new options in vim6 and later
 
 " NOTE:
 " - Our mapping convention: <Leader> is '\' in normal and '\-' in insert mode:
@@ -385,39 +383,30 @@ function! ZToggleVirtualEdit()
   endif
 endfunction
 
-" Cycle different editing aids: displaying invisible characters, line numbers
-" highlight line/columns
-if v:version >= 703
-  function! ZCycleEditDisplay()
-    if     !&list && !&number && !&relativenumber && !&cursorcolumn
-      set number
-    elseif !&list &&  &number && !&relativenumber && !&cursorcolumn
-      set relativenumber
-    elseif !&list && !&number &&  &relativenumber && !&cursorcolumn
-      set number cursorcolumn cursorline
-    elseif !&list &&  &number && !&relativenumber &&  &cursorcolumn
-      set relativenumber
-    elseif !&list && !&number &&  &relativenumber &&  &cursorcolumn
-      set number list
-    elseif  &list &&  &number && !&relativenumber &&  &cursorcolumn
-      set relativenumber
-    else
-      set nolist nonumber norelativenumber nocursorcolumn nocursorline
-    endif
-  endfunction
-else
-  function! ZCycleEditDisplay()
-    if     !&list && !&number && !&cursorcolumn
-      set number
-    elseif !&list &&  &number && !&cursorcolumn
-      set cursorcolumn cursorline
-    elseif !&list &&  &number &&  &cursorcolumn
-      set list
-    else
-      set nolist nonumber nocursorcolumn nocursorline
-    endif
-  endfunction
-endif
+" Cycle different editing aids
+function! ZCycleEditDisplay()
+  " Let's simplify this:
+  " if     !&list && !&number && !&relativenumber && !&cursorcolumn
+  "   set number
+  " elseif !&list &&  &number && !&relativenumber && !&cursorcolumn
+  "   set relativenumber
+  " elseif !&list &&  &number &&  &relativenumber && !&cursorcolumn
+  "   set cursorcolumn cursorline
+  " elseif !&list &&  &number &&  &relativenumber &&  &cursorcolumn
+  "   set list
+  " else
+  "   set nolist nonumber norelativenumber nocursorcolumn nocursorline
+  " endif
+  if     !&list && !&number && !&relativenumber
+    set number cursorline cursorcolumn
+  elseif !&list &&  &number && !&relativenumber
+    set relativenumber cursorline cursorcolumn
+  elseif !&list &&  &number &&  &relativenumber
+    set list
+  else
+    set nolist nonumber norelativenumber nocursorcolumn nocursorline
+  endif
+endfunction
 
 """ Typo Corrections
 
