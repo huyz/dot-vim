@@ -598,6 +598,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'bkad/CamelCaseMotion'
 Plug 'junegunn/vim-easy-align'
 Plug 'dhruvasagar/vim-table-mode'
@@ -694,6 +695,10 @@ endif
 let g:miniBufExplSplitBelow=0  " Put new window above
                                " current or on the
                                " left for vertical split
+
+""" sneak
+
+let g:sneak#label = 1
 
 """ NERDcommenter options
 

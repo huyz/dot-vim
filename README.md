@@ -123,6 +123,12 @@ I tend to forgot I defined these mappings:
 | `<C-x>` | Skip current match |
 | `<C-p>` | Undo current match |
 
+### sneak
+
+| Mapping | Description                      |
+| ---     | ---                              |
+| `sva`   | Jump to next two-character match |
+
 ### surround
 
 | Command   | Description                                                        |
