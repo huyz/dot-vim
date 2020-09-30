@@ -1,7 +1,7 @@
 # Files
 
-| File          | Description |
-| ---           | --- |
+| File          | Description                                                                                                         |
+| ---           | ---                                                                                                                 |
 | `.exrc`       | basic initialization file for the original ex/vi, in case vim isn't installed.  It has to be symlinked to `~/.exrc` |
 | `.vimrc`      | main initialization file.  It has to be symlinked to `~/.vimrc`
 | `.vimrc.post` | contains personal commands invoked after `.vimrc`.  You can create this file with your own customizations here.     |
@@ -73,11 +73,9 @@ I tend to forgot I defined these mappings:
 
 ## Plugins I installed
 
-### CamelCaseMotion
+### Gundo           : Shows undo tree
 
-*   `,w` `,b` `,e`  : like regular motions but respecting word boundaries
-*   `ci,w` `di,w`   : like regular change/delete but respecting word boundaries
-*   `c2i,b` `y2i,b` `v2i,b` : change/yank/select the current word and previous word
+*   `:GundoToggle`
 
 ### CtrlP
 
@@ -86,42 +84,23 @@ I tend to forgot I defined these mappings:
 *   `<C-P><C-F>` : find MRU file
 *   `F10`       : switch buffer
 
-### emmet-vim
-
-| Command  | Description         |
-|----------|---------------------|
-| `<C-Y>,` | Expand abbreviation |
-
-### easy-align
-
-| Command    | Description                                                    |
-| ---------- | ---------------------                                          |
-| V\_`ga= `  | in line visual mode, start aligning around first `=` character |
-| `gaip=`    | start aligning for inner paragraph                             |
-| V\_`\\`    | In Github-Flavored Markdown file, re-align current table       |
-
 ### fzf
 
 *   `F11`       : find file
 
-### Gist                 : post buffers or selected text to https://gist.github.com/
-
-*   `:Gist`          : post entire buffer
-*   `:Gist -p`  : post entire buffer to a private gist
-*   ``:`<,`>Gist -a``  : post selected text anonymously
-*   `:Gist -e`       : edit gist
-
-### Gundo           : Shows undo tree
-
-*   `:GundoToggle`
-
 ### multiple-cursors
 
-| Command | Description        |
+| Mapping | Description        |
 |---------|--------------------|
 | `<C-n>` | Start multicursor  |
 | `<C-x>` | Skip current match |
 | `<C-p>` | Undo current match |
+
+### easymotion
+
+| Mapping | Description                                   |
+| ---     | ---                                           |
+| `\\w`   | Highglight consecutive targets of word motion |
 
 ### sneak
 
@@ -131,7 +110,7 @@ I tend to forgot I defined these mappings:
 
 ### surround
 
-| Command   | Description                                                        |
+| Mapping   | Description                                                        |
 | --------- | --------------------                                               |
 | `ysiw'`   | surround inner word with single quotes                             |
 | `yss)`    | surround sentence with parentheses and no space                    |
@@ -143,9 +122,36 @@ I tend to forgot I defined these mappings:
 | `cs't`    | change surrounding quotes to tag with prompt                       |
 | `csw(`    | shortcut for `ysiw(`                                               |
 
+### CamelCaseMotion
+
+*   `,w` `,b` `,e`  : like regular motions but respecting word boundaries
+*   `ci,w` `di,w`   : like regular change/delete but respecting word boundaries
+*   `c2i,b` `y2i,b` `v2i,b` : change/yank/select the current word and previous word
+
+### easy-align
+
+| Mapping    | Description                                                    |
+| ---------- | ---------------------                                          |
+| V\_`ga= `  | in line visual mode, start aligning around first `=` character |
+| `gaip=`    | start aligning for inner paragraph                             |
+| V\_`\\`    | In Github-Flavored Markdown file, re-align current table       |
+
 ### table-mode            =   Table editing
 
 *   `\tm`             =   Toggle table mode
+
+### emmet-vim
+
+| Mapping  | Description         |
+|----------|---------------------|
+| `<C-Y>,` | Expand abbreviation |
+
+### Gist                 : post buffers or selected text to https://gist.github.com/
+
+*   `:Gist`          : post entire buffer
+*   `:Gist -p`  : post entire buffer to a private gist
+*   ``:`<,`>Gist -a``  : post selected text anonymously
+*   `:Gist -e`       : edit gist
 
 ### tcomment
 

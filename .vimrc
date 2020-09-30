@@ -594,11 +594,11 @@ Plug 'kien/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Text
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'easymotion/vim-easymotion'
 Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-surround'
 Plug 'bkad/CamelCaseMotion'
 Plug 'junegunn/vim-easy-align'
 Plug 'dhruvasagar/vim-table-mode'
@@ -655,13 +655,13 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options
 
+""" vim-indent-guides
+
+let g:indent_guides_enable_on_vim_startup = 1
+
 """ BufExplorer
 
 let g:bufExplorerSortBy='fullpath'   " Sort by full file path name.
-
-""" CamelCaseMotion
-
-let g:camelcasemotion_key = ','
 
 """ CtrlP
 
@@ -700,6 +700,18 @@ let g:miniBufExplSplitBelow=0  " Put new window above
 
 let g:sneak#label = 1
 
+""" CamelCaseMotion
+
+let g:camelcasemotion_key = ','
+
+""" vim-easy-align
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 """ NERDcommenter options
 
 map <Leader>c/ <plug>NERDCommenterAlignBoth
@@ -717,23 +729,10 @@ let g:syntastic_check_on_open            = 1
 let g:syntastic_check_on_wq              = 0
 let g:syntastic_python_pylint_post_args  = "--max-line-length=100"
 
-""" vim-easy-align
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-
 """ vim-gnupg
 
 " NOTE: set in .vimrc.post
 "let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
-
-""" vim-indent-guides
-
-let g:indent_guides_enable_on_vim_startup = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntax highlighting
@@ -781,13 +780,11 @@ function! SetBackgroundDark()
   "highlight IndentGuidesEven ctermfg=0 ctermbg=242 guifg=grey30 guibg=grey15
   " FIXME: can't get guibg to take effect on startup
   highlight IndentGuidesEven guibg=grey23
-
-  echo "  background=dark"
 endfunction
 
 function! SetBackgroundLight()
   execute 'colorscheme ' . g:colorscheme_light
-  echo "  background=light"
+  set background=light
 
   " NOTE: this needs to be after setting background
   highlight ColorColumn term=reverse ctermbg=lightgrey guibg=grey75
@@ -795,8 +792,6 @@ function! SetBackgroundLight()
   " Auto colors by g:indent_guides_auto_colors=1
   "highlight IndentGuidesOdd ctermfg=7 ctermbg=15 guifg=grey70 guibg=grey85
   "highlight IndentGuidesEven ctermfg=15 ctermbg=7 guifg=grey85 guibg=grey70
-
-  set background=light
 endfunction
 
 function! ToggleBackground()
