@@ -1,32 +1,60 @@
-#!/bin/sh
-# huyz 2011-07-03
-# Sets up everything.
-# TODO: this is mainly for me, not user-friendly for general use.
+#!/bin/bash
 
-if [ ! -e setup.sh -o ! -e .vimrc ]; then
-  echo "ERROR: This script needs to be run from within the git repository" >&2
-  exit 1
+### Preamble
+
+READLINK=/usr/local/bin/greadlink
+if [[ ! -x $READLINK ]]; then
+    echo "$0: error: $READLINK could not be found" >&2
+    exit 1
 fi
 
-GIT=$PWD
+SCRIPT="$($READLINK -f "${BASH_SOURCE[0]}")"
+SCRIPT_NAME="$(basename "$SCRIPT")"
+SCRIPT_DIR="$(dirname "$SCRIPT")"
+
+### Function
+
+function symlink {
+    target="$1"
+    link_name="$2"
+
+    if [[ -h "$link_name" ]]; then
+        link_target="$(readlink "$link_name")"
+        if [[ "$link_target" != "$target" ]]; then
+            echo "error: $link_name is pointing to $link_target" >&2
+        fi
+    elif [[ -e "$link_name" ]]; then
+        echo "error: $link_name already exists" >&2
+    else
+        echo ln -s "$1" "$2"
+        ln -s "$1" "$2"
+    fi
+}
+
+### Entire subdir
+
+relative_dir="${SCRIPT_DIR#$HOME/}"
+
+symlink "$relative_dir" ~/.vim
+
+### Contents of base
 
 cd ~
-[ -h ~/.vim ] || ln -s $GIT .vim
-[ -h ~/.vimrc ] || ln -s $GIT/.vimrc .
-[ -h ~/.gvimrc ] || ln -s $GIT/.gvimrc .
-[ -h ~/.exrc ] || ln -s $GIT/.exrc .
-[ -h ~/.editorconfig ] || ln -s $GIT/.editorconfig .
+for i in .vimrc .gvimrc .exrc .editorconfig; do
+    target=".vim/$i"
+    link_name="$(basename "$target")"
+    symlink "$target" "$link_name"
+done
 
-#[ -d ~/bin ] || mkdir ~/bin
-#[ -d ~/bin -a -h ~/bin/m ] || ln -s $GIT/bin/m ~/bin/.
+### Decrypt
 
-cd $GIT
+cd "$SCRIPT_DIR"
 
 # This is only for me
-if [ -e .vimrc.post.gpg -a ! -e .vimrc.post ]; then
-  if command -v gpg >/dev/null 2>&1; then 
-    gpg -d -o .vimrc.post .vimrc.post.gpg && touch -r .vimrc.post.gpg .vimrc.post
-  else
-    echo "Warning: gpg not found.  Cannot decrypt .vimrc.post.gpg" >&2
-  fi
+if [[ -e .vimrc.post.gpg && ! -e .vimrc.post ]]; then
+    if command -v gpg &>/dev/null; then 
+        gpg -d -o .vimrc.post .vimrc.post.gpg && touch -r .vimrc.post.gpg .vimrc.post
+    else
+        echo "Warning: gpg not found. Cannot decrypt .vimrc.post.gpg" >&2
+    fi
 fi
