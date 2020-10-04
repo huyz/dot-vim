@@ -580,7 +580,8 @@ endif
 Plug 'chriskempson/base16-vim'
 
 " UI
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
 " 2019-08-18 Has an annoying sizing bug and is no longer maintained
@@ -654,6 +655,10 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options
+
+""" vim-airline-themes
+
+let g:airline_theme = 'base16_tomorrow'
 
 """ vim-indent-guides
 
