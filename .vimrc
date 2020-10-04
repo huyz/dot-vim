@@ -656,10 +656,6 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options
 
-""" vim-airline-themes
-
-let g:airline_theme = 'base16_tomorrow'
-
 """ vim-indent-guides
 
 let g:indent_guides_enable_on_vim_startup = 1
@@ -810,10 +806,12 @@ nnoremap <silent> <Leader>b :call ToggleBackground()<CR>
 
 " Startup
 if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
+  let g:airline_theme = 'base16_tomorrow'
   set termguicolors
   let g:colorscheme_dark = "base16-tomorrow-night"
   let g:colorscheme_light = "base16-tomorrow"
 else
+  let g:airline_theme = 'base16_colors'
   let g:colorscheme_dark = "default"
   let g:colorscheme_light = "default"
 endif
