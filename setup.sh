@@ -1,4 +1,5 @@
 #!/bin/bash
+# Symlinks into $HOME
 
 ### Preamble
 
@@ -110,6 +111,6 @@ if [[ -e .vimrc.post.gpg && ! -e .vimrc.post ]]; then
     if command -v gpg &>/dev/null; then 
         gpg -d -o .vimrc.post .vimrc.post.gpg && touch -r .vimrc.post.gpg .vimrc.post
     else
-        echo "Warning: gpg not found. Cannot decrypt .vimrc.post.gpg" >&2
+        echo "$SCRIPT_NAME: warning: gpg not found. Cannot decrypt .vimrc.post.gpg" >&2
     fi
 fi
