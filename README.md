@@ -106,7 +106,7 @@ I tend to forgot I defined these mappings:
 
 | Mapping | Description                      |
 | ---     | ---                              |
-| `sva`   | Jump to next two-character match |
+| `-va`   | Jump to next two-character match |
 
 ### surround
 

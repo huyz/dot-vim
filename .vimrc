@@ -701,6 +701,17 @@ let g:miniBufExplSplitBelow=0  " Put new window above
 
 let g:sneak#label = 1
 
+" 2-character Sneak (default)
+nmap - <Plug>Sneak_s
+nmap _ <Plug>Sneak_S
+" visual-mode
+xmap - <Plug>Sneak_s
+xmap _ <Plug>Sneak_S
+" operator-pending-mode
+" So that `d-ea` works
+omap - <Plug>Sneak_s
+omap _ <Plug>Sneak_S
+
 """ CamelCaseMotion
 
 let g:camelcasemotion_key = ','
