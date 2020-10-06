@@ -7,7 +7,7 @@ set commentary
 
 set easymotion
 " To emulate vim-sneak
-nmap s <Plug>(easymotion-s2)
+nmap - <Plug>(easymotion-s2)
 
 set multiple-cursors
 " These mappings are to match vim-surround in vim and bbecause of conflict with the Mac
