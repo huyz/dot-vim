@@ -249,6 +249,8 @@ inoremap <C-s> <C-o>:w<CR>
 nnoremap <Leader>vi :e $MYVIM/.vimrc<CR>
 " Re-sources .vimrc
 nnoremap <Leader>so :so $MYVIM/.vimrc<CR>
+" Allow saving of files as sudo when you forget to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
 
 " Indents blocks
 "nmap <Tab> >>
