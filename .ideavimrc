@@ -6,7 +6,8 @@ set surround
 set commentary
 
 set easymotion
-" To emulate vim-sneak
+" To emulate vim-sneak. This is better than with vim-easymotion because you
+" can keep typing characters.
 nmap - <Plug>(easymotion-s2)
 
 set multiple-cursors
