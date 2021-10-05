@@ -101,6 +101,7 @@ I tend to forgot I defined these mappings:
 | Mapping | Description                                   |
 | ---     | ---                                           |
 | `\\w`   | Highglight consecutive targets of word motion |
+| `\\j`   | Highglight consecutive targets of line down |
 
 ### sneak
 
