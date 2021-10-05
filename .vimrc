@@ -798,6 +798,12 @@ function! SetBackgroundDark()
   "highlight IndentGuidesEven ctermfg=0 ctermbg=242 guifg=grey30 guibg=grey15
   " FIXME: can't get guibg to take effect on startup
   highlight IndentGuidesEven guibg=grey23
+
+  " 2021-07-02 On MacVim, can't see the cursor on top of yellow search results.  So tone down the yellow.
+  " Don't really have time to make this cleaner
+  if has("gui_running")
+    highlight Search guifg=#282a2e guibg=#f0c674
+  endif
 endfunction
 
 function! SetBackgroundLight()
