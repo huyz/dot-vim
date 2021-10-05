@@ -139,8 +139,7 @@ imap <Leader>-tz2 <Esc>:-1r $MYVIM/templates/zsh2<CR>o<Leader>-tt:setf zsh<CR><L
 
 """ repl mappings
 " Attempts to undo quoting done by replies
-map <Leader>> 1G:/^---/+1,$g/^[ ]*[^> ]/-1j
-:%g/^---/+1,$s/^[ ]*>[ ]\(>[ ]\)*//g<CR>
+map <Leader>> 1G:/^---/+1,$g/^[ ]*[^> ]/-1j<CR>:%g/^---/+1,$s/^[ ]*>[ ]\(>[ ]\)*//g<CR>
 " Opens the file replied to (Can't rely on MH's @ link because we will
 " be in a diff directory because of compeditor or the cwd might not even be
 " writable).
