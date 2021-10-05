@@ -134,36 +134,36 @@ imap <Leader>-ts2 <Esc>:-1r $MYVIM/templates/sh2<CR>o<Leader>-tt:setf sh<CR><Lea
 imap <Leader>-tz1 <Esc>:-1r $MYVIM/templates/zsh1<CR>o<Leader>-tt:setf zsh<CR><Leader>_t_z
 imap <Leader>-tz2 <Esc>:-1r $MYVIM/templates/zsh2<CR>o<Leader>-tt:setf zsh<CR><Leader>_t_z
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Mail mappings (for MH)
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """ Mail mappings (for MH)
 
-""" repl mappings
-" Attempts to undo quoting done by replies
-map <Leader>> 1G:/^---/+1,$g/^[ ]*[^> ]/-1j<CR>:%g/^---/+1,$s/^[ ]*>[ ]\(>[ ]\)*//g<CR>
-" Opens the file replied to (Can't rely on MH's @ link because we will
-" be in a diff directory because of compeditor or the cwd might not even be
-" writable).
-map <Leader>e@ :new $editalt<CR>
-" Puts in an Fcc based on the current draft
-" NOTE: There's gotta be a way to not re-read the whole file so we can set a
-" mark
-map <Leader>ef :%! getfcc - 2>/dev/null<CR>
-" Appends plain-text version of MH HTML body
-" (used in conjunction with my repl zsh function that creates this file)
-map <Leader>@ Gdd:r ~/tmp/@@<CR>
+" """ repl mappings
+" " Attempts to undo quoting done by replies
+" map <Leader>> 1G:/^---/+1,$g/^[ ]*[^> ]/-1j<CR>:%g/^---/+1,$s/^[ ]*>[ ]\(>[ ]\)*//g<CR>
+" " Opens the file replied to (Can't rely on MH's @ link because we will
+" " be in a diff directory because of compeditor or the cwd might not even be
+" " writable).
+" map <Leader>e@ :new $editalt<CR>
+" " Puts in an Fcc based on the current draft
+" " NOTE: There's gotta be a way to not re-read the whole file so we can set a
+" " mark
+" map <Leader>ef :%! getfcc - 2>/dev/null<CR>
+" " Appends plain-text version of MH HTML body
+" " (used in conjunction with my repl zsh function that creates this file)
+" map <Leader>@ Gdd:r ~/tmp/@@<CR>
 
-""" comp/repl/forw mappings
-" Invokes buildmimeproc on given email
-map <Leader>em :%! `mhparam buildmimeproc` -<CR>
-" Quotes lines starting with '#' to differentiate from MIME directives
-map <Leader>+# :%s/^#/##/<CR>
-" Inserts an example "type" directive for reference.
-" After typing this macro, you should be able to type the real name, then
-" hit ',' and then hit '.'.  This will change both 'x's quickly.
-imap <Leader>-#a #application/octet-stream; name="x_exe" [] x_exe<Esc>F#fxcw
-imap <Leader>-#g #image/gif; name="x.gif" [] x.gif<Esc>F#fxs
-imap <Leader>-#j #image/jpg; name="x.jpg" [] x.jpg<Esc>F#fxs
-imap <Leader>-#m #video/mpeg; name="x.mpg" [] x.mpg<Esc>F#fxs
+" """ comp/repl/forw mappings
+" " Invokes buildmimeproc on given email
+" map <Leader>em :%! `mhparam buildmimeproc` -<CR>
+" " Quotes lines starting with '#' to differentiate from MIME directives
+" map <Leader>+# :%s/^#/##/<CR>
+" " Inserts an example "type" directive for reference.
+" " After typing this macro, you should be able to type the real name, then
+" " hit ',' and then hit '.'.  This will change both 'x's quickly.
+" imap <Leader>-#a #application/octet-stream; name="x_exe" [] x_exe<Esc>F#fxcw
+" imap <Leader>-#g #image/gif; name="x.gif" [] x.gif<Esc>F#fxs
+" imap <Leader>-#j #image/jpg; name="x.jpg" [] x.jpg<Esc>F#fxs
+" imap <Leader>-#m #video/mpeg; name="x.mpg" [] x.mpg<Esc>F#fxs
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Key Mappings
@@ -446,6 +446,7 @@ endif
 " This is the vim6 default, but we have to overwrite what we have in ~/.exrc
 set directory=.,~/tmp,/var/tmp,/tmp
 
+set backupcopy=yes      " Preserve the birth time of files, at least on macOS
 set nobackup            " gvim-win32 has it on by default
 set autoread            " Reload files changed outside vim
 
