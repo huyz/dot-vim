@@ -106,8 +106,10 @@ map <Leader><TAB>> <Leader>_do_:%s/^\(\s*\)/\1\1/<CR><Leader>_done_
 
 " Inserts current date at insertion point.
 imap <Leader>-d <C-R>=strftime("%Y-%m-%d")<CR>
+imap <Leader>-D <C-R>=strftime("%FT%T%z")<CR>
 iab CRE: created: <C-R>=$LOGNAME<CR> <Leader>-d<CR>updated: <C-R>=$LOGNAME<CR> <Leader>-d
-iab ---: ---<CR>updated: <Leader>-d<CR>created: <Leader>-d<CR>author: <C-R>=$LOGNAME<CR><CR>---
+iab ---: ---<CR>updated: '<Leader>-D'<CR>created: '<Leader>-D'<CR>author: <C-R>=$LOGNAME<CR><CR>---
+
 
 """ RCS macros & mappings
 
