@@ -271,11 +271,11 @@ nmap <Leader>t4 :set noet<CR>:set sts=8 sw=8<CR>
 
 " Different options
 nmap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=+1,80,100,120<CR>
-nmap <Leader>o1 :set invpaste<CR>:GitGutterToggle<CR>:set paste?<CR>
+nmap <Leader>o1 :set invpaste<CR>:GitGutterToggle<CR><Leader>o5:set paste?<CR>
 nmap <Leader>o2 :call ZCycleWrap()<CR>
 nmap <Leader>o3 :call ZCycleTextwidth()<CR>
 nmap <Leader>o4 :call ZToggleVirtualEdit()<CR>
-nmap <Leader>o5 :call ZCycleEditDisplay()<CR>
+nmap <Leader>o5 :call ZToggleEditDisplay()<CR>
 "nmap <Leader>o6 :!elinks -default-mime-type "text/html" file://%<CR>
 
 " Invoke plugins
@@ -389,19 +389,14 @@ function! ZToggleVirtualEdit()
 endfunction
 
 " Cycle different editing aids
+function! ZToggleEditDisplay()
+  if     !&list && !&number && !&relativenumber && !&cursorline
+    set list number relativenumber cursorline
+  elseif  &list &&  &number &&  &relativenumber &&  &cursorline
+    set nolist nonumber norelativenumber nocursorline
+  endif
+endfunction
 function! ZCycleEditDisplay()
-  " Let's simplify this:
-  " if     !&list && !&number && !&relativenumber && !&cursorcolumn
-  "   set number
-  " elseif !&list &&  &number && !&relativenumber && !&cursorcolumn
-  "   set relativenumber
-  " elseif !&list &&  &number &&  &relativenumber && !&cursorcolumn
-  "   set cursorcolumn cursorline
-  " elseif !&list &&  &number &&  &relativenumber &&  &cursorcolumn
-  "   set list
-  " else
-  "   set nolist nonumber norelativenumber nocursorcolumn nocursorline
-  " endif
   if     !&list && !&number && !&relativenumber
     set number cursorline cursorcolumn
   elseif !&list &&  &number && !&relativenumber
@@ -464,6 +459,10 @@ set showcmd             " Display at the bottom right incomplete commands that
                         " are still being typed
 set ttyfast             " Connection is fast, so redraw well
 set visualbell          " Don't beep
+set number              " Show absolute line number at current line
+set relativenumber      " Show relative line numbers
+set cursorline          " Underline current line
+set list                " Display tabs
 
 " Define how ':set list' will give visual cues
 set listchars=tab:»\ ,trail:·,nbsp:⎵,precedes:<,extends:>
