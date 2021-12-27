@@ -3,6 +3,9 @@
 
 ### Preamble
 
+set -euo pipefail
+shopt -s failglob
+
 case "$OSTYPE" in
     darwin*)
         BREW="$(brew --prefix 2>/dev/null || /opt/homebrew/bin/brew --prefix)"
