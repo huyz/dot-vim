@@ -10,6 +10,7 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tommcdo/vim-exchange'
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'Plug 'kana/vim-textobj-entire'
 Plug 'machakann/vim-highlightedyank'
 
 Plug 'easymotion/vim-easymotion'
