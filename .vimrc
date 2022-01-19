@@ -594,6 +594,7 @@ Plug 'airblade/vim-gitgutter'
 "Plug 'fholgado/minibufexpl.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sjl/gundo.vim'
+Plug 'brglng/vim-im-select'
 
 " Files
 Plug 'kien/ctrlp.vim'
@@ -608,12 +609,16 @@ Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 Plug 'bkad/CamelCaseMotion'
 Plug 'junegunn/vim-easy-align'
+Plug 'bronson/vim-visual-star-search'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'machakann/vim-highlightedyank'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tommcdo/vim-exchange'
-Plug 'vim-scripts/argtextobj.vim'
+
+" Text objects
+Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'kana/vim-textobj-entire'
 
 " Dev
 Plug 'sheerun/vim-polyglot'
@@ -889,7 +894,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load up any custom initializations after this file
-if filereadable(expand("$MYVIM/.vimrc.post"))
+if filereadable(expand("$MYVIM/.vimrc.post", asdfsdf, asdfad))
   source $MYVIM/.vimrc.post
 endif
 
