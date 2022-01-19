@@ -465,7 +465,8 @@ set cursorline          " Underline current line
 set list                " Display tabs
 
 " Define how ':set list' will give visual cues
-set listchars=tab:»\ ,trail:·,nbsp:⎵,precedes:<,extends:>
+"set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
+set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
 
 
 """ Split window options
