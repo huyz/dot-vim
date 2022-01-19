@@ -2,15 +2,22 @@
 " Enable emulated plugins
 "
 
-set surround
-set commentary
+packadd matchit
 
-set easymotion
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'tommcdo/vim-exchange'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'machakann/vim-highlightedyank'
+
+Plug 'easymotion/vim-easymotion'
 " To emulate vim-sneak. This is better than with vim-easymotion because you
 " can keep typing characters.
 nmap - <Plug>(easymotion-s2)
 
-set multiple-cursors
+Plug 'terryma/vim-multiple-cursors'
 " These mappings are to match vim-surround in vim and bbecause of conflict with the Mac
 "   option key which prints out unicode chars.
 "   Unfortunately,$ we lose the ability to do ^N and ^P in insert mode for cyclical word search
