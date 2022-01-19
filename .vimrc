@@ -609,6 +609,11 @@ Plug 'tpope/vim-surround'
 Plug 'bkad/CamelCaseMotion'
 Plug 'junegunn/vim-easy-align'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'machakann/vim-highlightedyank'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'tommcdo/vim-exchange'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'michaeljsmith/vim-indent-object'
 
 " Dev
 Plug 'sheerun/vim-polyglot'

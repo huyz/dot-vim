@@ -109,6 +109,35 @@ I tend to forgot I defined these mappings:
 | ---     | ---                              |
 | `-va`   | Jump to next two-character match |
 
+### ReplaceWithRegister
+
+| Mapping | Description                      |
+| ---     | ---                              |
+| `gr{motion}` | Replace {motion} text with register |
+| `grr`   | Replace line(s) with register |
+
+### exchange
+
+| Mapping | Description                     |
+| ---     | ---                              |
+| `cx{motion}` | Sets first or second text to exchange |
+| `cxx`   | Sets first or second line to exchange |
+
+### argtextobj
+
+| Mapping | Description                      |
+| ---     | ---                              |
+| `cia` | Change function argument |
+| `daa`   | Delete function argument |
+
+### vim-indent-object (useful for Python)
+
+| Mapping | Description                      |
+| ---     | ---                              |
+| `vai` | Select indentation level + line above |
+| `vii` | Select indentation level |
+| `vaI`   | Select idnentation level + line below (useful for closing bracket) |
+
 ### surround
 
 | Mapping   | Description                                                        |
