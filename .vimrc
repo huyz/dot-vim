@@ -602,6 +602,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Text
+Plug 'ap/vim-you-keep-using-that-word'
 Plug 'tpope/vim-repeat'
 Plug 'mg979/vim-visual-multi'
 Plug 'easymotion/vim-easymotion'
