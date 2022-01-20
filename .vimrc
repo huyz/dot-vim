@@ -740,7 +740,14 @@ omap _ <Plug>Sneak_S
 
 """ CamelCaseMotion
 
-let g:camelcasemotion_key = ','
+let g:camelcasemotion_key = '<leader>'
+omap <silent> i<leader>w <Plug>CamelCaseMotion_iw
+xmap <silent> i<leader>w <Plug>CamelCaseMotion_iw
+omap <silent> i<leader>b <Plug>CamelCaseMotion_ib
+xmap <silent> i<leader>b <Plug>CamelCaseMotion_ib
+omap <silent> i<leader>e <Plug>CamelCaseMotion_ie
+xmap <silent> i<leader>e <Plug>CamelCaseMotion_ie
+
 
 """ vim-easy-align
 
