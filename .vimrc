@@ -618,6 +618,7 @@ Plug 'tommcdo/vim-exchange'
 " Text objects
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'kana/vim-textobj-user'  " dependency of textobj-entire
 Plug 'kana/vim-textobj-entire'
 
 " Dev
@@ -894,7 +895,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load up any custom initializations after this file
-if filereadable(expand("$MYVIM/.vimrc.post", asdfsdf, asdfad))
+if filereadable(expand("$MYVIM/.vimrc.post"))
   source $MYVIM/.vimrc.post
 endif
 
