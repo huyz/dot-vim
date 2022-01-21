@@ -14,8 +14,9 @@ Plug 'Plug 'kana/vim-textobj-entire'
 Plug 'machakann/vim-highlightedyank'
 
 Plug 'easymotion/vim-easymotion'
-" To emulate vim-sneak. This is better than with vim-easymotion because you
-" can keep typing characters.
+" To emulate vim-sneak.
+" NOTE: This is better than the way vim-easymotion emulates vim-sneak because
+"   you can keep typing characters.
 nmap - <Plug>(easymotion-s2)
 
 Plug 'terryma/vim-multiple-cursors'
