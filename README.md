@@ -100,14 +100,11 @@ I tend to forgot I defined these mappings:
 
 | Mapping | Description                                   |
 | ---     | ---                                           |
-| `\\w`   | Highglight consecutive targets of word motion |
-| `\\j`   | Highglight consecutive targets of line down |
-
-### sneak
-
-| Mapping | Description                      |
-| ---     | ---                              |
-| `-va`   | Jump to next two-character match |
+| `-abc`  | Highlight n-character matches |
+| `_`  | Go to previous n-character match |
+| `+`  | Go to nextncharacter match |
+| `\\w`   | Highlight consecutive targets of word motion |
+| `\\t`   | Highlight consecutive targets of character motion |
 
 ### ReplaceWithRegister
 

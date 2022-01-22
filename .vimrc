@@ -606,7 +606,6 @@ Plug 'ap/vim-you-keep-using-that-word'
 Plug 'tpope/vim-repeat'
 Plug 'mg979/vim-visual-multi'
 Plug 'easymotion/vim-easymotion'
-Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 Plug 'bkad/CamelCaseMotion'
 Plug 'junegunn/vim-easy-align'
@@ -723,20 +722,20 @@ let g:miniBufExplSplitBelow=0  " Put new window above
                                " current or on the
                                " left for vertical split
 
-""" sneak
+""" easymotion
 
-let g:sneak#label = 1
+" n-character search
+nmap - <Plug>(easymotion-sn)
+" visual mode
+xmap - <Plug>(easymotion-sn)
+" operator-pending-mode, e.g. `d-ea`
+" NOTE: `-tn` means the character before the match
+omap - <Plug>(easymotion-tn)
 
-" 2-character Sneak (default)
-nmap - <Plug>Sneak_s
-nmap _ <Plug>Sneak_S
-" visual-mode
-xmap - <Plug>Sneak_s
-xmap _ <Plug>Sneak_S
-" operator-pending-mode
-" So that `d-ea` works
-omap - <Plug>Sneak_s
-omap _ <Plug>Sneak_S
+" next match
+map  _ <Plug>(easymotion-prev)
+map  + <Plug>(easymotion-next)
+
 
 """ CamelCaseMotion
 
