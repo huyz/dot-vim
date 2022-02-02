@@ -739,13 +739,15 @@ map  + <Plug>(easymotion-next)
 
 """ CamelCaseMotion
 
-let g:camelcasemotion_key = '<leader>'
+let g:camelcasemotion_key = ','
 omap <silent> i<leader>w <Plug>CamelCaseMotion_iw
 xmap <silent> i<leader>w <Plug>CamelCaseMotion_iw
 omap <silent> i<leader>b <Plug>CamelCaseMotion_ib
 xmap <silent> i<leader>b <Plug>CamelCaseMotion_ib
 omap <silent> i<leader>e <Plug>CamelCaseMotion_ie
 xmap <silent> i<leader>e <Plug>CamelCaseMotion_ie
+imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
+imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
 
 
 """ vim-easy-align
