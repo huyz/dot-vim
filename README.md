@@ -167,6 +167,12 @@ I tend to forgot I defined these mappings:
 
 *   `\tm`             =   Toggle table mode
 
+### vim-gitmoji
+
+| Mapping    | Descriptio                                                    |
+| ---------- | ---------------------                                          |
+| `^X^U`    | Trigger completion |
+
 ### emmet-vim
 
 | Mapping  | Description         |

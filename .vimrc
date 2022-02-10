@@ -614,6 +614,7 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'machakann/vim-highlightedyank'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tommcdo/vim-exchange'
+Plug 'Kachyz/vim-gitmoji'
 
 " Text objects
 Plug 'wellle/targets.vim'
@@ -736,7 +737,6 @@ omap - <Plug>(easymotion-tn)
 map  _ <Plug>(easymotion-prev)
 map  + <Plug>(easymotion-next)
 
-
 """ CamelCaseMotion
 
 let g:camelcasemotion_key = ','
@@ -782,6 +782,12 @@ let g:syntastic_python_checkers          = ['python3', 'pylint']
 
 " NOTE: set in .vimrc.post
 "let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
+
+""" vim-gitmoji
+
+set completefunc=emoji#complete
+" Replace all :emoji_name: into Unicode emojis
+nmap <Leader><C-U> :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntax highlighting
