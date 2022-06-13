@@ -497,6 +497,7 @@ set nostartofline       " Don't move cursor to beg of line when paging
 set nojoinspaces        " Don't insert 2 spaces after [.?!] when hitting J
 set backspace=2         " Same as "set backspace=indent,eol,start" after vim 5.4
                         " NOTE: bs=1 doesn't work with vim-multiple-cursors
+set nrformats-=octal    " Prevent 07 from being interpreted as octal when incrementing
 
 set expandtab
 set tabstop=8           " Overwrites ~/.exrc setting in favor of softtabstop
