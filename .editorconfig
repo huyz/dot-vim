@@ -21,7 +21,7 @@ indent_size = 2
 [*.css]
 indent_size = 2
 
-[*.html]
+[*.{html,xml}]
 ; ;vim:max_char=99:brace_style=expand
 indent_size = 2
 
