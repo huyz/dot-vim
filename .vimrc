@@ -616,7 +616,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'mattn/webapi-vim'
 
 " Colorscheme
-if has("gui_macvim") && has("gui_running")
+if !has("nvim")
   Plug 'L-TChen/auto-dark-mode.vim'
 endif
 Plug 'chriskempson/base16-vim'
