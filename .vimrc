@@ -674,7 +674,7 @@ Plug 'mattn/gist-vim'
 " Misc
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'jamessan/vim-gnupg'
-if has("neovim")
+if has("nvim")
   Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 endif
 
@@ -828,6 +828,21 @@ let g:syntastic_python_checkers          = ['python3', 'pylint']
 set completefunc=emoji#complete
 " Replace all :emoji_name: into Unicode emojis
 nmap <Leader><C-U> :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
+
+""" Firenvim
+
+" 2022-07-20 FIXME: doesn't seem to work to get rid of status lines
+if has("nvim")
+  if exists('g:started_by_firenvim')
+    set laststatus=0
+  endif
+  function! OnUIEnter(event) abort
+    if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
+      set laststatus=0
+    endif
+  endfunction
+  autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntax highlighting
