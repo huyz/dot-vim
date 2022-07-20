@@ -1,8 +1,9 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MacVim-specific
 
-if has("gui_macvim")
-  set guifont=Monaco:h12
+if has("gui_running")
+  " For MacVim to display devicons
+  set guifont=MesloLGS-NF-Regular:h12
 
   "set background=dark
   " This is to counteract the 'colorscheme default' in .vimrc

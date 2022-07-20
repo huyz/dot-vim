@@ -629,6 +629,7 @@ Plug 'airblade/vim-gitgutter'
 " 2019-08-18 Has an annoying sizing bug and is no longer maintained
 "Plug 'fholgado/minibufexpl.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'ryanoasis/vim-devicons'
 Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
 
