@@ -62,7 +62,10 @@ command! -range -nargs=+ S call s:Substitute(<q-args>, <line1>, <line2>)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Misc macros & mappings
 
-" Right after yanking a block, paste and move cursor to end
+" To have the same default as neovim
+map Y y$
+
+" Right after yanking a block, paste and move cursor to end for easy repetition
 nnoremap Q ']gpk
 
 " Select last pasted block
@@ -79,6 +82,7 @@ map <Leader>- <Leader>_do_Yp:s/./-/g<CR><Leader>_done_
 map <Leader>= <Leader>_do_Yp:s/./=/g<CR><Leader>_done_
 
 " Quotes with backticks (useful for Markdown-style code words)
+" Like using vim-surround with ysiw`
 nnoremap <Leader>` ciw`<C-R>-`<Esc>
 
 " Inserts a row of '*' characters up to the 78th column

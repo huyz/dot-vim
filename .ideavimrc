@@ -42,6 +42,9 @@ map g<C-N> g<A-N>
 " Key mappings
 "
 
+" To work like neovim default
+map Y y$
+
 " To emulate CamelCaseMotion
 map ,w [w
 map ,e ]w
