@@ -423,6 +423,7 @@ set title               " Let vim modify window title
 set t_ti= t_te=         " Disable tite
 set ruler               " Show the cursor position all the time
 set laststatus=2        " Show the status line at all times
+set cmdheight=2         " Number of screen lines for the command line
 set showcmd             " Display at the bottom right incomplete commands that
                         " are still being typed
 set ttyfast             " Connection is fast, so redraw well
