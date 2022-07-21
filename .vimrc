@@ -605,10 +605,9 @@ Plug 'tomtom/tcomment_vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'jsx', 'typescript'] }
 Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
 if has("nvim")
   Plug 'simrat39/symbols-outline.nvim'
 endif
@@ -780,7 +779,15 @@ nmap <Leader><C-U> :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
 
 """ coc.nvim
 
-let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-pyright']
+let g:python3_host_prog = expand("~/.pyenv/versions/py3nvim/bin/python")
+
+" Usage: type `:Prettier` to format whole document
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+
+" Usage: select range and invoke `\f`
+vmap <Leader>f <Plug>(coc-format-selected)
+nmap <Leader>f <Plug>(coc-format-selected)
 
 """ Firenvim
 
