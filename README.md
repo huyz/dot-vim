@@ -33,6 +33,7 @@ occasionally.
 *   ``\`.``             :   Jump to last modification
 *   `gv`                :   Reselect last visual selection
 *   `ga`                :   ASCII/Unicode value of current character
+*   `gP` then `.`…      :   Paste successively
 *   `viw` `cis` `dap` `yab` `ci'` `cit` `dat` ``ci` ``
     : Operations on word, inner sentence, paragraph, () block, quoted strings,
       html tags
@@ -55,6 +56,7 @@ occasionally.
 *   `:bufdo exe "normal :%s,^,\<C-R>%,\<CR>"` : same as above
 *   `:verbose set history?` : Find where an option is set
 *   `:w !sudo tee %`    :   Save the current file with sudo privileges
+*   `:perldo s/p/r/`    :   Do perl-compatible regex substitution
 
 ## My own mappings
 
@@ -159,8 +161,8 @@ I tend to forgot I defined these mappings:
 
 | Mapping    | Description                                                    |
 | ---------- | ---------------------                                          |
-| V\_`ga= `  | in line visual mode, start aligning around first `=` character |
-| `gaip=`    | start aligning for inner paragraph                             |
+| V\_`gA= `  | in line visual mode, start aligning around first `=` character |
+| `gAip=`    | start aligning for inner paragraph                             |
 | V\_`\\`    | In Github-Flavored Markdown file, re-align current table       |
 
 ### table-mode            =   Table editing

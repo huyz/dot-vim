@@ -3,8 +3,9 @@
 " Requires: vim 7 and later
 
 " NOTE:
-" - Our mapping convention: <Leader> is '\' in normal and '\-' in insert mode:
-"   e.g. \[a-z] mappings are ok in normal mode, but use \-[a-z] for insert mode
+" - Our mapping convention: <Leader> is '\' in normal and '\`' in insert mode:
+"   (backtick was chosen because it can be easily typed by left hand right after backslash)
+"   e.g. \[a-z] mappings are ok in normal mode, but use \`[a-z] for insert mode
 " - $MEHOME is an envar set so that users who symlink to my files can
 "   automatically load some of my settings.  Just ignore it.
 
@@ -48,18 +49,6 @@ elseif filereadable(expand("~/.exrc"))
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Command-line commands
-
-" Perl-compatible substitution
-" http://vim.wikia.com/wiki/Perl_compatible_regular_expressions
-function! s:Substitute(sstring, line1, line2)
-    execute a:line1.",".a:line2."!perl -pi -e 'use encoding \"utf8\"; s'".
-            \escape(shellescape(a:sstring), '%!').
-            \" 2>/dev/null"
-endfunction
-command! -range -nargs=+ S call s:Substitute(<q-args>, <line1>, <line2>)
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Copy neovim's default mappings
 
 nnoremap Y y$
@@ -69,113 +58,6 @@ inoremap <C-W> <C-G>u<C-W>
 xnoremap * y/\V<C-R>"<CR>
 xnoremap # y?\V<C-R>"<CR>
 nnoremap & :&&<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Misc macros & mappings
-
-" Quotes with backticks (useful for Markdown-style code words)
-" Like using vim-surround with ysiw`
-nnoremap <Leader>` ciw`<C-R>-`<Esc>
-
-" Select last pasted block
-nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
-
-" Support for macros
-" (Remembers the last search, removes the highlight, and recovers old position)
-noremap <Leader>_do_ :let hls=@/<CR>
-noremap <Leader>_done_ :let @/=hls<CR>:nohl<CR><C-O>
-
-" Underlines the current line with '~', '-', '=' characters (good for markdown)
-map <Leader>~ <Leader>_do_Yp:s/./\~/g<CR><Leader>_done_
-map <Leader>- <Leader>_do_Yp:s/./-/g<CR><Leader>_done_
-map <Leader>= <Leader>_do_Yp:s/./=/g<CR><Leader>_done_
-
-" Inserts a row of '*' characters up to the 78th column
-imap <Leader>-** <Esc>80a*<Esc>78\|C
-" Inserts a row of '#' characters up to the 78th column
-imap <Leader>-## <Esc>80a#<Esc>78\|C
-" Inserts a row of '-' characters up to the 78th column
-imap <Leader>-- <Esc>80a-<Esc>78\|C
-" Inserts a row of '- ' characters up to the 78th column
-imap <Leader>-<Space> <Esc>40a- <Esc>78\|C
-
-" Swap words
-" http://www.vim.org/tips/tip.php?tip_id=329
-nmap <Leader>lh <Leader>_do_"_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<CR><Leader>_done_
-
-" Discard consecutive blank lines
-nmap <Leader>t0 <Leader>_do_:v/./.,/./-1join<CR><Leader>_done_
-
-" Halve the indentation of the file, assuming spaces
-" NOTE: makes sense only with expandtab on
-" TODO: doesn't work on mac
-map <Leader><TAB>< <Leader>_do_:%!unexpand --first-only -t 2<CR>:%!expand --initial -t 1<CR><Leader>_done_
-" Double the indentation of the file, assuming spaces
-map <Leader><TAB>> <Leader>_do_:%s/^\(\s*\)/\1\1/<CR><Leader>_done_
-
-" Inserts current date at insertion point.
-imap <Leader>`d <C-R>=strftime("%Y-%m-%d")<CR>
-imap <Leader>`D <C-R>=strftime("%FT%T%z")<CR>
-imap <Leader>`t <C-R>=strftime("%T")<CR>
-iab CRE: created: <C-R>=$LOGNAME<CR> <Leader>-d<CR>updated: <C-R>=$LOGNAME<CR> <Leader>-d
-iab ---: ---<CR>updated: '<Leader>-D'<CR>created: '<Leader>-D'<CR>author: <C-R>=$LOGNAME<CR><CR>---
-
-
-""" RCS macros & mappings
-
-inoreab RCSID $RCSfile<C-V>$ $Revision<C-V>$ $Date<C-V>$
-nnoremap <Leader>reco :!reco "<C-R>%"<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Programming mappings
-
-""" Support mappings for templates.
-
-" Do necessary replacements
-map <Leader>_t_s :%s/@User *@/\=$LOGNAME/ge \| %s/@Date *@/\=strftime("%Y-%m-%d")/ge \| %s/@Year *@/\=strftime("%Y")/ge <CR>
-map <Leader>_t_z 1G/Filename:<CR>:nohl<CR>A
-
-""" Inserts templates, replaces a few things, and sets file type
-
-imap <Leader>-tt  <Esc>:-1r $MYVIM/templates/header<CR><Leader>_t_s
-imap <Leader>-th  <Esc>:-1r $MYVIM/templates/html<CR><Leader>_t_s:setf html<CR>
-imap <Leader>-tp  <Esc>:-1r $MYVIM/templates/perl<CR>o<Leader>-tt:setf perl<CR><Leader>_t_z
-imap <Leader>-ts0 <Esc>:-1r $MYVIM/templates/script<CR>o<Leader>-tt<Leader>_t_z
-imap <Leader>-ts1 <Esc>:-1r $MYVIM/templates/sh1<CR>o<Leader>-tt:setf sh<CR><Leader>_t_z
-imap <Leader>-ts2 <Esc>:-1r $MYVIM/templates/sh2<CR>o<Leader>-tt:setf sh<CR><Leader>_t_z
-imap <Leader>-tz1 <Esc>:-1r $MYVIM/templates/zsh1<CR>o<Leader>-tt:setf zsh<CR><Leader>_t_z
-imap <Leader>-tz2 <Esc>:-1r $MYVIM/templates/zsh2<CR>o<Leader>-tt:setf zsh<CR><Leader>_t_z
-
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """ Mail mappings (for MH)
-
-" """ repl mappings
-" " Attempts to undo quoting done by replies
-" map <Leader>> 1G:/^---/+1,$g/^[ ]*[^> ]/-1j<CR>:%g/^---/+1,$s/^[ ]*>[ ]\(>[ ]\)*//g<CR>
-" " Opens the file replied to (Can't rely on MH's @ link because we will
-" " be in a diff directory because of compeditor or the cwd might not even be
-" " writable).
-" map <Leader>e@ :new $editalt<CR>
-" " Puts in an Fcc based on the current draft
-" " NOTE: There's gotta be a way to not re-read the whole file so we can set a
-" " mark
-" map <Leader>ef :%! getfcc - 2>/dev/null<CR>
-" " Appends plain-text version of MH HTML body
-" " (used in conjunction with my repl zsh function that creates this file)
-" map <Leader>@ Gdd:r ~/tmp/@@<CR>
-
-" """ comp/repl/forw mappings
-" " Invokes buildmimeproc on given email
-" map <Leader>em :%! `mhparam buildmimeproc` -<CR>
-" " Quotes lines starting with '#' to differentiate from MIME directives
-" map <Leader>+# :%s/^#/##/<CR>
-" " Inserts an example "type" directive for reference.
-" " After typing this macro, you should be able to type the real name, then
-" " hit ',' and then hit '.'.  This will change both 'x's quickly.
-" imap <Leader>-#a #application/octet-stream; name="x_exe" [] x_exe<Esc>F#fxcw
-" imap <Leader>-#g #image/gif; name="x.gif" [] x.gif<Esc>F#fxs
-" imap <Leader>-#j #image/jpg; name="x.jpg" [] x.jpg<Esc>F#fxs
-" imap <Leader>-#m #video/mpeg; name="x.mpg" [] x.mpg<Esc>F#fxs
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Key Mappings
@@ -201,16 +83,13 @@ nnoremap <Down> gj
 "nnoremap g^ ^
 "nnoremap g$ $
 
-""" Paragraph formatting mappings (and to override annoying default mappings)
+" Move faster between split windows
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
 
-" Emulate emacs, saving the cursor position
-nnoremap <Esc>q m`gqip``
-" FIXME: can't get this to work -- cursor position is wrong at end of line
-"inoremap <Esc>q <C-o>m`<C-o>gqip<C-o>``
-
-" Use Q for par formating
-" NOTE: regular formatting is still done with gq
-vnoremap Q !par -w<CR>
+" Closes buffer without messing up split window
+" (goes to the next buffer first so that the split window is not closed)
+nnoremap <C-w><C-q> :bnext<CR>:bdel #<CR>
 
 """ Emacs mappings (and also to replace the useless and dangerous ^A and ^X)
 
@@ -231,27 +110,22 @@ nnoremap <C-x>+ <C-w>=
 " Command-line
 cnoremap <C-g> <C-c>
 
-""" General mappings
+""" Paragraph formatting mappings (and to override annoying default mappings)
 
-" Case-insensitive search (doesn't make sense to set 'ignorecase'
-" as it's dangerous for substitutions)
-" NOTE: \v isn't completely like perl, even with the basics, because
-" the charaters <>= would be considered special
-" NOTE: set in .vimrc.post because this may confuser users
-"nnoremap / /\c
-"nnoremap ? ?\c
+" Emulate emacs, saving the cursor position
+nnoremap <Esc>q m`gqip``
+" FIXME: can't get this to work -- cursor position is wrong at end of line
+"inoremap <Esc>q <C-o>m`<C-o>gqip<C-o>``
+
+" Use Q for par formating
+" NOTE: regular formatting is still done with gq
+vnoremap Q !par -w<CR>
+
+""" Misc mappings
 
 " Folding http://vim.wikia.com/wiki/Folding
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
 vnoremap <Space> zf
-
-" Move faster between split windows
-nnoremap <C-k> <C-w>k
-nnoremap <C-j> <C-w>j
-
-" Closes buffer without messing up split window
-" (goes to the next buffer first so that the split window is not closed)
-nnoremap <C-w><C-q> :bnext<CR>:bdel #<CR>
 
 " Suspend from insert mode
 noremap! <C-z> <Esc><C-z>
@@ -372,7 +246,7 @@ vmap <Esc>OA <Up>
 vmap <Esc>OB <Down>
 vmap <ESC>[Z <S-Tab>
 
-""" Support functions for key mappings
+""" Support functions for complex mappings
 
 " Cycle between 3 modes:
 " 1) wrap, no showbreak [default]
@@ -465,6 +339,59 @@ nnoremap / /\c
 nnoremap ? ?\c
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Complex mappings
+
+" Select last pasted block
+nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
+
+" Swap words
+" http://www.vim.org/tips/tip.php?tip_id=329
+nmap <Leader>lh <Leader>_do_"_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<CR><Leader>_done_
+
+" Quotes with backticks (useful for Markdown-style code words)
+" Like using vim-surround with ysiw`, just quicker
+nnoremap <Leader>` ciw`<C-R>-`<Esc>
+
+" Discard consecutive blank lines
+nmap <Leader>t0 <Leader>_do_:v/./.,/./-1join<CR><Leader>_done_
+
+" Utility functions for macros below
+" (Remembers the last search, removes the `highlight`, and recovers old position)
+noremap <Leader>_do_ :let hls=@/<CR>
+noremap <Leader>_done_ :let @/=hls<CR>:nohl<CR><C-O>
+"
+" Halve the indentation of the file, assuming spaces
+" NOTE: makes sense only with expandtab on
+" TODO: doesn't work on mac
+map <Leader><TAB>< <Leader>_do_:%!unexpand --first-only -t 2<CR>:%!expand --initial -t 1<CR><Leader>_done_
+" Double the indentation of the file, assuming spaces
+map <Leader><TAB>> <Leader>_do_:%s/^\(\s*\)/\1\1/<CR><Leader>_done_
+
+" Underlines the current line with '~', '-', '=' characters (good for markdown)
+nmap <Leader>= <Leader>_do_yyp:s/./=/g<CR><Leader>_done_
+nmap <Leader>- <Leader>_do_yyp:s/./-/g<CR><Leader>_done_
+nmap <Leader>~ <Leader>_do_yyp:s/./\~/g<CR><Leader>_done_
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Complex abbrevations
+
+" Inserts a row of '*' characters up to the 78th column
+imap <Leader>`** <Esc>80a*<Esc>78\|C
+" Inserts a row of '#' characters up to the 78th column
+imap <Leader>`## <Esc>80a#<Esc>78\|C
+" Inserts a row of '-' characters up to the 78th column
+imap <Leader>`-- <Esc>80a-<Esc>78\|C
+" Inserts a row of '- ' characters up to the 78th column
+imap <Leader>`-<Space> <Esc>40a- <Esc>78\|C
+
+" Inserts current date at insertion point.
+imap <Leader>`d <C-R>=strftime("%Y-%m-%d")<CR>
+imap <Leader>`D <C-R>=strftime("%FT%T%z")<CR>
+imap <Leader>`t <C-R>=strftime("%T")<CR>
+iab CRE: created: <C-R>=$LOGNAME<CR> <Leader>`d<CR>updated: <C-R>=$LOGNAME<CR> <Leader>`d
+iab ---: ---<CR>updated: '<Leader>`D'<CR>created: '<Leader>`D'<CR>---
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Options
 
 """ File Options
@@ -511,6 +438,7 @@ set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
 
 """ Split window options
 
+set splitright          " Add new split window to right of current
 set splitbelow          " Add new split window below current
 set equalalways         " Make windows same size after new/close split
 set winheight=15        " Recommended minimum size of window when switching
@@ -613,8 +541,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
+" - Normallly, for Neovim it would be: ~/.local/share/nvim/plugged
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
@@ -676,6 +604,12 @@ Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'jsx', 'typescript'] }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+if has("nvim")
+  Plug 'simrat39/symbols-outline.nvim'
+endif
 
 " External sites
 Plug 'mattn/gist-vim'
@@ -722,7 +656,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Hacks
 
-" XXX Experimental
+" WIP Experimental
 " Make fileencoding work in modelines
 " http://vim.wikia.com/wiki/How_to_make_fileencoding_work_in_the_modeline
 "au BufReadPost * let b:reloadcheck = 1
@@ -798,14 +732,13 @@ xmap <silent> i<leader>e <Plug>CamelCaseMotion_ie
 imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
 imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
 
-
 """ vim-easy-align
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+xmap gA <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+nmap gA <Plug>(EasyAlign)
 
 """ NERDtree
 
@@ -842,6 +775,10 @@ let g:syntastic_python_checkers          = ['python3', 'pylint']
 set completefunc=emoji#complete
 " Replace all :emoji_name: into Unicode emojis
 nmap <Leader><C-U> :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
+
+""" coc.nvim
+
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
 
 """ Firenvim
 
@@ -981,6 +918,26 @@ autocmd BufEnter,WinEnter * call HighlightStrangeWhitespace()
 
 if v:version >= 703
   set colorcolumn=+1,80,100,120
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" neovim
+
+""" Terminal
+
+if has("nvim")
+  " Turn terminal to normal mode with escape
+  tnoremap <Esc> <C-\><C-n>
+  " Start terminal in insert mode
+  au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+  " Open terminal with opt+F12 (just like in JetBrains).
+  " In nvim within iTerm, opt+F12 is F60
+  function! OpenTerminal()
+    split term://bash
+    resize 10
+  endfunction
+  nnoremap <m-F12> :call OpenTerminal()<CR>
+  nnoremap <F60> :call OpenTerminal()<CR>
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
