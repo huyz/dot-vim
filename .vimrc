@@ -557,7 +557,9 @@ Plug 'mattn/webapi-vim'
 if has("nvim")
   Plug 'cormacrelf/dark-notify'
 else
-  Plug 'L-TChen/auto-dark-mode.vim'
+  if has("gui_running")
+    Plug 'L-TChen/auto-dark-mode.vim'
+  endif
 endif
 Plug 'chriskempson/base16-vim'
 
