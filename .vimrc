@@ -782,14 +782,25 @@ let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', '
 
 """ Firenvim
 
-" 2022-07-20 FIXME: doesn't seem to work to get rid of status lines
+function! RemapCopyAndPaste()
+  " Get Copy and Paste working inside the browser
+  vnoremap <D-x> "+d
+  vnoremap <D-c> "+y
+  vnoremap <D-v> "+gP
+  nnoremap <D-v> "+gP
+  cnoremap <D-v> <C-R>+
+  inoremap <D-v> <C-R><C-O>+
+endfunction
+
 if has("nvim")
   if exists('g:started_by_firenvim')
     set laststatus=0
+    call RemapCopyAndPaste()
   endif
   function! OnUIEnter(event) abort
     if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
       set laststatus=0
+      call RemapCopyAndPaste()
     endif
   endfunction
   autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
