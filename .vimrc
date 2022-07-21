@@ -77,9 +77,6 @@ nnoremap & :&&<CR>
 " Like using vim-surround with ysiw`
 nnoremap <Leader>` ciw`<C-R>-`<Esc>
 
-" For repetitive pasting of text (right after yanking a block, paste and move cursor to end)
-nnoremap Q ']gpk
-
 " Select last pasted block
 nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 
