@@ -60,10 +60,18 @@ endfunction
 command! -range -nargs=+ S call s:Substitute(<q-args>, <line1>, <line2>)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Misc macros & mappings
+""" Copy neovim's default mappings
 
-" To have the same default as neovim
-map Y y$
+nnoremap Y y$
+nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
+xnoremap * y/\V<C-R>"<CR>
+xnoremap # y?\V<C-R>"<CR>
+nnoremap & :&&<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Misc macros & mappings
 
 " Right after yanking a block, paste and move cursor to end for easy repetition
 nnoremap Q ']gpk

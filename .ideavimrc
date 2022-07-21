@@ -1,4 +1,26 @@
 "
+" Copied over from .vimrc
+"
+
+" To have the same defaults as neovim (as
+nnoremap Y y$
+nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
+xnoremap * y/\V<C-R>"<CR>
+xnoremap # y?\V<C-R>"<CR>
+nnoremap & :&&<CR>
+
+" Quotes with backticks (useful for Markdown-style code words)
+" Like using vim-surround with ysiw`
+" NOTE: in some contexts IntelliJ will add matching backtick, so we only insert one
+nnoremap <Leader>` ciw`<C-R>-`<Esc>
+
+" For repetitive pasting of text (right after yanking a block, paste and move cursor to end)
+nnoremap Q ']gpk
+
+
+"
 " Enable emulated plugins
 "
 
@@ -20,7 +42,7 @@ Plug 'easymotion/vim-easymotion'
 nmap - <Plug>(easymotion-s2)
 
 Plug 'terryma/vim-multiple-cursors'
-" These mappings are to match vim-surround in vim and bbecause of conflict with the Mac
+" These mappings are to match vim-surround in vim and because of conflict with the Mac
 "   option key which prints out unicode chars.
 "   Unfortunately,$ we lose the ability to do ^N and ^P in insert mode for cyclical word search
 "   (which we would assign to IDE in "Vim Emulation" settings)
@@ -42,25 +64,15 @@ map g<C-N> g<A-N>
 " Key mappings
 "
 
-" To work like neovim default
-map Y y$
-
 " To emulate CamelCaseMotion
 map ,w [w
 map ,e ]w
 map ,b [b
 map ,ge ]b
 
-" for  with backticks to Markdown-style commands in comments.
-" NOTE: in some contexts IntelliJ will add matching backtick, so we only insert one
-nnoremap <Leader>` ciw`<C-R>-`<Esc>
-
 " For formatting, especially comments
 " Depends on https://plugins.jetbrains.com/plugin/7234-wrap-to-column/
 vnoremap gq :action com.andrewbrookins.idea.wrap.WrapAction<CR>
-
-" For "repetitive" `pasting` of the `same` text
-nnoremap Q ']gpk
 
 " Enable relative numbers
 " source: https://youtrack.jetbrains.com/issue/VIM-410
