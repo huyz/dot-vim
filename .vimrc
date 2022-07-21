@@ -516,7 +516,7 @@ let xml_syntax_folding = 1
 """ Internationalization options
 
 " Avoid VimR issue https://github.com/qvacua/vimr/issues/879
-if !has("nvim") || !has("gui_running")
+if !has("gui_vimr")
   language messages en_US.UTF-8 " Use English menus at all times
 endif
 
@@ -890,7 +890,12 @@ if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
 else
   let g:airline_theme = 'base16_colors'
   let g:colorscheme_dark = "default"
-  let g:colorscheme_light = "default"
+  if has("gui_vimr")
+    " VimR can't seem to understand what "default" combined with bg=light should end up with
+    let g:colorscheme_light = "base16-tomorrow"
+  else
+    let g:colorscheme_light = "default"
+  endif
 endif
 
 if &background == 'dark'
