@@ -554,7 +554,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'mattn/webapi-vim'
 
 " Colorscheme
-if !has("nvim")
+if has("nvim")
+  Plug 'cormacrelf/dark-notify'
+else
   Plug 'L-TChen/auto-dark-mode.vim'
 endif
 Plug 'chriskempson/base16-vim'
@@ -899,11 +901,12 @@ if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
   let g:colorscheme_light = "base16-tomorrow"
 else
   let g:airline_theme = 'base16_colors'
-  let g:colorscheme_dark = "default"
   if has("gui_vimr")
     " VimR can't seem to understand what "default" combined with bg=light should end up with
+    let g:colorscheme_dark = "base16-tomorrow-night"
     let g:colorscheme_light = "base16-tomorrow"
   else
+    let g:colorscheme_dark = "default"
     let g:colorscheme_light = "default"
   endif
 endif
@@ -913,6 +916,23 @@ if &background == 'dark'
 else
   call SetBackgroundLight()
 endif
+
+:lua <<EOF
+require('dark_notify').run({
+    onchange = function(mode)
+        -- optional, you can configure your own things to react to changes.
+        -- this is called at startup and every time dark mode is switched,
+        -- either via the OS, or because you manually set/toggled the mode.
+        -- mode is either "light" or "dark"
+        if (mode == "dark")
+        then
+          vim.api.nvim_call_function("SetBackgroundDark", {})
+        else
+          vim.api.nvim_call_function("SetBackgroundLight", {})
+        end
+    end,
+})
+EOF
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntax highlighting overrides
