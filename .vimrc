@@ -587,7 +587,10 @@ let xml_syntax_folding = 1
 
 """ Internationalization options
 
-language messages en_US.UTF-8 " Use English menus at all times
+" Avoid VimR issue https://github.com/qvacua/vimr/issues/879
+if !has("nvim") || !has("gui_running")
+  language messages en_US.UTF-8 " Use English menus at all times
+endif
 
 """ Misc options
 
