@@ -73,7 +73,11 @@ nnoremap & :&&<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Misc macros & mappings
 
-" Right after yanking a block, paste and move cursor to end for easy repetition
+" Quotes with backticks (useful for Markdown-style code words)
+" Like using vim-surround with ysiw`
+nnoremap <Leader>` ciw`<C-R>-`<Esc>
+
+" For repetitive pasting of text (right after yanking a block, paste and move cursor to end)
 nnoremap Q ']gpk
 
 " Select last pasted block
@@ -88,10 +92,6 @@ noremap <Leader>_done_ :let @/=hls<CR>:nohl<CR><C-O>
 map <Leader>~ <Leader>_do_Yp:s/./\~/g<CR><Leader>_done_
 map <Leader>- <Leader>_do_Yp:s/./-/g<CR><Leader>_done_
 map <Leader>= <Leader>_do_Yp:s/./=/g<CR><Leader>_done_
-
-" Quotes with backticks (useful for Markdown-style code words)
-" Like using vim-surround with ysiw`
-nnoremap <Leader>` ciw`<C-R>-`<Esc>
 
 " Inserts a row of '*' characters up to the 78th column
 imap <Leader>-** <Esc>80a*<Esc>78\|C
