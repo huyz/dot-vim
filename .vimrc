@@ -123,6 +123,9 @@ vnoremap Q !par -w<CR>
 
 """ Misc mappings
 
+" Remove search highlight (same mapping as "less") but neovim's `<C-l>` is better
+nnoremap <Esc>u :noh<CR>
+
 " Folding http://vim.wikia.com/wiki/Folding
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
 vnoremap <Space> zf
@@ -137,7 +140,7 @@ nnoremap <Leader>vi :e $MYVIM/.vimrc<CR>
 " Re-sources .vimrc
 nnoremap <Leader>so :so $MYVIM/.vimrc<CR>
 " Allow saving of files as sudo when you forget to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
+cnoremap w!! w !sudo tee > /dev/null %
 
 " Indents blocks
 "nmap <Tab> >>
@@ -148,27 +151,27 @@ cmap w!! w !sudo tee > /dev/null %
 """ Function key mappings (like in .exrc, but more portable)
 
 " Different tab settings
-nmap <Leader>t1 :set et<CR>:set sts=2 sw=2<CR>
-nmap <Leader>t2 :set et<CR>:set sts=4 sw=2<CR>
-nmap <Leader>t3 :set et<CR>:set sts=8 sw=4<CR>
-nmap <Leader>t4 :set noet<CR>:set sts=8 sw=8<CR>
+nnoremap <Leader>t1 :set et<CR>:set sts=2 sw=2<CR>
+nnoremap <Leader>t2 :set et<CR>:set sts=4 sw=2<CR>
+nnoremap <Leader>t3 :set et<CR>:set sts=8 sw=4<CR>
+nnoremap <Leader>t4 :set noet<CR>:set sts=8 sw=8<CR>
 
 " Different options
-nmap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=+1,80,100,120<CR>
+nnoremap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=+1,80,100,120<CR>
 nmap <Leader>o1 :set invpaste<CR>:GitGutterToggle<CR><Leader>o5:set paste?<CR>
-nmap <Leader>o2 :call ZCycleWrap()<CR>
-nmap <Leader>o3 :call ZCycleTextwidth()<CR>
-nmap <Leader>o4 :call ZToggleVirtualEdit()<CR>
-nmap <Leader>o5 :call ZToggleEditDisplay()<CR>
-"nmap <Leader>o6 :!elinks -default-mime-type "text/html" file://%<CR>
+nnoremap <Leader>o2 :call ZCycleWrap()<CR>
+nnoremap <Leader>o3 :call ZCycleTextwidth()<CR>
+nnoremap <Leader>o4 :call ZToggleVirtualEdit()<CR>
+nnoremap <Leader>o5 :call ZToggleEditDisplay()<CR>
+"nnoremap <Leader>o6 :!elinks -default-mime-type "text/html" file://%<CR>
 
 " Invoke plugins
-nmap <Leader>p1 :CtrlPBuffer<CR>
-nmap <Leader>p2 :CtrlP<CR>
-nmap <Leader>p3 :CtrlP .<CR>
-nmap <Leader>p4 :FZF<CR>
-nmap <Leader>p5 :NERDTreeToggle<CR>
-nmap <Leader>p0 :BufExplorer<CR>
+nnoremap <Leader>p1 :CtrlPBuffer<CR>
+nnoremap <Leader>p2 :CtrlP<CR>
+nnoremap <Leader>p3 :CtrlP .<CR>
+nnoremap <Leader>p4 :FZF<CR>
+nnoremap <Leader>p5 :NERDTreeToggle<CR>
+nnoremap <Leader>p0 :BufExplorer<CR>
 
 " Current mappings we want quick access to
 nmap <Leader>f1 <Leader>t1
@@ -236,15 +239,15 @@ endif
 """ Keyboard mappings (To teach vim some new keymaps)
 
 " Putty keymap
-nmap <Esc>OA <Up>
-nmap <Esc>OB <Down>
-nmap <ESC>[Z <S-Tab>
-imap <Esc>OA <Up>
-imap <Esc>OB <Down>
-imap <ESC>[Z <S-Tab>
-vmap <Esc>OA <Up>
-vmap <Esc>OB <Down>
-vmap <ESC>[Z <S-Tab>
+nnoremap <Esc>OA <Up>
+nnoremap <Esc>OB <Down>
+nnoremap <ESC>[Z <S-Tab>
+inoremap <Esc>OA <Up>
+inoremap <Esc>OB <Down>
+inoremap <ESC>[Z <S-Tab>
+vnoremap <Esc>OA <Up>
+vnoremap <Esc>OB <Down>
+vnoremap <ESC>[Z <S-Tab>
 
 """ Support functions for complex mappings
 
@@ -363,9 +366,9 @@ noremap <Leader>_done_ :let @/=hls<CR>:nohl<CR><C-O>
 " Halve the indentation of the file, assuming spaces
 " NOTE: makes sense only with expandtab on
 " TODO: doesn't work on mac
-map <Leader><TAB>< <Leader>_do_:%!unexpand --first-only -t 2<CR>:%!expand --initial -t 1<CR><Leader>_done_
+nmap <Leader><TAB>< <Leader>_do_:%!unexpand --first-only -t 2<CR>:%!expand --initial -t 1<CR><Leader>_done_
 " Double the indentation of the file, assuming spaces
-map <Leader><TAB>> <Leader>_do_:%s/^\(\s*\)/\1\1/<CR><Leader>_done_
+nmap <Leader><TAB>> <Leader>_do_:%s/^\(\s*\)/\1\1/<CR><Leader>_done_
 
 " Underlines the current line with '~', '-', '=' characters (good for markdown)
 nmap <Leader>= <Leader>_do_yyp:s/./=/g<CR><Leader>_done_
@@ -376,18 +379,18 @@ nmap <Leader>~ <Leader>_do_yyp:s/./\~/g<CR><Leader>_done_
 """ Complex abbrevations
 
 " Inserts a row of '*' characters up to the 78th column
-imap <Leader>`** <Esc>80a*<Esc>78\|C
+inoremap <Leader>`** <Esc>80a*<Esc>78\|C
 " Inserts a row of '#' characters up to the 78th column
-imap <Leader>`## <Esc>80a#<Esc>78\|C
+inoremap <Leader>`## <Esc>80a#<Esc>78\|C
 " Inserts a row of '-' characters up to the 78th column
-imap <Leader>`-- <Esc>80a-<Esc>78\|C
+inoremap <Leader>`-- <Esc>80a-<Esc>78\|C
 " Inserts a row of '- ' characters up to the 78th column
-imap <Leader>`-<Space> <Esc>40a- <Esc>78\|C
+inoremap <Leader>`-<Space> <Esc>40a- <Esc>78\|C
 
 " Inserts current date at insertion point.
-imap <Leader>`d <C-R>=strftime("%Y-%m-%d")<CR>
-imap <Leader>`D <C-R>=strftime("%FT%T%z")<CR>
-imap <Leader>`t <C-R>=strftime("%T")<CR>
+inoremap <Leader>`d <C-R>=strftime("%Y-%m-%d")<CR>
+inoremap <Leader>`D <C-R>=strftime("%FT%T%z")<CR>
+inoremap <Leader>`t <C-R>=strftime("%T")<CR>
 iab CRE: created: <C-R>=$LOGNAME<CR> <Leader>`d<CR>updated: <C-R>=$LOGNAME<CR> <Leader>`d
 iab ---: ---<CR>updated: '<Leader>`D'<CR>created: '<Leader>`D'<CR>---
 
@@ -486,8 +489,6 @@ set hlsearch            " Hightlight search matches
 " In case, we're manually sourcing .vimrc and we had a search going, turn
 " off the current search highlight
 noh
-" Remove search highlight (same mapping as "less")
-map <Esc>u :noh<CR>
 
 """ Programming options
 
@@ -840,6 +841,7 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Color schemes
+" Usage: `\b` to toggle between dark and light
 
 function! SetBackgroundDark()
   execute 'colorscheme ' . g:colorscheme_dark
