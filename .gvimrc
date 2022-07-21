@@ -12,18 +12,20 @@ if has("gui_running")
   "highlight ColorColumn term=reverse ctermbg=darkgrey guibg=black
 
   " Overwrite functions of https://github.com/L-TChen/auto-dark-mode.vim/blob/master/plugin/autoDark.vim
-  func! s:ChangeBackground()
-    if (v:os_appearance)
-      call SetBackgroundDark()
-    else
-      call SetBackgroundLight()
-    endif
-    redraw!
-  endfunc
+  if !has("nvim")
+    func! s:ChangeBackground()
+      if (v:os_appearance)
+        call SetBackgroundDark()
+      else
+        call SetBackgroundLight()
+      endif
+      redraw!
+    endfunc
 
-  augroup AutoDark
-  autocmd OSAppearanceChanged * call s:ChangeBackground()
-  augroup END
+    augroup AutoDark
+    autocmd OSAppearanceChanged * call s:ChangeBackground()
+    augroup END
+  endif
 endif
 
 " vim:set ai et sts=2 sw=2 tw=0:
