@@ -159,34 +159,35 @@ nnoremap <Leader>t3 :set et<CR>:set sts=8 sw=4<CR>
 nnoremap <Leader>t4 :set noet<CR>:set sts=8 sw=8<CR>
 
 " Different options
-nnoremap <Leader>o0 :set sw=2 sts=2 wrap linebreak showbreak=… number relativenumber cursorcolumn cursorline colorcolumn=+1,80,100,120<CR>
-nmap <Leader>o1 :set invpaste<CR>:GitGutterToggle<CR><Leader>o5:set paste?<CR>
-nnoremap <Leader>o2 :call ZCycleWrap()<CR>
-nnoremap <Leader>o3 :call ZCycleTextwidth()<CR>
-nnoremap <Leader>o4 :call ZToggleVirtualEdit()<CR>
-nnoremap <Leader>o5 :call ZToggleEditDisplay()<CR>
+nnoremap <Leader>o0 :set sts=2 sw=2 wrap linebreak showbreak=↪ number relativenumber cursorline nocursorcolumn colorcolumn=+1,80,100,120<CR>
+nmap <Leader>o1 :set invpaste<CR>:GitGutterToggle<CR><Leader>o2:set paste?<CR>
+nnoremap <Leader>o2 :call ZToggleEditDisplay()<CR>
+nnoremap <Leader>o3 :set wrap!<CR>
+nnoremap <Leader>o4 :call ZCycleTextwidth()<CR>
+nnoremap <Leader>o5 :call ZToggleVirtualEdit()<CR>
 "nnoremap <Leader>o6 :!elinks -default-mime-type "text/html" file://%<CR>
 
 " Invoke plugins
-nnoremap <Leader>p1 :CtrlPBuffer<CR>
-nnoremap <Leader>p2 :CtrlP<CR>
-nnoremap <Leader>p3 :CtrlP .<CR>
-nnoremap <Leader>p4 :FZF<CR>
-nnoremap <Leader>p5 :NERDTreeToggle<CR>
-nnoremap <Leader>p0 :BufExplorer<CR>
+nnoremap <Leader>p1 :NERDTreeToggle<CR>
+nnoremap <Leader>p2 :FZF<CR>
+nnoremap <Leader>p3 :CtrlP<CR>
+nnoremap <Leader>p4 :CtrlP .<CR>
+nnoremap <Leader>p5 :CtrlPBuffer<CR>
+nnoremap <Leader>p6 :LazyGit<CR>
+nnoremap <Leader>p7 :SymbolsOutline<CR>
 
 " Current mappings we want quick access to
-nmap <Leader>f1 <Leader>t1
-nmap <Leader>f2 <Leader>t2
-nmap <Leader>f3 <Leader>t3
-nmap <Leader>f4 <Leader>o0
+nmap <Leader>f1 <Leader>p1
+nmap <Leader>f2 <Leader>p2
+nmap <Leader>f3 <Leader>p3
+nmap <Leader>f4 <Leader>p5
 nmap <Leader>f5 <Leader>o1
 nmap <Leader>f6 <Leader>o2
 nmap <Leader>f7 <Leader>o3
 nmap <Leader>f8 <Leader>o4
 nmap <Leader>f9 <Leader>o5
-nmap <Leader>f0 <Leader>p2
-nmap <Leader>F1 <Leader>p4
+nmap <Leader>f0 <Leader>p6
+nmap <Leader>F1 <Leader>p7
 nmap <Leader>F2 <Leader>p5
 
 " Normal function key mappings (these don't change)
@@ -253,25 +254,6 @@ vnoremap <ESC>[Z <S-Tab>
 
 """ Support functions for complex mappings
 
-" Cycle between 3 modes:
-" 1) wrap, no showbreak [default]
-" 2) wrap, showbreak, linebreak
-" 3) nowrap, showbreak, linebreak
-" linebreak : Don't break words when visually wrapping
-" showbreak : left-fringe indicator
-function! ZCycleWrap()
-  if &wrap && &showbreak == ""
-    set wrap linebreak showbreak=…
-    echo "  wrap   linebreak showbreak=…"
-  elseif &wrap && &showbreak != ""
-    set nowrap nolinebreak showbreak=
-    echo "nowrap nolinebreak showbreak="
-  else
-    set wrap nolinebreak showbreak=
-    echo "  wrap nolinebreak showbreak="
-  endif
-endfunction
-
 " Cycle textwidth
 function! ZCycleTextwidth()
   if &textwidth == 0
@@ -307,12 +289,13 @@ endfunction
 
 " Cycle different editing aids
 function! ZToggleEditDisplay()
-  if     !&list && !&number && !&relativenumber && !&cursorline
-    set list number relativenumber cursorline
-  elseif  &list &&  &number &&  &relativenumber &&  &cursorline
-    set nolist nonumber norelativenumber nocursorline
+  if &list || &number ||  &relativenumber || &cursorline || &showbreak || &cursorcolumn
+    set nolist nonumber norelativenumber nocursorline showbreak=  nocursorcolumn
+  else
+    set   list   number   relativenumber   cursorline showbreak=↪
   endif
 endfunction
+" XXX Deprecated (too complicated)
 function! ZCycleEditDisplay()
   if     !&list && !&number && !&relativenumber
     set number cursorline cursorcolumn
@@ -434,6 +417,8 @@ set number              " Show absolute line number at current line
 set relativenumber      " Show relative line numbers
 set cursorline          " Underline current line
 set list                " Display tabs
+set linebreak           " Wrap at word boundaries (see 'breakat' option)
+set showbreak=↪         " String to put at start of lines that are soft-wrapped
 
 " Define how ':set list' will give visual cues
 "set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
