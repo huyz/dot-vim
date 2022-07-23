@@ -70,6 +70,8 @@ nnoremap <End> G
 " Use arrows to navigate wrapped lines
 nnoremap <Up> gk
 nnoremap <Down> gj
+inoremap <Up> <C-O>gk
+inoremap <Down> <C-O>gj
 " Handle wrapped lines more intuitively by reversing meaning
 " (Use arrow keys for old behavior)
 "nnoremap k gk
