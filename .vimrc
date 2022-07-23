@@ -524,6 +524,11 @@ if !has("gui_vimr")
   language messages en_US.UTF-8 " Use English menus at all times
 endif
 
+""" Sessions
+
+" Recommended https://github.com/rmagatti/auto-session#recommended-sessionoptions-config
+set sessionoptions+=winpos,terminal,folds
+
 """ Misc options
 
 set keywordprg=man            " Command when hitting K: default to man
@@ -578,6 +583,9 @@ Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
 
 " Files
+if has("nvim") && has("gui_running")
+  Plug 'rmagatti/auto-session', { 'branch': 'main' }
+endif
 Plug 'kien/ctrlp.vim'
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -671,6 +679,10 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options
+
+""" auto-session
+
+let g:auto_session_root_dir = expand("~/.local/share/nvim/sessions")
 
 """ vim-indent-guides
 
