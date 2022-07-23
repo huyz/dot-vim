@@ -625,6 +625,7 @@ Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
 if has("nvim")
   Plug 'simrat39/symbols-outline.nvim'
 endif
+Plug 'kdheepak/lazygit.nvim', {'branch': 'main'}
 
 " External sites
 Plug 'mattn/gist-vim'
