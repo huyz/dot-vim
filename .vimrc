@@ -797,17 +797,23 @@ nmap <Leader>f <Plug>(coc-format-selected)
 
 """ Firenvim
 
-function! RemapCopyAndPaste()
-  " Get Copy and Paste working inside the browser
-  vnoremap <D-x> "+d
-  vnoremap <D-c> "+y
-  vnoremap <D-v> "+gP
-  nnoremap <D-v> "+gP
-  cnoremap <D-v> <C-R>+
-  inoremap <D-v> <C-R><C-O>+
-endfunction
-
 if has("nvim")
+  let g:firenvim_config = {
+        \ 'localSettings': {
+          \ 'https?://[^/]+\.slack\.com/': { 'takeover': 'never' }
+        \ }
+  \ }
+
+  function! RemapCopyAndPaste()
+    " Get Copy and Paste working inside the browser
+    vnoremap <D-x> "+d
+    vnoremap <D-c> "+y
+    vnoremap <D-v> "+gP
+    nnoremap <D-v> "+gP
+    cnoremap <D-v> <C-R>+
+    inoremap <D-v> <C-R><C-O>+
+  endfunction
+
   if exists('g:started_by_firenvim')
     set laststatus=0
     call RemapCopyAndPaste()
