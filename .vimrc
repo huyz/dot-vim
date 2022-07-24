@@ -85,13 +85,20 @@ inoremap <Down> <C-O>gj
 "nnoremap g^ ^
 "nnoremap g$ $
 
-" Move faster between split windows
-nnoremap <C-k> <C-w>k
-nnoremap <C-j> <C-w>j
-
 " Closes buffer without messing up split window
 " (goes to the next buffer first so that the split window is not closed)
 nnoremap <C-w><C-q> :bnext<CR>:bdel #<CR>
+
+" Move between split windows
+" FIXME: we need S-Left and S-Right to override vim-visual-multi easily
+nnoremap <S-Left> <C-w>h
+nnoremap <S-Down> <C-w>j
+nnoremap <S-Up> <C-w>k
+nnoremap <S-Right> <C-w>l
+tnoremap <S-Left> <C-\><C-N><C-w>h
+tnoremap <S-Down> <C-\><C-N><C-w>j
+tnoremap <S-Up> <C-\><C-N><C-w>k
+tnoremap <S-Right> <C-\><C-N><C-w>l
 
 """ Emacs mappings (and also to replace the useless and dangerous ^A and ^X)
 
