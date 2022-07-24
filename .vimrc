@@ -1004,13 +1004,13 @@ endif
 
 if has("nvim")
   autocmd TermOpen * setlocal nonumber norelativenumber
+  autocmd TermClose * if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
 else
   autocmd TerminalWinOpen * setlocal nonumber norelativenumber
 endif
 " Start terminal in insert mode when switching to it
 autocmd BufEnter * if &buftype == 'terminal' | set nonumber norelativenumber | :startinsert | endif
 " Close terminal buffers if the job exited without error
-autocmd TermClose * if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
 
 " Open terminal with opt+F12 (just like in JetBrains).
 function! OpenTerminal()
