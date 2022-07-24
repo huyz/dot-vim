@@ -989,19 +989,40 @@ endif
 
 """ Terminal
 
+" Usage:
+"     <M-Esc>   Go to terminal Normal mode
+"   Vim-only:
+"     <C-W> .   Send <C-w> to terminal
+
 if has("nvim")
-  " Turn terminal to normal mode with escape
-  tnoremap <Esc> <C-\><C-n>
-  " Start terminal in insert mode
-  au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-  " Open terminal with opt+F12 (just like in JetBrains).
-  " In nvim within iTerm, opt+F12 is F60
-  function! OpenTerminal()
-    split term://bash
-    resize 10
-  endfunction
-  nnoremap <m-F12> :call OpenTerminal()<CR>
-  nnoremap <F60> :call OpenTerminal()<CR>
+  autocmd TermOpen * setlocal nonumber norelativenumber
+else
+  autocmd TerminalWinOpen * setlocal nonumber norelativenumber
+endif
+" Start terminal in insert mode when switching to it
+autocmd BufEnter * if &buftype == 'terminal' | set nonumber norelativenumber | :startinsert | endif
+" Close terminal buffers if the job exited without error
+autocmd TermClose * if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
+
+" Open terminal with opt+F12 (just like in JetBrains).
+function! OpenTerminal()
+  if has("nvim")
+    split term://zsh
+  else
+    terminal ++close
+  endif
+  resize 10
+endfunction
+nnoremap <m-F12> :call OpenTerminal()<CR>
+" In nvim within iTerm, opt+F12 is F60
+nnoremap <F60> :call OpenTerminal()<CR>
+" In vim within iTerm, opt+F12 is <Esc>[24~
+nnoremap <Esc>[24~ :call OpenTerminal()<CR>
+
+if has("nvim")
+  tnoremap <D-[> <C-\><C-N>
+else
+  tnoremap <D-[> <C-w>N
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
