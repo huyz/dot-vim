@@ -325,7 +325,7 @@ command! Qa qa
 command! QA qa
 command! W w
 
-""" Mappings
+""" Misc Mappings
 
 " Case-insensitive search (doesn't make sense to set 'ignorecase'
 " as it's dangerous for substitutions)
@@ -568,8 +568,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
-" 2019-08-18 Has an annoying sizing bug and is no longer maintained
-"Plug 'fholgado/minibufexpl.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'sjl/gundo.vim'
@@ -668,8 +666,8 @@ endif
 " WIP Experimental
 " Make fileencoding work in modelines
 " http://vim.wikia.com/wiki/How_to_make_fileencoding_work_in_the_modeline
-"au BufReadPost * let b:reloadcheck = 1
-"au BufWinEnter * if exists('b:reloadcheck') | unlet b:reloadcheck | if &mod != 0 && &fenc != "" | exe 'e! ++enc=' . &fenc | endif | endif
+"autocmd BufReadPost * let b:reloadcheck = 1
+"autocmd BufWinEnter * if exists('b:reloadcheck') | unlet b:reloadcheck | if &mod != 0 && &fenc != "" | exe 'e! ++enc=' . &fenc | endif | endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options
@@ -678,13 +676,14 @@ endif
 
 let g:auto_session_root_dir = expand("~/.local/share/nvim/sessions")
 
+""" vim-visual-multi
+
+" FIXME: C-LeftMouse doesn't work
+"let g:VM_mouse_mappings = 1
+
 """ vim-indent-guides
 
 let g:indent_guides_enable_on_vim_startup = 1
-
-""" BufExplorer
-
-let g:bufExplorerSortBy='fullpath'   " Sort by full file path name.
 
 """ CtrlP
 
