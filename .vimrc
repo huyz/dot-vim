@@ -142,7 +142,8 @@ nnoremap <Leader>vi :e $MYVIM/.vimrc<CR>
 " Re-sources .vimrc
 nnoremap <Leader>so :so $MYVIM/.vimrc<CR>
 " Allow saving of files as sudo when you forget to start vim using sudo.
-cnoremap w!! w !sudo tee > /dev/null %
+" Shortcut matches my zsh binding
+cnoremap <C-x><C-s> w !sudo tee > /dev/null %
 
 " Indents blocks
 "nmap <Tab> >>
