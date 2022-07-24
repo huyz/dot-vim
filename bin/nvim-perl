@@ -1,0 +1,10 @@
+#!/bin/bash
+# Perl for nvim that has the right environment set
+
+if [[ -d ~/perl5/lib/perl5 ]]; then
+    export PERL5LIB=~/perl5/lib/perl5
+    eval "$(perl -I"$PERL5LIB" -Mlocal::lib=~/perl5)"
+fi
+
+exec perl "$@"
+

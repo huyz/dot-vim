@@ -3,4 +3,5 @@
 
 ### Except
 !.gitignore
+!nvim-perl
 !vimruntime.sh
