@@ -30,7 +30,7 @@ indent_size = 2
 [*.py]
 
 [*.md]
-; 2022-06-18 Lists need 4 spaces per https://hyperpolyglot.org/lightweight-markup#grouping-alignment
+; 2022-06-18 Pandoc: lists need 4 spaces per https://hyperpolyglot.org/lightweight-markup#grouping-alignment
 indent_size = 4
 
 [Makefile]
