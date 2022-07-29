@@ -767,6 +767,17 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 map <Leader>c/ <plug>NERDCommenterAlignBoth
 "map <Leader>bj <plug>NERDCommenterAlignBoth
 
+""" vim-gnupg
+
+" NOTE: set in .vimrc.post
+"let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
+
+""" vim-gitmoji
+
+set completefunc=emoji#complete
+" Replace all :emoji_name: into Unicode emojis
+nmap <Leader><C-U> :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
+
 """ syntastic
 
 set statusline+=%#warningmsg#
@@ -781,17 +792,6 @@ let g:syntastic_python_pylint_post_args  = "--max-line-length=100"
 
 " on macOS 10.15.7: system "python" is still python2
 let g:syntastic_python_checkers          = ['python3', 'pylint']
-
-""" vim-gnupg
-
-" NOTE: set in .vimrc.post
-"let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
-
-""" vim-gitmoji
-
-set completefunc=emoji#complete
-" Replace all :emoji_name: into Unicode emojis
-nmap <Leader><C-U> :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
 
 """ coc.nvim
 
