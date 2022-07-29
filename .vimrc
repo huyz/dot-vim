@@ -753,6 +753,10 @@ xmap gA <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap gA <Plug>(EasyAlign)
 
+""" vim-titlecase
+
+let g:titlecase_excluded_words = ["và"]
+
 """ NERDtree
 
 " Automaticaly close nvim if NERDTree is only thing left open
