@@ -124,17 +124,17 @@ I tend to forgot I defined these mappings:
 
 ### argtextobj
 
-| Mapping | Description                      |
-| ---     | ---                              |
-| `cia` | Change function argument |
+| Mapping | Description              |
+| ----    | ---                      |
+| `cia`   | Change function argument |
 | `daa`   | Delete function argument |
 
 ### vim-indent-object (useful for Python)
 
-| Mapping | Description                      |
-| ---     | ---                              |
-| `vai` | Select indentation level + line above |
-| `vii` | Select indentation level |
+| Mapping | Description                                                        |
+| ---     | ---                                                                |
+| `vai`   | Select indentation level + line above                              |
+| `vii`   | Select indentation level                                           |
 | `vaI`   | Select idnentation level + line below (useful for closing bracket) |
 
 ### surround
@@ -165,15 +165,22 @@ I tend to forgot I defined these mappings:
 | `gAip=`    | start aligning for inner paragraph                             |
 | V\_`\\`    | In Github-Flavored Markdown file, re-align current table       |
 
+### vim-title
+
+| Mapping    | Description           |
+| ---------- | --------------------- |
+| gz         | title-case            |
+| gzz        | title-case line       |
+
 ### table-mode            =   Table editing
 
 *   `\tm`             =   Toggle table mode
 
 ### vim-gitmoji
 
-| Mapping    | Descriptio                                                    |
-| ---------- | ---------------------                                          |
-| `^X^U`    | Trigger completion |
+| Mapping    | Description           |
+| ---------- | --------------------- |
+| `^X^U`     | Trigger completion    |
 
 ### emmet-vim
 
