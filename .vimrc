@@ -583,6 +583,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Text
 Plug 'ap/vim-you-keep-using-that-word'
+Plug 'matze/vim-move'
 Plug 'tpope/vim-repeat'
 Plug 'mg979/vim-visual-multi'
 Plug 'easymotion/vim-easymotion'
@@ -676,6 +677,12 @@ endif
 """ auto-session
 
 let g:auto_session_root_dir = expand("~/.local/share/nvim/sessions")
+
+""" vim-move
+
+if has("mac") and has("gui_running")
+  let g:move_normal_option = 1
+endif
 
 """ vim-visual-multi
 
