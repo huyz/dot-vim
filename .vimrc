@@ -674,13 +674,14 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options
 
+
 """ auto-session
 
 let g:auto_session_root_dir = expand("~/.local/share/nvim/sessions")
 
 """ vim-move
 
-if has("mac") and has("gui_running")
+if has("mac") && has("gui_running")
   let g:move_normal_option = 1
 endif
 
