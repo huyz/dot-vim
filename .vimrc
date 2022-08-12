@@ -368,6 +368,23 @@ nmap <Leader>= <Leader>_do_yyp:s/./=/g<CR><Leader>_done_
 nmap <Leader>- <Leader>_do_yyp:s/./-/g<CR><Leader>_done_
 nmap <Leader>~ <Leader>_do_yyp:s/./\~/g<CR><Leader>_done_
 
+" Toggle split orientation
+" https://stackoverflow.com/questions/1269603/to-switch-from-vertical-split-to-horizontal-split-fast-in-vim/45994525#45994525
+function! ToggleSplitOrientation()
+  if !exists('t:splitType')
+    let t:splitType = 'vertical'
+  endif
+  if t:splitType == 'vertical'
+    windo wincmd K
+    let t:splitType = 'horizontal'
+  else
+    windo wincmd H
+    let t:splitType = 'vertical'
+  endif
+endfunction
+nnoremap <silent> <C-w><Bslash> :call ToggleSplitOrientation()<CR>
+nnoremap <silent> <C-\> :call ToggleSplitOrientation()<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Complex abbrevations
 
