@@ -1032,7 +1032,7 @@ endif
 """ Terminal
 
 " Usage:
-"     <M-Esc>   Go to terminal Normal mode
+"     <M-Esc>   Go to terminal Normal mode (NOTE: on mac, this is Option, not Cmd)
 "   Vim-only:
 "     <C-W> .   Send <C-w> to terminal
 
@@ -1055,7 +1055,8 @@ function! OpenTerminal()
   endif
   resize 10
 endfunction
-nnoremap <m-F12> :call OpenTerminal()<CR>
+" In GUI, `M` means Option, not Cmd ke
+nnoremap <M-F12> :call OpenTerminal()<CR>
 " In nvim within iTerm, opt+F12 is F60
 nnoremap <F60> :call OpenTerminal()<CR>
 " In vim within iTerm, opt+F12 is <Esc>[24~
