@@ -224,28 +224,30 @@ set pastetoggle=<f5>
 if has("gui_running")
   " Switch tab with Cmd +[1-9].
   " NOTE: can't do <c-2> and <c-6> for some reason so we rely on <d-2>
-  nnoremap <d-1> :tabn 1<CR>
-  nnoremap <d-2> :tabn 2<CR>
-  nnoremap <d-3> :tabn 3<CR>
-  nnoremap <d-4> :tabn 4<CR>
-  nnoremap <d-5> :tabn 5<CR>
-  nnoremap <d-6> :tabn 6<CR>
-  nnoremap <d-7> :tabn 7<CR>
-  nnoremap <d-8> :tabn 8<CR>
-  nnoremap <d-9> :tabn 9<CR>
-  nnoremap <d-9> :tabn 0<CR>
-  inoremap <d-1> <C-o>:tabn 1<CR>
-  inoremap <d-2> <C-o>:tabn 2<CR>
-  inoremap <d-3> <C-o>:tabn 3<CR>
-  inoremap <d-4> <C-o>:tabn 4<CR>
-  inoremap <d-5> <C-o>:tabn 5<CR>
-  inoremap <d-6> <C-o>:tabn 6<CR>
-  inoremap <d-7> <C-o>:tabn 7<CR>
-  inoremap <d-8> <C-o>:tabn 8<CR>
-  inoremap <d-9> <C-o>:tabn 9<CR>
-  inoremap <d-9> <C-o>:tabn 0<CR>
-endif
+  nnoremap <D-1> :tabn 1<CR>
+  nnoremap <D-2> :tabn 2<CR>
+  nnoremap <D-3> :tabn 3<CR>
+  nnoremap <D-4> :tabn 4<CR>
+  nnoremap <D-5> :tabn 5<CR>
+  nnoremap <D-6> :tabn 6<CR>
+  nnoremap <D-7> :tabn 7<CR>
+  nnoremap <D-8> :tabn 8<CR>
+  nnoremap <D-9> :tablast<CR>
+  inoremap <D-1> <C-o>:tabn 1<CR>
+  inoremap <D-2> <C-o>:tabn 2<CR>
+  inoremap <D-3> <C-o>:tabn 3<CR>
+  inoremap <D-4> <C-o>:tabn 4<CR>
+  inoremap <D-5> <C-o>:tabn 5<CR>
+  inoremap <D-6> <C-o>:tabn 6<CR>
+  inoremap <D-7> <C-o>:tabn 7<CR>
+  inoremap <D-8> <C-o>:tabn 8<CR>
+  inoremap <D-9> <C-o>:tablast<CR>
 
+  if has("gui_vimr")
+    nnoremap <S-D-{> :tabprev<CR>
+    nnoremap <S-D-}> :tabnext<CR>
+  endif
+endif
 
 """ Keyboard mappings (To teach vim some new keymaps)
 
