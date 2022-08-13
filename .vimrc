@@ -269,9 +269,42 @@ if has("gui_running")
   inoremap <D-8> <C-o>:tabn 8<CR>
   inoremap <D-9> <C-o>:tablast<CR>
 
-  if has("gui_vimr")
+  if has("nvim")
     nnoremap <S-D-{> :tabprev<CR>
     nnoremap <S-D-}> :tabnext<CR>
+  endif
+else
+  if has("nvim")
+    nnoremap <A-1> :tabn 1<CR>
+    nnoremap <A-2> :tabn 2<CR>
+    nnoremap <A-3> :tabn 3<CR>
+    nnoremap <A-4> :tabn 4<CR>
+    nnoremap <A-5> :tabn 5<CR>
+    nnoremap <A-6> :tabn 6<CR>
+    nnoremap <A-7> :tabn 7<CR>
+    nnoremap <A-8> :tabn 8<CR>
+    nnoremap <A-9> :tablast<CR>
+    inoremap <A-1> <C-o>:tabn 1<CR>
+    inoremap <A-2> <C-o>:tabn 2<CR>
+    inoremap <A-3> <C-o>:tabn 3<CR>
+    inoremap <A-4> <C-o>:tabn 4<CR>
+    inoremap <A-5> <C-o>:tabn 5<CR>
+    inoremap <A-6> <C-o>:tabn 6<CR>
+    inoremap <A-7> <C-o>:tabn 7<CR>
+    inoremap <A-8> <C-o>:tabn 8<CR>
+    inoremap <A-9> <C-o>:tablast<CR>
+  else
+    nnoremap <Esc>1 :tabn 1<CR>
+    nnoremap <Esc>2 :tabn 2<CR>
+    nnoremap <Esc>3 :tabn 3<CR>
+    nnoremap <Esc>4 :tabn 4<CR>
+    nnoremap <Esc>5 :tabn 5<CR>
+    nnoremap <Esc>6 :tabn 6<CR>
+    nnoremap <Esc>7 :tabn 7<CR>
+    nnoremap <Esc>8 :tabn 8<CR>
+    nnoremap <Esc>9 :tablast<CR>
+    " XXX: cannot do Insert-mode maps because they interfere with exiting out
+    " of Insert mode with <Esc> and then immediately hitting a number.
   endif
 endif
 
