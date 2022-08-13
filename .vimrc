@@ -202,6 +202,7 @@ nnoremap <Leader>o5 :call ZToggleVirtualEdit()<CR>
 "nnoremap <Leader>o6 :!elinks -default-mime-type "text/html" file://%<CR>
 
 " Invoke plugins
+nnoremap <Leader>p0 :Startify<CR>
 nnoremap <Leader>p1 :NERDTreeToggle<CR>
 nnoremap <Leader>p2 :FZF<CR>
 nnoremap <Leader>p3 :CtrlP<CR>
@@ -222,7 +223,7 @@ nmap <Leader>f8 <Leader>o4
 nmap <Leader>f9 <Leader>o5
 nmap <Leader>f0 <Leader>p6
 nmap <Leader>F1 <Leader>p7
-nmap <Leader>F2 <Leader>p5
+nmap <Leader>F2 <Leader>p0
 
 " Normal function key mappings (these don't change)
 nmap <F1> <Leader>f1
@@ -662,9 +663,7 @@ Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
 
 " Files
-if has("gui_running") && has("nvim")
-  Plug 'rmagatti/auto-session', { 'branch': 'main' }
-endif
+Plug 'mhinz/vim-startify'
 Plug 'kien/ctrlp.vim'
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -705,6 +704,8 @@ Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
 Plug 'simrat39/symbols-outline.nvim', Cond(has('nvim'))
 Plug 'kdheepak/lazygit.nvim', {'branch': 'main'}
+" Needed for automatic session naming function below for Startify
+Plug 'itchyny/vim-gitbranch'
 
 " External sites
 Plug 'mattn/gist-vim'
@@ -755,9 +756,61 @@ autocmd BufReadPost *
 """ Plugin options
 
 
-""" auto-session
+""" vim-startify
 
-let g:auto_session_root_dir = expand("~/.local/share/nvim/sessions")
+let g:startify_session_dir = '~/.vim/session'
+let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
+let g:startify_session_persistence = 1
+let g:startify_session_autoload = 1
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
+let g:startify_session_sort = 1
+
+" https://github.com/mhinz/vim-startify/wiki/Example-configurations#display-nerdtree-bookmarks-as-a-separate-list
+" Read ~/.NERDTreeBookmarks file and takes its second column
+function! s:nerdtreeBookmarks()
+    let bookmarks = systemlist("cut -d' ' -f 2- ~/.NERDTreeBookmarks")
+    let bookmarks = bookmarks[0:-2] " Slices an empty last line
+    return map(bookmarks, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" https://github.com/mhinz/vim-startify/wiki/Example-configurations#show-modified-and-untracked-git-files
+" returns all modified files of the current git repo
+" `2>/dev/null` makes the command fail quietly, so that when we are not
+" in a git repo, the list will be empty
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']},
+        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+
+" https://github.com/mhinz/vim-startify/wiki/Example-configurations#auto-load-and-auto-save-a-session-named-from-git-branch
+function! GetUniqueSessionName()
+  let path = fnamemodify(getcwd(), ':~:t')
+  let path = empty(path) ? 'no-project' : path
+  let branch = gitbranch#name()
+  let branch = empty(branch) ? '' : '-' . branch
+  return substitute(path . branch, '/', '-', 'g')
+endfunction
+" XXX: This next line is giving me problems when I run :Startify
+"autocmd User        StartifyReady silent execute 'SLoad '  . GetUniqueSessionName()
+autocmd VimLeavePre *             silent execute 'SSave! ' . GetUniqueSessionName()
 
 """ vim-move
 
@@ -877,7 +930,7 @@ let g:titlecase_excluded_words = ["và"]
 
 """ NERDtree
 
-" Automaticaly close nvim if NERDTree is only thing left open
+" Automatically close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 """ NERDcommenter options
