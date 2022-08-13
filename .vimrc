@@ -167,8 +167,9 @@ vnoremap <Space> zf
 " Suspend from insert mode
 noremap! <C-z> <Esc><C-z>
 " Quick-save
+" NOTE: MacVim and VimR already handle <D-s>
 nnoremap <C-s> :w<CR>
-inoremap <C-s> <C-o>:w<CR>
+inoremap <C-s> <Esc>:w<CR>
 " Edits .vimrc
 nnoremap <Leader>vi :e $MYVIM/.vimrc<CR>
 " Re-sources .vimrc
