@@ -90,15 +90,40 @@ inoremap <Down> <C-O>gj
 nnoremap <C-w><C-q> :bnext<CR>:bdel #<CR>
 
 " Move between split windows
-" FIXME: we need S-Left and S-Right to override vim-visual-multi easily
-nnoremap <S-Left> <C-w>h
-nnoremap <S-Down> <C-w>j
-nnoremap <S-Up> <C-w>k
-nnoremap <S-Right> <C-w>l
-tnoremap <S-Left> <C-\><C-N><C-w>h
-tnoremap <S-Down> <C-\><C-N><C-w>j
-tnoremap <S-Up> <C-\><C-N><C-w>k
-tnoremap <S-Right> <C-\><C-N><C-w>l
+" NOTE: all this complication is because the Option key can have multiple behaviors on mac
+" NOTE: vim-visual-multi takes over <S-arrow> mappings
+if has("gui_running")
+  nnoremap Ó <C-w>h
+  nnoremap Ô <C-w>j
+  nnoremap  <C-w>k
+  nnoremap Ò <C-w>l
+  inoremap Ó <Esc><C-w>h
+  inoremap Ô <Esc><C-w>j
+  inoremap  <Esc><C-w>k
+  inoremap Ò <Esc><C-w>l
+  tnoremap Ó <C-\><C-N><C-w>h
+  tnoremap Ô <C-\><C-N><C-w>j
+  tnoremap  <C-\><C-N><C-w>k
+  tnoremap Ò <C-\><C-N><C-w>l
+else
+  " NOTE: assumes iTerm2 has `Left Option key` set to `Esc+`
+  nnoremap <Esc>H <C-w>h
+  nnoremap <Esc>J <C-w>j
+  nnoremap <Esc>K <C-w>k
+  nnoremap <Esc>L <C-w>l
+  if has("nvim")
+    tnoremap <A-H> <C-\><C-N><C-w>h
+    tnoremap <A-J> <C-\><C-N><C-w>j
+    tnoremap <A-K> <C-\><C-N><C-w>k
+    tnoremap <A-L> <C-\><C-N><C-w>l
+  else
+    tnoremap <Esc>H <C-\><C-N><C-w>h
+    tnoremap <Esc>J <C-\><C-N><C-w>j
+    tnoremap <Esc>K <C-\><C-N><C-w>k
+    tnoremap <Esc>L <C-\><C-N><C-w>l
+  endif
+endif
+
 
 """ Emacs mappings (and also to replace the useless and dangerous ^A and ^X)
 
