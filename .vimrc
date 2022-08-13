@@ -1126,8 +1126,8 @@ endif
 """ Terminal
 
 " Usage:
-"     <M-Esc>   Go to terminal Normal mode (NOTE: on mac, this is Option, not Cmd)
-"   Vim-only:
+"     <A-[>   Go to terminal Normal mode
+"   vim and not neovim:
 "     <C-W> .   Send <C-w> to terminal
 
 if has("nvim")
@@ -1149,17 +1149,22 @@ function! OpenTerminal()
   endif
   resize 10
 endfunction
-" In GUI, `M` means Option, not Cmd ke
-nnoremap <M-F12> :call OpenTerminal()<CR>
+" In GUI, `A` means Option, not Cmd key
+nnoremap <A-F12> :call OpenTerminal()<CR>
 " In nvim within iTerm, opt+F12 is F60
 nnoremap <F60> :call OpenTerminal()<CR>
 " In vim within iTerm, opt+F12 is <Esc>[24~
 nnoremap <Esc>[24~ :call OpenTerminal()<CR>
 
-if has("nvim")
-  tnoremap <D-[> <C-\><C-N>
+if has("gui_running")
+  tnoremap “ <C-\><C-N>
 else
-  tnoremap <D-[> <C-w>N
+  " NOTE: assumes iTerm2 has `Left Option key` set to `Esc+`
+  if has("nvim")
+    tnoremap <A-[> <C-\><C-N>
+  else
+    tnoremap <Esc>[ <C-w>N
+  endif
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
