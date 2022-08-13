@@ -314,9 +314,14 @@ endif
 nnoremap <Esc>OA <Up>
 nnoremap <Esc>OB <Down>
 nnoremap <ESC>[Z <S-Tab>
-inoremap <Esc>OA <Up>
-inoremap <Esc>OB <Down>
-inoremap <ESC>[Z <S-Tab>
+" The mappings below can be annoying as they slow down the switch to Normal
+" mode, which often interferes with my ability to then quickly hit `Cmd+s` in
+" to save in vim GUIs.
+"inoremap <Esc>OA <Up>
+"inoremap <Esc>OB <Down>
+"inoremap <ESC>[Z <S-Tab>
+" NOTE: the above problem doesn't affect <Esc> in Visual mode because there's
+" already a delay no matter what.
 vnoremap <Esc>OA <Up>
 vnoremap <Esc>OB <Down>
 vnoremap <ESC>[Z <S-Tab>
