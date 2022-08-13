@@ -766,8 +766,38 @@ let g:auto_session_root_dir = expand("~/.local/share/nvim/sessions")
 
 """ vim-move
 
-if has("mac") && has("gui_running")
-  let g:move_normal_option = 1
+" Disable the default mappings because they're bad on macOS
+" https://github.com/matze/vim-move/issues/69#issuecomment-1199891566
+
+let g:move_map_keys = 0
+
+if has("gui_running")
+  nmap <A-Down> <Plug>MoveLineDown
+  nmap <A-Up> <Plug>MoveLineUp
+  nmap <A-Left> <Plug>MoveCharLeft
+  nmap <A-Right> <Plug>MoveCharRight
+  vmap <A-Down> <Plug>MoveBlockDown
+  vmap <A-Up> <Plug>MoveBlockUp
+  vmap <A-Left> <Plug>MoveBlockLeft
+  vmap <A-Right> <Plug>MoveBlockRight
+else
+  nmap <Esc><Down> <Plug>MoveLineDown
+  nmap <Esc><Up> <Plug>MoveLineUp
+  nmap <Esc><Left> <Plug>MoveCharLeft
+  nmap <Esc><Right> <Plug>MoveCharRight
+
+  " WARNING: if instead of using h,j,k,l, you tend to use arrow keys for motion
+  " in Normal mode, then the mappings below may interfere when you try to exit
+  " out of Visual mode with <Esc> and immediately hit an arrow key. In that
+  " case, you might want to use the `C` modifier instead as here:
+  "vmap <C-Down> <Plug>MoveBlockDown
+  "vmap <C-Up> <Plug>MoveBlockUp
+  "vmap <C-Left> <Plug>MoveBlockLeft
+  "vmap <C-Right> <Plug>MoveBlockRight
+  vmap <Esc><Down> <Plug>MoveBlockDown
+  vmap <Esc><Up> <Plug>MoveBlockUp
+  vmap <Esc><Left> <Plug>MoveBlockLeft
+  vmap <Esc><Right> <Plug>MoveBlockRight
 endif
 
 """ vim-visual-multi
