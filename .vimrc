@@ -492,6 +492,7 @@ set directory=.,~/tmp,/var/tmp,/tmp
 set backupcopy=yes      " Preserve the birth time of files, at least on macOS
 set nobackup            " gvim-win32 has it on by default
 set autoread            " Reload files changed outside vim
+set autochdir           " Automatically change the working directory
 
 """ Display options
 
@@ -631,20 +632,23 @@ endif
 " - Normallly, for Neovim it would be: ~/.local/share/nvim/plugged
 call plug#begin('~/.vim/plugged')
 
-" Make sure you use single quotes
+" Conditional activation
+" https://github.com/junegunn/vim-plug/wiki/tips#conditional-activation
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
+" WARNING: Make sure you use single quotes in the Plug lines below.
+"   Even for the `has("nvim")` pieces.  Weird, I know.
 
 " Dependencies
 " webapi-vim is required by gist-vim and optional for emmet-vim
 Plug 'mattn/webapi-vim'
 
 " Colorscheme
-if has("nvim")
-  Plug 'cormacrelf/dark-notify'
-else
-  if has("gui_running")
-    Plug 'L-TChen/auto-dark-mode.vim'
-  endif
-endif
+Plug 'cormacrelf/dark-notify', Cond(has('nvim'))
+Plug 'L-TChen/auto-dark-mode.vim', Cond(!has('nvim') && has('gui_running'))
 Plug 'chriskempson/base16-vim'
 
 " UI
@@ -652,7 +656,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
@@ -699,9 +703,7 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
-if has("nvim")
-  Plug 'simrat39/symbols-outline.nvim'
-endif
+Plug 'simrat39/symbols-outline.nvim', Cond(has('nvim'))
 Plug 'kdheepak/lazygit.nvim', {'branch': 'main'}
 
 " External sites
@@ -710,9 +712,7 @@ Plug 'mattn/gist-vim'
 " Misc
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'jamessan/vim-gnupg'
-if has("nvim")
-  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-endif
+Plug 'glacambre/firenvim', Cond(has('nvim'), { 'do': { _ -> firenvim#install(0) } })
 
 " MarkdownPreview
 " If you don't have nodejs and yarn
@@ -730,21 +730,17 @@ call plug#end()
 """ Filetype-detection options
 
 " Enable file type detection, as per vimrc_example.vim
-if has("autocmd")
-  " Load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-endif
+" Load indent files, to automatically do language-dependent indenting.
+filetype plugin indent on
 
-if has("autocmd")
-  " When editing a file, always jump to the last known cursor position
-  " (as saved in the session info found in ~/.viminfo),
-  " but don't do it when the position is invalid or when inside an event handler
-  " (this happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \  exe "normal g`\"" |
-    \ endif
-endif
+" When editing a file, always jump to the last known cursor position
+" (as saved in the session info found in ~/.viminfo),
+" but don't do it when the position is invalid or when inside an event handler
+" (this happens when dropping a file on gvim).
+autocmd BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \  exe "normal g`\"" |
+  \ endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Hacks
