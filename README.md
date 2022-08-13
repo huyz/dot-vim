@@ -62,16 +62,14 @@ occasionally.
 
 I tend to forgot I defined these mappings:
 
-*   `Q`              : Right after yanking a block, paste and move cursor to end
-*   `gb`             : Re-select last pasted block
-*   `<C-k>` `<C-j>`  : Quick switch between split windows
-*   `<C-w><C-q>`     : Closes buffer without messing up split window
-*   `\lh`            : Swap words
-*   `\t0`            : Discard consecutive blank lines
-*   `Q` `gq` `<M-q>` : In visual mode, format by `par`, vim, or emacs-style
-*   `<Meta>q`        : Reformat paragraph (like emacs)
-*   `:S` instead `:s` : For perl-compatible regexp
 *   `<C-s>`          : Save buffer
+*   `<A-H>` `<A-J>`  : switch between split windows (note capitalization so there's no conflict with vim-visual-multi)
+*   `<C-w><C-q>`     : Closes buffer without messing up split window
+*   `gb`             : Re-select last pasted block
+*   `\lh`            : Swap words
+*   `Q` `gq` `<M-q>` : In visual mode, format by `par`, vim, or emacs-style
+*   `\t0`            : Discard consecutive blank lines
+*   `<Meta>q`        : Reformat paragraph (like emacs)
 
 ## Plugins I installed
 
