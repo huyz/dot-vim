@@ -52,11 +52,11 @@ endif
 """ Copy neovim's default mappings
 
 nnoremap Y y$
-nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
-inoremap <C-U> <C-G>u<C-U>
-inoremap <C-W> <C-G>u<C-W>
-xnoremap * y/\V<C-R>"<CR>
-xnoremap # y?\V<C-R>"<CR>
+nnoremap <C-l> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+inoremap <C-u> <C-g>u<C-U>
+inoremap <C-w> <C-g>u<C-W>
+xnoremap * y/\V<C-r>"<CR>
+xnoremap # y?\V<C-r>"<CR>
 nnoremap & :&&<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -70,8 +70,8 @@ nnoremap <End> G
 " Use arrows to navigate wrapped lines
 nnoremap <Up> gk
 nnoremap <Down> gj
-inoremap <Up> <C-O>gk
-inoremap <Down> <C-O>gj
+inoremap <Up> <C-o>gk
+inoremap <Down> <C-o>gj
 " Handle wrapped lines more intuitively by reversing meaning
 " (Use arrow keys for old behavior)
 "nnoremap k gk
@@ -548,7 +548,6 @@ set shortmess=a         " Use short messages whenever possible
 set nostartofline       " Don't move cursor to beg of line when paging
 set nojoinspaces        " Don't insert 2 spaces after [.?!] when hitting J
 set backspace=2         " Same as "set backspace=indent,eol,start" after vim 5.4
-                        " NOTE: bs=1 doesn't work with vim-multiple-cursors
 set nrformats-=octal    " Prevent 07 from being interpreted as octal when incrementing
 
 set expandtab
@@ -659,7 +658,7 @@ Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
 
 " Files
-if has("nvim") && has("gui_running")
+if has("gui_running") && has("nvim")
   Plug 'rmagatti/auto-session', { 'branch': 'main' }
 endif
 Plug 'kien/ctrlp.vim'
