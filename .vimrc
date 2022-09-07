@@ -195,7 +195,7 @@ nnoremap <Leader>t4 :set noet<CR>:set sts=8 sw=8<CR>
 " Different options
 nnoremap <Leader>o0 :set sts=2 sw=2 wrap linebreak showbreak=↪ number relativenumber cursorline nocursorcolumn colorcolumn=+1,80,100,120<CR>
 nmap <Leader>o1 :set invpaste<CR>:GitGutterToggle<CR><Leader>o2:set paste?<CR>
-nnoremap <Leader>o2 :call ZToggleEditDisplay()<CR>
+nnoremap <Leader>o2 :call ZCycleEditDisplay()<CR>
 nnoremap <Leader>o3 :set wrap!<CR>
 nnoremap <Leader>o4 :call ZCycleTextwidth()<CR>
 nnoremap <Leader>o5 :call ZToggleVirtualEdit()<CR>
@@ -362,26 +362,23 @@ function! ZToggleVirtualEdit()
   endif
 endfunction
 
-" Cycle different editing aids
-function! ZToggleEditDisplay()
-  if &list || &number ||  &relativenumber || &cursorline || &showbreak || &cursorcolumn
+function! ZCycleEditDisplay()
+  if g:z_cycle_edit_display_mode == "default"
+    let g:z_cycle_edit_display_mode = "full"
+    set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
+    set   list   number   relativenumber   cursorline showbreak=↪
+  elseif g:z_cycle_edit_display_mode == "full"
+    let g:z_cycle_edit_display_mode = "none"
     set nolist nonumber norelativenumber nocursorline showbreak=  nocursorcolumn
   else
+    let g:z_cycle_edit_display_mode = "default"
+    set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
     set   list   number   relativenumber   cursorline showbreak=↪
   endif
+  echo "g:z_cycle_edit_display_mode=" . g:z_cycle_edit_display_mode
 endfunction
-" XXX Deprecated (too complicated)
-function! ZCycleEditDisplay()
-  if     !&list && !&number && !&relativenumber
-    set number cursorline cursorcolumn
-  elseif !&list &&  &number && !&relativenumber
-    set relativenumber cursorline cursorcolumn
-  elseif !&list &&  &number &&  &relativenumber
-    set list
-  else
-    set nolist nonumber norelativenumber nocursorcolumn nocursorline
-  endif
-endfunction
+let g:z_cycle_edit_display_mode = "init"
+call ZCycleEditDisplay()
 
 """ Typo Corrections
 
@@ -516,10 +513,10 @@ set linebreak           " Wrap at word boundaries (see 'breakat' option)
 set showbreak=↪         " String to put at start of lines that are soft-wrapped
 
 " Define how ':set list' will give visual cues
-"set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
 " Test: [ ] [ ]
-set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
 " Test: [​] (zero-width)
+"set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
+set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
 
 
 """ Split window options
