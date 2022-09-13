@@ -117,8 +117,8 @@ I tend to forgot I defined these mappings:
 
 | Mapping | Description                     |
 | ---     | ---                              |
-| `cx{motion}` | Sets first or second text to exchange |
-| `cxx`   | Sets first or second line to exchange |
+| `cx{motion}` | Sets first or second text to swap/exchange |
+| `cxx`   | Sets first or second line to swap/exchange |
 
 ### argtextobj
 
