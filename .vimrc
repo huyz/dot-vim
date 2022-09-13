@@ -203,7 +203,11 @@ nnoremap <Leader>o5 :call ZToggleVirtualEdit()<CR>
 
 " Invoke plugins
 nnoremap <Leader>p0 :Startify<CR>
-nnoremap <Leader>p1 :NERDTreeToggle<CR>
+if has("nvim")
+  nnoremap <Leader>p1 :NvimTreeToggle<CR>
+else
+  nnoremap <Leader>p1 :NERDTreeToggle<CR>
+endif
 nnoremap <Leader>p2 :FZF<CR>
 nnoremap <Leader>p3 :CtrlP<CR>
 nnoremap <Leader>p4 :CtrlP .<CR>
@@ -654,7 +658,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
-Plug 'preservim/nerdtree'
+Plug 'kyazdani42/nvim-tree.lua', Cond(has('nvim'))
+Plug 'preservim/nerdtree', Cond(!has('nvim'))
 Plug 'ryanoasis/vim-devicons'
 Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
@@ -756,7 +761,11 @@ autocmd BufReadPost *
 """ vim-startify
 
 let g:startify_session_dir = '~/.vim/session'
-let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
+if has("nvim")
+  let g:startify_session_before_save = [ 'silent! tabdo NvimTreeClose' ]
+else
+  let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
+endif
 let g:startify_session_persistence = 1
 let g:startify_session_autoload = 1
 let g:startify_change_to_dir = 0
@@ -808,6 +817,14 @@ endfunction
 " XXX: This next line is giving me problems when I run :Startify
 "autocmd User        StartifyReady silent execute 'SLoad '  . GetUniqueSessionName()
 autocmd VimLeavePre *             silent execute 'SSave! ' . GetUniqueSessionName()
+
+""" nvim-tree
+
+if has("nvim")
+  lua << EOF
+require("nvim-tree").setup()
+EOF
+endif
 
 """ vim-move
 
