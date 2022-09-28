@@ -182,6 +182,15 @@ I tend to forgot I defined these mappings:
 | `vai`   | Select indentation level + line above                              |
 | `vii`   | Select indentation level                                           |
 | `vaI`   | Select idnentation level + line below (useful for closing bracket) |
+
+### splitjoin
+
+| Mapping    | Description                            |
+| ---------- | ---------------------                  |
+| `gS`       | Trigger smart split wherever cursor is |
+| `gJ`       | Trigger smart join wherever cursor is  |
+
+
 ### emmet-vim
 
 | Mapping  | Description         |

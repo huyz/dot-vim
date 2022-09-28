@@ -698,6 +698,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/syntastic'
 Plug 'tomtom/tcomment_vim'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'jsx', 'typescript'] }
 Plug 'elzr/vim-json', { 'for': 'json' }
