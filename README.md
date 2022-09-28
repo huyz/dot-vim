@@ -88,54 +88,34 @@ I tend to forgot I defined these mappings:
 
 *   `F11`       : find file
 
-### multiple-cursors
+### vim-visual-multi
 
-| Mapping | Description        |
-|---------|--------------------|
-| `<C-n>` | Start multicursor  |
-| `<C-x>` | Skip current match |
-| `<C-p>` | Undo current match |
+| Mapping                 | Description                                                    |
+|-------------------------|----------------------------------------------------------------|
+| `<C-n>`                 | Select word at cursor, or next occurrence of current selection |
+| `N`                     | Select previous occurrence of current selection                |
+| `Q`                     | Unselect occurrence                                            |
+| `q`                     | Skip current occurrence                                        |
+| `\A`                    | Select all occurrences                                         |
+| `<C-down>` then `<Tab>` | Add cursor(s) vertically                                       |
 
-### easymotion
+### vim-easymotion
 
-| Mapping | Description                                   |
-| ---     | ---                                           |
-| `-abc`  | Highlight n-character matches |
-| `_`  | Go to previous n-character match |
-| `+`  | Go to nextncharacter match |
-| `\\w`   | Highlight consecutive targets of word motion |
+| Mapping | Description                                       |
+| ---     | ---                                               |
+| `-abc`  | Highlight n-character matches                     |
+| `_`     | Go to previous n-character match                  |
+| `+`     | Go to nextncharacter match                        |
+| `\\w`   | Highlight consecutive targets of word motion      |
 | `\\t`   | Highlight consecutive targets of character motion |
 
-### ReplaceWithRegister
+### CamelCaseMotion
 
-| Mapping | Description                      |
-| ---     | ---                              |
-| `gr{motion}` | Replace {motion} text with register |
-| `grr`   | Replace line(s) with register |
+*   `,w` `,b` `,e`  : like regular motions but respecting word boundaries
+*   `ci,w` `di,w`   : like regular change/delete but respecting word boundaries
+*   `c2i,b` `y2i,b` `v2i,b` : change/yank/select the current word and previous word
 
-### exchange
-
-| Mapping | Description                     |
-| ---     | ---                              |
-| `cx{motion}` | Sets first or second text to swap/exchange |
-| `cxx`   | Sets first or second line to swap/exchange |
-
-### argtextobj
-
-| Mapping | Description              |
-| ----    | ---                      |
-| `cia`   | Change function argument |
-| `daa`   | Delete function argument |
-
-### vim-indent-object (useful for Python)
-
-| Mapping | Description                                                        |
-| ---     | ---                                                                |
-| `vai`   | Select indentation level + line above                              |
-| `vii`   | Select indentation level                                           |
-| `vaI`   | Select idnentation level + line below (useful for closing bracket) |
-
-### surround
+### vim-surround
 
 | Mapping   | Description                                                        |
 | --------- | --------------------                                               |
@@ -149,13 +129,7 @@ I tend to forgot I defined these mappings:
 | `cs't`    | change surrounding quotes to tag with prompt                       |
 | `csw(`    | shortcut for `ysiw(`                                               |
 
-### CamelCaseMotion
-
-*   `,w` `,b` `,e`  : like regular motions but respecting word boundaries
-*   `ci,w` `di,w`   : like regular change/delete but respecting word boundaries
-*   `c2i,b` `y2i,b` `v2i,b` : change/yank/select the current word and previous word
-
-### easy-align
+### vim-easy-align
 
 | Mapping    | Description                                                    |
 | ---------- | ---------------------                                          |
@@ -163,16 +137,23 @@ I tend to forgot I defined these mappings:
 | `gAip=`    | start aligning for inner paragraph                             |
 | V\_`\\`    | In Github-Flavored Markdown file, re-align current table       |
 
-### vim-title
+### table-mode
+
+*   `\tm`             =   Toggle table mode
+
+### ReplaceWithRegister
+
+| Mapping | Description                      |
+| ---     | ---                              |
+| `gr{motion}` | Replace {motion} text with register |
+| `grr`   | Replace line(s) with register |
+
+### vim-titlecase
 
 | Mapping    | Description           |
 | ---------- | --------------------- |
 | gz         | title-case            |
 | gzz        | title-case line       |
-
-### table-mode            =   Table editing
-
-*   `\tm`             =   Toggle table mode
 
 ### vim-gitmoji
 
@@ -180,6 +161,27 @@ I tend to forgot I defined these mappings:
 | ---------- | --------------------- |
 | `^X^U`     | Trigger completion    |
 
+### vim-exchange
+
+| Mapping      | Description                                |
+| ---          | ---                                        |
+| `cx{motion}` | Sets first or second text to swap/exchange |
+| `cxx`        | Sets first or second line to swap/exchange |
+
+### targets
+
+| Mapping | Description              |
+| ----    | ---                      |
+| `cia`   | Change function argument |
+| `daa`   | Delete function argument |
+
+### vim-indent-object (useful for Python)
+
+| Mapping | Description                                                        |
+| ---     | ---                                                                |
+| `vai`   | Select indentation level + line above                              |
+| `vii`   | Select indentation level                                           |
+| `vaI`   | Select idnentation level + line below (useful for closing bracket) |
 ### emmet-vim
 
 | Mapping  | Description         |
@@ -192,8 +194,3 @@ I tend to forgot I defined these mappings:
 *   `:Gist -p`  : post entire buffer to a private gist
 *   ``:`<,`>Gist -a``  : post selected text anonymously
 *   `:Gist -e`       : edit gist
-
-### tcomment
-
-TODO
-
