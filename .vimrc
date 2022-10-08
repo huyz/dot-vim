@@ -209,8 +209,8 @@ else
   nnoremap <Leader>p1 :NERDTreeToggle<CR>
 endif
 nnoremap <Leader>p2 :FZF<CR>
-nnoremap <Leader>p3 :CtrlP<CR>
-nnoremap <Leader>p4 :CtrlP .<CR>
+nnoremap <Leader>p3 :CtrlPMRU<CR>
+nnoremap <Leader>p4 :CtrlPMixed<CR>
 nnoremap <Leader>p5 :CtrlPBuffer<CR>
 nnoremap <Leader>p6 :LazyGit<CR>
 nnoremap <Leader>p7 :SymbolsOutline<CR>
