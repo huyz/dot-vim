@@ -769,9 +769,10 @@ else
 endif
 let g:startify_session_persistence = 1
 let g:startify_session_autoload = 1
+let g:startify_session_sort = 1
+let g:startify_session_number = 10
 let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 1
-let g:startify_session_sort = 1
 
 " https://github.com/mhinz/vim-startify/wiki/Example-configurations#display-nerdtree-bookmarks-as-a-separate-list
 " Read ~/.NERDTreeBookmarks file and takes its second column
