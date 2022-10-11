@@ -64,9 +64,6 @@ nnoremap & :&&<CR>
 
 """ Movement mappings
 
-nnoremap <Home> 1G
-nnoremap <End> G
-
 " Use arrows to navigate wrapped lines
 nnoremap <Up> gk
 nnoremap <Down> gj
@@ -178,11 +175,17 @@ nnoremap <Leader>so :so $MYVIM/.vimrc<CR>
 " Shortcut matches my zsh binding
 cnoremap <C-x><C-s> w !sudo tee > /dev/null %
 
-" Indents blocks
-"nmap <Tab> >>
-"nmap <S-Tab> <<
-"vmap <Tab> >gv
-"vmap <S-Tab> <gv
+" Ident like other editors
+nnoremap <Tab> >>
+nnoremap <D-]> >>
+nnoremap <S-Tab> <<
+nnoremap <D-[> <<
+vnoremap <Tab> >gv
+vnoremap <D-]> >gv
+vnoremap <S-Tab> <gv
+vnoremap <D-[> <gv
+inoremap <D-]> <C-t>
+inoremap <D-[> <C-d>
 
 """ Function key mappings (like in .exrc, but more portable)
 
