@@ -1000,10 +1000,13 @@ nmap <Leader>f <Plug>(coc-format-selected)
 
 """ Firenvim
 
+
 if has("nvim")
   let g:firenvim_config = {
         \ 'localSettings': {
-          \ 'https?://[^/]+\.slack\.com/': { 'takeover': 'never' }
+          \ '.*': { 'takeover': 'once', 'priority': 0 },
+          \ 'https?://(?:[^/]+\.)excalidraw\.com/': { 'takeover': 'never', 'priority': 1 },
+          \ 'https?://[^/]+\.slack\.com/': { 'takeover': 'never', 'priority': 1 }
         \ }
   \ }
 
