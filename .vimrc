@@ -370,6 +370,7 @@ function! ZToggleVirtualEdit()
 endfunction
 
 function! ZCycleEditDisplay()
+  let l:init = g:z_cycle_edit_display_mode == "init" ? 1 : 0
   if g:z_cycle_edit_display_mode == "default"
     let g:z_cycle_edit_display_mode = "full"
     set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
@@ -382,7 +383,9 @@ function! ZCycleEditDisplay()
     set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
     set   list   number   relativenumber   cursorline showbreak=↪
   endif
-  echo "g:z_cycle_edit_display_mode=" . g:z_cycle_edit_display_mode
+  if (!l:init)
+    echo "g:z_cycle_edit_display_mode=" . g:z_cycle_edit_display_mode
+  endif
 endfunction
 let g:z_cycle_edit_display_mode = "init"
 call ZCycleEditDisplay()
