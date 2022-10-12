@@ -96,7 +96,7 @@ I tend to forgot I defined these mappings:
 | `N`                     | Select previous occurrence of current selection                |
 | `Q`                     | Unselect occurrence                                            |
 | `q`                     | Skip current occurrence                                        |
-| `\A`                    | Select all occurrences                                         |
+| `\\A`                    | Select all occurrences                                         |
 | `<C-down>` then `<Tab>` | Add cursor(s) vertically                                       |
 
 ### vim-easymotion
