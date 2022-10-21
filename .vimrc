@@ -577,6 +577,12 @@ set shiftround          " Round indent to multiple of 'shiftwidth'
 " in insert mode using the arrow keys--this is great for editing tables.
 set virtualedit=block,insert
 
+" Cursor shape in insert mode
+"let &t_EI = "\e[2 q"    " steady block
+"let &t_SI = "\e[6 q"    " steady bar
+" 2022-10-18 Doesn't blink in neovim
+let &t_SI = "\e[5 q"    " blinking bar
+
 """ Search options
 
 set incsearch           " Do incremental searching
