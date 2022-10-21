@@ -2,7 +2,6 @@
 " https://github.com/esm7/obsidian-vimrc-support
 
 " Neovim mappings
-nmap Y y$
 nmap <C-L> :nohl
 
 " Have j and k navigate visual lines rather than logical ones

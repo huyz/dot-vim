@@ -49,15 +49,23 @@ elseif filereadable(expand("~/.exrc"))
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Copy neovim's default mappings
+""" Copy some of neovim's default mappings
 
-nnoremap Y y$
+if has("nvim")
+  " Can't remap `Y` as it's used incredibly often and needs to be pressed reliably
+  silent! nunmap Y
+endif
+" Clear search highlight, update diff, and redraw screen
 nnoremap <C-l> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+" Allow <C-u> and <C-w> to be undone
 inoremap <C-u> <C-g>u<C-U>
 inoremap <C-w> <C-g>u<C-W>
+" Make `*` and `#` work on visual selection. NOTE: overridden by visual-star-search
 xnoremap * y/\V<C-r>"<CR>
 xnoremap # y?\V<C-r>"<CR>
+" Repeat last substitute with all the same flags
 nnoremap & :&&<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Key Mappings

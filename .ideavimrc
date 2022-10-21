@@ -2,8 +2,9 @@
 " Copied over from .vimrc
 "
 
-" To have the same defaults as neovim (as
-nnoremap Y y$
+" To have most of the same defaults as neovim
+" Can't remap `Y` as it's used incredibly often and needs to be pressed reliably
+"nnoremap Y y$
 nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
