@@ -1174,7 +1174,7 @@ function! s:swap_last_two_words_in_insert_mode()
   endif
 endfunction
 
-nnoemap <silent> <M-s> :<C-u>call <SID>swap_last_two_words()<CR>
+nnoremap <silent> <M-s> :<C-u>call <SID>swap_last_two_words()<CR>
 " NOTE: we can't use <Cmd> because we actually want a mode change to normal
 "   inside function to look at whitespace
 imap <silent> <M-s> <C-\><C-o>:<C-u>call <SID>swap_last_two_words_in_insert_mode()<CR>
