@@ -171,14 +171,14 @@ vnoremap <Space> zf
 
 " Suspend from insert mode
 noremap! <C-z> <Esc><C-z>
-" Quick-save
-" NOTE: MacVim and VimR already handle <D-s>
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <Esc>:w<CR>
 " Edits .vimrc
 nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 " Re-sources .vimrc
 nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR>
+" Quick-save and reload .vimrc
+" NOTE: MacVim and VimR already handle <D-s>
+nmap <C-s> <Cmd>w<CR><Leader>so
+imap <C-s> <Cmd>w<CR><Leader>so
 " Allow saving of files as sudo when you forget to start vim using sudo.
 " Shortcut matches my zsh binding
 cnoremap <C-x><C-s> w !sudo tee > /dev/null %
