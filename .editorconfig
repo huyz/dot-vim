@@ -21,9 +21,6 @@ space_redirects = true
 [{*.zsh,.zsh*,.zlog*,.zprofile*,.zprezto*}]
 indent_size = 2 # for legacy and to visually differentiate from bash
 
-[{*.vim,.vimrc*}]
-indent_size = 2 # for legacy
-
 [{*.gitconfig*,.git/config}]
 indent_size = 4
 indent_style = tab # Because that's how git writes files

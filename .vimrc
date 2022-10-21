@@ -18,13 +18,13 @@ let $MYVIM = expand('<sfile>:p:h')
 
 " If .vimrc is from ~, then we assume ~/.vim as usual
 if $MYVIM == $HOME
-  let $MYVIM = expand("$HOME/.vim")
+    let $MYVIM = expand("$HOME/.vim")
 else
-  " set default 'runtimepath' (without ~/.vim folders)
-  let &runtimepath = printf('%s/vimfiles,%s,%s/vimfiles/after', $VIM, $VIMRUNTIME, $VIM)
+    " set default 'runtimepath' (without ~/.vim folders)
+    let &runtimepath = printf('%s/vimfiles,%s,%s/vimfiles/after', $VIM, $VIMRUNTIME, $VIM)
 
-  " add the directory to 'runtimepath'
-  let &runtimepath = printf('%s,%s,%s/after', $MYVIM, &runtimepath, $MYVIM)
+    " add the directory to 'runtimepath'
+    let &runtimepath = printf('%s,%s,%s/after', $MYVIM, &runtimepath, $MYVIM)
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -35,25 +35,25 @@ set nocompatible
 
 " Load up any custom initializations before this file
 if filereadable(expand("$MYVIM/.vimrc.pre"))
-  source $MYVIM/.vimrc.pre
+    source $MYVIM/.vimrc.pre
 endif
 
 """ Standard vi settings are shared with vi in ~/.exrc
 
 if filereadable(expand("$MEHOME/.exrc"))
-  source $MEHOME/.exrc
+    source $MEHOME/.exrc
 elseif filereadable(expand("$MYVIM/.exrc"))
-  source $MYVIM/.exrc
+    source $MYVIM/.exrc
 elseif filereadable(expand("~/.exrc"))
-  source ~/.exrc
+    source ~/.exrc
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Copy some of neovim's default mappings
 
 if has("nvim")
-  " Can't remap `Y` as it's used incredibly often and needs to be pressed reliably
-  silent! nunmap Y
+    " Can't remap `Y` as it's used incredibly often and needs to be pressed reliably
+    silent! nunmap Y
 endif
 " Clear search highlight, update diff, and redraw screen
 nnoremap <C-l> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
@@ -177,9 +177,9 @@ nnoremap <Leader>o5 <Cmd>call ZToggleVirtualEdit()<CR>
 " Invoke plugins
 nnoremap <Leader>p0 <Cmd>Startify<CR>
 if has("nvim")
-  nnoremap <Leader>p1 <Cmd>NvimTreeToggle<CR>
+    nnoremap <Leader>p1 <Cmd>NvimTreeToggle<CR>
 else
-  nnoremap <Leader>p1 <Cmd>NERDTreeToggle<CR>
+    nnoremap <Leader>p1 <Cmd>NERDTreeToggle<CR>
 endif
 nnoremap <Leader>p2 <Cmd>FZF<CR>
 nnoremap <Leader>p3 <Cmd>CtrlPMRU<CR>
@@ -226,67 +226,67 @@ set pastetoggle=<f5>
 """ Common GUI mappings
 
 if has("gui_running")
-  " Move cursor
-  nnoremap <D-Up> gg
-  nnoremap <D-Down> G
-  nnoremap <D-Left> 0
-  nnoremap <D-Right> $
-  inoremap <D-Up> <C-o>gg
-  inoremap <D-Down> <C-o>G
-  inoremap <D-Left> <C-o>0
-  inoremap <D-Right> <C-o>$
+    " Move cursor
+    nnoremap <D-Up> gg
+    nnoremap <D-Down> G
+    nnoremap <D-Left> 0
+    nnoremap <D-Right> $
+    inoremap <D-Up> <C-o>gg
+    inoremap <D-Down> <C-o>G
+    inoremap <D-Left> <C-o>0
+    inoremap <D-Right> <C-o>$
 
-  " Go back/forward
-  nnoremap <M-D-Left> <C-o>
-  inoremap <M-D-Left> <C-o><C-o>
-  vnoremap <M-D-Left> <Esc><C-o>
-  nnoremap <M-D-Right> <C-i>
-  inoremap <M-D-Right> <C-o><C-i>
-  vnoremap <M-D-Right> <Esc><C-i>
+    " Go back/forward
+    nnoremap <M-D-Left> <C-o>
+    inoremap <M-D-Left> <C-o><C-o>
+    vnoremap <M-D-Left> <Esc><C-o>
+    nnoremap <M-D-Right> <C-i>
+    inoremap <M-D-Right> <C-o><C-i>
+    vnoremap <M-D-Right> <Esc><C-i>
 
-  " Go to previous edit location
-  nnoremap <S-D-BS> `.
-  inoremap <S-D-BS> <C-o>`.
-  vnoremap <S-D-BS> <Esc>`.
-  " Delete line
-  nnoremap <C-S-BS> dd
-  nnoremap <D-Del> D
-  nnoremap <D-BS> d0
-  inoremap <C-S-BS> <C-o>dd
-  inoremap <D-Del> <C-o>D
-  inoremap <D-BS> <C-o>d0
+    " Go to previous edit location
+    nnoremap <S-D-BS> `.
+    inoremap <S-D-BS> <C-o>`.
+    vnoremap <S-D-BS> <Esc>`.
+    " Delete line
+    nnoremap <C-S-BS> dd
+    nnoremap <D-Del> D
+    nnoremap <D-BS> d0
+    inoremap <C-S-BS> <C-o>dd
+    inoremap <D-Del> <C-o>D
+    inoremap <D-BS> <C-o>d0
 
-  " Go to previous/next method
-  noremap <C-S-D-Up> [m
-  inoremap <C-S-D-Up> <C-o>[m
-  noremap <C-S-D-Down> ]m
-  inoremap <C-S-D-Down> <C-o>]m
+    " Go to previous/next method
+    noremap <C-S-D-Up> [m
+    inoremap <C-S-D-Up> <C-o>[m
+    noremap <C-S-D-Down> ]m
+    inoremap <C-S-D-Down> <C-o>]m
 
-  " Insert line above/below
-  nnoremap <C-CR> o<Esc>
-  vnoremap <C-CR> <Esc>o<Esc>
-  inoremap <C-CR> <C-o>o
-  nnoremap <S-C-CR> O<Esc>
-  inoremap <S-C-CR> <C-o>O
-  vnoremap <S-C-CR> <Esc>O<Esc>
+    " Insert line above/below
+    nnoremap <C-CR> o<Esc>
+    vnoremap <C-CR> <Esc>o<Esc>
+    inoremap <C-CR> <C-o>o
+    nnoremap <S-C-CR> O<Esc>
+    inoremap <S-C-CR> <C-o>O
+    vnoremap <S-C-CR> <Esc>O<Esc>
 
-  " Open recent
-  noremap <D-p> <Cmd>FZF<CR>
-  noremap <D-e> <Cmd>CtrlPBuffer<CR>
+    " Open recent
+    noremap <D-p> <Cmd>FZF<CR>
+    noremap <D-e> <Cmd>CtrlPBuffer<CR>
 endif
 
 """ System clipboard
 
 if has("mac")
-  " <M-x> on macOS
-  vnoremap ≈ "+d
-  " <M-c> on macOS
-  vnoremap ç "+y
-  " <M-v> on macOS
-  vnoremap √ "+gP
-  nnoremap √ "+gP
-  cnoremap √ <C-R>+
-  inoremap √ <C-R><C-O>+
+    " <M-x> on macOS
+    vnoremap ≈ "+d
+    " <M-c> on macOS
+    vnoremap ç "+y
+    " <M-v> on macOS
+    vnoremap √ "+gP
+    nnoremap √ "+gP
+    cnoremap √ <C-R>+
+    inoremap √ <C-R><C-O>+
 endif
 
 """ Split mappings
@@ -330,73 +330,73 @@ noremap <C-w><C-q> <Cmd>bnext<CR><Cmd>bdel #<CR>
 " NOTE: all this complication is because the Option key can have multiple behaviors on mac
 " NOTE: vim-visual-multi takes over <S-arrow> mappings
 if has("gui_running")
-  if has("mac")
-    noremap ‰ <Cmd>vsplit<CR>
-    noremap Í <Cmd>split<CR>
-    inoremap ‰ <Cmd>vsplit<CR>
-    inoremap Í <Cmd>split<CR>
-    nnoremap „ <C-w>c
-    nnoremap Ø <C-w>o
-    tnoremap „ <C-\><C-N><C-w>c
-    tnoremap Ø <C-\><C-N><C-w>o
-    nnoremap Ó <C-w>h
-    nnoremap Ô <C-w>j
-    nnoremap  <C-w>k
-    nnoremap Ò <C-w>l
-    inoremap Ó <C-o><C-w>h
-    inoremap Ô <C-o><C-w>j
-    inoremap  <C-o><C-w>k
-    inoremap Ò <C-o><C-w>l
-    tnoremap Ó <C-\><C-N><C-w>h
-    tnoremap Ô <C-\><C-N><C-w>j
-    tnoremap  <C-\><C-N><C-w>k
-    tnoremap Ò <C-\><C-N><C-w>l
-  endif
-  if has("nvim")
-    nnoremap <M-S-D-h> <C-w>H
-    nnoremap <M-S-D-j> <C-w>J
-    nnoremap <M-S-D-k> <C-w>K
-    nnoremap <M-S-D-l> <C-w>L
-  elseif has("mac")
-    nnoremap <D-Ó> <C-w>H
-    nnoremap <D-Ô> <C-w>J
-    nnoremap <D-> <C-w>K
-    nnoremap <D-Ò> <C-w>L
-  endif
+    if has("mac")
+        noremap ‰ <Cmd>vsplit<CR>
+        noremap Í <Cmd>split<CR>
+        inoremap ‰ <Cmd>vsplit<CR>
+        inoremap Í <Cmd>split<CR>
+        nnoremap „ <C-w>c
+        nnoremap Ø <C-w>o
+        tnoremap „ <C-\><C-N><C-w>c
+        tnoremap Ø <C-\><C-N><C-w>o
+        nnoremap Ó <C-w>h
+        nnoremap Ô <C-w>j
+        nnoremap  <C-w>k
+        nnoremap Ò <C-w>l
+        inoremap Ó <C-o><C-w>h
+        inoremap Ô <C-o><C-w>j
+        inoremap  <C-o><C-w>k
+        inoremap Ò <C-o><C-w>l
+        tnoremap Ó <C-\><C-N><C-w>h
+        tnoremap Ô <C-\><C-N><C-w>j
+        tnoremap  <C-\><C-N><C-w>k
+        tnoremap Ò <C-\><C-N><C-w>l
+    endif
+    if has("nvim")
+        nnoremap <M-S-D-h> <C-w>H
+        nnoremap <M-S-D-j> <C-w>J
+        nnoremap <M-S-D-k> <C-w>K
+        nnoremap <M-S-D-l> <C-w>L
+    elseif has("mac")
+        nnoremap <D-Ó> <C-w>H
+        nnoremap <D-Ô> <C-w>J
+        nnoremap <D-> <C-w>K
+        nnoremap <D-Ò> <C-w>L
+    endif
 else
-  " NOTE: assumes iTerm2 has `Left Option key` set to `Esc+`
-  noremap <Esc>R <Cmd>vsplit<CR>
-  noremap <Esc>S <Cmd>split<CR>
-  nnoremap <Esc>W <C-w>c
-  nnoremap <Esc>O <C-w>o
-  nnoremap <Esc>H <C-w>h
-  nnoremap <Esc>J <C-w>j
-  nnoremap <Esc>K <C-w>k
-  nnoremap <Esc>L <C-w>l
-  if has("nvim")
-    inoremap <M-H> <C-o><C-w>h
-    inoremap <M-J> <C-o><C-w>j
-    inoremap <M-K> <C-o><C-w>k
-    inoremap <M-L> <C-o><C-w>l
-    tnoremap <M-H> <C-\><C-N><C-w>h
-    tnoremap <M-J> <C-\><C-N><C-w>j
-    tnoremap <M-K> <C-\><C-N><C-w>k
-    tnoremap <M-L> <C-\><C-N><C-w>l
-    inoremap <M-R> <Cmd>vsplit<CR>
-    inoremap <M-S> <Cmd>split<CR>
-    inoremap <M-W> <C-o><C-w>c
-    tnoremap <M-W> <C-\><C-N><C-w>c
-    inoremap <M-O> <C-o><C-w>o
-    tnoremap <M-O> <C-\><C-N><C-w>o
-  else
-    " XXX: For vim, cannot do Insert-mode maps because they interfere with exiting out
-    " of Insert mode with <Esc> and then immediately hitting a number.
-    tnoremap <Esc>W <C-\><C-N><C-w>c
-    tnoremap <Esc>H <C-\><C-N><C-w>h
-    tnoremap <Esc>J <C-\><C-N><C-w>j
-    tnoremap <Esc>K <C-\><C-N><C-w>k
-    tnoremap <Esc>L <C-\><C-N><C-w>l
-  endif
+    " NOTE: assumes iTerm2 has `Left Option key` set to `Esc+`
+    noremap <Esc>R <Cmd>vsplit<CR>
+    noremap <Esc>S <Cmd>split<CR>
+    nnoremap <Esc>W <C-w>c
+    nnoremap <Esc>O <C-w>o
+    nnoremap <Esc>H <C-w>h
+    nnoremap <Esc>J <C-w>j
+    nnoremap <Esc>K <C-w>k
+    nnoremap <Esc>L <C-w>l
+    if has("nvim")
+        inoremap <M-H> <C-o><C-w>h
+        inoremap <M-J> <C-o><C-w>j
+        inoremap <M-K> <C-o><C-w>k
+        inoremap <M-L> <C-o><C-w>l
+        tnoremap <M-H> <C-\><C-N><C-w>h
+        tnoremap <M-J> <C-\><C-N><C-w>j
+        tnoremap <M-K> <C-\><C-N><C-w>k
+        tnoremap <M-L> <C-\><C-N><C-w>l
+        inoremap <M-R> <Cmd>vsplit<CR>
+        inoremap <M-S> <Cmd>split<CR>
+        inoremap <M-W> <C-o><C-w>c
+        tnoremap <M-W> <C-\><C-N><C-w>c
+        inoremap <M-O> <C-o><C-w>o
+        tnoremap <M-O> <C-\><C-N><C-w>o
+    else
+        " XXX: For vim, cannot do Insert-mode maps because they interfere with exiting out
+        " of Insert mode with <Esc> and then immediately hitting a number.
+        tnoremap <Esc>W <C-\><C-N><C-w>c
+        tnoremap <Esc>H <C-\><C-N><C-w>h
+        tnoremap <Esc>J <C-\><C-N><C-w>j
+        tnoremap <Esc>K <C-\><C-N><C-w>k
+        tnoremap <Esc>L <C-\><C-N><C-w>l
+    endif
 endif
 
 """ Tab mappings
@@ -404,101 +404,101 @@ endif
 " GUI-only
 
 if has("gui_running")
-  " Switch tab with Cmd +[1-9].
-  " NOTE: can't do <c-2> and <c-6> for some reason so we rely on <d-2>
-  noremap <D-1> <Cmd>tabn 1<CR>
-  noremap <D-2> <Cmd>tabn 2<CR>
-  noremap <D-3> <Cmd>tabn 3<CR>
-  noremap <D-4> <Cmd>tabn 4<CR>
-  noremap <D-5> <Cmd>tabn 5<CR>
-  noremap <D-6> <Cmd>tabn 6<CR>
-  noremap <D-7> <Cmd>tabn 7<CR>
-  noremap <D-8> <Cmd>tabn 8<CR>
-  noremap <D-9> <Cmd>tablast<CR>
-  inoremap <D-1> <Cmd>tabn 1<CR>
-  inoremap <D-2> <Cmd>tabn 2<CR>
-  inoremap <D-3> <Cmd>tabn 3<CR>
-  inoremap <D-4> <Cmd>tabn 4<CR>
-  inoremap <D-5> <Cmd>tabn 5<CR>
-  inoremap <D-6> <Cmd>tabn 6<CR>
-  inoremap <D-7> <Cmd>tabn 7<CR>
-  inoremap <D-8> <Cmd>tabn 8<CR>
-  inoremap <D-9> <Cmd>tablast<CR>
+    " Switch tab with Cmd +[1-9].
+    " NOTE: can't do <c-2> and <c-6> for some reason so we rely on <d-2>
+    noremap <D-1> <Cmd>tabn 1<CR>
+    noremap <D-2> <Cmd>tabn 2<CR>
+    noremap <D-3> <Cmd>tabn 3<CR>
+    noremap <D-4> <Cmd>tabn 4<CR>
+    noremap <D-5> <Cmd>tabn 5<CR>
+    noremap <D-6> <Cmd>tabn 6<CR>
+    noremap <D-7> <Cmd>tabn 7<CR>
+    noremap <D-8> <Cmd>tabn 8<CR>
+    noremap <D-9> <Cmd>tablast<CR>
+    inoremap <D-1> <Cmd>tabn 1<CR>
+    inoremap <D-2> <Cmd>tabn 2<CR>
+    inoremap <D-3> <Cmd>tabn 3<CR>
+    inoremap <D-4> <Cmd>tabn 4<CR>
+    inoremap <D-5> <Cmd>tabn 5<CR>
+    inoremap <D-6> <Cmd>tabn 6<CR>
+    inoremap <D-7> <Cmd>tabn 7<CR>
+    inoremap <D-8> <Cmd>tabn 8<CR>
+    inoremap <D-9> <Cmd>tablast<CR>
 
-  if has("nvim")
-    nnoremap <S-D-{> <Cmd>tabprev<CR>
-    nnoremap <S-D-}> <Cmd>tabnext<CR>
-    inoremap <S-D-{> <Cmd>tabprev<CR>
-    inoremap <S-D-}> <Cmd>tabnext<CR>
-  endif
+    if has("nvim")
+        nnoremap <S-D-{> <Cmd>tabprev<CR>
+        nnoremap <S-D-}> <Cmd>tabnext<CR>
+        inoremap <S-D-{> <Cmd>tabprev<CR>
+        inoremap <S-D-}> <Cmd>tabnext<CR>
+    endif
 
-  " XXX These don't work in macvim as <S-A-D-{> is interpreted as <M-D-{>
-  nnoremap <S-A-D-{> <Cmd>-tabmove<CR>
-  nnoremap <S-A-D-}> <Cmd>+tabmove<CR>
-  inoremap <S-A-D-{> <Cmd>-tabmove<CR>
-  inoremap <S-A-D-}> <Cmd>+tabmove<CR>
+    " XXX These don't work in macvim as <S-A-D-{> is interpreted as <M-D-{>
+    nnoremap <S-A-D-{> <Cmd>-tabmove<CR>
+    nnoremap <S-A-D-}> <Cmd>+tabmove<CR>
+    inoremap <S-A-D-{> <Cmd>-tabmove<CR>
+    inoremap <S-A-D-}> <Cmd>+tabmove<CR>
 endif
 
 " GUI & TUI
 
 if has("gui_running") && has("mac")
-  noremap † <Cmd>tabnew<CR>
-  noremap ∑ <Cmd>tabclose<CR>
-  noremap ¡ <Cmd>tabn 1<CR>
-  noremap ™ <Cmd>tabn 2<CR>
-  noremap £ <Cmd>tabn 3<CR>
-  noremap ¢ <Cmd>tabn 4<CR>
-  noremap ∞ <Cmd>tabn 5<CR>
-  noremap § <Cmd>tabn 6<CR>
-  noremap ¶ <Cmd>tabn 7<CR>
-  noremap • <Cmd>tabn 8<CR>
-  noremap ª <Cmd>tablast<CR>
-  noremap ” <Cmd>tabprev<CR>
-  noremap ’ <Cmd>tabnext<CR>
-  inoremap † <Cmd>tabnew<CR>
-  inoremap ∑ <Cmd>tabclose<CR>
-  inoremap ¡ <Cmd>tabn 1<CR>
-  inoremap ™ <Cmd>tabn 2<CR>
-  inoremap £ <Cmd>tabn 3<CR>
-  inoremap ¢ <Cmd>tabn 4<CR>
-  inoremap ∞ <Cmd>tabn 5<CR>
-  inoremap § <Cmd>tabn 6<CR>
-  inoremap ¶ <Cmd>tabn 7<CR>
-  inoremap • <Cmd>tabn 8<CR>
-  inoremap ª <Cmd>tablast<CR>
-  inoremap ” <Cmd>tabprev<CR>
-  inoremap ’ <Cmd>tabnext<CR>
+    noremap † <Cmd>tabnew<CR>
+    noremap ∑ <Cmd>tabclose<CR>
+    noremap ¡ <Cmd>tabn 1<CR>
+    noremap ™ <Cmd>tabn 2<CR>
+    noremap £ <Cmd>tabn 3<CR>
+    noremap ¢ <Cmd>tabn 4<CR>
+    noremap ∞ <Cmd>tabn 5<CR>
+    noremap § <Cmd>tabn 6<CR>
+    noremap ¶ <Cmd>tabn 7<CR>
+    noremap • <Cmd>tabn 8<CR>
+    noremap ª <Cmd>tablast<CR>
+    noremap ” <Cmd>tabprev<CR>
+    noremap ’ <Cmd>tabnext<CR>
+    inoremap † <Cmd>tabnew<CR>
+    inoremap ∑ <Cmd>tabclose<CR>
+    inoremap ¡ <Cmd>tabn 1<CR>
+    inoremap ™ <Cmd>tabn 2<CR>
+    inoremap £ <Cmd>tabn 3<CR>
+    inoremap ¢ <Cmd>tabn 4<CR>
+    inoremap ∞ <Cmd>tabn 5<CR>
+    inoremap § <Cmd>tabn 6<CR>
+    inoremap ¶ <Cmd>tabn 7<CR>
+    inoremap • <Cmd>tabn 8<CR>
+    inoremap ª <Cmd>tablast<CR>
+    inoremap ” <Cmd>tabprev<CR>
+    inoremap ’ <Cmd>tabnext<CR>
 else
-  noremap <Esc>t <Cmd>tabnew<CR>
-  noremap <Esc>w <Cmd>tabclose<CR>
-  noremap <Esc>1 <Cmd>tabn 1<CR>
-  noremap <Esc>2 <Cmd>tabn 2<CR>
-  noremap <Esc>3 <Cmd>tabn 3<CR>
-  noremap <Esc>4 <Cmd>tabn 4<CR>
-  noremap <Esc>5 <Cmd>tabn 5<CR>
-  noremap <Esc>6 <Cmd>tabn 6<CR>
-  noremap <Esc>7 <Cmd>tabn 7<CR>
-  noremap <Esc>8 <Cmd>tabn 8<CR>
-  noremap <Esc>9 <Cmd>tablast<CR>
-  noremap <Esc>{ <Cmd>tabprev<CR>
-  noremap <Esc>} <Cmd>tabnext<CR>
-  if has("nvim")
-    " XXX: For vim, cannot do Insert-mode maps because they interfere with exiting out
-    " of Insert mode with <Esc> and then immediately hitting a number.
-    inoremap <M-t> <Cmd>tabnew<CR>
-    inoremap <M-w> <Cmd>tabclose<CR>
-    inoremap <M-1> <Cmd>tabn 1<CR>
-    inoremap <M-2> <Cmd>tabn 2<CR>
-    inoremap <M-3> <Cmd>tabn 3<CR>
-    inoremap <M-4> <Cmd>tabn 4<CR>
-    inoremap <M-5> <Cmd>tabn 5<CR>
-    inoremap <M-6> <Cmd>tabn 6<CR>
-    inoremap <M-7> <Cmd>tabn 7<CR>
-    inoremap <M-8> <Cmd>tabn 8<CR>
-    inoremap <M-9> <Cmd>tablast<CR>
-    inoremap <M-{> <Cmd>tabprev<CR>
-    inoremap <M-}> <Cmd>tabnext<CR>
-  endif
+    noremap <Esc>t <Cmd>tabnew<CR>
+    noremap <Esc>w <Cmd>tabclose<CR>
+    noremap <Esc>1 <Cmd>tabn 1<CR>
+    noremap <Esc>2 <Cmd>tabn 2<CR>
+    noremap <Esc>3 <Cmd>tabn 3<CR>
+    noremap <Esc>4 <Cmd>tabn 4<CR>
+    noremap <Esc>5 <Cmd>tabn 5<CR>
+    noremap <Esc>6 <Cmd>tabn 6<CR>
+    noremap <Esc>7 <Cmd>tabn 7<CR>
+    noremap <Esc>8 <Cmd>tabn 8<CR>
+    noremap <Esc>9 <Cmd>tablast<CR>
+    noremap <Esc>{ <Cmd>tabprev<CR>
+    noremap <Esc>} <Cmd>tabnext<CR>
+    if has("nvim")
+        " XXX: For vim, cannot do Insert-mode maps because they interfere with exiting out
+        " of Insert mode with <Esc> and then immediately hitting a number.
+        inoremap <M-t> <Cmd>tabnew<CR>
+        inoremap <M-w> <Cmd>tabclose<CR>
+        inoremap <M-1> <Cmd>tabn 1<CR>
+        inoremap <M-2> <Cmd>tabn 2<CR>
+        inoremap <M-3> <Cmd>tabn 3<CR>
+        inoremap <M-4> <Cmd>tabn 4<CR>
+        inoremap <M-5> <Cmd>tabn 5<CR>
+        inoremap <M-6> <Cmd>tabn 6<CR>
+        inoremap <M-7> <Cmd>tabn 7<CR>
+        inoremap <M-8> <Cmd>tabn 8<CR>
+        inoremap <M-9> <Cmd>tablast<CR>
+        inoremap <M-{> <Cmd>tabprev<CR>
+        inoremap <M-}> <Cmd>tabnext<CR>
+    endif
 endif
 
 """ Keyboard mappings (To teach vim some new keymaps)
@@ -523,54 +523,54 @@ vmap <ESC>[Z <S-Tab>
 
 " Cycle textwidth
 function! ZCycleTextwidth()
-  if &textwidth == 0
-    set textwidth=78
-  elseif &textwidth == 78
-    set textwidth=98
-  else
-    set textwidth=0
-  endif
-  echo "textwidth=" . &textwidth
+    if &textwidth == 0
+        set textwidth=78
+    elseif &textwidth == 78
+        set textwidth=98
+    else
+        set textwidth=0
+    endif
+    echo "textwidth=" . &textwidth
 endfunction
 
 " Toggle virtual movement, which is useful for editing tables
 " By default, we have "block,insert" set
 function! ZToggleVirtualEdit()
-  if &virtualedit == "block,insert"
-    nnoremap r gr
-    nnoremap R gR
-    " 2011-05-26 Now, we've already reversed the meanings of j and k, by default
-    "nnoremap k gk
-    "nnoremap j gj
-    set virtualedit=all
-    set virtualedit?
-  else
-    nunmap r
-    nunmap R
-    "nunmap k
-    "nunmap j
-    set virtualedit=block,insert
-    set virtualedit?
-  endif
+    if &virtualedit == "block,insert"
+        nnoremap r gr
+        nnoremap R gR
+        " 2011-05-26 Now, we've already reversed the meanings of j and k, by default
+        "nnoremap k gk
+        "nnoremap j gj
+        set virtualedit=all
+        set virtualedit?
+    else
+        nunmap r
+        nunmap R
+        "nunmap k
+        "nunmap j
+        set virtualedit=block,insert
+        set virtualedit?
+    endif
 endfunction
 
 function! ZCycleEditDisplay()
-  let l:init = g:z_cycle_edit_display_mode == "init" ? 1 : 0
-  if g:z_cycle_edit_display_mode == "default"
-    let g:z_cycle_edit_display_mode = "full"
-    set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
-    set   list   number   relativenumber   cursorline showbreak=↪
-  elseif g:z_cycle_edit_display_mode == "full"
-    let g:z_cycle_edit_display_mode = "none"
-    set nolist nonumber norelativenumber nocursorline showbreak=  nocursorcolumn
-  else
-    let g:z_cycle_edit_display_mode = "default"
-    set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
-    set   list   number   relativenumber   cursorline showbreak=↪
-  endif
-  if (!l:init)
-    echo "g:z_cycle_edit_display_mode=" . g:z_cycle_edit_display_mode
-  endif
+    let l:init = g:z_cycle_edit_display_mode == "init" ? 1 : 0
+    if g:z_cycle_edit_display_mode == "default"
+        let g:z_cycle_edit_display_mode = "full"
+        set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
+        set   list   number   relativenumber   cursorline showbreak=↪
+    elseif g:z_cycle_edit_display_mode == "full"
+        let g:z_cycle_edit_display_mode = "none"
+        set nolist nonumber norelativenumber nocursorline showbreak=  nocursorcolumn
+    else
+        let g:z_cycle_edit_display_mode = "default"
+        set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
+        set   list   number   relativenumber   cursorline showbreak=↪
+    endif
+    if (!l:init)
+        echo "g:z_cycle_edit_display_mode=" . g:z_cycle_edit_display_mode
+    endif
 endfunction
 let g:z_cycle_edit_display_mode = "init"
 call ZCycleEditDisplay()
@@ -626,16 +626,16 @@ nmap <Leader>~ <Leader>_do_yyp:s/./\~/g<CR><Leader>_done_
 " Toggle split orientation
 " https://stackoverflow.com/questions/1269603/to-switch-from-vertical-split-to-horizontal-split-fast-in-vim/45994525#45994525
 function! ToggleSplitOrientation()
-  if !exists('t:splitType')
-    let t:splitType = 'vertical'
-  endif
-  if t:splitType == 'vertical'
-    windo wincmd K
-    let t:splitType = 'horizontal'
-  else
-    windo wincmd H
-    let t:splitType = 'vertical'
-  endif
+    if !exists('t:splitType')
+        let t:splitType = 'vertical'
+    endif
+    if t:splitType == 'vertical'
+        windo wincmd K
+        let t:splitType = 'horizontal'
+    else
+        windo wincmd H
+        let t:splitType = 'vertical'
+    endif
 endfunction
 nnoremap <silent> <C-w><Bslash> <Cmd>call ToggleSplitOrientation()<CR>
 nnoremap <silent> <C-\> <Cmd>call ToggleSplitOrientation()<CR>
@@ -668,10 +668,10 @@ iab ---: ---<CR>updated: '<Leader>`D'<CR>created: '<Leader>`D'<CR>---
 
 " For proteges (users who symlink to my files)
 if isdirectory(expand("$MEHOME/.vim"))
-  set runtimepath^=$MEHOME/.vim
-  if isdirectory(expand("$MEHOME/.vim/after"))
-    set runtimepath+=$MEHOME/.vim/after
-  endif
+    set runtimepath^=$MEHOME/.vim
+    if isdirectory(expand("$MEHOME/.vim/after"))
+        set runtimepath+=$MEHOME/.vim/after
+    endif
 endif
 
 " List of directory names for the swap file
@@ -794,7 +794,7 @@ let xml_syntax_folding = 1
 
 " Avoid VimR issue https://github.com/qvacua/vimr/issues/879
 if !has("gui_vimr")
-  language messages en_US.UTF-8 " Use English menus at all times
+    language messages en_US.UTF-8 " Use English menus at all times
 endif
 
 """ Sessions
@@ -817,9 +817,9 @@ runtime macros/matchit.vim
 
 " Automatically install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Specify a directory for plugins
@@ -830,8 +830,8 @@ call plug#begin('~/.vim/plugged')
 " Conditional activation
 " https://github.com/junegunn/vim-plug/wiki/tips#conditional-activation
 function! Cond(cond, ...)
-  let opts = get(a:000, 0, {})
-  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+    let opts = get(a:000, 0, {})
+    return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
 
 " WARNING: Make sure you use single quotes in the Plug lines below.
@@ -935,9 +935,9 @@ filetype plugin indent on
 " but don't do it when the position is invalid or when inside an event handler
 " (this happens when dropping a file on gvim).
 autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  \  exe "normal g`\"" |
-  \ endif
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \  exe "normal g`\"" |
+    \ endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Hacks
@@ -956,9 +956,9 @@ autocmd BufReadPost *
 
 let g:startify_session_dir = '~/.vim/session'
 if has("nvim")
-  let g:startify_session_before_save = [ 'silent! tabdo NvimTreeClose' ]
+    let g:startify_session_before_save = [ 'silent! tabdo NvimTreeClose' ]
 else
-  let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
+    let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
 endif
 let g:startify_session_persistence = 1
 let g:startify_session_autoload = 1
@@ -970,9 +970,9 @@ let g:startify_change_to_vcs_root = 1
 " https://github.com/mhinz/vim-startify/wiki/Example-configurations#display-nerdtree-bookmarks-as-a-separate-list
 " Read ~/.NERDTreeBookmarks file and takes its second column
 function! s:nerdtreeBookmarks()
-    let bookmarks = systemlist("cut -d' ' -f 2- ~/.NERDTreeBookmarks")
-    let bookmarks = bookmarks[0:-2] " Slices an empty last line
-    return map(bookmarks, "{'line': v:val, 'path': v:val}")
+        let bookmarks = systemlist("cut -d' ' -f 2- ~/.NERDTreeBookmarks")
+        let bookmarks = bookmarks[0:-2] " Slices an empty last line
+        return map(bookmarks, "{'line': v:val, 'path': v:val}")
 endfunction
 
 " https://github.com/mhinz/vim-startify/wiki/Example-configurations#show-modified-and-untracked-git-files
@@ -980,34 +980,34 @@ endfunction
 " `2>/dev/null` makes the command fail quietly, so that when we are not
 " in a git repo, the list will be empty
 function! s:gitModified()
-    let files = systemlist('git ls-files -m 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
+        let files = systemlist('git ls-files -m 2>/dev/null')
+        return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
 
 " same as above, but show untracked files, honouring .gitignore
 function! s:gitUntracked()
-    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
+        let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+        return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
 
 let g:startify_lists = [
-        \ { 'type': 'files',     'header': ['   MRU']            },
-        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-        \ { 'type': 'sessions',  'header': ['   Sessions']       },
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']},
-        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
-        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
-        \ { 'type': 'commands',  'header': ['   Commands']       },
-        \ ]
+                \ { 'type': 'files',     'header': ['   MRU']            },
+                \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+                \ { 'type': 'sessions',  'header': ['   Sessions']       },
+                \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+                \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']},
+                \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+                \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+                \ { 'type': 'commands',  'header': ['   Commands']       },
+                \ ]
 
 " https://github.com/mhinz/vim-startify/wiki/Example-configurations#auto-load-and-auto-save-a-session-named-from-git-branch
 function! GetUniqueSessionName()
-  let path = fnamemodify(getcwd(), ':~:t')
-  let path = empty(path) ? 'no-project' : path
-  let branch = gitbranch#name()
-  let branch = empty(branch) ? '' : '-' . branch
-  return substitute(path . branch, '/', '-', 'g')
+    let path = fnamemodify(getcwd(), ':~:t')
+    let path = empty(path) ? 'no-project' : path
+    let branch = gitbranch#name()
+    let branch = empty(branch) ? '' : '-' . branch
+    return substitute(path . branch, '/', '-', 'g')
 endfunction
 " XXX: This next line is giving me problems when I run :Startify
 "autocmd User        StartifyReady silent execute 'SLoad '  . GetUniqueSessionName()
@@ -1016,7 +1016,7 @@ autocmd VimLeavePre *             silent execute 'SSave! ' . GetUniqueSessionNam
 """ nvim-tree
 
 if has("nvim")
-  lua << EOF
+    lua << EOF
 require("nvim-tree").setup()
 EOF
 endif
@@ -1029,32 +1029,32 @@ endif
 let g:move_map_keys = 0
 
 if has("gui_running")
-  nmap <M-Down> <Plug>MoveLineDown
-  nmap <M-Up> <Plug>MoveLineUp
-  nmap <M-Left> <Plug>MoveCharLeft
-  nmap <M-Right> <Plug>MoveCharRight
-  vmap <M-Down> <Plug>MoveBlockDown
-  vmap <M-Up> <Plug>MoveBlockUp
-  vmap <M-Left> <Plug>MoveBlockLeft
-  vmap <M-Right> <Plug>MoveBlockRight
+    nmap <M-Down> <Plug>MoveLineDown
+    nmap <M-Up> <Plug>MoveLineUp
+    nmap <M-Left> <Plug>MoveCharLeft
+    nmap <M-Right> <Plug>MoveCharRight
+    vmap <M-Down> <Plug>MoveBlockDown
+    vmap <M-Up> <Plug>MoveBlockUp
+    vmap <M-Left> <Plug>MoveBlockLeft
+    vmap <M-Right> <Plug>MoveBlockRight
 else
-  nmap <Esc><Down> <Plug>MoveLineDown
-  nmap <Esc><Up> <Plug>MoveLineUp
-  nmap <Esc><Left> <Plug>MoveCharLeft
-  nmap <Esc><Right> <Plug>MoveCharRight
+    nmap <Esc><Down> <Plug>MoveLineDown
+    nmap <Esc><Up> <Plug>MoveLineUp
+    nmap <Esc><Left> <Plug>MoveCharLeft
+    nmap <Esc><Right> <Plug>MoveCharRight
 
-  " WARNING: if instead of using h,j,k,l, you tend to use arrow keys for motion
-  " in Normal mode, then the mappings below may interfere when you try to exit
-  " out of Visual mode with <Esc> and immediately hit an arrow key. In that
-  " case, you might want to use the `C` modifier instead as here:
-  "vmap <C-Down> <Plug>MoveBlockDown
-  "vmap <C-Up> <Plug>MoveBlockUp
-  "vmap <C-Left> <Plug>MoveBlockLeft
-  "vmap <C-Right> <Plug>MoveBlockRight
-  vmap <Esc><Down> <Plug>MoveBlockDown
-  vmap <Esc><Up> <Plug>MoveBlockUp
-  vmap <Esc><Left> <Plug>MoveBlockLeft
-  vmap <Esc><Right> <Plug>MoveBlockRight
+    " WARNING: if instead of using h,j,k,l, you tend to use arrow keys for motion
+    " in Normal mode, then the mappings below may interfere when you try to exit
+    " out of Visual mode with <Esc> and immediately hit an arrow key. In that
+    " case, you might want to use the `C` modifier instead as here:
+    "vmap <C-Down> <Plug>MoveBlockDown
+    "vmap <C-Up> <Plug>MoveBlockUp
+    "vmap <C-Left> <Plug>MoveBlockLeft
+    "vmap <C-Right> <Plug>MoveBlockRight
+    vmap <Esc><Down> <Plug>MoveBlockDown
+    vmap <Esc><Up> <Plug>MoveBlockUp
+    vmap <Esc><Left> <Plug>MoveBlockLeft
+    vmap <Esc><Right> <Plug>MoveBlockRight
 endif
 
 """ vim-visual-multi
@@ -1072,9 +1072,9 @@ let g:ctrlp_cmd = 'CtrlPBuffer'
 
 "set wildignore+=/tmp/,.so,.so p,*.zip
 let g:ctrlp_custom_ignore = {
- \ 'dir':  '\v[\/](\.(git|hg|svn)|.venv|venv.*|node_modules)$',
- \ 'file': '\v\.(pyc|class|DS_Store)$',
- \ }
+    \ 'dir':  '\v[\/](\.(git|hg|svn)|.venv|venv.*|node_modules)$',
+    \ 'file': '\v\.(pyc|class|DS_Store)$',
+    \ }
 
 let g:ctrlp_max_files = 20000
 
@@ -1092,12 +1092,12 @@ set rtp+=~/.fzf
 
 " Disable miniBufExpl if in VimR
 if has("gui_vimr")
-  let g:miniBufExplorerMoreThanOne=99
+    let g:miniBufExplorerMoreThanOne=99
 endif
 
-let g:miniBufExplSplitBelow=0  " Put new window above
-                               " current or on the
-                               " left for vertical split
+let g:miniBufExplSplitBelow=0   " Put new window above
+                                " current or on the
+                                " left for vertical split
 
 """ easymotion
 
@@ -1138,40 +1138,40 @@ nmap gA <Plug>(EasyAlign)
 " https://github.com/tommcdo/vim-exchange/issues/58#issuecomment-1284067044
 " Usage: cursor must be on any character of the second word
 function! s:swap_last_two_words()
-  " First, go to last character  of last word, even if the Word is one long character
-  normal viW
-  let l:pos = getpos('.')
-  normal XBcxiW
-  call setpos('.', l:pos)
+    " First, go to last character  of last word, even if the Word is one long character
+    normal viW
+    let l:pos = getpos('.')
+    normal XBcxiW
+    call setpos('.', l:pos)
 endfunction
 
 " Usage: cursor must be right before second word, inside the word, or after
 "   any whitespace after the word
 function! s:swap_last_two_words_in_insert_mode()
-  let l:addone = 0
-  let l:beyondeol = 0
-  let l:pos = getpos('.')
-  if col(".") == col("$")
-    let l:beyondeol = 1
-  endif
-  normal \<Esc>
-  if getline('.')[col('.')-1] =~ "\\s"
-    " If on whitespace, go back one word
-    normal gE
-  else
-    " If inside word, then let's make sure we move the cursor to end of word
-    " because the left word could be shorter than the second word
-    exe "normal! viW\<Esc>"
+    let l:addone = 0
+    let l:beyondeol = 0
     let l:pos = getpos('.')
-    let l:addone = 1
-  endif
-  normal cxiWB.
-  call setpos('.', l:pos)
-  if l:beyondeol
-    normal $
-  elseif l:addone
-    normal l
-  endif
+    if col(".") == col("$")
+        let l:beyondeol = 1
+    endif
+    normal \<Esc>
+    if getline('.')[col('.')-1] =~ "\\s"
+        " If on whitespace, go back one word
+        normal gE
+    else
+        " If inside word, then let's make sure we move the cursor to end of word
+        " because the left word could be shorter than the second word
+        exe "normal! viW\<Esc>"
+        let l:pos = getpos('.')
+        let l:addone = 1
+    endif
+    normal cxiWB.
+    call setpos('.', l:pos)
+    if l:beyondeol
+        normal $
+    elseif l:addone
+        normal l
+    endif
 endfunction
 
 nnoremap <silent> <M-s> :<C-u>call <SID>swap_last_two_words()<CR>
@@ -1236,35 +1236,35 @@ nmap <Leader>f <Plug>(coc-format-selected)
 """ Firenvim
 
 if has("nvim")
-  let g:firenvim_config = {
-        \ 'localSettings': {
-          \ '.*': { 'takeover': 'once', 'priority': 0 },
-          \ 'https?://(?:[^/]+\.)excalidraw\.com/': { 'takeover': 'never', 'priority': 1 },
-          \ 'https?://[^/]+\.slack\.com/': { 'takeover': 'never', 'priority': 1 }
-        \ }
-  \ }
+    let g:firenvim_config = {
+                \ 'localSettings': {
+                    \ '.*': { 'takeover': 'once', 'priority': 0 },
+                    \ 'https?://(?:[^/]+\.)excalidraw\.com/': { 'takeover': 'never', 'priority': 1 },
+                    \ 'https?://[^/]+\.slack\.com/': { 'takeover': 'never', 'priority': 1 }
+                \ }
+    \ }
 
-  function! RemapCopyAndPaste()
-    " Get Copy and Paste working inside the browser
-    vnoremap <D-x> "+d
-    vnoremap <D-c> "+y
-    vnoremap <D-v> "+gP
-    nnoremap <D-v> "+gP
-    cnoremap <D-v> <C-R>+
-    inoremap <D-v> <C-R><C-O>+
-  endfunction
+    function! RemapCopyAndPaste()
+        " Get Copy and Paste working inside the browser
+        vnoremap <D-x> "+d
+        vnoremap <D-c> "+y
+        vnoremap <D-v> "+gP
+        nnoremap <D-v> "+gP
+        cnoremap <D-v> <C-R>+
+        inoremap <D-v> <C-R><C-O>+
+    endfunction
 
-  if exists('g:started_by_firenvim')
-    set laststatus=0
-    call RemapCopyAndPaste()
-  endif
-  function! OnUIEnter(event) abort
-    if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
-      set laststatus=0
-      call RemapCopyAndPaste()
+    if exists('g:started_by_firenvim')
+        set laststatus=0
+        call RemapCopyAndPaste()
     endif
-  endfunction
-  autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+    function! OnUIEnter(event) abort
+        if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
+            set laststatus=0
+            call RemapCopyAndPaste()
+        endif
+    endfunction
+    autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1281,21 +1281,21 @@ let is_bash = 1
 
 if &t_Co > 2 || has("gui_running") " If we have color
 
-  " Set background based on our environment variable with a default of light
-  " (we default to light because dark colors on white are easier to see
-  " than light colors on black)
-  if $user_background == "dark"
-    set background=dark
-  else
-    set background=light
-  endif
+    " Set background based on our environment variable with a default of light
+    " (we default to light because dark colors on white are easier to see
+    " than light colors on black)
+    if $user_background == "dark"
+        set background=dark
+    else
+        set background=light
+    endif
 
-  " Turn on syntax highlighting
-  syntax on
+    " Turn on syntax highlighting
+    syntax on
 
 else " If we don't have color
-  " Highlighting for monochrome screens (with underlines and crap) sucks
-  syntax off
+    " Highlighting for monochrome screens (with underlines and crap) sucks
+    syntax off
 endif
 
 
@@ -1304,85 +1304,85 @@ endif
 " Usage: `\b` to toggle between dark and light
 
 function! SetBackgroundDark()
-  execute 'colorscheme ' . g:colorscheme_dark
-  set background=dark
+    execute 'colorscheme ' . g:colorscheme_dark
+    set background=dark
 
-  " NOTE: this needs to be after setting background
-  highlight ColorColumn term=reverse ctermbg=darkgrey guibg=grey25
-  " For reference: Auto colors by g:indent_guides_auto_colors=1
-  "highlight IndentGuidesOdd ctermfg=242 ctermbg=0 guifg=grey15 guibg=grey30
-  "highlight IndentGuidesEven ctermfg=0 ctermbg=242 guifg=grey30 guibg=grey15
-  " FIXME: can't get guibg to take effect on startup
-  highlight IndentGuidesEven guibg=grey23
+    " NOTE: this needs to be after setting background
+    highlight ColorColumn term=reverse ctermbg=darkgrey guibg=grey25
+    " For reference: Auto colors by g:indent_guides_auto_colors=1
+    "highlight IndentGuidesOdd ctermfg=242 ctermbg=0 guifg=grey15 guibg=grey30
+    "highlight IndentGuidesEven ctermfg=0 ctermbg=242 guifg=grey30 guibg=grey15
+    " FIXME: can't get guibg to take effect on startup
+    highlight IndentGuidesEven guibg=grey23
 
-  " 2021-07-02 On MacVim, can't see the cursor on top of yellow search results.  So tone down the yellow.
-  " Don't really have time to make this cleaner
-  if has("gui_running")
-    highlight Search guifg=#282a2e guibg=#f0c674
-  endif
+    " 2021-07-02 On MacVim, can't see the cursor on top of yellow search results.  So tone down the yellow.
+    " Don't really have time to make this cleaner
+    if has("gui_running")
+        highlight Search guifg=#282a2e guibg=#f0c674
+    endif
 endfunction
 
 function! SetBackgroundLight()
-  execute 'colorscheme ' . g:colorscheme_light
-  set background=light
+    execute 'colorscheme ' . g:colorscheme_light
+    set background=light
 
-  " NOTE: this needs to be after setting background
-  highlight ColorColumn term=reverse ctermbg=lightgrey guibg=grey75
-  " For reference: Auto colors by g:indent_guides_auto_colors=1
-  " Auto colors by g:indent_guides_auto_colors=1
-  "highlight IndentGuidesOdd ctermfg=7 ctermbg=15 guifg=grey70 guibg=grey85
-  "highlight IndentGuidesEven ctermfg=15 ctermbg=7 guifg=grey85 guibg=grey70
+    " NOTE: this needs to be after setting background
+    highlight ColorColumn term=reverse ctermbg=lightgrey guibg=grey75
+    " For reference: Auto colors by g:indent_guides_auto_colors=1
+    " Auto colors by g:indent_guides_auto_colors=1
+    "highlight IndentGuidesOdd ctermfg=7 ctermbg=15 guifg=grey70 guibg=grey85
+    "highlight IndentGuidesEven ctermfg=15 ctermbg=7 guifg=grey85 guibg=grey70
 endfunction
 
 function! ToggleBackground()
-  if &background == "dark"
-    call SetBackgroundLight()
-  else
-    call SetBackgroundDark()
-  endif
+    if &background == "dark"
+        call SetBackgroundLight()
+    else
+        call SetBackgroundDark()
+    endif
 endfunction
 nnoremap <silent> <Leader>b <Cmd>call ToggleBackground()<CR>
 
 " Startup
 if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
-  let g:airline_theme = 'base16_tomorrow'
-  set termguicolors
-  let g:colorscheme_dark = "base16-tomorrow-night"
-  let g:colorscheme_light = "base16-tomorrow"
-else
-  let g:airline_theme = 'base16_colors'
-  if has("gui_vimr") || exists("g:neovide")
-    " VimR can't seem to understand what "default" combined with bg=light should end up with
+    let g:airline_theme = 'base16_tomorrow'
+    set termguicolors
     let g:colorscheme_dark = "base16-tomorrow-night"
     let g:colorscheme_light = "base16-tomorrow"
-  else
-    let g:colorscheme_dark = "default"
-    let g:colorscheme_light = "default"
-  endif
+else
+    let g:airline_theme = 'base16_colors'
+    if has("gui_vimr") || exists("g:neovide")
+        " VimR can't seem to understand what "default" combined with bg=light should end up with
+        let g:colorscheme_dark = "base16-tomorrow-night"
+        let g:colorscheme_light = "base16-tomorrow"
+    else
+        let g:colorscheme_dark = "default"
+        let g:colorscheme_light = "default"
+    endif
 endif
 
 if &background == 'dark'
-  call SetBackgroundDark()
+    call SetBackgroundDark()
 else
-  call SetBackgroundLight()
+    call SetBackgroundLight()
 endif
 
 if has("nvim")
-  :lua <<EOF
-  require('dark_notify').run({
-      onchange = function(mode)
-          -- optional, you can configure your own things to react to changes.
-          -- this is called at startup and every time dark mode is switched,
-          -- either via the OS, or because you manually set/toggled the mode.
-          -- mode is either "light" or "dark"
-          if (mode == "dark")
-          then
-            vim.api.nvim_call_function("SetBackgroundDark", {})
-          else
-            vim.api.nvim_call_function("SetBackgroundLight", {})
-          end
-      end,
-  })
+    :lua <<EOF
+    require('dark_notify').run({
+            onchange = function(mode)
+                    -- optional, you can configure your own things to react to changes.
+                    -- this is called at startup and every time dark mode is switched,
+                    -- either via the OS, or because you manually set/toggled the mode.
+                    -- mode is either "light" or "dark"
+                    if (mode == "dark")
+                    then
+                        vim.api.nvim_call_function("SetBackgroundDark", {})
+                    else
+                        vim.api.nvim_call_function("SetBackgroundLight", {})
+                    end
+            end,
+    })
 EOF
 endif
 
@@ -1390,23 +1390,23 @@ endif
 """ Syntax highlighting overrides
 
 function! HighlightStrangeWhitespace()
-  " Highlight whitespace at end of line
-  " (if there's more than one extra one or more than two extra ones in
-  " the case of after a dot, so we don't get too much feedback as we type)
-  " http://www.vim.org/tips/tip.php?tip_id=396
-  " FIXME:
-  "   - See improvements at http://vim.wikia.com/wiki/Highlighting_whitespaces_at_end_of_line
-  "   - Doesn't work if TERM=xterm-256color
-  " Test:
-  highlight WhitespaceEOL term=reverse ctermfg=red ctermbg=NONE cterm=underline guifg=red guibg=NONE gui=underline
-  " NOTE: lookbehind prevents matching on spaces at beginning of line
-  match WhitespaceEOL /\([^.!? \t]\@<=\|[.!?]\s\)\s\s\+$/
+    " Highlight whitespace at end of line
+    " (if there's more than one extra one or more than two extra ones in
+    " the case of after a dot, so we don't get too much feedback as we type)
+    " http://www.vim.org/tips/tip.php?tip_id=396
+    " FIXME:
+    "   - See improvements at http://vim.wikia.com/wiki/Highlighting_whitespaces_at_end_of_line
+    "   - Doesn't work if TERM=xterm-256color
+    " Test:
+    highlight WhitespaceEOL term=reverse ctermfg=red ctermbg=NONE cterm=underline guifg=red guibg=NONE gui=underline
+    " NOTE: lookbehind prevents matching on spaces at beginning of line
+    match WhitespaceEOL /\([^.!? \t]\@<=\|[.!?]\s\)\s\s\+$/
 
-  " Highlight Unicode whitespace characters
-  " Test: [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [　] [ ] [ ]
-  highlight UnicodeWhitespace term=reverse ctermfg=red ctermbg=NONE cterm=underline guifg=red guibg=NONE gui=reverse
-  " The list is from https://stackoverflow.com/a/37903645 (with `\t`, `\n`, ` `, `\xa0` removed):
-  call matchadd('UnicodeWhitespace', '[\x0b\x0c\r\x1c\x1d\x1e\x1f\x85\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000]')
+    " Highlight Unicode whitespace characters
+    " Test: [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [　] [ ] [ ]
+    highlight UnicodeWhitespace term=reverse ctermfg=red ctermbg=NONE cterm=underline guifg=red guibg=NONE gui=reverse
+    " The list is from https://stackoverflow.com/a/37903645 (with `\t`, `\n`, ` `, `\xa0` removed):
+    call matchadd('UnicodeWhitespace', '[\x0b\x0c\r\x1c\x1d\x1e\x1f\x85\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000]')
 endfunction
 
 autocmd BufEnter,WinEnter * call HighlightStrangeWhitespace()
@@ -1415,7 +1415,7 @@ autocmd BufEnter,WinEnter * call HighlightStrangeWhitespace()
 """ Column highlight
 
 if v:version >= 703
-  set colorcolumn=+1,80,100,120
+    set colorcolumn=+1,80,100,120
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1424,9 +1424,9 @@ endif
 """ Language providers
 
 if has("nvim") && has("mac")
-  " On macOS, we can't use System perl:
-  "   https://stackoverflow.com/questions/52682304/fatal-error-extern-h-file-not-found-while-installing-perl-modules/52997962#52997962
-  let g:perl_host_prog = expand("$MYVIM/bin/nvim-perl")
+    " On macOS, we can't use System perl:
+    "   https://stackoverflow.com/questions/52682304/fatal-error-extern-h-file-not-found-while-installing-perl-modules/52997962#52997962
+    let g:perl_host_prog = expand("$MYVIM/bin/nvim-perl")
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1438,10 +1438,10 @@ endif
 "     <C-W> .   Send <C-w> to terminal
 
 if has("nvim")
-  autocmd TermOpen * setlocal nonumber norelativenumber
-  autocmd TermClose * if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
+    autocmd TermOpen * setlocal nonumber norelativenumber
+    autocmd TermClose * if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
 else
-  autocmd TerminalWinOpen * setlocal nonumber norelativenumber
+    autocmd TerminalWinOpen * setlocal nonumber norelativenumber
 endif
 " Start terminal in insert mode when switching to it
 autocmd BufEnter * if &buftype == 'terminal' | set nonumber norelativenumber | :startinsert | endif
@@ -1449,12 +1449,12 @@ autocmd BufEnter * if &buftype == 'terminal' | set nonumber norelativenumber | :
 
 " Open terminal with opt+F12 (just like in JetBrains).
 function! OpenTerminal()
-  if has("nvim")
-    split term://zsh
-  else
-    terminal ++close
-  endif
-  resize 10
+    if has("nvim")
+        split term://zsh
+    else
+        terminal ++close
+    endif
+    resize 10
 endfunction
 " In GUI, `A` means Option, not Cmd key
 nnoremap <M-F12> <Cmd>call OpenTerminal()<CR>
@@ -1464,21 +1464,21 @@ nnoremap <F60> <Cmd>call OpenTerminal()<CR>
 nnoremap <Esc>[24~ <Cmd>call OpenTerminal()<CR>
 
 if has("gui_running")
-  tnoremap “ <C-\><C-N>
+    tnoremap “ <C-\><C-N>
 else
-  " NOTE: assumes iTerm2 has `Left Option key` set to `Esc+`
-  if has("nvim")
-    tnoremap <M-[> <C-\><C-N>
-  else
-    tnoremap <Esc>[ <C-w>N
-  endif
+    " NOTE: assumes iTerm2 has `Left Option key` set to `Esc+`
+    if has("nvim")
+        tnoremap <M-[> <C-\><C-N>
+    else
+        tnoremap <Esc>[ <C-w>N
+    endif
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load up any custom initializations after this file
 if filereadable(expand("$MYVIM/.vimrc.post"))
-  source $MYVIM/.vimrc.post
+    source $MYVIM/.vimrc.post
 endif
 
 " vim:set ai et sts=2 sw=2 tw=0:
