@@ -468,7 +468,7 @@ nnoremap <silent> <C-w><Bslash> <Cmd>call ToggleSplitOrientation()<CR>
 nnoremap <silent> <C-\> <Cmd>call ToggleSplitOrientation()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Complex abbrevations
+""" Complex abbreviations
 
 " Inserts a row of '*' characters up to the 78th column
 inoremap <Leader>`** <Esc>80a*<Esc>78\|C
@@ -850,14 +850,14 @@ endif
 let g:move_map_keys = 0
 
 if has("gui_running")
-  nmap <A-Down> <Plug>MoveLineDown
-  nmap <A-Up> <Plug>MoveLineUp
-  nmap <A-Left> <Plug>MoveCharLeft
-  nmap <A-Right> <Plug>MoveCharRight
-  vmap <A-Down> <Plug>MoveBlockDown
-  vmap <A-Up> <Plug>MoveBlockUp
-  vmap <A-Left> <Plug>MoveBlockLeft
-  vmap <A-Right> <Plug>MoveBlockRight
+  nmap <M-Down> <Plug>MoveLineDown
+  nmap <M-Up> <Plug>MoveLineUp
+  nmap <M-Left> <Plug>MoveCharLeft
+  nmap <M-Right> <Plug>MoveCharRight
+  vmap <M-Down> <Plug>MoveBlockDown
+  vmap <M-Up> <Plug>MoveBlockUp
+  vmap <M-Left> <Plug>MoveBlockLeft
+  vmap <M-Right> <Plug>MoveBlockRight
 else
   nmap <Esc><Down> <Plug>MoveLineDown
   nmap <Esc><Up> <Plug>MoveLineUp
@@ -1206,7 +1206,7 @@ endif
 """ Terminal
 
 " Usage:
-"     <A-[>   Go to terminal Normal mode
+"     <M-[>   Go to terminal Normal mode
 "   vim and not neovim:
 "     <C-W> .   Send <C-w> to terminal
 
@@ -1241,7 +1241,7 @@ if has("gui_running")
 else
   " NOTE: assumes iTerm2 has `Left Option key` set to `Esc+`
   if has("nvim")
-    tnoremap <A-[> <C-\><C-N>
+    tnoremap <M-[> <C-\><C-N>
   else
     tnoremap <Esc>[ <C-w>N
   endif
