@@ -86,7 +86,9 @@ I tend to forgot I defined these mappings:
 
 ### fzf
 
-*   `F11`       : find file
+| Mapping         | Description      |
+|-----------------|------------------|
+| `:RG <pattern>` | Search all files |
 
 ### vim-visual-multi
 
@@ -98,6 +100,13 @@ I tend to forgot I defined these mappings:
 | `q`                     | Skip current occurrence                                        |
 | `\\A`                    | Select all occurrences                                         |
 | `<C-down>` then `<Tab>` | Add cursor(s) vertically                                       |
+
+### vim-windowswap
+
+| Mapping | Description                         |
+| ---     | ---                                 |
+| `\ww`   | Sets first or second window to swap |
+
 
 ### vim-easymotion
 
