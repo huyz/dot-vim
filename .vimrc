@@ -330,7 +330,7 @@ endif
 " Putty keymap
 nnoremap <Esc>OA <Up>
 nnoremap <Esc>OB <Down>
-nnoremap <ESC>[Z <S-Tab>
+nmap <ESC>[Z <S-Tab>
 " The mappings below can be annoying as they slow down the switch to Normal
 " mode, which often interferes with my ability to then quickly hit `Cmd+s` in
 " to save in vim GUIs.
@@ -341,7 +341,7 @@ nnoremap <ESC>[Z <S-Tab>
 " already a delay no matter what.
 vnoremap <Esc>OA <Up>
 vnoremap <Esc>OB <Down>
-vnoremap <ESC>[Z <S-Tab>
+vmap <ESC>[Z <S-Tab>
 
 """ Support functions for complex mappings
 
