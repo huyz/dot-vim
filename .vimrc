@@ -184,7 +184,8 @@ imap <C-s> <Cmd>w<CR><Leader>so
 cnoremap <C-x><C-s> w !sudo tee > /dev/null %
 
 " Ident like other editors
-nnoremap <Tab> >>
+" XXX: can't remap normal-mode <Tab> as that's the same as <C-i>
+"nnoremap <Tab> >>
 nnoremap <D-]> >>
 nnoremap <S-Tab> <<
 nnoremap <D-[> <<
