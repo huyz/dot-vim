@@ -133,9 +133,9 @@ endif
 """ Emacs mappings (and also to replace the useless and dangerous ^A and ^X)
 
 " File operations
-nnoremap <C-x><C-s> :w<CR>
-nnoremap <C-x><C-f> :e
-inoremap <C-x><C-s> <C-o>:w<CR>
+nnoremap <C-x><C-s> <Cmd>w<CR>
+nnoremap <C-x><C-f> <Cmd>e
+inoremap <C-x><C-s> <Cmd>w<CR>
 nnoremap <C-a> 0
 
 " Window operations
@@ -163,7 +163,7 @@ vnoremap Q !par -w<CR>
 """ Misc mappings
 
 " Remove search highlight (same mapping as "less") but neovim's `<C-l>` is better
-nnoremap <Esc>u :noh<CR>
+nnoremap <Esc>u <Cmd>noh<CR>
 
 " Folding http://vim.wikia.com/wiki/Folding
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
@@ -176,9 +176,9 @@ noremap! <C-z> <Esc><C-z>
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <Esc>:w<CR>
 " Edits .vimrc
-nnoremap <Leader>vi :e $MYVIM/.vimrc<CR>
+nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 " Re-sources .vimrc
-nnoremap <Leader>so :so $MYVIM/.vimrc<CR>
+nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR>
 " Allow saving of files as sudo when you forget to start vim using sudo.
 " Shortcut matches my zsh binding
 cnoremap <C-x><C-s> w !sudo tee > /dev/null %
@@ -198,33 +198,33 @@ inoremap <D-[> <C-d>
 """ Function key mappings (like in .exrc, but more portable)
 
 " Different tab settings
-nnoremap <Leader>t1 :set et<CR>:set sts=2 sw=2<CR>
-nnoremap <Leader>t2 :set et<CR>:set sts=4 sw=2<CR>
-nnoremap <Leader>t3 :set et<CR>:set sts=8 sw=4<CR>
-nnoremap <Leader>t4 :set noet<CR>:set sts=8 sw=8<CR>
+nnoremap <Leader>t1 <Cmd>set et<CR><Cmd>set sts=2 sw=2<CR>
+nnoremap <Leader>t2 <Cmd>set et<CR><Cmd>set sts=4 sw=2<CR>
+nnoremap <Leader>t3 <Cmd>set et<CR><Cmd>set sts=8 sw=4<CR>
+nnoremap <Leader>t4 <Cmd>set noet<CR><Cmd>set sts=8 sw=8<CR>
 
 " Different options
-nnoremap <Leader>o0 :set sts=2 sw=2 wrap linebreak showbreak=↪ number relativenumber cursorline nocursorcolumn colorcolumn=+1,80,100,120<CR>
-nmap <Leader>o1 :set invpaste<CR>:GitGutterToggle<CR><Leader>o2:set paste?<CR>
-nnoremap <Leader>o2 :call ZCycleEditDisplay()<CR>
-nnoremap <Leader>o3 :set wrap!<CR>
-nnoremap <Leader>o4 :call ZCycleTextwidth()<CR>
-nnoremap <Leader>o5 :call ZToggleVirtualEdit()<CR>
-"nnoremap <Leader>o6 :!elinks -default-mime-type "text/html" file://%<CR>
+nnoremap <Leader>o0 <Cmd>set sts=2 sw=2 wrap linebreak showbreak=↪ number relativenumber cursorline nocursorcolumn colorcolumn=+1,80,100,120<CR>
+nmap <Leader>o1 <Cmd>set invpaste<CR><Cmd>GitGutterToggle<CR><Leader>o2<Cmd>set paste?<CR>
+nnoremap <Leader>o2 <Cmd>call ZCycleEditDisplay()<CR>
+nnoremap <Leader>o3 <Cmd>set wrap!<CR>
+nnoremap <Leader>o4 <Cmd>call ZCycleTextwidth()<CR>
+nnoremap <Leader>o5 <Cmd>call ZToggleVirtualEdit()<CR>
+"nnoremap <Leader>o6 <Cmd>!elinks -default-mime-type "text/html" file://%<CR>
 
 " Invoke plugins
-nnoremap <Leader>p0 :Startify<CR>
+nnoremap <Leader>p0 <Cmd>Startify<CR>
 if has("nvim")
-  nnoremap <Leader>p1 :NvimTreeToggle<CR>
+  nnoremap <Leader>p1 <Cmd>NvimTreeToggle<CR>
 else
-  nnoremap <Leader>p1 :NERDTreeToggle<CR>
+  nnoremap <Leader>p1 <Cmd>NERDTreeToggle<CR>
 endif
-nnoremap <Leader>p2 :FZF<CR>
-nnoremap <Leader>p3 :CtrlPMRU<CR>
-nnoremap <Leader>p4 :CtrlPMixed<CR>
-nnoremap <Leader>p5 :CtrlPBuffer<CR>
-nnoremap <Leader>p6 :LazyGit<CR>
-nnoremap <Leader>p7 :SymbolsOutline<CR>
+nnoremap <Leader>p2 <Cmd>FZF<CR>
+nnoremap <Leader>p3 <Cmd>CtrlPMRU<CR>
+nnoremap <Leader>p4 <Cmd>CtrlPMixed<CR>
+nnoremap <Leader>p5 <Cmd>CtrlPBuffer<CR>
+nnoremap <Leader>p6 <Cmd>LazyGit<CR>
+nnoremap <Leader>p7 <Cmd>SymbolsOutline<CR>
 
 " Current mappings we want quick access to
 nmap <Leader>f1 <Leader>p1
@@ -266,28 +266,28 @@ set pastetoggle=<f5>
 if has("gui_running")
   " Switch tab with Cmd +[1-9].
   " NOTE: can't do <c-2> and <c-6> for some reason so we rely on <d-2>
-  nnoremap <D-1> :tabn 1<CR>
-  nnoremap <D-2> :tabn 2<CR>
-  nnoremap <D-3> :tabn 3<CR>
-  nnoremap <D-4> :tabn 4<CR>
-  nnoremap <D-5> :tabn 5<CR>
-  nnoremap <D-6> :tabn 6<CR>
-  nnoremap <D-7> :tabn 7<CR>
-  nnoremap <D-8> :tabn 8<CR>
-  nnoremap <D-9> :tablast<CR>
-  inoremap <D-1> <C-o>:tabn 1<CR>
-  inoremap <D-2> <C-o>:tabn 2<CR>
-  inoremap <D-3> <C-o>:tabn 3<CR>
-  inoremap <D-4> <C-o>:tabn 4<CR>
-  inoremap <D-5> <C-o>:tabn 5<CR>
-  inoremap <D-6> <C-o>:tabn 6<CR>
-  inoremap <D-7> <C-o>:tabn 7<CR>
-  inoremap <D-8> <C-o>:tabn 8<CR>
-  inoremap <D-9> <C-o>:tablast<CR>
+  noremap <D-1> <Cmd>tabn 1<CR>
+  noremap <D-2> <Cmd>tabn 2<CR>
+  noremap <D-3> <Cmd>tabn 3<CR>
+  noremap <D-4> <Cmd>tabn 4<CR>
+  noremap <D-5> <Cmd>tabn 5<CR>
+  noremap <D-6> <Cmd>tabn 6<CR>
+  noremap <D-7> <Cmd>tabn 7<CR>
+  noremap <D-8> <Cmd>tabn 8<CR>
+  noremap <D-9> <Cmd>tablast<CR>
+  inoremap <D-1> <Cmd>tabn 1<CR>
+  inoremap <D-2> <Cmd>tabn 2<CR>
+  inoremap <D-3> <Cmd>tabn 3<CR>
+  inoremap <D-4> <Cmd>tabn 4<CR>
+  inoremap <D-5> <Cmd>tabn 5<CR>
+  inoremap <D-6> <Cmd>tabn 6<CR>
+  inoremap <D-7> <Cmd>tabn 7<CR>
+  inoremap <D-8> <Cmd>tabn 8<CR>
+  inoremap <D-9> <Cmd>tablast<CR>
 
   if has("nvim")
-    nnoremap <S-D-{> :tabprev<CR>
-    nnoremap <S-D-}> :tabnext<CR>
+    nnoremap <S-D-{> <Cmd>tabprev<CR>
+    nnoremap <S-D-}> <Cmd>tabnext<CR>
   endif
 else
   if has("nvim")
@@ -435,8 +435,8 @@ nmap <Leader>t0 <Leader>_do_:v/./.,/./-1join<CR><Leader>_done_
 
 " Utility functions for macros below
 " (Remembers the last search, removes the `highlight`, and recovers old position)
-noremap <Leader>_do_ :let hls=@/<CR>
-noremap <Leader>_done_ :let @/=hls<CR>:nohl<CR><C-O>
+noremap <Leader>_do_ <Cmd>let hls=@/<CR>
+noremap <Leader>_done_ <Cmd>let @/=hls<CR><Cmd>nohl<CR><C-O>
 "
 " Halve the indentation of the file, assuming spaces
 " NOTE: makes sense only with expandtab on
@@ -464,8 +464,8 @@ function! ToggleSplitOrientation()
     let t:splitType = 'vertical'
   endif
 endfunction
-nnoremap <silent> <C-w><Bslash> :call ToggleSplitOrientation()<CR>
-nnoremap <silent> <C-\> :call ToggleSplitOrientation()<CR>
+nnoremap <silent> <C-w><Bslash> <Cmd>call ToggleSplitOrientation()<CR>
+nnoremap <silent> <C-\> <Cmd>call ToggleSplitOrientation()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Complex abbrevations
@@ -977,7 +977,7 @@ map <Leader>c/ <plug>NERDCommenterAlignBoth
 
 set completefunc=emoji#complete
 " Replace all :emoji_name: into Unicode emojis
-nmap <Leader><C-U> :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
+nmap <Leader><C-U> <Cmd>%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
 
 """ syntastic
 
@@ -1007,7 +1007,6 @@ vmap <Leader>f <Plug>(coc-format-selected)
 nmap <Leader>f <Plug>(coc-format-selected)
 
 """ Firenvim
-
 
 if has("nvim")
   let g:firenvim_config = {
@@ -1115,7 +1114,7 @@ function! ToggleBackground()
     call SetBackgroundDark()
   endif
 endfunction
-nnoremap <silent> <Leader>b :call ToggleBackground()<CR>
+nnoremap <silent> <Leader>b <Cmd>call ToggleBackground()<CR>
 
 " Startup
 if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
@@ -1231,11 +1230,11 @@ function! OpenTerminal()
   resize 10
 endfunction
 " In GUI, `A` means Option, not Cmd key
-nnoremap <A-F12> :call OpenTerminal()<CR>
+nnoremap <M-F12> <Cmd>call OpenTerminal()<CR>
 " In nvim within iTerm, opt+F12 is F60
-nnoremap <F60> :call OpenTerminal()<CR>
+nnoremap <F60> <Cmd>call OpenTerminal()<CR>
 " In vim within iTerm, opt+F12 is <Esc>[24~
-nnoremap <Esc>[24~ :call OpenTerminal()<CR>
+nnoremap <Esc>[24~ <Cmd>call OpenTerminal()<CR>
 
 if has("gui_running")
   tnoremap “ <C-\><C-N>
