@@ -90,45 +90,6 @@ inoremap <Down> <C-o>gj
 "nnoremap g^ ^
 "nnoremap g$ $
 
-" Closes buffer without messing up split window
-" (goes to the next buffer first so that the split window is not closed)
-nnoremap <C-w><C-q> :bnext<CR>:bdel #<CR>
-
-" Move between split windows
-" NOTE: all this complication is because the Option key can have multiple behaviors on mac
-" NOTE: vim-visual-multi takes over <S-arrow> mappings
-if has("gui_running")
-  nnoremap Ó <C-w>h
-  nnoremap Ô <C-w>j
-  nnoremap  <C-w>k
-  nnoremap Ò <C-w>l
-  inoremap Ó <Esc><C-w>h
-  inoremap Ô <Esc><C-w>j
-  inoremap  <Esc><C-w>k
-  inoremap Ò <Esc><C-w>l
-  tnoremap Ó <C-\><C-N><C-w>h
-  tnoremap Ô <C-\><C-N><C-w>j
-  tnoremap  <C-\><C-N><C-w>k
-  tnoremap Ò <C-\><C-N><C-w>l
-else
-  " NOTE: assumes iTerm2 has `Left Option key` set to `Esc+`
-  nnoremap <Esc>H <C-w>h
-  nnoremap <Esc>J <C-w>j
-  nnoremap <Esc>K <C-w>k
-  nnoremap <Esc>L <C-w>l
-  if has("nvim")
-    tnoremap <A-H> <C-\><C-N><C-w>h
-    tnoremap <A-J> <C-\><C-N><C-w>j
-    tnoremap <A-K> <C-\><C-N><C-w>k
-    tnoremap <A-L> <C-\><C-N><C-w>l
-  else
-    tnoremap <Esc>H <C-\><C-N><C-w>h
-    tnoremap <Esc>J <C-\><C-N><C-w>j
-    tnoremap <Esc>K <C-\><C-N><C-w>k
-    tnoremap <Esc>L <C-\><C-N><C-w>l
-  endif
-endif
-
 
 """ Emacs mappings (and also to replace the useless and dangerous ^A and ^X)
 
@@ -262,7 +223,185 @@ nmap <F12> <Leader>F2
 " Make pastetoggle also work in insert mode
 set pastetoggle=<f5>
 
-""" Command+number mappings
+""" Common GUI mappings
+
+if has("gui_running")
+  " Move cursor
+  nnoremap <D-Up> gg
+  nnoremap <D-Down> G
+  nnoremap <D-Left> 0
+  nnoremap <D-Right> $
+  inoremap <D-Up> <C-o>gg
+  inoremap <D-Down> <C-o>G
+  inoremap <D-Left> <C-o>0
+  inoremap <D-Right> <C-o>$
+
+  " Go back/forward
+  nnoremap <M-D-Left> <C-o>
+  inoremap <M-D-Left> <C-o><C-o>
+  vnoremap <M-D-Left> <Esc><C-o>
+  nnoremap <M-D-Right> <C-i>
+  inoremap <M-D-Right> <C-o><C-i>
+  vnoremap <M-D-Right> <Esc><C-i>
+
+  " Go to previous edit location
+  nnoremap <S-D-BS> `.
+  inoremap <S-D-BS> <C-o>`.
+  vnoremap <S-D-BS> <Esc>`.
+  " Delete line
+  nnoremap <C-S-BS> dd
+  nnoremap <D-Del> D
+  nnoremap <D-BS> d0
+  inoremap <C-S-BS> <C-o>dd
+  inoremap <D-Del> <C-o>D
+  inoremap <D-BS> <C-o>d0
+
+  " Go to previous/next method
+  noremap <C-S-D-Up> [m
+  inoremap <C-S-D-Up> <C-o>[m
+  noremap <C-S-D-Down> ]m
+  inoremap <C-S-D-Down> <C-o>]m
+
+  " Insert line above/below
+  nnoremap <C-CR> o<Esc>
+  vnoremap <C-CR> <Esc>o<Esc>
+  inoremap <C-CR> <C-o>o
+  nnoremap <S-C-CR> O<Esc>
+  inoremap <S-C-CR> <C-o>O
+  vnoremap <S-C-CR> <Esc>O<Esc>
+
+  " Open recent
+  noremap <D-p> <Cmd>FZF<CR>
+  noremap <D-e> <Cmd>CtrlPBuffer<CR>
+endif
+
+""" System clipboard
+
+if has("mac")
+  " <M-x> on macOS
+  vnoremap ≈ "+d
+  " <M-c> on macOS
+  vnoremap ç "+y
+  " <M-v> on macOS
+  vnoremap √ "+gP
+  nnoremap √ "+gP
+  cnoremap √ <C-R>+
+  inoremap √ <C-R><C-O>+
+endif
+
+""" Split mappings
+
+" Closes buffer without messing up split window
+" (goes to the next buffer first so that the split window is not closed)
+noremap <C-w><C-q> <Cmd>bnext<CR><Cmd>bdel #<CR>
+
+" Splitting windows and moving between them
+
+" TODO: Using the Ctrl modifier
+" NOTE: this will only work if the terminal supports it, recent xterm and
+"   iTerm with modifyOtherKeys mode;MacVim
+"
+" noremap <Esc>R <Cmd>vsplit<CR>
+" noremap <Esc>S <Cmd>split<CR>
+" nnoremap <Esc>W <C-w>c
+" nnoremap <Esc>O <C-w>o
+" nnoremap <Esc>H <C-w>h
+" nnoremap <Esc>J <C-w>j
+" nnoremap <Esc>K <C-w>k
+" nnoremap <Esc>L <C-w>l
+" if has("nvim")
+"   inoremap <M-H> <C-o><C-w>h
+"   inoremap <M-J> <C-o><C-w>j
+"   inoremap <M-K> <C-o><C-w>k
+"   inoremap <M-L> <C-o><C-w>l
+"   tnoremap <M-H> <C-\><C-N><C-w>h
+"   tnoremap <M-J> <C-\><C-N><C-w>j
+"   tnoremap <M-K> <C-\><C-N><C-w>k
+"   tnoremap <M-L> <C-\><C-N><C-w>l
+"   inoremap <M-R> <Cmd>vsplit<CR>
+"   inoremap <M-S> <Cmd>split<CR>
+"   inoremap <M-W> <C-o><C-w>c
+"   tnoremap <M-W> <C-\><C-N><C-w>c
+"   inoremap <M-O> <C-o><C-w>o
+"   tnoremap <M-O> <C-\><C-N><C-w>o
+" endif
+
+" Using the Opt modifier
+" NOTE: all this complication is because the Option key can have multiple behaviors on mac
+" NOTE: vim-visual-multi takes over <S-arrow> mappings
+if has("gui_running")
+  if has("mac")
+    noremap ‰ <Cmd>vsplit<CR>
+    noremap Í <Cmd>split<CR>
+    inoremap ‰ <Cmd>vsplit<CR>
+    inoremap Í <Cmd>split<CR>
+    nnoremap „ <C-w>c
+    nnoremap Ø <C-w>o
+    tnoremap „ <C-\><C-N><C-w>c
+    tnoremap Ø <C-\><C-N><C-w>o
+    nnoremap Ó <C-w>h
+    nnoremap Ô <C-w>j
+    nnoremap  <C-w>k
+    nnoremap Ò <C-w>l
+    inoremap Ó <C-o><C-w>h
+    inoremap Ô <C-o><C-w>j
+    inoremap  <C-o><C-w>k
+    inoremap Ò <C-o><C-w>l
+    tnoremap Ó <C-\><C-N><C-w>h
+    tnoremap Ô <C-\><C-N><C-w>j
+    tnoremap  <C-\><C-N><C-w>k
+    tnoremap Ò <C-\><C-N><C-w>l
+  endif
+  if has("nvim")
+    nnoremap <M-S-D-h> <C-w>H
+    nnoremap <M-S-D-j> <C-w>J
+    nnoremap <M-S-D-k> <C-w>K
+    nnoremap <M-S-D-l> <C-w>L
+  elseif has("mac")
+    nnoremap <D-Ó> <C-w>H
+    nnoremap <D-Ô> <C-w>J
+    nnoremap <D-> <C-w>K
+    nnoremap <D-Ò> <C-w>L
+  endif
+else
+  " NOTE: assumes iTerm2 has `Left Option key` set to `Esc+`
+  noremap <Esc>R <Cmd>vsplit<CR>
+  noremap <Esc>S <Cmd>split<CR>
+  nnoremap <Esc>W <C-w>c
+  nnoremap <Esc>O <C-w>o
+  nnoremap <Esc>H <C-w>h
+  nnoremap <Esc>J <C-w>j
+  nnoremap <Esc>K <C-w>k
+  nnoremap <Esc>L <C-w>l
+  if has("nvim")
+    inoremap <M-H> <C-o><C-w>h
+    inoremap <M-J> <C-o><C-w>j
+    inoremap <M-K> <C-o><C-w>k
+    inoremap <M-L> <C-o><C-w>l
+    tnoremap <M-H> <C-\><C-N><C-w>h
+    tnoremap <M-J> <C-\><C-N><C-w>j
+    tnoremap <M-K> <C-\><C-N><C-w>k
+    tnoremap <M-L> <C-\><C-N><C-w>l
+    inoremap <M-R> <Cmd>vsplit<CR>
+    inoremap <M-S> <Cmd>split<CR>
+    inoremap <M-W> <C-o><C-w>c
+    tnoremap <M-W> <C-\><C-N><C-w>c
+    inoremap <M-O> <C-o><C-w>o
+    tnoremap <M-O> <C-\><C-N><C-w>o
+  else
+    " XXX: For vim, cannot do Insert-mode maps because they interfere with exiting out
+    " of Insert mode with <Esc> and then immediately hitting a number.
+    tnoremap <Esc>W <C-\><C-N><C-w>c
+    tnoremap <Esc>H <C-\><C-N><C-w>h
+    tnoremap <Esc>J <C-\><C-N><C-w>j
+    tnoremap <Esc>K <C-\><C-N><C-w>k
+    tnoremap <Esc>L <C-\><C-N><C-w>l
+  endif
+endif
+
+""" Tab mappings
+
+" GUI-only
 
 if has("gui_running")
   " Switch tab with Cmd +[1-9].
@@ -289,39 +428,76 @@ if has("gui_running")
   if has("nvim")
     nnoremap <S-D-{> <Cmd>tabprev<CR>
     nnoremap <S-D-}> <Cmd>tabnext<CR>
+    inoremap <S-D-{> <Cmd>tabprev<CR>
+    inoremap <S-D-}> <Cmd>tabnext<CR>
   endif
+
+  " XXX These don't work in macvim as <S-A-D-{> is interpreted as <M-D-{>
+  nnoremap <S-A-D-{> <Cmd>-tabmove<CR>
+  nnoremap <S-A-D-}> <Cmd>+tabmove<CR>
+  inoremap <S-A-D-{> <Cmd>-tabmove<CR>
+  inoremap <S-A-D-}> <Cmd>+tabmove<CR>
+endif
+
+" GUI & TUI
+
+if has("gui_running") && has("mac")
+  noremap † <Cmd>tabnew<CR>
+  noremap ∑ <Cmd>tabclose<CR>
+  noremap ¡ <Cmd>tabn 1<CR>
+  noremap ™ <Cmd>tabn 2<CR>
+  noremap £ <Cmd>tabn 3<CR>
+  noremap ¢ <Cmd>tabn 4<CR>
+  noremap ∞ <Cmd>tabn 5<CR>
+  noremap § <Cmd>tabn 6<CR>
+  noremap ¶ <Cmd>tabn 7<CR>
+  noremap • <Cmd>tabn 8<CR>
+  noremap ª <Cmd>tablast<CR>
+  noremap ” <Cmd>tabprev<CR>
+  noremap ’ <Cmd>tabnext<CR>
+  inoremap † <Cmd>tabnew<CR>
+  inoremap ∑ <Cmd>tabclose<CR>
+  inoremap ¡ <Cmd>tabn 1<CR>
+  inoremap ™ <Cmd>tabn 2<CR>
+  inoremap £ <Cmd>tabn 3<CR>
+  inoremap ¢ <Cmd>tabn 4<CR>
+  inoremap ∞ <Cmd>tabn 5<CR>
+  inoremap § <Cmd>tabn 6<CR>
+  inoremap ¶ <Cmd>tabn 7<CR>
+  inoremap • <Cmd>tabn 8<CR>
+  inoremap ª <Cmd>tablast<CR>
+  inoremap ” <Cmd>tabprev<CR>
+  inoremap ’ <Cmd>tabnext<CR>
 else
+  noremap <Esc>t <Cmd>tabnew<CR>
+  noremap <Esc>w <Cmd>tabclose<CR>
+  noremap <Esc>1 <Cmd>tabn 1<CR>
+  noremap <Esc>2 <Cmd>tabn 2<CR>
+  noremap <Esc>3 <Cmd>tabn 3<CR>
+  noremap <Esc>4 <Cmd>tabn 4<CR>
+  noremap <Esc>5 <Cmd>tabn 5<CR>
+  noremap <Esc>6 <Cmd>tabn 6<CR>
+  noremap <Esc>7 <Cmd>tabn 7<CR>
+  noremap <Esc>8 <Cmd>tabn 8<CR>
+  noremap <Esc>9 <Cmd>tablast<CR>
+  noremap <Esc>{ <Cmd>tabprev<CR>
+  noremap <Esc>} <Cmd>tabnext<CR>
   if has("nvim")
-    nnoremap <A-1> :tabn 1<CR>
-    nnoremap <A-2> :tabn 2<CR>
-    nnoremap <A-3> :tabn 3<CR>
-    nnoremap <A-4> :tabn 4<CR>
-    nnoremap <A-5> :tabn 5<CR>
-    nnoremap <A-6> :tabn 6<CR>
-    nnoremap <A-7> :tabn 7<CR>
-    nnoremap <A-8> :tabn 8<CR>
-    nnoremap <A-9> :tablast<CR>
-    inoremap <A-1> <C-o>:tabn 1<CR>
-    inoremap <A-2> <C-o>:tabn 2<CR>
-    inoremap <A-3> <C-o>:tabn 3<CR>
-    inoremap <A-4> <C-o>:tabn 4<CR>
-    inoremap <A-5> <C-o>:tabn 5<CR>
-    inoremap <A-6> <C-o>:tabn 6<CR>
-    inoremap <A-7> <C-o>:tabn 7<CR>
-    inoremap <A-8> <C-o>:tabn 8<CR>
-    inoremap <A-9> <C-o>:tablast<CR>
-  else
-    nnoremap <Esc>1 :tabn 1<CR>
-    nnoremap <Esc>2 :tabn 2<CR>
-    nnoremap <Esc>3 :tabn 3<CR>
-    nnoremap <Esc>4 :tabn 4<CR>
-    nnoremap <Esc>5 :tabn 5<CR>
-    nnoremap <Esc>6 :tabn 6<CR>
-    nnoremap <Esc>7 :tabn 7<CR>
-    nnoremap <Esc>8 :tabn 8<CR>
-    nnoremap <Esc>9 :tablast<CR>
-    " XXX: cannot do Insert-mode maps because they interfere with exiting out
+    " XXX: For vim, cannot do Insert-mode maps because they interfere with exiting out
     " of Insert mode with <Esc> and then immediately hitting a number.
+    inoremap <M-t> <Cmd>tabnew<CR>
+    inoremap <M-w> <Cmd>tabclose<CR>
+    inoremap <M-1> <Cmd>tabn 1<CR>
+    inoremap <M-2> <Cmd>tabn 2<CR>
+    inoremap <M-3> <Cmd>tabn 3<CR>
+    inoremap <M-4> <Cmd>tabn 4<CR>
+    inoremap <M-5> <Cmd>tabn 5<CR>
+    inoremap <M-6> <Cmd>tabn 6<CR>
+    inoremap <M-7> <Cmd>tabn 7<CR>
+    inoremap <M-8> <Cmd>tabn 8<CR>
+    inoremap <M-9> <Cmd>tablast<CR>
+    inoremap <M-{> <Cmd>tabprev<CR>
+    inoremap <M-}> <Cmd>tabnext<CR>
   endif
 endif
 
