@@ -80,8 +80,8 @@ nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR>
 " Quick-save and reload .vimrc
 " NOTE: MacVim and VimR already handle <D-s>
-nmap <C-s> <Cmd>w<CR><Leader>so
-imap <C-s> <Cmd>w<CR><Leader>so
+nmap <C-s> <Cmd>write<CR><Leader>so
+imap <C-s> <Cmd>write<CR><C-o><Leader>so
 
 " Allow saving of files as sudo when you forget to start vim using sudo.
 " Shortcut matches my zsh binding
