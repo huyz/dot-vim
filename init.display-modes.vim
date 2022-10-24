@@ -39,31 +39,38 @@ function! ToggleVirtualEdit()
     endif
 endfunction
 
-function! CycleEditDisplay()
-    if exists('b:CycleEditDisplay_init')
-        let l:init = 1
-        unlet b:CycleEditDisplay_init
-        let b:CycleEditDisplay_mode = 'init'
-    endif
-    if b:CycleEditDisplay_mode == 'default'
+function! CycleEditDisplay(mode = '')
+    if a:mode == 'init'
+        let b:CycleEditDisplay_mode = 'default'
+    elseif a:mode == '1'
+        " This is 'paste'
+        let b:CycleEditDisplay_mode = 'none'
+    elseif a:mode == '0'
+        " This is 'nopaste'
+        let b:CycleEditDisplay_mode = 'default'
+    elseif b:CycleEditDisplay_mode == 'default'
         let b:CycleEditDisplay_mode = 'full'
+    elseif b:CycleEditDisplay_mode == 'full'
+        let b:CycleEditDisplay_mode = 'none'
+    else
+        let b:CycleEditDisplay_mode = 'default'
+    endif
+
+    if b:CycleEditDisplay_mode == 'full'
         set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
         set   list   number   relativenumber   cursorline showbreak=↪
         set colorcolumn=+1,80,100,120
-    elseif b:CycleEditDisplay_mode == 'full'
-        let b:CycleEditDisplay_mode = 'none'
+    elseif b:CycleEditDisplay_mode == 'none'
         set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
         set nolist nonumber norelativenumber nocursorline showbreak=  nocursorcolumn
         set colorcolumn=
     else
-        let b:CycleEditDisplay_mode = 'default'
         set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
         set   list   number   relativenumber   cursorline showbreak=↪
         set colorcolumn=+1,80,100,120
     endif
-    if !exists('l:init')
+    if a:mode != 'init'
         echo 'b:CycleEditDisplay_mode=' . b:CycleEditDisplay_mode
     endif
 endfunction
-let b:CycleEditDisplay_init = 1
-call CycleEditDisplay()
+call CycleEditDisplay('init')
