@@ -90,6 +90,13 @@ I tend to forgot I defined these mappings:
 |-----------------|------------------|
 | `:RG <pattern>` | Search all files |
 
+### vim-move
+
+| Mapping    | Description                           |
+|------------|---------------------------------------|
+| `<M-Up>` | Move current character/selection up |
+| `<M-Left>` | Move current character/selection left |
+
 ### vim-visual-multi
 
 | Mapping                 | Description                                                    |
@@ -176,6 +183,12 @@ I tend to forgot I defined these mappings:
 | ---          | ---                                        |
 | `cx{motion}` | Sets first or second text to swap/exchange |
 | `cxx`        | Sets first or second line to swap/exchange |
+
+### vim-argumentative
+
+| Mapping | Description                  |
+| ---     | ---                          |
+| `⇧⌥.` or `<.`    | Shift function argument right |
 
 ### targets
 

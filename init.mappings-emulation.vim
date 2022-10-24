@@ -34,7 +34,8 @@ function! s:MetaNeedsNormalization(str) abort
     if has("nvim") || (has("gui_macvim") && has("gui_running") && !&macmeta)
         return 0
     endif
-    return strlen(a:str) == 5 && StartsWith(a:str, '<M-')
+    return strlen(a:str) == 5 && StartsWith(a:str, '<M-') ||
+                \ (a:str == '<M-lt>')
 endfunction
 
 " There are some cases where using <Esc>x is necessary over <M-x>
@@ -52,6 +53,11 @@ function! s:NormalizeMetaModifier(str) abort
     if has("nvim") || (has("gui_macvim") && has("gui_running") && !&macmeta)
         return a:str
     endif
+    if a:str == '<M-lt>'
+        return '<Esc><lt>'
+    elseif a:str == '<M->>'
+        return '<Esc><gt>'
+    endif
     return substitute(a:str, '<M-\(.\)>', '<Esc>\1', '')
 endfunction
 
@@ -64,7 +70,7 @@ function! s:MapAlias(keys, rhs) abort
 endfunction
 
 " Maps the key sequence to RHS, optionally with specific modes
-function! Noremap(keys, rhs, modes = "all", no_insert = 0) abort
+function! Keymap(keys, rhs, modes = "all", no_insert = 0, no_remap = 1) abort
     let l:keys = a:keys
     let l:rhs = a:rhs
     let l:modes = a:modes
@@ -83,18 +89,22 @@ function! Noremap(keys, rhs, modes = "all", no_insert = 0) abort
             " <Esc> key to get out of normal mode.
             let l:no_insert = 1
         endif
-        call Noremap(s:NormalizeMetaModifier(a:keys), s:NormalizeMetaModifier(a:rhs), l:modes, l:no_insert)
+        call Keymap(s:NormalizeMetaModifier(a:keys),
+                    \ s:NormalizeMetaModifier(a:rhs), l:modes, l:no_insert,
+                    \ a:no_remap)
         if has("gui_running")
             return
         endif
     endif
 
+    let l:nore = a:no_remap ? 'nore' : ''
+
     let l:prefixes = s:RhsPrefixesForAllModes(l:rhs)
     if type(l:modes) == type("") && l:modes == 'all'
-        execute 'noremap'  l:keys l:rhs
-        execute 'tnoremap' l:keys l:prefixes[1] . l:rhs
+        execute l:nore . 'map'  l:keys l:rhs
+        execute 't' . l:nore . 'map' l:keys l:prefixes[1] . l:rhs
         if a:no_insert == 0
-            execute 'noremap!' l:keys l:prefixes[0] . l:rhs
+            execute l:nore . 'map!' l:keys l:prefixes[0] . l:rhs
         endif
     else
         for mode in l:modes
@@ -109,9 +119,9 @@ endfunction
 " access and easy GUI access
 function! s:NoremapSuperKey(key, rhs, ...) abort
     let l:modes = get(a:, 2, 'all')
-    call Noremap('<M-' . a:key . '>', a:rhs, l:modes)
+    call Keymap('<M-' . a:key . '>', a:rhs, l:modes)
     if has("gui_running")
-        call Noremap('<D-' . a:key . '>', a:rhs, l:modes)
+        call Keymap('<D-' . a:key . '>', a:rhs, l:modes)
     endif
 endfunction
 
@@ -206,7 +216,7 @@ call <SID>MapAlias('Æ', '<M-">')
 call <SID>MapAlias('≤', '<M-,>')
 call <SID>MapAlias('¯', '<M-lt>')
 call <SID>MapAlias('≥', '<M-.>')
-call <SID>MapAlias('˘', '<M-gt>')
+call <SID>MapAlias('˘', '<M->>')
 call <SID>MapAlias('¿', '<M-?>')
 call <SID>MapAlias('÷', '<M-/>')
 
@@ -308,7 +318,7 @@ if has("gui_running")
         call <SID>NoremapSuperKey('ø', '<Cmd>Startify<CR>')
     elseif has("gui_vimr")
         " In GUI: <M-D-o>
-        call Noremap('<M-D-o>', '<Cmd>Startify<CR>')
+        call Keymap('<M-D-o>', '<Cmd>Startify<CR>')
     endif
 endif
 
@@ -328,7 +338,7 @@ nnoremap <Up> gk
 nnoremap <Down> gj
 inoremap <Up> <C-o>gk
 inoremap <Down> <C-o>gj
-call Noremap('<M-z>', '<Cmd>set wrap!<CR>')
+call Keymap('<M-z>', '<Cmd>set wrap!<CR>')
 
 " Move cursor
 nnoremap <D-Up> gg
@@ -390,16 +400,20 @@ nnoremap <S-C-CR> O<Esc>
 inoremap <S-C-CR> <C-o>O
 vnoremap <S-C-CR> <Esc>O<Esc>
 
+" Shift argument (using vim-argumentative)
+call Keymap('<M-lt>', '<,', 'all', 0, 0)
+call Keymap('<M->>', '>,', 'all', 0, 0)
+
 """ Splits {{{2
 
-call Noremap('<M-R>', '<Cmd>vsplit<CR>')
-call Noremap('<M-S>', '<Cmd>split<CR>')
-call Noremap('<M-W>', '<C-w>c')
-call Noremap('<M-O>', '<C-w>o')
-call Noremap('<M-H>', '<C-w>h')
-call Noremap('<M-J>', '<C-w>j')
-call Noremap('<M-K>', '<C-w>k')
-call Noremap('<M-L>', '<C-w>l')
+call Keymap('<M-R>', '<Cmd>vsplit<CR>')
+call Keymap('<M-S>', '<Cmd>split<CR>')
+call Keymap('<M-W>', '<C-w>c')
+call Keymap('<M-O>', '<C-w>o')
+call Keymap('<M-H>', '<C-w>h')
+call Keymap('<M-J>', '<C-w>j')
+call Keymap('<M-K>', '<C-w>k')
+call Keymap('<M-L>', '<C-w>l')
 
 " Toggle split orientation
 " https://stackoverflow.com/questions/1269603/to-switch-from-vertical-split-to-horizontal-split-fast-in-vim/45994525#45994525
@@ -436,12 +450,12 @@ call <SID>NoremapSuperKey('}', '<Cmd>tabnext<CR>')
 
 if has("gui_running")
     " Switch tab with ⌘+[1-9].
-    call Noremap('<S-D-{>', '<Cmd>tabprev<CR>')
-    call Noremap('<S-D-}>', '<Cmd>tabnext<CR>')
+    call Keymap('<S-D-{>', '<Cmd>tabprev<CR>')
+    call Keymap('<S-D-}>', '<Cmd>tabnext<CR>')
 
     " These don't work inside iTerm as they are passed as `<M-{>`
-    call Noremap('<M-S-D-{>', '<Cmd>-tabmove<CR>')
-    call Noremap('<M-S-D-}>', '<Cmd>+tabmove<CR>')
+    call Keymap('<M-S-D-{>', '<Cmd>-tabmove<CR>')
+    call Keymap('<M-S-D-}>', '<Cmd>+tabmove<CR>')
 endif
 
 " vim:foldmethod=marker:

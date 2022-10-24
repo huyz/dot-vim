@@ -25,8 +25,8 @@ function! OpenTerminal()
     endif
     resize 10
 endfunction
-call Noremap('<M-F12>', '<Cmd>call OpenTerminal()<CR>')
+call Keymap('<M-F12>', '<Cmd>call OpenTerminal()<CR>')
 
 " Convenience map of <M-[> for escaping to normal mode, which is easier to
 " press than <C-\><C-N>
-call Noremap('<M-[>', '<C-\><C-N>', ['tnoremap'])
+call Keymap('<M-[>', '<C-\><C-N>', ['tnoremap'])

@@ -86,6 +86,7 @@ Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'kana/vim-textobj-user'  " dependency of textobj-entire
 Plug 'kana/vim-textobj-entire'
+Plug 'PeterRincker/vim-argumentative'
 
 " Dev
 Plug 'sheerun/vim-polyglot'
