@@ -225,7 +225,9 @@ call <SID>MapAlias('<D-’>', '<M-S-D-}>')
 
 " In vim within iTerm, Opt+F12 is <Esc>[24~
 call <SID>MapAlias('<Esc>[24~', '<M-F12>')
-call <SID>MapAlias('<F60>', '<M-F12>')
+if has("nvim")
+    call <SID>MapAlias('<F60>', '<M-F12>')
+endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
