@@ -310,7 +310,7 @@ nnoremap <Esc>u <Cmd>noh<CR>
 """ General
 
 " Open recent
-call <SID>NoremapSuperKey('p', '<Cmd>FZF<CR>')
+call <SID>NoremapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
 call <SID>NoremapSuperKey('e', '<Cmd>CtrlPBuffer<CR>')
 call <SID>NoremapSuperKey('F', '<Cmd>RG<CR>')
 call <SID>NoremapSuperKey('o', '<Cmd>Startify<CR>')

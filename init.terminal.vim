@@ -8,7 +8,8 @@
 
 if has("nvim")
     autocmd TermOpen * setlocal nonumber norelativenumber
-    autocmd TermClose * if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
+    " NOTE: added "silent!" to avoid error when FZF terminal window is closed.
+    autocmd TermClose * if !v:event.status | silent! exe 'bdelete! '..expand('<abuf>') | endif
 else
     autocmd TerminalWinOpen * setlocal nonumber norelativenumber
 endif
