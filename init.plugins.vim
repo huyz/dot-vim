@@ -61,6 +61,7 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
+Plug 'moll/vim-bbye'
 
 " Text
 Plug 'ap/vim-you-keep-using-that-word'
@@ -254,6 +255,10 @@ endif
 
 " Automatically close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+""" bbye {{{2
+
+noremap <C-w><C-q> <Cmd>Bdelete<CR>
 
 """ vim-indent-guides {{{2
 

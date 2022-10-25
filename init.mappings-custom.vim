@@ -89,7 +89,8 @@ cnoremap <C-x><C-s> w !sudo tee > /dev/null %
 
 " Closes buffer without messing up split window
 " (goes to the next buffer first so that the split window is not closed)
-noremap <C-w><C-q> <Cmd>bnext<CR><Cmd>bdel #<CR>
+" 2022-10-25 Now use bbye plugin
+"noremap <C-w><C-q> <Cmd>bnext<CR><Cmd>bdel #<CR>
 
 " Use Q for par formating
 " NOTE: regular formatting is still done with `gq` and emacs formatting with <M-q>
