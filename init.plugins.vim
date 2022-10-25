@@ -45,6 +45,23 @@ Plug 'kien/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" wilder
+if has('nvim')
+  function! UpdateRemotePlugins(...)
+    " Needed to refresh runtime files
+    let &rtp=&rtp
+    UpdateRemotePlugins
+  endfunction
+
+  Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
+else
+  Plug 'gelguy/wilder.nvim'
+endif
+" For wilder: To use Python remote plugin features in Vim, can be skipped
+" 2022-10-25 Can't get python options to work in vim or neovim
+" Plug 'roxma/nvim-yarp', Cond(!has('nvim'))
+" Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim'))
+
 " Colorscheme
 Plug 'cormacrelf/dark-notify', Cond(has('nvim'))
 Plug 'L-TChen/auto-dark-mode.vim', Cond(!has('nvim') && has('gui_running'))
@@ -242,6 +259,23 @@ command! -bang -nargs=* RG
     \   'rg -L --hidden --glob "!.git/" --column --line-number --no-heading --color=always --smart-case -- '
     \   .shellescape(<q-args>), 1,
     \   fzf#vim#with_preview(), <bang>0)
+
+""" wilder {{{2
+" 2022-10-25 Can't get python options to work in vim or neovim
+
+call wilder#setup({'modes': [':', '/', '?']})
+
+call wilder#set_option('pipeline', [
+      \   wilder#branch(
+      \     wilder#cmdline_pipeline({
+      \       'language': 'vim',
+      \       'fuzzy': 1,
+      \       'fuzzy_filter': wilder#vim_fuzzy_filter(),
+      \     }),
+      \   ),
+      \ ])
+
+call wilder#set_option('renderer', wilder#popupmenu_renderer())
 
 """ nvim-tree {{{2
 
