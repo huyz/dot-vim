@@ -12,8 +12,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Init {{{1
 
-""" Find .vim/ relative to .vimrc {{{2
-""" Usage: vim -u /path/to/portable/vim/.vimrc
+""" Find .vim/ relative to .vimrc
+" Usage: vim -u /path/to/portable/vim/.vimrc
 
 " what is the name of the directory containing this file?
 let $MYVIM = expand('<sfile>:p:h')
@@ -37,7 +37,7 @@ set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Source other files {{{1
 
-" Load up any custom initializations before this file
+""" Load up any custom initializations before this file
 if filereadable(expand("$MYVIM/.vimrc.pre"))
     source $MYVIM/.vimrc.pre
 endif
@@ -77,9 +77,8 @@ if isdirectory(expand("$MEHOME/.vim"))
     endif
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Load up any custom initializations after this file
 
-" Load up any custom initializations after this file
 if filereadable(expand("$MYVIM/.vimrc.post"))
     source $MYVIM/.vimrc.post
 endif

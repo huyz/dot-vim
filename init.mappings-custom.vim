@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Function keys (like in .exrc, but more portable) {{{1
+""" Function keys {{{1
 
 " Normal function key mappings (these don't change)
 if has("nvim")

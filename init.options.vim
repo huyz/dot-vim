@@ -6,6 +6,8 @@ set backupcopy=yes      " Preserve the birth time of files, at least on macOS
 set nobackup            " gvim-win32 has it on by default
 set autoread            " Reload files changed outside vim
 set autochdir           " Automatically change the working directory
+set browsedir=current   " Make the file browser always open the current directory.
+
 
 """ Display options
 
@@ -41,8 +43,7 @@ set splitbelow          " Add new split window below current
 set equalalways         " Make windows same size after new/close split
 set winheight=15        " Recommended minimum size of window when switching
                         " to one of the split windows, if possible
-set winminheight=0      " We don't need to see any line of non-current split
-                        " window
+set winminheight=0      " We don't need to see any line of non-current split window
 
 """ Buffer options
 
