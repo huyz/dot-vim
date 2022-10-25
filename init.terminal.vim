@@ -31,3 +31,7 @@ call MapKey('<M-F12>', '<Cmd>call OpenTerminal()<CR>')
 " Convenience map of <M-[> for escaping to normal mode, which is easier to
 " press than <C-\><C-N>
 call MapKey('<M-[>', '<C-\><C-N>', ['tnoremap'])
+
+" For <C-/> to work in FZF window
+" XXX Doesn't work in MacVim (and other UIs may beep); using <C-_> is better
+tmap <C-/> <C-_>
