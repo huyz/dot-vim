@@ -205,7 +205,13 @@ let g:ctrlp_max_files = 20000
 
 """ fzf {{{2
 
-"
+" Tip: remember to keep these envvars in sync in your shell config files
+let $FZF_DEFAULT_OPTS="--bind=ctrl-/:toggle-preview,ctrl-f:preview-page-down,ctrl-b:preview-page-up --preview '
+      \ if [[ -d {} ]]; then ls -ACF --color=always {};
+      \ elif [[ -f {} ]]; then [[ \$(file --mime \{\}) =~ binary ]] &&
+      \ echo ''** binary file **'' ||
+      \ (bat --plain --color=always {} || cat {}) 2> /dev/null | head -500; fi' "
+let $FZF_DEFAULT_COMMAND="fd --follow --hidden --exclude .git"
 
 " An action can be a reference to a function that processes selected lines
 function! s:build_quickfix_list(lines)
