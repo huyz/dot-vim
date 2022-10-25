@@ -37,6 +37,7 @@ runtime macros/matchit.vim
 Plug 'mattn/webapi-vim'
 
 """ Plugins {{{2
+Plug 'tpope/vim-eunuch'
 
 " Files
 Plug 'mhinz/vim-startify'
@@ -44,6 +45,7 @@ Plug 'kien/ctrlp.vim'
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-eunuch'
 
 " wilder
 if has('nvim')
@@ -98,7 +100,6 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tommcdo/vim-exchange'
 Plug 'nicwest/vim-camelsnek'
 Plug 'christoomey/vim-titlecase'
-Plug 'Kachyz/vim-gitmoji'
 
 " Text objects
 Plug 'wellle/targets.vim'
@@ -120,11 +121,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
 Plug 'simrat39/symbols-outline.nvim', Cond(has('nvim'))
-Plug 'kdheepak/lazygit.nvim', {'branch': 'main'}
+
+" Git
+Plug 'Kachyz/vim-gitmoji'
+Plug 'rhysd/git-messenger.vim'
+Plug 'kdheepak/lazygit.nvim', Cond(has('nvim'), {'branch': 'main'})
 " Needed for automatic session naming function below for Startify
 Plug 'itchyny/vim-gitbranch'
-
-" External sites
 Plug 'mattn/gist-vim'
 
 " Misc
@@ -264,7 +267,14 @@ command! -bang -nargs=* RG
 """ wilder {{{2
 " 2022-10-25 Can't get python options to work in vim or neovim
 
-call wilder#setup({'modes': [':', '/', '?']})
+call wilder#setup({
+      \ 'modes': [':', '/', '?'],
+      \ 'next_key': '<C-j>',
+      \ 'previous_key': '<C-k>',
+      \ 'accept_key': '<Enter>',
+      \ 'reject_key': '<Esc>',
+      \ })
+
 
 call wilder#set_option('pipeline', [
       \   wilder#branch(
@@ -418,7 +428,8 @@ let g:syntastic_python_checkers          = ['python3', 'pylint']
 
 """ coc.nvim {{{2
 
-let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-pyright']
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier',
+            \ 'coc-tsserver', 'coc-pyright', 'coc-git']
 let g:python3_host_prog = expand("~/.pyenv/versions/py3nvim/bin/python")
 
 " Usage: type `:Prettier` to format whole document
@@ -427,6 +438,12 @@ command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 " Usage: select range and invoke `\f`
 vmap <Leader>f <Plug>(coc-format-selected)
 nmap <Leader>f <Plug>(coc-format-selected)
+
+""" git-messenger
+
+let g:git_messenger_no_default_mappings = v:false
+nmap <Leader>gb <Plug>(git-messenger)
+
 
 """ Gist {{{2
 
