@@ -222,6 +222,7 @@ call <SID>MapAlias('÷', '<M-/>')
 
 call <SID>MapAlias('<D-”>', '<M-S-D-{>')
 call <SID>MapAlias('<D-’>', '<M-S-D-}>')
+call <SID>MapAlias('<D-±>', '<M-S-D-BS>')
 
 " In vim within iTerm, Opt+F12 is <Esc>[24~
 call <SID>MapAlias('<Esc>[24~', '<M-F12>')
@@ -312,6 +313,7 @@ nnoremap <Esc>u <Cmd>noh<CR>
 " Open recent
 call <SID>NoremapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
 call <SID>NoremapSuperKey('e', '<Cmd>CtrlPBuffer<CR>')
+call <SID>NoremapSuperKey('E', '<Cmd>CtrlPBuffer<CR>')
 call <SID>NoremapSuperKey('F', '<Cmd>RG<CR>')
 call <SID>NoremapSuperKey('o', '<Cmd>Startify<CR>')
 if has("gui_running")
@@ -336,71 +338,55 @@ inoremap <M-v> <C-R><C-O>+
 """ Movement {{{2
 
 " Wrapped line navigation
-nnoremap <Up> gk
-nnoremap <Down> gj
-inoremap <Up> <C-o>gk
-inoremap <Down> <C-o>gj
+call MapKey('<Up>', 'gk')
+call MapKey('<Down>', 'gj')
 call MapKey('<M-z>', '<Cmd>set wrap!<CR>')
 
 " Move cursor
-nnoremap <D-Up> gg
-nnoremap <D-Down> G
-nnoremap <D-Left> 0
-nnoremap <D-Right> $
-inoremap <D-Up> <C-o>gg
-inoremap <D-Down> <C-o>G
-inoremap <D-Left> <C-o>0
-inoremap <D-Right> <C-o>$
+call MapKey('<D-Up>', 'gg')
+call MapKey('<D-Down>', 'G')
+call MapKey('<D-Left>', '0')
+call MapKey('<D-Right>', '$')
 
 " Go back/forward
-nnoremap <M-D-Left> <C-o>
-inoremap <M-D-Left> <C-o><C-o>
-vnoremap <M-D-Left> <Esc><C-o>
-nnoremap <M-D-Right> <C-i>
-inoremap <M-D-Right> <C-o><C-i>
-vnoremap <M-D-Right> <Esc><C-i>
+call MapKey('<M-D-Left>', '<C-o>')
+call MapKey('<M-D-Right>', '<C-i>')
 
 " Go to previous edit location
-nnoremap <S-D-BS> `.
-inoremap <S-D-BS> <C-o>`.
-vnoremap <S-D-BS> <Esc>`.
+call MapKey('<S-D-BS>', '`.')
 " Delete line
-nnoremap <C-S-BS> dd
-nnoremap <D-Del> D
-nnoremap <D-BS> d0
-inoremap <C-S-BS> <C-o>dd
-inoremap <D-Del> <C-o>D
-inoremap <D-BS> <C-o>d0
+call MapKey('<C-S-BS>', 'dd')
+call MapKey('<D-Del>', 'D')
+call MapKey('<D-BS>', 'd0')
+
+" Go to previous/next git change
+call MapKey('<C-S-Up>', '[c', 'all', 0, 0)
+call MapKey('<C-S-Down>', ']c', 'all', 0, 0)
 
 " Go to previous/next method
-noremap <C-S-D-Up> [m
-inoremap <C-S-D-Up> <C-o>[m
-noremap <C-S-D-Down> ]m
-inoremap <C-S-D-Down> <C-o>]m
+call MapKey('<C-S-D-Up>', '[m')
+call MapKey('<C-S-D-Down>', ']m')
 
 """ Indent {{{2
 
 " XXX: can't remap normal-mode <Tab> as that's the same as <C-i>
 "nnoremap <Tab> >>
-nnoremap <D-]> >>
 nnoremap <S-Tab> <<
+nnoremap <D-]> >>
+inoremap <D-]> <C-t>
 nnoremap <D-[> <<
+inoremap <D-[> <C-d>
+" Need to reselect selection
 vnoremap <Tab> >gv
 vnoremap <D-]> >gv
 vnoremap <S-Tab> <gv
 vnoremap <D-[> <gv
-inoremap <D-]> <C-t>
-inoremap <D-[> <C-d>
 
 """ Line manipulation {{{2
 
 " Insert empty line above/below
-nnoremap <C-CR> o<Esc>
-vnoremap <C-CR> <Esc>o<Esc>
-inoremap <C-CR> <C-o>o
-nnoremap <S-C-CR> O<Esc>
-inoremap <S-C-CR> <C-o>O
-vnoremap <S-C-CR> <Esc>O<Esc>
+call MapKey('<C-CR>', 'o')
+call MapKey('<S-C-CR>', 'O')
 
 " Shift argument (using vim-argumentative)
 call MapKey('<M-lt>', '<,', 'all', 0, 0)
@@ -416,6 +402,7 @@ call MapKey('<M-H>', '<C-w>h')
 call MapKey('<M-J>', '<C-w>j')
 call MapKey('<M-K>', '<C-w>k')
 call MapKey('<M-L>', '<C-w>l')
+call MapKey('<M-S-D-+>', '<C-w>=')
 
 " Toggle split orientation
 " https://stackoverflow.com/questions/1269603/to-switch-from-vertical-split-to-horizontal-split-fast-in-vim/45994525#45994525
