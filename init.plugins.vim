@@ -205,6 +205,8 @@ let g:ctrlp_max_files = 20000
 
 """ fzf {{{2
 
+"
+
 " An action can be a reference to a function that processes selected lines
 function! s:build_quickfix_list(lines)
     call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
@@ -230,7 +232,7 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 "   \   fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=* RG
     \ call fzf#vim#grep(
-    \   'rg -Li --hidden --glob "!.git" --column --line-number --no-heading --color=always --smart-case -- '
+    \   'rg -L --hidden --glob "!.git/" --column --line-number --no-heading --color=always --smart-case -- '
     \   .shellescape(<q-args>), 1,
     \   fzf#vim#with_preview(), <bang>0)
 
