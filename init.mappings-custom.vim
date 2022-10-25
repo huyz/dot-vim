@@ -69,8 +69,8 @@ nnoremap / /\c
 nnoremap ? ?\c
 
 " Folding http://vim.wikia.com/wiki/Folding
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
-vnoremap <Space> zf
+nnoremap <silent> <Space><Space> @=(foldlevel('.')?'za':'l')<CR>
+vnoremap <Space><Space> zf
 
 " Suspend from insert mode
 noremap! <C-z> <Esc><C-z>
@@ -79,10 +79,10 @@ noremap! <C-z> <Esc><C-z>
 nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 " Re-source .vimrc
 nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR>
-" Quick-save and reload .vimrc
+" Quick-save and re-source .vimrc, using emacs keybinding
 " NOTE: MacVim and VimR already handle <D-s>
-nmap <C-s> <Cmd>write<CR><Leader>so
-imap <C-s> <Cmd>write<CR><C-o><Leader>so
+nmap <C-x><C-s> <Cmd>write<CR><Leader>so
+imap <C-x><C-s> <Cmd>write<CR><C-o><Leader>so
 
 " Allow saving of files as sudo when you forget to start vim using sudo.
 " Shortcut matches my zsh binding

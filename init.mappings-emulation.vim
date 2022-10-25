@@ -74,7 +74,7 @@ endfunction
 
 " Maps the key sequence to RHS, optionally with specific modes
 " 'all' modes implies: map, imap, tmap (so no cmap or lmap)
-function! MapKey(keys, rhs, modes = "all", no_insert = 0, no_remap = 1) abort
+function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:true) abort
     let l:keys = a:keys
     let l:rhs = a:rhs
     let l:modes = a:modes
@@ -91,7 +91,7 @@ function! MapKey(keys, rhs, modes = "all", no_insert = 0, no_remap = 1) abort
             " If we're automatically normalizing to <Esc>, we don't want to
             " map any insert-like mode because we don't want conflict with
             " <Esc> key to get out of normal mode.
-            let l:no_insert = 1
+            let l:no_insert = v:true
         endif
         call MapKey(s:NormalizeMetaModifier(a:keys),
                     \ s:NormalizeMetaModifier(a:rhs), l:modes, l:no_insert,
@@ -278,10 +278,10 @@ nnoremap & :&&<CR>
 
 """ File operations
 
+nnoremap <C-x><C-f> :e<Space>
+" NOTE: <C-x><C-s> is overridden elsewhere to reload .vimrc
 nnoremap <C-x><C-s> <Cmd>w<CR>
-nnoremap <C-x><C-f> <Cmd>e
 inoremap <C-x><C-s> <Cmd>w<CR>
-nnoremap <C-a> 0
 
 """ Window operations
 

@@ -16,7 +16,8 @@ augroup filetype
   au BufNewFile,BufRead /*/jboss/conf/*/*.conf setf xml
   au BufNewFile,BufRead *.gradle        setf groovy
   au BufNewFile,BufRead *.jade          setf jade
-  au BufNewFile,BufRead *.json          set filetype=json foldmethod=syntax 
+  " au BufNewFile,BufRead *.json          set filetype=json foldmethod=syntax
+  au BufNewFile,BufRead *.jsonc,*.json5,coc-settings.json set filetype=jsonc
   au BufNewFile,BufReadPost *.coffee    setl foldmethod=indent nofoldenable shiftwidth=2 expandtab
   au BufNewFile,BufRead *.less          setf lesscss
   au BufNewFile,BufRead *.mrc           setf mhonarc
