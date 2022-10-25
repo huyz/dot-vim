@@ -55,7 +55,7 @@ set hidden              " Automatically hides buffers when abandoned
 """ Command-line options
 
 set history=1024        " New of lines of command line history
-set wildmenu wildmode=longest:full
+set wildmenu wildmode=longest:full,full
 set shortmess=a         " Use short messages whenever possible
 
 """ Editing options
