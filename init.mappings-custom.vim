@@ -7,6 +7,7 @@ if has("nvim")
 else
     nnoremap <F1> <Cmd>NERDTreeToggle<CR>
 endif
+call MapKey('<S-F1>', '<Cmd>helpclose<CR>')
 nmap <F2> <Cmd>CtrlPBuffer<CR>
 nmap <F3> <Cmd>RG<CR>
 nmap <F4> <Cmd>FZF<CR>
