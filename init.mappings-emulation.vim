@@ -65,11 +65,15 @@ endfunction
 function! s:MapAlias(keys, rhs) abort
     let l:rhs = s:NormalizeMetaModifier(a:rhs)
     execute 'map'  a:keys l:rhs
-    execute 'map!' a:keys l:rhs
+    " Exclude insert mode because we don't want the <Esc> to slow down exiting insert mode
+    if !StartsWith(a:keys, '<Esc>')
+        execute 'map!' a:keys l:rhs
+    endif
     execute 'tmap' a:keys l:rhs
 endfunction
 
 " Maps the key sequence to RHS, optionally with specific modes
+" 'all' modes implies: map, imap, tmap (so no cmap or lmap)
 function! MapKey(keys, rhs, modes = "all", no_insert = 0, no_remap = 1) abort
     let l:keys = a:keys
     let l:rhs = a:rhs
@@ -104,7 +108,7 @@ function! MapKey(keys, rhs, modes = "all", no_insert = 0, no_remap = 1) abort
         execute l:nore . 'map'  l:keys l:rhs
         execute 't' . l:nore . 'map' l:keys l:prefixes[1] . l:rhs
         if a:no_insert == 0
-            execute l:nore . 'map!' l:keys l:prefixes[0] . l:rhs
+            execute 'i' . l:nore . 'map' l:keys l:prefixes[0] . l:rhs
         endif
     else
         for mode in l:modes
