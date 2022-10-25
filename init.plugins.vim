@@ -79,6 +79,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
 Plug 'moll/vim-bbye'
+Plug 'vim-utils/vim-husk'
 
 " Text
 Plug 'ap/vim-you-keep-using-that-word'
