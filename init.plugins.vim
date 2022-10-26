@@ -314,9 +314,7 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'startify']
 
 """ vim-visual-multi {{{2
 
-" FIXME: C-LeftMouse doesn't work
-"let g:VM_mouse_mappings = 1
-
+let g:VM_mouse_mappings = 1
 
 """ easymotion {{{2
 
