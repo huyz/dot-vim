@@ -272,7 +272,7 @@ call wilder#setup({
     \ 'next_key': '<C-j>',
     \ 'previous_key': '<C-k>',
     \ 'accept_key': '<M-Enter>',
-    \ 'reject_key': '<Esc>',
+    \ 'reject_key': '<S-Esc>',
     \ })
 
 
