@@ -65,6 +65,7 @@ endif
 " Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim'))
 
 " Colorscheme
+" Plug 'f-person/auto-dark-mode.nvim', Cond(has('nvim'))
 Plug 'cormacrelf/dark-notify', Cond(has('nvim'))
 Plug 'L-TChen/auto-dark-mode.vim', Cond(!has('nvim') && has('gui_running'))
 Plug 'chriskempson/base16-vim'
