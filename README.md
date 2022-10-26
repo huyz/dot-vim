@@ -28,61 +28,65 @@ cd ~/.vim
 These are useful commands that are easy to forget because they're needed only
 occasionally.
 
-*   `cgn` + `.`         :   Incrementally change matches
-*   `q:`  `q/`  `q?`    :   Open comand-line window (`^F` if already in command-line)
-*   ``\`.``             :   Jump to last modification
-*   `gv`                :   Reselect last visual selection
-*   `ga`                :   ASCII/Unicode value of current character
-*   `gP` then `.`…      :   Paste successively
-*   `viw` `cis` `dap` `yab` `ci'` `cit` `dat` ``ci` ``
-    : Operations on word, inner sentence, paragraph, () block, quoted strings,
-      html tags
-*   `/<C-R><C-W>`       :   Pull current word into search
-*   `/<C-R>"`           :   Pull in last yank
-*   `[I`                :   Show lines that match current word
-*   ```[ `` or `` `]``  :   Go to beginning/end of last change
-*   `<C-X><C-L>`        :   Line complete, then hit `<C-n>` and `<C-p>`
-*   `<C-X><C-K>`        :   Starts dictionary completion, then hit `<C-n>` and `<C-p>`
-*   `==`                :   Reindent line(s)
-*   `:ce`               :   Center line(s)
-*   `!!date`            :   Replace current line with date (different from my `\-d`)
-*   `:-1r`              :   Read in file above current line
-*   `:reg`              :   List registers
-*   `:argdo %s/f//`     :   Operate over all files listed on command line
-*   `:windo %s/f//`     :   Operate over all viewable split windows
-*   `:bufdo normal :%s,^,^R%,^M` : perform an operation on all buffers when
-                      a register needs to be accessed (note that ^R ^M are
-                      typed by hitting control-v and then control-r or -m)
-*   `:bufdo exe "normal :%s,^,\<C-R>%,\<CR>"` : same as above
-*   `:verbose set history?` : Find where an option is set
-*   `:w !sudo tee %`    :   Save the current file with sudo privileges
-*   `:perldo s/p/r/`    :   Do perl-compatible regex substitution
+| Mapping                                            | Description                                                                                                                                        |
+| ----                                               | ---                                                                                                                                                |
+| `cgn` + `.`                                        | Incrementally change matches                                                                                                                       |
+| `q:`  `q/`  `q?`                                   | Open comand-line window (`^F` if already in command-line)                                                                                          |
+| ``\`.``                                            | Jump to last modification                                                                                                                          |
+| `gv`                                               | Reselect last visual selection                                                                                                                     |
+| `ga`                                               | ASCII/Unicode value of current character                                                                                                           |
+| `gP` then `.`…                                     | Paste successively                                                                                                                                 |
+| `viw` `cis` `dap` `yab` `ci'` `cit` `dat` ``ci` `` | Operations on word, inner sentence, paragraph, () block, quoted strings, html tags                                                                 |
+| `/<C-R><C-W>`                                      | Pull current word into search                                                                                                                      |
+| `/<C-R>"`                                          | Pull in last yank                                                                                                                                  |
+| `[I`                                               | Show lines that match current word                                                                                                                 |
+| ```[ `` or `` `]``                                 | Go to beginning/end of last change                                                                                                                 |
+| `<C-X><C-L>`                                       | Line complete, then hit `<C-n>` and `<C-p>`                                                                                                        |
+| `<C-X><C-K>`                                       | Starts dictionary completion, then hit `<C-n>` and `<C-p>`                                                                                         |
+| `==`                                               | Reindent line(s)                                                                                                                                   |
+| `:ce`                                              | Center line(s)                                                                                                                                     |
+| `!!date`                                           | Replace current line with date (different from my `\-d`)                                                                                           |
+| `:-1r`                                             | Read in file above current line                                                                                                                    |
+| `:reg`                                             | List registers                                                                                                                                     |
+| `:argdo %s/f//`                                    | Operate over all files listed on command line                                                                                                      |
+| `:windo %s/f//`                                    | Operate over all viewable split windows                                                                                                            |
+| `:bufdo normal :%s,^,^R%,^M`                       | perform an operation on all buffers when a register needs to be accessed (note that ^R ^M are typed by hitting control-v and then control-r or -m) |
+| `:bufdo exe "normal :%s,^,\<C-R>%,\<CR>"`          | same as above                                                                                                                                      |
+| `:verbose set history?`                            | Find where an option is set                                                                                                                        |
+| `:w !sudo tee %`                                   | Save the current file with sudo privileges                                                                                                         |
+| `:perldo s/p/r/`                                   | Do perl-compatible regex substitution                                                                                                              |
 
 ## My own mappings
 
 I tend to forgot I defined these mappings:
 
-*   `<C-s>`          : Save buffer
-*   `<A-H>` `<A-J>`  : switch between split windows (note capitalization so there's no conflict with vim-visual-multi)
-*   `<C-w><C-q>`     : Closes buffer without messing up split window
-*   `gb`             : Re-select last pasted block
-*   `\lh`            : Swap words
-*   `Q` `gq` `<M-q>` : In visual mode, format by `par`, vim, or emacs-style
-*   `\t0`            : Discard consecutive blank lines
-*   `<Meta>q`        : Reformat paragraph (like emacs)
+| Mapping          | Description                                                                                     |
+| ----             | ---                                                                                             |
+| `<C-s>`          | Save buffer                                                                                     |
+| `<A-H>` `<A-J>`  | switch between split windows (note capitalization so there's no conflict with vim-visual-multi) |
+| `<C-w><C-q>`     | Closes buffer without messing up split window                                                   |
+| `gb`             | Re-select last pasted block                                                                     |
+| `\lh`            | Swap words                                                                                      |
+| `Q` `gq` `<M-q>` | In visual mode, format by `par`, vim, or emacs-style                                            |
+| `\t0`            | Discard consecutive blank lines                                                                 |
+| `<Meta>q`        | Reformat paragraph (like emacs)                                                                 |
 
 ## Plugins I installed
 
-### Gundo           : Shows undo tree
+### Gundo
 
-*   `:GundoToggle`
+| Mapping        | Description     |
+| ----           | ---             |
+| `:GundoToggle` | Shows undo tree |
 
 ### CtrlP
 
-*   `<C-P>`     : switch buffer
-*   `<C-P><C-B>` : find file
-*   `<C-P><C-F>` : find MRU file
-*   `F10`       : switch buffer
+| Mapping      | Description   |
+| ----         | ---           |
+| `<C-P>`      | switch buffer |
+| `<C-P><C-B>` | find file     |
+| `<C-P><C-F>` | find MRU file |
+| `F10`        | switch buffer |
 
 ### fzf
 
@@ -105,7 +109,7 @@ I tend to forgot I defined these mappings:
 | `N`                     | Select previous occurrence of current selection                |
 | `Q`                     | Unselect occurrence                                            |
 | `q`                     | Skip current occurrence                                        |
-| `\\A`                    | Select all occurrences                                         |
+| `\\A`                   | Select all occurrences                                         |
 | `<C-down>` then `<Tab>` | Add cursor(s) vertically                                       |
 
 ### vim-windowswap
@@ -155,7 +159,9 @@ I tend to forgot I defined these mappings:
 
 ### table-mode
 
-*   `\tm`             =   Toggle table mode
+| Mapping | Description       |
+| ----    | ---               |
+| `\tm`   | Toggle table mode |
 
 ### ReplaceWithRegister
 
@@ -186,9 +192,9 @@ I tend to forgot I defined these mappings:
 
 ### vim-argumentative
 
-| Mapping | Description                  |
-| ---     | ---                          |
-| `⇧⌥.` or `<.`    | Shift function argument right |
+| Mapping       | Description                   |
+| ---           | ---                           |
+| `⇧⌥.` or `<.` | Shift function argument right |
 
 ### targets
 
@@ -219,9 +225,11 @@ I tend to forgot I defined these mappings:
 |----------|---------------------|
 | `<C-Y>,` | Expand abbreviation |
 
-### Gist                 : post buffers or selected text to https://gist.github.com/
+### Gist: post buffers or selected text to https://gist.github.com/
 
-*   `:Gist`          : post entire buffer
-*   `:Gist -p`  : post entire buffer to a private gist
-*   ``:`<,`>Gist -a``  : post selected text anonymously
-*   `:Gist -e`       : edit gist
+| Mapping           | Description                          |
+| ----              | ---                                  |
+| `:Gist`           | post entire buffer                   |
+| `:Gist -p`        | post entire buffer to a private gist |
+| ``:`<,`>Gist -a`` | post selected text anonymously       |
+| `:Gist -e`        | edit gist                            |
