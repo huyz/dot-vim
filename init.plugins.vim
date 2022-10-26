@@ -49,15 +49,15 @@ Plug 'tpope/vim-eunuch'
 
 " wilder
 if has('nvim')
-  function! UpdateRemotePlugins(...)
-    " Needed to refresh runtime files
-    let &rtp=&rtp
-    UpdateRemotePlugins
-  endfunction
+    function! UpdateRemotePlugins(...)
+        " Needed to refresh runtime files
+        let &rtp=&rtp
+        UpdateRemotePlugins
+    endfunction
 
-  Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
+    Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 else
-  Plug 'gelguy/wilder.nvim'
+    Plug 'gelguy/wilder.nvim'
 endif
 " For wilder: To use Python remote plugin features in Vim, can be skipped
 " 2022-10-25 Can't get python options to work in vim or neovim
@@ -229,10 +229,10 @@ let g:ctrlp_max_files = 20000
 
 " Tip: remember to keep these envvars in sync in your shell config files
 let $FZF_DEFAULT_OPTS="--bind=ctrl-/:toggle-preview,ctrl-f:preview-page-down,ctrl-b:preview-page-up --preview '
-      \ if [[ -d {} ]]; then ls -ACF --color=always {};
-      \ elif [[ -f {} ]]; then [[ \$(file --mime \{\}) =~ binary ]] &&
-      \ echo ''** binary file **'' ||
-      \ (bat --plain --color=always {} || cat {}) 2> /dev/null | head -500; fi' "
+    \ if [[ -d {} ]]; then ls -ACF --color=always {};
+    \ elif [[ -f {} ]]; then [[ \$(file --mime \{\}) =~ binary ]] &&
+    \ echo ''** binary file **'' ||
+    \ (bat --plain --color=always {} || cat {}) 2> /dev/null | head -500; fi' "
 let $FZF_DEFAULT_COMMAND="fd --follow --hidden --exclude .git"
 
 " An action can be a reference to a function that processes selected lines
@@ -268,23 +268,23 @@ command! -bang -nargs=* RG
 " 2022-10-25 Can't get python options to work in vim or neovim
 
 call wilder#setup({
-      \ 'modes': [':', '/', '?'],
-      \ 'next_key': '<C-j>',
-      \ 'previous_key': '<C-k>',
-      \ 'accept_key': '<Enter>',
-      \ 'reject_key': '<Esc>',
-      \ })
+    \ 'modes': [':', '/', '?'],
+    \ 'next_key': '<C-j>',
+    \ 'previous_key': '<C-k>',
+    \ 'accept_key': '<M-Enter>',
+    \ 'reject_key': '<Esc>',
+    \ })
 
 
 call wilder#set_option('pipeline', [
-      \   wilder#branch(
-      \     wilder#cmdline_pipeline({
-      \       'language': 'vim',
-      \       'fuzzy': 1,
-      \       'fuzzy_filter': wilder#vim_fuzzy_filter(),
-      \     }),
-      \   ),
-      \ ])
+    \   wilder#branch(
+    \     wilder#cmdline_pipeline({
+    \       'language': 'vim',
+    \       'fuzzy': 1,
+    \       'fuzzy_filter': wilder#vim_fuzzy_filter(),
+    \     }),
+    \   ),
+    \ ])
 
 call wilder#set_option('renderer', wilder#popupmenu_renderer())
 
