@@ -152,7 +152,7 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options {{{1
 
-""" vim-startify {{{2
+""" startify {{{2
 
 let g:startify_session_dir = '~/.vim/session'
 if has("nvim")
