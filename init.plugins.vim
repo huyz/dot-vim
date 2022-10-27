@@ -101,7 +101,9 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'machakann/vim-highlightedyank'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tommcdo/vim-exchange'
-Plug 'nicwest/vim-camelsnek'
+" Take fork for screaming case and to apply to kebab words
+" Plug 'nicwest/vim-camelsnek'
+Plug 'zatchheems/vim-camelsnek'
 Plug 'christoomey/vim-titlecase'
 " abolish is good for :S case-preserving substitute but not for case conversions
 Plug 'tpope/vim-abolish'
@@ -120,7 +122,7 @@ Plug 'PeterRincker/vim-argumentative'
 "Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " If you have nodejs and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-
+" Plug 'christoomey/vim-quicklink'
 
 " Dev
 " polyglot: collection of language packs
@@ -401,6 +403,29 @@ xmap gA <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap gA <Plug>(EasyAlign)
+
+""" camelsnek {{{2
+
+" NOTE: These also work in operator-pending
+call MapKey('Zct', '<Plug>Titlecase', ['map'])
+call MapKey('Zctt', '<Plug>TitlecaseLine', ['map'])
+
+" NOTE: These don't work in operator-pending mode
+call MapKey('Zcc', ':CamelB<CR>', ['map'])
+call MapKey('Zck', ':Kebab<CR>', ['map'])
+" Zcp: PascalCase, a.k.a. MixedCase
+call MapKey('Zcp', ':Camel<CR>', ['map'])
+call MapKey('Zcs', ':Snek<CR>', ['map'])
+call MapKey('ZcS', ':Screm<CR>', ['map'])
+
+" NOTE: These don't work in operator-pending mode or visual mode
+" Re-map abolish's `cr.`
+call MapKey('Zc.', 'cr.', ['map'])
+
+" XXX: Until this is addressed:
+"   https://github.com/nicwest/vim-camelsnek/pull/1#issuecomment-1293417153
+let g:camelsnek_iskeyword_override = 0
+
 
 """ titlecase {{{2
 
