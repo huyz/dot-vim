@@ -16,7 +16,7 @@ nmap <F6> <Leader>o2
 nmap <F7> <Cmd>SymbolsOutline<CR>
 "nmap <F8> <Leader>o4
 nmap <F9> <Cmd>LazyGit<CR>
-"nmap <F10>
+nmap <F10> <Cmd>Startify<CR>
 nmap <F11> <Leader>o3
 nmap <F12> <Leader>o4
 
