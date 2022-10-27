@@ -63,7 +63,7 @@ I tend to forgot I defined these mappings:
 | Mapping          | Description                                                                                     |
 | ----             | ---                                                                                             |
 | `<C-s>`          | Save buffer                                                                                     |
-| `<A-H>` `<A-J>`  | switch between split windows (note capitalization so there's no conflict with vim-visual-multi) |
+| `<A-H>` `<A-J>`  | switch between split windows (note capitalization so there's no conflict with visual-multi) |
 | `<C-w><C-q>`     | Closes buffer without messing up split window                                                   |
 | `gb`             | Re-select last pasted block                                                                     |
 | `\lh`            | Swap words                                                                                      |
@@ -101,7 +101,7 @@ I tend to forgot I defined these mappings:
 | `<M-Up>` | Move current character/selection up |
 | `<M-Left>` | Move current character/selection left |
 
-### vim-visual-multi
+### visual-multi
 
 | Mapping                 | Description                                                    |
 |-------------------------|----------------------------------------------------------------|
@@ -112,14 +112,14 @@ I tend to forgot I defined these mappings:
 | `\\A`                   | Select all occurrences                                         |
 | `<C-down>` then `<Tab>` | Add cursor(s) vertically                                       |
 
-### vim-windowswap
+### windowswap
 
 | Mapping | Description                         |
 | ---     | ---                                 |
 | `\ww`   | Sets first or second window to swap |
 
 
-### vim-easymotion
+### easymotion
 
 | Mapping | Description                                       |
 | ---     | ---                                               |
@@ -131,11 +131,13 @@ I tend to forgot I defined these mappings:
 
 ### CamelCaseMotion
 
-*   `,w` `,b` `,e`  : like regular motions but respecting word boundaries
-*   `ci,w` `di,w`   : like regular change/delete but respecting word boundaries
-*   `c2i,b` `y2i,b` `v2i,b` : change/yank/select the current word and previous word
+| Mapping                 | Description                                               |
+| ---                     | ---                                                       |
+| `,w` `,b` `,e`          | like regular motions but respecting word boundaries       |
+| `ci,w` `di,w`           | like regular change/delete but respecting word boundaries |
+| `c2i,b` `y2i,b` `v2i,b` | change/yank/select the current word and previous word     |
 
-### vim-surround
+### surround
 
 | Mapping   | Description                                                        |
 | --------- | --------------------                                               |
@@ -149,7 +151,7 @@ I tend to forgot I defined these mappings:
 | `cs't`    | change surrounding quotes to tag with prompt                       |
 | `csw(`    | shortcut for `ysiw(`                                               |
 
-### vim-easy-align
+### easy-align
 
 | Mapping    | Description                                                    |
 | ---------- | ---------------------                                          |
@@ -170,27 +172,33 @@ I tend to forgot I defined these mappings:
 | `gr{motion}` | Replace {motion} text with register |
 | `grr`   | Replace line(s) with register |
 
-### vim-titlecase
+### abolish
+
+| Mapping    | Description                 |
+| ---------- | ---------------------       |
+| `:S`       | case-preserving subsitution |
+
+### titlecase
 
 | Mapping    | Description           |
 | ---------- | --------------------- |
-| gz         | title-case            |
-| gzz        | title-case line       |
+| `gz`       | title-case            |
+| `gzz`      | title-case line       |
 
-### vim-gitmoji
+### gitmoji
 
 | Mapping    | Description           |
 | ---------- | --------------------- |
 | `^X^U`     | Trigger completion    |
 
-### vim-exchange
+### exchange
 
 | Mapping      | Description                                |
 | ---          | ---                                        |
 | `cx{motion}` | Sets first or second text to swap/exchange |
 | `cxx`        | Sets first or second line to swap/exchange |
 
-### vim-argumentative
+### argumentative
 
 | Mapping       | Description                   |
 | ---           | ---                           |
@@ -203,7 +211,7 @@ I tend to forgot I defined these mappings:
 | `cia`   | Change function argument |
 | `daa`   | Delete function argument |
 
-### vim-indent-object (useful for Python)
+### indent-object (useful for Python)
 
 | Mapping | Description                                                        |
 | ---     | ---                                                                |

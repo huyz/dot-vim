@@ -81,10 +81,12 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
+" bbye: delete buffer preserving window layout
 Plug 'moll/vim-bbye'
 Plug 'ryvnf/readline.vim'
 
 " Text
+" you-keep-using-that-word: remap `cw`
 Plug 'ap/vim-you-keep-using-that-word'
 Plug 'tpope/vim-repeat'
 Plug 'bronson/vim-visual-star-search'
@@ -111,40 +113,39 @@ Plug 'kana/vim-textobj-user'  " dependency of textobj-entire
 Plug 'kana/vim-textobj-entire'
 Plug 'PeterRincker/vim-argumentative'
 
-" Dev
-Plug 'sheerun/vim-polyglot'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'scrooloose/syntastic'
-Plug 'tomtom/tcomment_vim'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'jsx', 'typescript'] }
-Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
-Plug 'simrat39/symbols-outline.nvim', Cond(has('nvim'))
-
-" Git
-Plug 'Kachyz/vim-gitmoji'
-Plug 'rhysd/git-messenger.vim'
-Plug 'kdheepak/lazygit.nvim', Cond(has('nvim'), {'branch': 'main'})
-" Needed for automatic session naming function below for Startify
-Plug 'itchyny/vim-gitbranch'
-Plug 'mattn/gist-vim'
-
-" Misc
-Plug 'dbeniamine/cheat.sh-vim'
-Plug 'jamessan/vim-gnupg'
-Plug 'glacambre/firenvim', Cond(has('nvim'), { 'do': { _ -> firenvim#install(0) } })
-
-" MarkdownPreview
+" Markdown
 " If you don't have nodejs and yarn
 " use pre build, add 'vim-plug' to the filetype list so vim-plug can update this plugin
 " see: https://github.com/iamcco/markdown-preview.nvim/issues/50
 "Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " If you have nodejs and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+" Dev
+" polyglot: collection of language packs
+Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/syntastic'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'jsx', 'typescript'] }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
+Plug 'simrat39/symbols-outline.nvim', Cond(has('nvim'))
+
+" Git
+Plug 'rhysd/git-messenger.vim'
+Plug 'kdheepak/lazygit.nvim', Cond(has('nvim'), {'branch': 'main'})
+" Needed for automatic session naming function below for Startify
+Plug 'itchyny/vim-gitbranch'
+Plug 'Kachyz/vim-gitmoji'
+Plug 'mattn/gist-vim'
+
+" Misc
+Plug 'dbeniamine/cheat.sh-vim'
+Plug 'jamessan/vim-gnupg'
+Plug 'glacambre/firenvim', Cond(has('nvim'), { 'do': { _ -> firenvim#install(0) } })
 
 
 """ Initialize plugin system {{{2
@@ -308,15 +309,20 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 noremap <C-w><C-q> <Cmd>Bdelete<CR>
 
-""" vim-indent-guides {{{2
+""" indent-guides {{{2
 
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'startify']
 
 
-""" vim-visual-multi {{{2
+""" visual-multi {{{2
 
 let g:VM_mouse_mappings = 1
+
+let g:VM_maps = {}
+" Enable undo in order to restore regions
+let g:VM_maps["Undo"] = 'u'
+let g:VM_maps["Redo"] = '<C-r>'
 
 """ easymotion {{{2
 
@@ -346,7 +352,7 @@ xmap <silent> i<leader>e <Plug>CamelCaseMotion_ie
 imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
 imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
 
-""" vim-expand-region {{{2
+""" expand-region {{{2
 
 map <C-S-Right> <Plug>(expand_region_expand)
 map <C-S-Left> <Plug>(expand_region_shrink)
@@ -386,7 +392,7 @@ else
     vmap <Esc><Right> <Plug>MoveBlockRight
 endif
 
-""" vim-easy-align {{{2
+""" easy-align {{{2
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap gA <Plug>(EasyAlign)
@@ -394,25 +400,20 @@ xmap gA <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap gA <Plug>(EasyAlign)
 
-""" vim-titlecase {{{2
+""" titlecase {{{2
 
 let g:titlecase_excluded_words = ["và"]
+
+""" markdown-preview {{{2
+
+nmap µµ <Cmd>MarkdownPreview<CR>
+" FIXME: doesn't work
+"call MapKey('<M-m><M-m>', '<Cmd>MarkdownPreview<CR>')
 
 """ NERDcommenter options {{{2
 
 map <Leader>c/ <plug>NERDCommenterAlignBoth
 "map <Leader>bj <plug>NERDCommenterAlignBoth
-
-""" vim-gnupg {{{2
-
-" NOTE: set in .vimrc.post
-"let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
-
-""" vim-gitmoji {{{2
-
-set completefunc=emoji#complete
-" Replace all :emoji_name: into Unicode emojis
-nmap <Leader><C-U> <Cmd>%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
 
 """ syntastic {{{2
 
@@ -429,7 +430,7 @@ let g:syntastic_python_pylint_post_args  = "--max-line-length=100"
 " on macOS 10.15.7: system "python" is still python2
 let g:syntastic_python_checkers          = ['python3', 'pylint']
 
-""" coc.nvim {{{2
+""" coc {{{2
 
 let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier',
             \ 'coc-tsserver', 'coc-pyright', 'coc-git']
@@ -447,12 +448,22 @@ vnoremap <space>f <Plug>(coc-format-selected)
 let g:git_messenger_no_default_mappings = v:false
 nmap <Leader>gb <Plug>(git-messenger)
 
+""" gitmoji {{{2
 
-""" Gist {{{2
+set completefunc=emoji#complete
+" Replace all :emoji_name: into Unicode emojis
+nmap <Leader><C-U> <Cmd>%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
+
+""" gist {{{2
 
 " NOTE: set in .vimrc.post
 "let g:github_user  = "YOUR_GITHUB_USERNAME"
 "let g:github_token = "YOUR_GITHUB_API_TOKEN"
+
+""" gnupg {{{2
+
+" NOTE: set in .vimrc.post
+"let g:GPGDefaultRecipients = [ 'YOUR_GPG_EMAIL' ]
 
 """ Firenvim {{{2
 
