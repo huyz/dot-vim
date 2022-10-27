@@ -272,8 +272,8 @@ command! -bang -nargs=* RG
 
 call wilder#setup({
     \ 'modes': [':', '/', '?'],
-    \ 'next_key': '<C-j>',
-    \ 'previous_key': '<C-k>',
+    \ 'next_key': '<C-n>',
+    \ 'previous_key': '<C-p>',
     \ 'accept_key': '<M-Enter>',
     \ 'reject_key': '<S-Esc>',
     \ })
