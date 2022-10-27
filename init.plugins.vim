@@ -439,8 +439,8 @@ let g:python3_host_prog = expand("~/.pyenv/versions/py3nvim/bin/python")
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
 " Usage: select range and invoke `\f`
-vmap <Leader>f <Plug>(coc-format-selected)
-nmap <Leader>f <Plug>(coc-format-selected)
+nnoremap <space>f <Plug>(coc-format-selected)
+vnoremap <space>f <Plug>(coc-format-selected)
 
 """ git-messenger
 
