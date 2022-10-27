@@ -1,136 +1,4 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Convenience functions {{{1
-
-" Checks if given string starts with given substring
-function! StartsWith(longer, shorter) abort
-    return a:longer[0:len(a:shorter)-1] ==# a:shorter
-endfunction
-
-function! s:IsInsertLikeMode(mode) abort
-    return index(['map!', 'noremap!', 'imap', 'inoremap', 'cmap', 'cnoremap', 'lmap', 'lnoremap'], a:mode) >= 0
-endfunction
-
-" Returns a RHS prefix for given mode
-function! s:RhsPrefixForMode(rhs, mode) abort
-    if !StartsWith(a:rhs, '<Cmd>')
-        if a:mode == 'tmap' || a:mode == 'tnoremap'
-            return '<C-\><C-N>'
-        elseif s:IsInsertLikeMode(a:mode)
-            return '<C-o>'
-        endif
-    endif
-    return ''
-endfunction
-" Returns a list of RHS prefixes for insert-like and terminal mode, if
-" necessary
-function! s:RhsPrefixesForAllModes(rhs) abort
-    if !StartsWith(a:rhs, '<Cmd>')
-        return ['<C-o>', '<C-\><C-N>']
-    endif
-    return ['', '']
-endfunction
-
-function! s:MetaNeedsNormalization(str) abort
-    if has("nvim") || (has("gui_macvim") && has("gui_running") && !&macmeta)
-        return 0
-    endif
-    return strlen(a:str) == 5 && StartsWith(a:str, '<M-') ||
-                \ (a:str == '<M-lt>')
-endfunction
-
-" There are some cases where using <Esc>x is necessary over <M-x>
-" - for MacVim GUI, unless `macmeta` is on: https://github.com/macvim-dev/macvim/issues/1321
-" - for iTerm vim, unless this is set:
-"   xterm control sequence can enable modifyOtherKeys mode"
-"
-" NOTE:
-" - in iTerm, it's preferable to have modifyOtherKeys to on, because that way,
-"   keymaps will work in insert-like modes too (if modifyOtherKeys is off, then
-"   <Esc>x keymaps would conflict with the <Esc> used to exit insert mode)
-" - in MacVim GUI, it is preferable to not have `macmeta` for the same reason
-"   as prefering iTerm to have modifyOtherKeys set to on.
-function! s:NormalizeMetaModifier(str) abort
-    if has("nvim") || (has("gui_macvim") && has("gui_running") && !&macmeta)
-        return a:str
-    endif
-    if a:str == '<M-lt>'
-        return '<Esc><lt>'
-    elseif a:str == '<M->>'
-        return '<Esc><gt>'
-    endif
-    return substitute(a:str, '<M-\(.\)>', '<Esc>\1', '')
-endfunction
-
-" Allows mapping aliases for characters like `å` to `<M-a>`
-function! s:MapAlias(keys, rhs) abort
-    let l:rhs = s:NormalizeMetaModifier(a:rhs)
-    execute 'map'  a:keys l:rhs
-    " Exclude insert mode because we don't want the <Esc> to slow down exiting insert mode
-    if !StartsWith(a:keys, '<Esc>')
-        execute 'map!' a:keys l:rhs
-    endif
-    execute 'tmap' a:keys l:rhs
-endfunction
-
-" Maps the key sequence to RHS, optionally with specific modes
-" 'all' modes implies: map, imap, tmap (so no cmap or lmap)
-function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:true) abort
-    let l:keys = a:keys
-    let l:rhs = a:rhs
-    let l:modes = a:modes
-
-    " 1) If nvim, then we don't change anything
-    " 2) If MacVim GUI, then we normalize and try again
-    " 3) If vim TUI, then we do two mappings: one normalized and one
-    "    unchanged. That's because we don't know if iTerm has modifyOtherKeys
-    "    on or not.
-    let l:lhs_needs_norm = s:MetaNeedsNormalization(a:keys)
-    if !has("nvim") && (l:lhs_needs_norm || s:MetaNeedsNormalization(a:rhs))
-        let l:no_insert = a:no_insert
-        if l:lhs_needs_norm
-            " If we're automatically normalizing to <Esc>, we don't want to
-            " map any insert-like mode because we don't want conflict with
-            " <Esc> key to get out of normal mode.
-            let l:no_insert = v:true
-        endif
-        call MapKey(s:NormalizeMetaModifier(a:keys),
-                    \ s:NormalizeMetaModifier(a:rhs), l:modes, l:no_insert,
-                    \ a:no_remap)
-        if has("gui_running")
-            return
-        endif
-    endif
-
-    let l:nore = a:no_remap ? 'nore' : ''
-
-    let l:prefixes = s:RhsPrefixesForAllModes(l:rhs)
-    if type(l:modes) == type("") && l:modes == 'all'
-        execute l:nore . 'map'  l:keys l:rhs
-        execute 't' . l:nore . 'map' l:keys l:prefixes[1] . l:rhs
-        if a:no_insert == 0
-            execute 'i' . l:nore . 'map' l:keys l:prefixes[0] . l:rhs
-        endif
-    else
-        for mode in l:modes
-            if a:no_insert == 0 || !s:IsInsertLikeMode(mode)
-                execute mode l:keys s:RhsPrefixForMode(l:rhs, mode)
-            endif
-        endfor
-    endif
-endfunction
-
-" Maps both the Option (⌥) and Command (⌘) versions for universal
-" access and easy GUI access
-function! s:NoremapSuperKey(key, rhs, ...) abort
-    let l:modes = get(a:, 2, 'all')
-    call MapKey('<M-' . a:key . '>', a:rhs, l:modes)
-    if has("gui_running")
-        call MapKey('<D-' . a:key . '>', a:rhs, l:modes)
-    endif
-endfunction
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ macOS: make composed keys act like Meta {{{1
 
 " TODO: to have macmeta working, I'd need to MapAlias a whole different
@@ -139,99 +7,99 @@ endfunction
 " NOTE: Won't remap –, —, ≠, ±, …  as these are useful special characters even to
 "   Americans
 " NOTE: Can't remap `, e, u, i, n as these are useful to compose digraph prefixes
-call <SID>MapAlias('å', '<M-a>')
-call <SID>MapAlias('Å', '<M-A>')
-call <SID>MapAlias('∫', '<M-b>')
-call <SID>MapAlias('ı', '<M-B>')
-call <SID>MapAlias('ç', '<M-c>')
-call <SID>MapAlias('Ç', '<M-C>')
-call <SID>MapAlias('∂', '<M-d>')
-call <SID>MapAlias('Î', '<M-D>')
-call <SID>MapAlias('ƒ', '<M-f>')
-call <SID>MapAlias('´', '<M-E>')
-call <SID>MapAlias('Ï', '<M-F>')
-call <SID>MapAlias('©', '<M-g>')
-call <SID>MapAlias('˝', '<M-G>')
-call <SID>MapAlias('˙', '<M-h>')
-call <SID>MapAlias('Ó', '<M-H>')
-call <SID>MapAlias('ˆ', '<M-I>')
-call <SID>MapAlias('∆', '<M-j>')
-call <SID>MapAlias('Ô', '<M-J>')
-call <SID>MapAlias('˚', '<M-k>')
-call <SID>MapAlias('', '<M-K>')
-call <SID>MapAlias('¬', '<M-l>')
-call <SID>MapAlias('Ò', '<M-L>')
-call <SID>MapAlias('µ', '<M-m>')
-call <SID>MapAlias('Â', '<M-M>')
-call <SID>MapAlias('˜', '<M-N>')
-call <SID>MapAlias('ø', '<M-o>')
-call <SID>MapAlias('Ø', '<M-O>')
-call <SID>MapAlias('π', '<M-p>')
-call <SID>MapAlias('∏', '<M-P>')
-call <SID>MapAlias('œ', '<M-q>')
-call <SID>MapAlias('Œ', '<M-Q>')
-call <SID>MapAlias('®', '<M-r>')
-call <SID>MapAlias('‰', '<M-R>')
-call <SID>MapAlias('ß', '<M-s>')
-call <SID>MapAlias('Í', '<M-S>')
-call <SID>MapAlias('†', '<M-t>')
-call <SID>MapAlias('ˇ', '<M-T>')
-call <SID>MapAlias('¨', '<M-U>')
-call <SID>MapAlias('√', '<M-v>')
-call <SID>MapAlias('◊', '<M-V>')
-call <SID>MapAlias('∑', '<M-w>')
-call <SID>MapAlias('„', '<M-W>')
-call <SID>MapAlias('≈', '<M-x>')
-call <SID>MapAlias('˛', '<M-X>')
-call <SID>MapAlias('¥', '<M-y>')
-call <SID>MapAlias('Á', '<M-Y>')
-call <SID>MapAlias('Ω', '<M-z>')
-call <SID>MapAlias('¸', '<M-Z>')
-call <SID>MapAlias('¡', '<M-1>')
-call <SID>MapAlias('⁄', '<M-!>')
-call <SID>MapAlias('™', '<M-2>')
-call <SID>MapAlias('€', '<M-@>')
-call <SID>MapAlias('£', '<M-3>')
-call <SID>MapAlias('‹', '<M-#>')
-call <SID>MapAlias('¢', '<M-4>')
-call <SID>MapAlias('›', '<M-$>')
-call <SID>MapAlias('∞', '<M-5>')
-call <SID>MapAlias('ﬁ', '<M-%>')
-call <SID>MapAlias('§', '<M-6>')
-call <SID>MapAlias('ﬂ', '<M-^>')
-call <SID>MapAlias('¶', '<M-7>')
-call <SID>MapAlias('‡', '<M-&>')
-call <SID>MapAlias('•', '<M-8>')
-call <SID>MapAlias('°', '<M-*>')
-call <SID>MapAlias('ª', '<M-9>')
-call <SID>MapAlias('·', '<M-(>')
-call <SID>MapAlias('º', '<M-0>')
-call <SID>MapAlias('‚', '<M-)>')
-call <SID>MapAlias('“', '<M-[>')
-call <SID>MapAlias('”', '<M-{>')
-call <SID>MapAlias('‘', '<M-]>')
-call <SID>MapAlias('’', '<M-}>')
-call <SID>MapAlias('«', '<M-Bslash>')
-call <SID>MapAlias('»', '<M-Bar>')
-call <SID>MapAlias("æ", "<M-'>")
-call <SID>MapAlias('Ú', '<M-:>')
-call <SID>MapAlias('æ', "<M-'>")
-call <SID>MapAlias('Æ', '<M-">')
-call <SID>MapAlias('≤', '<M-,>')
-call <SID>MapAlias('¯', '<M-lt>')
-call <SID>MapAlias('≥', '<M-.>')
-call <SID>MapAlias('˘', '<M->>')
-call <SID>MapAlias('¿', '<M-?>')
-call <SID>MapAlias('÷', '<M-/>')
+call MapAlias('å', '<M-a>')
+call MapAlias('Å', '<M-A>')
+call MapAlias('∫', '<M-b>')
+call MapAlias('ı', '<M-B>')
+call MapAlias('ç', '<M-c>')
+call MapAlias('Ç', '<M-C>')
+call MapAlias('∂', '<M-d>')
+call MapAlias('Î', '<M-D>')
+call MapAlias('ƒ', '<M-f>')
+call MapAlias('´', '<M-E>')
+call MapAlias('Ï', '<M-F>')
+call MapAlias('©', '<M-g>')
+call MapAlias('˝', '<M-G>')
+call MapAlias('˙', '<M-h>')
+call MapAlias('Ó', '<M-H>')
+call MapAlias('ˆ', '<M-I>')
+call MapAlias('∆', '<M-j>')
+call MapAlias('Ô', '<M-J>')
+call MapAlias('˚', '<M-k>')
+call MapAlias('', '<M-K>')
+call MapAlias('¬', '<M-l>')
+call MapAlias('Ò', '<M-L>')
+call MapAlias('µ', '<M-m>')
+call MapAlias('Â', '<M-M>')
+call MapAlias('˜', '<M-N>')
+call MapAlias('ø', '<M-o>')
+call MapAlias('Ø', '<M-O>')
+call MapAlias('π', '<M-p>')
+call MapAlias('∏', '<M-P>')
+call MapAlias('œ', '<M-q>')
+call MapAlias('Œ', '<M-Q>')
+call MapAlias('®', '<M-r>')
+call MapAlias('‰', '<M-R>')
+call MapAlias('ß', '<M-s>')
+call MapAlias('Í', '<M-S>')
+call MapAlias('†', '<M-t>')
+call MapAlias('ˇ', '<M-T>')
+call MapAlias('¨', '<M-U>')
+call MapAlias('√', '<M-v>')
+call MapAlias('◊', '<M-V>')
+call MapAlias('∑', '<M-w>')
+call MapAlias('„', '<M-W>')
+call MapAlias('≈', '<M-x>')
+call MapAlias('˛', '<M-X>')
+call MapAlias('¥', '<M-y>')
+call MapAlias('Á', '<M-Y>')
+call MapAlias('Ω', '<M-z>')
+call MapAlias('¸', '<M-Z>')
+call MapAlias('¡', '<M-1>')
+call MapAlias('⁄', '<M-!>')
+call MapAlias('™', '<M-2>')
+call MapAlias('€', '<M-@>')
+call MapAlias('£', '<M-3>')
+call MapAlias('‹', '<M-#>')
+call MapAlias('¢', '<M-4>')
+call MapAlias('›', '<M-$>')
+call MapAlias('∞', '<M-5>')
+call MapAlias('ﬁ', '<M-%>')
+call MapAlias('§', '<M-6>')
+call MapAlias('ﬂ', '<M-^>')
+call MapAlias('¶', '<M-7>')
+call MapAlias('‡', '<M-&>')
+call MapAlias('•', '<M-8>')
+call MapAlias('°', '<M-*>')
+call MapAlias('ª', '<M-9>')
+call MapAlias('·', '<M-(>')
+call MapAlias('º', '<M-0>')
+call MapAlias('‚', '<M-)>')
+call MapAlias('“', '<M-[>')
+call MapAlias('”', '<M-{>')
+call MapAlias('‘', '<M-]>')
+call MapAlias('’', '<M-}>')
+call MapAlias('«', '<M-Bslash>')
+call MapAlias('»', '<M-Bar>')
+call MapAlias("æ", "<M-'>")
+call MapAlias('Ú', '<M-:>')
+call MapAlias('æ', "<M-'>")
+call MapAlias('Æ', '<M-">')
+call MapAlias('≤', '<M-,>')
+call MapAlias('¯', '<M-lt>')
+call MapAlias('≥', '<M-.>')
+call MapAlias('˘', '<M->>')
+call MapAlias('¿', '<M-?>')
+call MapAlias('÷', '<M-/>')
 
-call <SID>MapAlias('<D-”>', '<M-S-D-{>')
-call <SID>MapAlias('<D-’>', '<M-S-D-}>')
-call <SID>MapAlias('<D-±>', '<M-S-D-BS>')
+call MapAlias('<D-”>', '<M-S-D-{>')
+call MapAlias('<D-’>', '<M-S-D-}>')
+call MapAlias('<D-±>', '<M-S-D-BS>')
 
 " In vim within iTerm, Opt+F12 is <Esc>[24~
-call <SID>MapAlias('<Esc>[24~', '<M-F12>')
+call MapAlias('<Esc>[24~', '<M-F12>')
 if has("nvim")
-    call <SID>MapAlias('<F60>', '<M-F12>')
+    call MapAlias('<F60>', '<M-F12>')
 endif
 
 
@@ -315,15 +183,15 @@ nnoremap <Esc>u <Cmd>noh<CR>
 """ General
 
 " Open recent
-call <SID>NoremapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
-call <SID>NoremapSuperKey('e', '<Cmd>CtrlPBuffer<CR>')
-call <SID>NoremapSuperKey('E', '<Cmd>CtrlPBuffer<CR>')
-call <SID>NoremapSuperKey('F', '<Cmd>RG<CR>')
-call <SID>NoremapSuperKey('o', '<Cmd>Startify<CR>')
+call NoremapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
+call NoremapSuperKey('e', '<Cmd>CtrlPBuffer<CR>')
+call NoremapSuperKey('E', '<Cmd>CtrlPBuffer<CR>')
+call NoremapSuperKey('F', '<Cmd>RG<CR>')
+call NoremapSuperKey('o', '<Cmd>Startify<CR>')
 if has("gui_running")
     if has("gui_macvim")
         " In GUI: <M-D-o>
-        call <SID>NoremapSuperKey('ø', '<Cmd>Startify<CR>')
+        call NoremapSuperKey('ø', '<Cmd>Startify<CR>')
     elseif has("gui_vimr")
         " In GUI: <M-D-o>
         call MapKey('<M-D-o>', '<Cmd>Startify<CR>')
@@ -427,19 +295,19 @@ nnoremap <silent> <C-\> <Cmd>call ToggleSplitOrientation()<CR>
 
 """ Tabs {{{2
 
-call <SID>NoremapSuperKey('t', '<Cmd>tabnew<CR>')
-call <SID>NoremapSuperKey('w', '<Cmd>tabclose<CR>')
-call <SID>NoremapSuperKey('1', '<Cmd>tabn 1<CR>')
-call <SID>NoremapSuperKey('2', '<Cmd>tabn 2<CR>')
-call <SID>NoremapSuperKey('3', '<Cmd>tabn 3<CR>')
-call <SID>NoremapSuperKey('4', '<Cmd>tabn 4<CR>')
-call <SID>NoremapSuperKey('5', '<Cmd>tabn 5<CR>')
-call <SID>NoremapSuperKey('6', '<Cmd>tabn 6<CR>')
-call <SID>NoremapSuperKey('7', '<Cmd>tabn 7<CR>')
-call <SID>NoremapSuperKey('8', '<Cmd>tabn 8<CR>')
-call <SID>NoremapSuperKey('9', '<Cmd>tablast<CR>')
-call <SID>NoremapSuperKey('{', '<Cmd>tabprev<CR>')
-call <SID>NoremapSuperKey('}', '<Cmd>tabnext<CR>')
+call NoremapSuperKey('t', '<Cmd>tabnew<CR>')
+call NoremapSuperKey('w', '<Cmd>tabclose<CR>')
+call NoremapSuperKey('1', '<Cmd>tabn 1<CR>')
+call NoremapSuperKey('2', '<Cmd>tabn 2<CR>')
+call NoremapSuperKey('3', '<Cmd>tabn 3<CR>')
+call NoremapSuperKey('4', '<Cmd>tabn 4<CR>')
+call NoremapSuperKey('5', '<Cmd>tabn 5<CR>')
+call NoremapSuperKey('6', '<Cmd>tabn 6<CR>')
+call NoremapSuperKey('7', '<Cmd>tabn 7<CR>')
+call NoremapSuperKey('8', '<Cmd>tabn 8<CR>')
+call NoremapSuperKey('9', '<Cmd>tablast<CR>')
+call NoremapSuperKey('{', '<Cmd>tabprev<CR>')
+call NoremapSuperKey('}', '<Cmd>tabnext<CR>')
 
 if has("gui_running")
     " Switch tab with ⌘+[1-9].

@@ -54,10 +54,11 @@ endif
 
 """ Splitting .vimrc into smaller files
 
+source $MYVIM/init.util.vim
 source $MYVIM/init.options.vim
 source $MYVIM/init.plugins.vim
 if has("nvim") || v:version >= 801
-  source $MYVIM/init.plugins-coc.vim
+    source $MYVIM/init.plugins-coc.vim
 endif
 source $MYVIM/init.display-modes.vim
 source $MYVIM/init.mappings-emulation.vim
