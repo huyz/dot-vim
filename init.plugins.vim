@@ -101,6 +101,8 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tommcdo/vim-exchange'
 Plug 'nicwest/vim-camelsnek'
 Plug 'christoomey/vim-titlecase'
+" abolish is good for :S case-preserving substitute but not for case conversions
+Plug 'tpope/vim-abolish'
 
 " Text objects
 Plug 'wellle/targets.vim'
