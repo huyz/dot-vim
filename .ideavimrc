@@ -48,6 +48,22 @@ map <C-X> <A-X>
 map g<C-N> g<A-N>
 
 "
+" intellimacs
+"
+
+" if filereadable("~/.intellimacs/spacemacs.vim")
+    source ~/.intellimacs/spacemacs.vim
+
+    " (Optional) Enable other Intellimacs modules
+    source ~/.intellimacs/extra.vim
+    source ~/.intellimacs/major.vim
+    source ~/.intellimacs/hybrid.vim
+
+    " (Optional) Enable which-key plugin
+    source ~/.intellimacs/which-key.vim
+" endif
+
+"
 " Enable IdeaVim-specific features
 "
 
