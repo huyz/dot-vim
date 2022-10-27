@@ -320,6 +320,8 @@ let g:VM_mouse_mappings = 1
 
 """ easymotion {{{2
 
+let g:EasyMotion_smartcase = 1
+
 " n-character search
 nmap - <Plug>(easymotion-sn)
 " visual mode
