@@ -82,7 +82,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
 Plug 'moll/vim-bbye'
-Plug 'vim-utils/vim-husk'
+Plug 'ryvnf/readline.vim'
 
 " Text
 Plug 'ap/vim-you-keep-using-that-word'
