@@ -121,6 +121,7 @@ Plug 'PeterRincker/vim-argumentative'
 " If you have nodejs and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
+
 " Dev
 " polyglot: collection of language packs
 Plug 'sheerun/vim-polyglot'
@@ -130,7 +131,8 @@ Plug 'tomtom/tcomment_vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'jsx', 'typescript'] }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let coc_supported = has('nvim') || v:version >= 801
+Plug 'neoclide/coc.nvim', Cond(coc_supported, {'branch': 'release'})
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
 Plug 'simrat39/symbols-outline.nvim', Cond(has('nvim'))
 
