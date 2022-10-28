@@ -325,12 +325,27 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'startify']
 
 """ visual-multi {{{2
 
-let g:VM_mouse_mappings = 1
-
 let g:VM_maps = {}
-" Enable undo in order to restore regions
 let g:VM_maps["Undo"] = 'u'
 let g:VM_maps["Redo"] = '<C-r>'
+
+
+if has("gui_running")
+  " Until https://github.com/macvim-dev/macvim/issues/1325 is fixed, we have
+  " to use <C> instead of <D>. For MacVim this means we have to run once:
+  " `defaults write org.vim.MacVim MMTranslateCtrlClick 0` to disable the context menu
+  "let g:VM_maps["Mouse Cursor"] = '<D-LeftMouse>'
+  "let g:VM_maps["Mouse Word"] = '<D-RightMouse>'
+  "let g:VM_maps["Mouse Column"] = '<M-D-RightMouse>'
+    let g:VM_maps["Mouse Cursor"] = '<C-RightMouse>'
+    let g:VM_maps["Mouse Word"] = '<C-MiddleMouse>'
+    let g:VM_maps["Mouse Column"] = '<C-S-RightMouse>'
+else
+    " NOTE: iTerm2 sends Cmd+Click as <M>
+    let g:VM_maps["Mouse Cursor"] = '<M-RightMouse>'
+    let g:VM_maps["Mouse Word"] = '<M-MiddleMouse>'
+    let g:VM_maps["Mouse Column"] = '<S-M-RightMouse>'
+endif
 
 """ easymotion {{{2
 
