@@ -125,7 +125,8 @@ function! NoremapSuperKey(key, rhs, ...) abort
     let l:modes = get(a:, 2, 'all')
     call MapKey('<M-' . a:key . '>', a:rhs, l:modes)
     if has("gui_running")
-        call MapKey('<D-' . a:key . '>', a:rhs, l:modes)
+        let l:extra_modifier = a:key >= 'A' && a:key <= 'Z' ? 'S-' : ''
+        call MapKey('<' . l:extra_modifier . 'D-' . tolower(a:key) . '>', a:rhs, l:modes)
     endif
 endfunction
 
