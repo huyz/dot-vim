@@ -37,7 +37,6 @@ runtime macros/matchit.vim
 Plug 'mattn/webapi-vim'
 
 """ Plugins {{{2
-Plug 'tpope/vim-eunuch'
 
 " Files
 Plug 'mhinz/vim-startify'
@@ -45,7 +44,9 @@ Plug 'kien/ctrlp.vim'
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+" eunuch: some Unix file commands, e.g. Rename
 Plug 'tpope/vim-eunuch'
+Plug 'henrik/vim-reveal-in-finder'
 
 " wilder
 if has('nvim')
@@ -145,6 +146,9 @@ Plug 'kdheepak/lazygit.nvim', Cond(has('nvim'), {'branch': 'main'})
 Plug 'itchyny/vim-gitbranch'
 Plug 'Kachyz/vim-gitmoji'
 Plug 'mattn/gist-vim'
+
+" External Apps
+Plug 'declancm/vim2vscode'
 
 " Misc
 Plug 'dbeniamine/cheat.sh-vim'

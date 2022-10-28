@@ -26,12 +26,24 @@ function! OpenTerminal()
     endif
     resize 10
 endfunction
-call MapKey('<M-F12>', '<Cmd>call OpenTerminal()<CR>')
+" Open in current buffer's directory
+function! RevealInTerminal()
+    let l:dir = expand('%:p:h')
+    if has("nvim")
+        below new
+        call termopen([&shell], {'cwd': l:dir })
+        normal i
+    else
+        terminal ++close
+        cd l:dir
+    endif
+    resize 10
+endfunction
 
 " Convenience map of <M-[> for escaping to normal mode, which is easier to
 " press than <C-\><C-N>
 call MapKey('<M-[>', '<C-\><C-N>', ['tnoremap'])
 
 " For <C-/> to work in FZF window
-" XXX Doesn't work in MacVim (and other UIs may beep); using <C-_> is better
+" NOTE: Doesn't work in MacVim (and other UIs may beep); using <C-_> is better
 tmap <C-/> <C-_>

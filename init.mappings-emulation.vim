@@ -186,7 +186,8 @@ nnoremap <Esc>u <Cmd>noh<CR>
 call NoremapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
 call NoremapSuperKey('e', '<Cmd>CtrlPBuffer<CR>')
 call NoremapSuperKey('E', '<Cmd>CtrlPBuffer<CR>')
-call NoremapSuperKey('F', '<Cmd>RG<CR>')
+" We don't remap `<M-S-F>` because we use that as alternate for `<C-S-F>` needed in MacVim/VimR
+call MapKey('<S-D-F>', '<Cmd>RG<CR>')
 call NoremapSuperKey('o', '<Cmd>Startify<CR>')
 if has("gui_running")
     if has("gui_macvim")
@@ -266,6 +267,9 @@ call MapKey('<M->>', '>,', 'all', 0, 0)
 
 """ Splits {{{2
 
+" We prefer using `<M>` instead of `<C>` here because:
+" 1) these won't conflict with iTerm's split keybindings
+" 2) MacVim/VimR don't support modifyOtherKeys as of 2022-10-28
 call MapKey('<M-R>', '<Cmd>vsplit<CR>')
 call MapKey('<M-S>', '<Cmd>split<CR>')
 call MapKey('<M-W>', '<C-w>c')
@@ -295,6 +299,8 @@ nnoremap <silent> <C-\> <Cmd>call ToggleSplitOrientation()<CR>
 
 """ Tabs {{{2
 
+" NOTE: we avoid <C-2> and <C-6> because these are ANSI control characters
+"   (even Shift isn't pressed)
 call NoremapSuperKey('t', '<Cmd>tabnew<CR>')
 call NoremapSuperKey('w', '<Cmd>tabclose<CR>')
 call NoremapSuperKey('1', '<Cmd>tabn 1<CR>')
@@ -310,7 +316,6 @@ call NoremapSuperKey('{', '<Cmd>tabprev<CR>')
 call NoremapSuperKey('}', '<Cmd>tabnext<CR>')
 
 if has("gui_running")
-    " Switch tab with ⌘+[1-9].
     call MapKey('<S-D-{>', '<Cmd>tabprev<CR>')
     call MapKey('<S-D-}>', '<Cmd>tabnext<CR>')
 
@@ -318,5 +323,26 @@ if has("gui_running")
     call MapKey('<M-S-D-{>', '<Cmd>-tabmove<CR>')
     call MapKey('<M-S-D-}>', '<Cmd>+tabmove<CR>')
 endif
+
+""" Terminal
+
+call MapKey('<M-F12>', '<Cmd>call OpenTerminal()<CR>')
+call MapKey('<C-S-Z>', '<Cmd>call RevealInTerminal()<CR>')
+" We need alternate for MacVim/VimR
+call MapKey('<M-Z>', '<Cmd>call RevealInTerminal()<CR>')
+
+call MapKey('<C-S-T>', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
+" We need alternate for MacVim/VimR
+call MapKey('<M-T>', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
+
+""" External Apps
+
+call MapKey('<C-S-F>', '<Cmd>Reveal<CR>')
+" We need alternate for MacVim/VimR
+call MapKey('<M-F>', '<Cmd>Reveal<CR>')
+
+call MapKey('<C-S-C>', '<Cmd>CodeCurrent<CR>')
+" We need alternate for MacVim/VimR
+call MapKey('<M-C>', '<Cmd>CodeCurrent<CR>')
 
 " vim:foldmethod=marker:
