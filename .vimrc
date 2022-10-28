@@ -87,4 +87,4 @@ if filereadable(expand("$MYVIM/.vimrc.post"))
     source $MYVIM/.vimrc.post
 endif
 
-" vim:set ai et sts=2 sw=2 tw=0:
+" vim:set ai et sts=4 sw=4 tw=98:
