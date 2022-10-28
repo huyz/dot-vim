@@ -63,6 +63,9 @@ map g<C-N> g<A-N>
     source ~/.intellimacs/which-key.vim
 " endif
 
+" Activate the Which-Key plugin
+set which-key
+
 "
 " Enable IdeaVim-specific features
 "
