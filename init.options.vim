@@ -5,7 +5,6 @@ set directory=.,~/tmp,/var/tmp,/tmp
 set backupcopy=yes      " Preserve the birth time of files, at least on macOS
 set nobackup            " gvim-win32 has it on by default
 set autoread            " Reload files changed outside vim
-set autochdir           " Automatically change the working directory
 set browsedir=current   " Make the file browser always open the current directory.
 
 
