@@ -457,19 +457,6 @@ let g:syntastic_python_pylint_post_args  = "--max-line-length=100"
 " on macOS 10.15.7: system "python" is still python2
 let g:syntastic_python_checkers          = ['python3', 'pylint']
 
-""" coc {{{2
-
-let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier',
-            \ 'coc-tsserver', 'coc-pyright', 'coc-git']
-let g:python3_host_prog = expand("~/.pyenv/versions/py3nvim/bin/python")
-
-" Usage: type `:Prettier` to format whole document
-command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
-
-" Usage: select range and invoke `\f`
-nnoremap <space>f <Plug>(coc-format-selected)
-vnoremap <space>f <Plug>(coc-format-selected)
-
 """ git-messenger
 
 let g:git_messenger_no_default_mappings = v:false
