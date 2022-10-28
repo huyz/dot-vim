@@ -404,11 +404,23 @@ xmap gA <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap gA <Plug>(EasyAlign)
 
-""" camelsnek {{{2
+""" titlecase {{{2
 
+let g:titlecase_excluded_words = ["và"]
 " NOTE: These also work in operator-pending
 call MapKey('Zct', '<Plug>Titlecase', ['map'])
 call MapKey('Zctt', '<Plug>TitlecaseLine', ['map'])
+
+let g:titlecase_map_keys = 0
+nmap <leader>gt <Plug>Titlecase
+vmap <leader>gt <Plug>Titlecase
+nmap <leader>gT <Plug>TitlecaseLine
+
+""" camelsnek {{{2
+
+" XXX: Until this is addressed:
+"   https://github.com/nicwest/vim-camelsnek/pull/1#issuecomment-1293417153
+let g:camelsnek_iskeyword_override = 0
 
 " NOTE: These don't work in operator-pending mode
 call MapKey('Zcc', ':CamelB<CR>', ['map'])
@@ -418,18 +430,12 @@ call MapKey('Zcp', ':Camel<CR>', ['map'])
 call MapKey('Zcs', ':Snek<CR>', ['map'])
 call MapKey('ZcS', ':Screm<CR>', ['map'])
 
+""" abolish {{{2
+
 " NOTE: These don't work in operator-pending mode or visual mode
 " Re-map abolish's `cr.`
 call MapKey('Zc.', 'cr.', ['map'])
 
-" XXX: Until this is addressed:
-"   https://github.com/nicwest/vim-camelsnek/pull/1#issuecomment-1293417153
-let g:camelsnek_iskeyword_override = 0
-
-
-""" titlecase {{{2
-
-let g:titlecase_excluded_words = ["và"]
 
 """ markdown-preview {{{2
 
