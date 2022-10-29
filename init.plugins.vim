@@ -260,7 +260,7 @@ if has('nvim')
               opts = { nowait = true, silent = true }
             },
             ["<C-n>"] = require('telescope.actions').cycle_history_next,
-            ["<C-p>"] = require('telescope.actions').cycle_history_prev
+            ["<C-p>"] = require('telescope.actions').cycle_history_prev,
           }
         }
       },
@@ -272,6 +272,20 @@ if has('nvim')
         -- }
         -- Now the picker_config_key will be applied every time you call this
         -- builtin picker
+        find_files = {
+            find_command = {'rg', '-L', '--hidden', '--glob', '!.git/', '--files'},
+        },
+        live_grep = {
+            glob_pattern = '!.git/',
+            additional_args = {
+              '-L',
+              '--hidden',
+              '--column',
+              '--line-number',
+              '--no-heading',
+              '--smart-case',
+            },
+        },
       },
       extensions = {
         -- Your extension configuration goes here:
