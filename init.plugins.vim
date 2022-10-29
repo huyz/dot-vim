@@ -138,6 +138,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tomtom/tcomment_vim'
+Plug 'Raimondi/delimitMate'
+Plug 'chrisbra/Colorizer'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'jsx', 'typescript'] }

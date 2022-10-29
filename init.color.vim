@@ -69,18 +69,18 @@ endif
 if has("nvim")
     :lua <<EOF
     require('dark_notify').run({
-            onchange = function(mode)
-                    -- optional, you can configure your own things to react to changes.
-                    -- this is called at startup and every time dark mode is switched,
-                    -- either via the OS, or because you manually set/toggled the mode.
-                    -- mode is either "light" or "dark"
-                    if (mode == "dark")
-                    then
-                        vim.api.nvim_call_function("SetBackgroundDark", {})
-                    else
-                        vim.api.nvim_call_function("SetBackgroundLight", {})
-                    end
-            end,
+        onchange = function(mode)
+            -- optional, you can configure your own things to react to changes.
+            -- this is called at startup and every time dark mode is switched,
+            -- either via the OS, or because you manually set/toggled the mode.
+            -- mode is either "light" or "dark"
+            if (mode == "dark")
+            then
+                vim.api.nvim_call_function("SetBackgroundDark", {})
+            else
+                vim.api.nvim_call_function("SetBackgroundLight", {})
+            end
+        end,
     })
 EOF
 endif
