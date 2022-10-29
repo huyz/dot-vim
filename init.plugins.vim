@@ -405,12 +405,12 @@ let g:VM_maps["Redo"] = '<C-r>'
 
 
 if has("gui_running")
-  " Until https://github.com/macvim-dev/macvim/issues/1325 is fixed, we have
-  " to use <C> instead of <D>. For MacVim this means we have to run once:
-  " `defaults write org.vim.MacVim MMTranslateCtrlClick 0` to disable the context menu
-  "let g:VM_maps["Mouse Cursor"] = '<D-LeftMouse>'
-  "let g:VM_maps["Mouse Word"] = '<D-RightMouse>'
-  "let g:VM_maps["Mouse Column"] = '<M-D-RightMouse>'
+    " Until https://github.com/macvim-dev/macvim/issues/1325 is fixed, we have
+    " to use <C> instead of <D>. For MacVim this means we have to run once:
+    " `defaults write org.vim.MacVim MMTranslateCtrlClick 0` to disable the context menu
+    "let g:VM_maps["Mouse Cursor"] = '<D-LeftMouse>'
+    "let g:VM_maps["Mouse Word"] = '<D-RightMouse>'
+    "let g:VM_maps["Mouse Column"] = '<M-D-RightMouse>'
     let g:VM_maps["Mouse Cursor"] = '<C-RightMouse>'
     let g:VM_maps["Mouse Word"] = '<C-MiddleMouse>'
     let g:VM_maps["Mouse Column"] = '<C-S-RightMouse>'
@@ -501,8 +501,9 @@ nmap gA <Plug>(EasyAlign)
 
 let g:titlecase_excluded_words = ["và"]
 " NOTE: These also work in operator-pending
-call MapKey('Zct', '<Plug>Titlecase', ['map'])
-call MapKey('Zctt', '<Plug>TitlecaseLine', ['map'])
+call MapKey('<M-c>T', 'viW<Plug>Titlecase<CR>', ['nmap'])
+call MapKey('<M-c>t', '<Plug>Titlecase', ['map'])
+call MapKey('<M-c>tt', '<Plug>TitlecaseLine', ['nmap'])
 
 let g:titlecase_map_keys = 0
 nmap <leader>gt <Plug>Titlecase
@@ -516,18 +517,17 @@ nmap <leader>gT <Plug>TitlecaseLine
 let g:camelsnek_iskeyword_override = 0
 
 " NOTE: These don't work in operator-pending mode
-call MapKey('Zcc', ':CamelB<CR>', ['map'])
-call MapKey('Zck', ':Kebab<CR>', ['map'])
+call MapKey('<M-c>C', ':CamelB<CR>', ['map'])
+call MapKey('<M-c>K', ':Kebab<CR>', ['map'])
 " Zcp: PascalCase, a.k.a. MixedCase
-call MapKey('Zcp', ':Camel<CR>', ['map'])
-call MapKey('Zcs', ':Snek<CR>', ['map'])
-call MapKey('ZcS', ':Screm<CR>', ['map'])
+call MapKey('<M-c>P', ':Camel<CR>', ['map'])
+call MapKey('<M-c>S', ':Snek<CR>', ['map'])
+call MapKey('<M-c>_', ':Screm<CR>', ['map'])
 
 """ abolish {{{2
 
 " NOTE: These don't work in operator-pending mode or visual mode
-" Re-map abolish's `cr.`
-call MapKey('Zc.', 'cr.', ['map'])
+call MapKey('<M-c>D', 'cr.', ['map'])
 
 
 """ markdown-preview {{{2

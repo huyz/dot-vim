@@ -34,8 +34,7 @@ function! s:MetaNeedsNormalization(str) abort
     if has("nvim") || (has("gui_macvim") && has("gui_running") && !&macmeta)
         return 0
     endif
-    return strlen(a:str) == 5 && StartsWith(a:str, '<M-') ||
-                \ (a:str == '<M-lt>')
+    return StartsWith(a:str, '<M-')
 endfunction
 
 " There are some cases where using <Esc>x is necessary over <M-x>
@@ -58,7 +57,7 @@ function! s:NormalizeMetaModifier(str) abort
     elseif a:str == '<M->>'
         return '<Esc><gt>'
     endif
-    return substitute(a:str, '<M-\(.\)>', '<Esc>\1', '')
+    return substitute(a:str, '<M-\(.\)>', '<Esc>\1', 'g')
 endfunction
 
 " Allows mapping aliases for characters like `å` to `<M-a>`
