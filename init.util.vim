@@ -62,14 +62,21 @@ function! s:NormalizeMetaModifier(str) abort
 endfunction
 
 " Allows mapping aliases for characters like `å` to `<M-a>`
-function! MapAlias(keys, rhs) abort
+function! MapAlias(keys, rhs, modes = 'all') abort
+    let l:modes = a:modes
     let l:rhs = s:NormalizeMetaModifier(a:rhs)
-    execute 'map'  a:keys l:rhs
-    " Exclude insert mode because we don't want the <Esc> to slow down exiting insert mode
-    if !StartsWith(a:keys, '<Esc>')
-        execute 'map!' a:keys l:rhs
+    if type(l:modes) == type("") && l:modes == 'all'
+        execute 'map'  a:keys l:rhs
+        " Exclude insert mode because we don't want the <Esc> to slow down exiting insert mode
+        if !StartsWith(a:keys, '<Esc>')
+            execute 'map!' a:keys l:rhs
+        endif
+        execute 'tmap' a:keys l:rhs
+    else
+        for mode in l:modes
+            execute mode a:keys l:rhs
+        endfor
     endif
-    execute 'tmap' a:keys l:rhs
 endfunction
 
 " Maps the key sequence to RHS, optionally with specific modes
@@ -121,12 +128,12 @@ endfunction
 
 " Maps both the Option (⌥) and Command (⌘) versions for universal
 " access and easy GUI access
-function! NoremapSuperKey(key, rhs, ...) abort
-    let l:modes = get(a:, 2, 'all')
-    call MapKey('<M-' . a:key . '>', a:rhs, l:modes)
+function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true) abort
+    call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap)
     if has("gui_running")
         let l:extra_modifier = a:key >= 'A' && a:key <= 'Z' ? 'S-' : ''
-        call MapKey('<' . l:extra_modifier . 'D-' . tolower(a:key) . '>', a:rhs, l:modes)
+        call MapKey('<' . l:extra_modifier . 'D-' . tolower(a:key) . '>',
+            \ a:rhs, a:modes, a:no_insert, a:no_remap)
     endif
 endfunction
 

@@ -183,19 +183,23 @@ nnoremap <Esc>u <Cmd>noh<CR>
 """ General
 
 " Open recent
-call NoremapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
-call NoremapSuperKey('e', '<Cmd>CtrlPBuffer<CR>')
-call NoremapSuperKey('E', '<Cmd>CtrlPBuffer<CR>')
+if has('nvim')
+    call MapSuperKey('p', '<F4>', 'all', v:false, v:false)
+else
+    call MapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
+endif
+call MapSuperKey('e', '<F2>', 'all', v:false, v:false)
+call MapSuperKey('E', '<F2>', 'all', v:false, v:false)
 " We don't remap `<M-S-F>` because we use that as alternate for `<C-S-F>` needed in MacVim/VimR
-call MapKey('<S-D-F>', '<Cmd>RG<CR>')
-call NoremapSuperKey('o', '<Cmd>Startify<CR>')
+call MapKey('<S-D-f>', '<F3>', 'all', v:false, v:false)
+call MapSuperKey('o', '<F10>', 'all', v:false, v:false)
 if has("gui_running")
     if has("gui_macvim")
         " In GUI: <M-D-o>
-        call NoremapSuperKey('ø', '<Cmd>Startify<CR>')
+        call MapSuperKey('ø', '<F10>', 'all', v:false, v:false)
     elseif has("gui_vimr")
         " In GUI: <M-D-o>
-        call MapKey('<M-D-o>', '<Cmd>Startify<CR>')
+        call MapKey('<M-D-o>', '<F10>', 'all', v:false, v:false)
     endif
 endif
 
@@ -301,19 +305,19 @@ nnoremap <silent> <C-\> <Cmd>call ToggleSplitOrientation()<CR>
 
 " NOTE: we avoid <C-2> and <C-6> because these are ANSI control characters
 "   (even Shift isn't pressed)
-call NoremapSuperKey('t', '<Cmd>tabnew<CR>')
-call NoremapSuperKey('w', '<Cmd>tabclose<CR>')
-call NoremapSuperKey('1', '<Cmd>tabn 1<CR>')
-call NoremapSuperKey('2', '<Cmd>tabn 2<CR>')
-call NoremapSuperKey('3', '<Cmd>tabn 3<CR>')
-call NoremapSuperKey('4', '<Cmd>tabn 4<CR>')
-call NoremapSuperKey('5', '<Cmd>tabn 5<CR>')
-call NoremapSuperKey('6', '<Cmd>tabn 6<CR>')
-call NoremapSuperKey('7', '<Cmd>tabn 7<CR>')
-call NoremapSuperKey('8', '<Cmd>tabn 8<CR>')
-call NoremapSuperKey('9', '<Cmd>tablast<CR>')
-call NoremapSuperKey('{', '<Cmd>tabprev<CR>')
-call NoremapSuperKey('}', '<Cmd>tabnext<CR>')
+call MapSuperKey('t', '<Cmd>tabnew<CR>')
+call MapSuperKey('w', '<Cmd>tabclose<CR>')
+call MapSuperKey('1', '<Cmd>tabn 1<CR>')
+call MapSuperKey('2', '<Cmd>tabn 2<CR>')
+call MapSuperKey('3', '<Cmd>tabn 3<CR>')
+call MapSuperKey('4', '<Cmd>tabn 4<CR>')
+call MapSuperKey('5', '<Cmd>tabn 5<CR>')
+call MapSuperKey('6', '<Cmd>tabn 6<CR>')
+call MapSuperKey('7', '<Cmd>tabn 7<CR>')
+call MapSuperKey('8', '<Cmd>tabn 8<CR>')
+call MapSuperKey('9', '<Cmd>tablast<CR>')
+call MapSuperKey('{', '<Cmd>tabprev<CR>')
+call MapSuperKey('}', '<Cmd>tabnext<CR>')
 
 if has("gui_running")
     call MapKey('<S-D-{>', '<Cmd>tabprev<CR>')

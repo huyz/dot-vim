@@ -8,9 +8,18 @@ else
     nnoremap <F1> <Cmd>NERDTreeToggle<CR>
 endif
 call MapKey('<S-F1>', '<Cmd>helpclose<CR>')
-nmap <F2> <Cmd>CtrlPBuffer<CR>
-nmap <F3> <Cmd>RG<CR>
-nmap <F4> <Cmd>FZF<CR>
+if has('nvim')
+    nmap <F2> <Cmd>Telescope buffers<CR>
+    nmap <F3> <Cmd>Telescope live_grep<CR>
+    nmap <F4> <Cmd>Telescope find_files<CR>
+else
+    nmap <F2> <Cmd>CtrlPBuffer<CR>
+    nmap <F3> <Cmd>RG<CR>
+    nmap <F4> <Cmd>FZF<CR>
+endif
+nmap <S-F2> <Cmd>CtrlPBuffer<CR>
+nmap <S-F3> <Cmd>RG<CR>
+nmap <S-F4> <Cmd>FZF<CR>
 nmap <F5> <Leader>o1
 nmap <F6> <Leader>o2
 nmap <F7> <Cmd>SymbolsOutline<CR>

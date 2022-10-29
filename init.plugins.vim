@@ -40,6 +40,10 @@ Plug 'mattn/webapi-vim'
 
 " Files
 Plug 'mhinz/vim-startify'
+" plenary: dependency of telescope
+Plug 'nvim-lua/plenary.nvim', Cond(has('nvim'))
+Plug 'nvim-telescope/telescope.nvim', Cond(has('nvim'))
+Plug 'nvim-telescope/telescope-fzf-native.nvim', Cond(has('nvim'), { 'do': 'make' })
 Plug 'kien/ctrlp.vim'
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -229,6 +233,57 @@ endfunction
 "autocmd User        StartifyReady silent execute 'SLoad '  . GetUniqueSessionName()
 autocmd VimLeavePre *             silent execute 'SSave! ' . GetUniqueSessionName()
 
+""" telescope {{{2
+
+if has('nvim')
+    lua << EOF
+    -- To get fzf loaded and working with telescope, you need to call
+    -- load_extension, somewhere after setup function:
+    require('telescope').load_extension('fzf')
+
+    require('telescope').setup{
+      defaults = {
+        -- Default configuration for telescope goes here:
+        -- config_key = value,
+        mappings = {
+          i = {
+            -- map actions.which_key to <C-h> (default: <C-/>)
+            -- actions.which_key shows the mappings for your picker,
+            -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+            -- ["<C-h>"] = "which_key",
+            ["<C-j>"] = {
+              require('telescope.actions').move_selection_next, type = "action",
+              opts = { nowait = true, silent = true }
+            },
+            ["<C-k>"] = {
+              require('telescope.actions').move_selection_previous, type = "action",
+              opts = { nowait = true, silent = true }
+            },
+            ["<C-n>"] = require('telescope.actions').cycle_history_next,
+            ["<C-p>"] = require('telescope.actions').cycle_history_prev
+          }
+        }
+      },
+      pickers = {
+        -- Default configuration for builtin pickers goes here:
+        -- picker_name = {
+        --   picker_config_key = value,
+        --   ...
+        -- }
+        -- Now the picker_config_key will be applied every time you call this
+        -- builtin picker
+      },
+      extensions = {
+        -- Your extension configuration goes here:
+        -- extension_name = {
+        --   extension_config_key = value,
+        -- }
+        -- please take a look at the readme of the extension you want to configure
+      }
+    }
+EOF
+endif
+
 """ CtrlP {{{2
 
 let g:ctrlp_cmd = 'CtrlPBuffer'
@@ -308,7 +363,7 @@ call wilder#set_option('renderer', wilder#popupmenu_renderer())
 
 if has("nvim")
     lua << EOF
-require("nvim-tree").setup()
+    require("nvim-tree").setup()
 EOF
 endif
 
