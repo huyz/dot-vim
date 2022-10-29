@@ -83,7 +83,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
 Plug 'wesQ3/vim-windowswap'
-Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons', Cond(!has('nvim'))
+Plug 'kyazdani42/nvim-web-devicons', Cond(has('nvim'))
 Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
 " bbye: delete buffer preserving window layout
