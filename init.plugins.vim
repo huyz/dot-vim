@@ -95,6 +95,8 @@ Plug 'mg979/vim-visual-multi'
 Plug 'easymotion/vim-easymotion'
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-surround'
+" sleuth: automatic tab/space and indentation
+Plug 'tpope/vim-sleuth'
 Plug 'landock/vim-expand-region'
 Plug 'matze/vim-move'
 Plug 'junegunn/vim-easy-align'
@@ -138,6 +140,8 @@ let coc_supported = has('nvim') || v:version >= 801
 Plug 'neoclide/coc.nvim', Cond(coc_supported, {'branch': 'release'})
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
 Plug 'simrat39/symbols-outline.nvim', Cond(has('nvim'))
+" illuminate: highlight other usages
+Plug 'RRethy/vim-illuminate'
 
 " Git
 Plug 'rhysd/git-messenger.vim'
