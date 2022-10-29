@@ -177,11 +177,14 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 let g:coc_global_extensions = [
             \ 'coc-css',
+            \ 'coc-diagnostic',
+            \ 'coc-eslint',
             \ 'coc-git',
             \ 'coc-html',
             \ 'coc-json',
             \ 'coc-prettier',
             \ 'coc-pyright',
+            \ 'coc-snippets',
             \ 'coc-tsserver',
             \ 'coc-vimlsp'
             \ ]
