@@ -125,13 +125,29 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:tru
     endif
 endfunction
 
-" Maps both the Option (⌥) and Command (⌘) versions for universal
-" access and easy GUI access
+" Maps the Command (⌘) key, or in TUIs the fallback Option (⌥), key.
+" That's because terminals like iTerm swallow up key bindings with the ⌘ key.
 function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true) abort
-    call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap)
     if has("gui_running")
-        let l:extra_modifier = a:key >= 'A' && a:key <= 'Z' ? 'S-' : ''
+        let l:extra_modifier = a:key >= 'A' && a:key <= 'Z' ||
+                    \ index(['{', '}'], a:key) >= 0 ? 'S-' : ''
         call MapKey('<' . l:extra_modifier . 'D-' . tolower(a:key) . '>',
+            \ a:rhs, a:modes, a:no_insert, a:no_remap)
+    else
+        call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap)
+    endif
+endfunction
+
+
+" Maps the Control (⌃) key, or in GUIs the fallback Option (⌥), key.
+" 2022-10-30 That's because neither MacVim/VimR support modifyOtherKeys yet
+"   and thus treat <C-S-A> like <C-A>.
+function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true) abort
+    if has("gui_running")
+        call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap)
+    else
+        let l:extra_modifier = a:key >= 'A' && a:key <= 'Z' ? 'S-' : ''
+        call MapKey('<' . l:extra_modifier . 'C-' . tolower(a:key) . '>',
             \ a:rhs, a:modes, a:no_insert, a:no_remap)
     endif
 endfunction

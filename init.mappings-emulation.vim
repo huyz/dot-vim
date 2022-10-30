@@ -92,6 +92,11 @@ call MapAlias('˘', '<M->>')
 call MapAlias('¿', '<M-?>')
 call MapAlias('÷', '<M-/>')
 
+" TODO: automate these MapAlias whenever it's used
+call MapAlias('µµ', '<M-m><M-m>')
+call MapAlias('µπ', '<M-m><M-p>')
+"call MapAlias('µ¬', '<M-m><M-l>')
+
 call MapAlias('<D-”>', '<M-S-D-{>')
 call MapAlias('<D-’>', '<M-S-D-}>')
 call MapAlias('<D-±>', '<M-S-D-BS>')
@@ -190,8 +195,8 @@ else
 endif
 call MapSuperKey('e', '<F2>', 'all', v:false, v:false)
 call MapSuperKey('E', '<F2>', 'all', v:false, v:false)
-" We don't remap `<M-S-F>` because we use that as alternate for `<C-S-F>` needed in MacVim/VimR
-call MapKey('<S-D-f>', '<F3>', 'all', v:false, v:false)
+call MapSuperKey('F', '<F3>', 'all', v:false, v:false)
+" In terminal, we can't do ⌥⌘O, so we do ⌥O
 call MapSuperKey('o', '<F10>', 'all', v:false, v:false)
 if has("gui_running")
     if has("gui_macvim")
@@ -217,7 +222,7 @@ inoremap <M-v> <C-R><C-O>+
 " Wrapped line navigation
 call MapKey('<Up>', 'gk')
 call MapKey('<Down>', 'gj')
-call MapKey('<M-z>', '<Cmd>set wrap!<CR>')
+call MapKey('<M-t>w', '<Cmd>set wrap!<CR>')
 
 " Move cursor
 call MapKey('<D-Up>', 'gg')
@@ -271,17 +276,14 @@ call MapKey('<M->>', '>,', 'all', 0, 0)
 
 """ Splits {{{2
 
-" We prefer using `<M>` instead of `<C>` here because:
-" 1) these won't conflict with iTerm's split keybindings
-" 2) MacVim/VimR don't support modifyOtherKeys as of 2022-10-28
-call MapKey('<M-R>', '<Cmd>vsplit<CR>')
-call MapKey('<M-S>', '<Cmd>split<CR>')
-call MapKey('<M-W>', '<C-w>c')
-call MapKey('<M-O>', '<C-w>o')
-call MapKey('<M-H>', '<C-w>h')
-call MapKey('<M-J>', '<C-w>j')
-call MapKey('<M-K>', '<C-w>k')
-call MapKey('<M-L>', '<C-w>l')
+call MapControlKey('R', '<Cmd>vsplit<CR>')
+call MapControlKey('S', '<Cmd>split<CR>')
+call MapControlKey('W', '<C-w>c')
+call MapControlKey('O', '<C-w>o')
+call MapControlKey('H', '<C-w>h')
+call MapControlKey('J', '<C-w>j')
+call MapControlKey('K', '<C-w>k')
+call MapControlKey('L', '<C-w>l')
 call MapKey('<M-S-D-+>', '<C-w>=')
 
 " Toggle split orientation
@@ -319,34 +321,50 @@ call MapSuperKey('9', '<Cmd>tablast<CR>')
 call MapSuperKey('{', '<Cmd>tabprev<CR>')
 call MapSuperKey('}', '<Cmd>tabnext<CR>')
 
-if has("gui_running")
-    call MapKey('<S-D-{>', '<Cmd>tabprev<CR>')
-    call MapKey('<S-D-}>', '<Cmd>tabnext<CR>')
+call MapControlKey('{', '<Cmd>-tabmove<CR>')
+call MapControlKey('}', '<Cmd>+tabmove<CR>')
 
-    " These don't work inside iTerm as they are passed as `<M-{>`
-    call MapKey('<M-S-D-{>', '<Cmd>-tabmove<CR>')
-    call MapKey('<M-S-D-}>', '<Cmd>+tabmove<CR>')
-endif
+""" Code editing
+
+" titlecase
+" NOTE: These also work in operator-pending
+call MapKey('<M-c>T', 'viW<Plug>Titlecase<CR>', ['nmap'])
+call MapKey('<M-c>t', '<Plug>Titlecase', ['map'])
+call MapKey('<M-c>tt', '<Plug>TitlecaseLine', ['nmap'])
+
+" camelsnek
+" NOTE: These don't work in operator-pending mode
+call MapKey('<M-c>C', ':CamelB<CR>', ['map'])
+call MapKey('<M-c>K', ':Kebab<CR>', ['map'])
+" Zcp: PascalCase, a.k.a. MixedCase
+call MapKey('<M-c>P', ':Camel<CR>', ['map'])
+call MapKey('<M-c>S', ':Snek<CR>', ['map'])
+call MapKey('<M-c>_', ':Screm<CR>', ['map'])
+
+" abolish
+" NOTE: These don't work in operator-pending mode or visual mode
+call MapKey('<M-c>D', 'cr.', ['map'])
+
+""" Markdown
+
+call MapKey('<M-m><M-m>', '<Cmd>MarkdownPreview<CR>')
+call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
+call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
+
+""" Colors
+
+call MapKey('<M-t>b', '<Cmd>call ToggleBackground()<CR>')
 
 """ Terminal
 
 call MapKey('<M-F12>', '<Cmd>call OpenTerminal()<CR>')
-call MapKey('<C-S-Z>', '<Cmd>call RevealInTerminal()<CR>')
-" We need alternate for MacVim/VimR
-call MapKey('<M-Z>', '<Cmd>call RevealInTerminal()<CR>')
+call MapControlKey('Z', '<Cmd>call RevealInTerminal()<CR>')
 
-call MapKey('<C-S-T>', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
-" We need alternate for MacVim/VimR
-call MapKey('<M-T>', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
+call MapControlKey('T', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
 
 """ External Apps
 
-call MapKey('<C-S-F>', '<Cmd>Reveal<CR>')
-" We need alternate for MacVim/VimR
-call MapKey('<M-F>', '<Cmd>Reveal<CR>')
-
-call MapKey('<C-S-C>', '<Cmd>CodeCurrent<CR>')
-" We need alternate for MacVim/VimR
-call MapKey('<M-C>', '<Cmd>CodeCurrent<CR>')
+call MapControlKey('F', '<Cmd>Reveal<CR>')
+call MapControlKey('C', '<Cmd>CodeCurrent<CR>')
 
 " vim:foldmethod=marker:

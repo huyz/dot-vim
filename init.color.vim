@@ -40,7 +40,6 @@ function! ToggleBackground()
         call SetBackgroundDark()
     endif
 endfunction
-nnoremap <silent> <Leader>b <Cmd>call ToggleBackground()<CR>
 
 " Startup
 if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')

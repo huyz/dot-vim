@@ -501,16 +501,8 @@ nmap gA <Plug>(EasyAlign)
 
 """ titlecase {{{2
 
-let g:titlecase_excluded_words = ["và"]
-" NOTE: These also work in operator-pending
-call MapKey('<M-c>T', 'viW<Plug>Titlecase<CR>', ['nmap'])
-call MapKey('<M-c>t', '<Plug>Titlecase', ['map'])
-call MapKey('<M-c>tt', '<Plug>TitlecaseLine', ['nmap'])
-
 let g:titlecase_map_keys = 0
-nmap <leader>gt <Plug>Titlecase
-vmap <leader>gt <Plug>Titlecase
-nmap <leader>gT <Plug>TitlecaseLine
+let g:titlecase_excluded_words = ["và"]
 
 """ camelsnek {{{2
 
@@ -518,30 +510,17 @@ nmap <leader>gT <Plug>TitlecaseLine
 "   https://github.com/nicwest/vim-camelsnek/pull/1#issuecomment-1293417153
 let g:camelsnek_iskeyword_override = 0
 
-" NOTE: These don't work in operator-pending mode
-call MapKey('<M-c>C', ':CamelB<CR>', ['map'])
-call MapKey('<M-c>K', ':Kebab<CR>', ['map'])
-" Zcp: PascalCase, a.k.a. MixedCase
-call MapKey('<M-c>P', ':Camel<CR>', ['map'])
-call MapKey('<M-c>S', ':Snek<CR>', ['map'])
-call MapKey('<M-c>_', ':Screm<CR>', ['map'])
+""" glow {{{2
 
-""" abolish {{{2
+if has("nvim")
+    lua << EOF
+    require('glow').setup()
+EOF
+endif
 
-" NOTE: These don't work in operator-pending mode or visual mode
-call MapKey('<M-c>D', 'cr.', ['map'])
+""" Colorizer {{{2
 
-
-""" markdown-preview {{{2
-
-nmap µµ <Cmd>MarkdownPreview<CR>
-" FIXME: doesn't work
-"call MapKey('<M-m><M-m>', '<Cmd>MarkdownPreview<CR>')
-
-""" NERDcommenter options {{{2
-
-map <Leader>c/ <plug>NERDCommenterAlignBoth
-"map <Leader>bj <plug>NERDCommenterAlignBoth
+let g:colorizer_auto_filetype='css,html,vim'
 
 """ syntastic {{{2
 
