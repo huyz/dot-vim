@@ -1,6 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Color schemes
-" Usage: `\b` to toggle between dark and light
 
 function! SetBackgroundDark()
     execute 'colorscheme ' . g:colorscheme_dark

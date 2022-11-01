@@ -360,6 +360,7 @@ call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 """ Colors
 
 call MapKey('<M-t>b', '<Cmd>call ToggleBackground()<CR>')
+call MapKey('<M-t>c', '<Cmd>HexokinaseToggle<CR>')
 
 """ Terminal
 

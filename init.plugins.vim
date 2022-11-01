@@ -139,7 +139,7 @@ Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'Raimondi/delimitMate'
-Plug 'chrisbra/Colorizer'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'jsx', 'typescript'] }
@@ -518,9 +518,11 @@ if has("nvim")
 EOF
 endif
 
-""" Colorizer {{{2
+""" Hexokinase {{{2
 
-let g:colorizer_auto_filetype='css,html,vim'
+let g:Hexokinase_highlighters = ['virtual']
+let g:Hexokinase_ftEnabled = ['vim', 'html', 'css', 'less', 'scss', 'stylus', 'javascript',
+            \ 'markwhen']
 
 """ syntastic {{{2
 
