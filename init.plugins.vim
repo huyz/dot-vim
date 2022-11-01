@@ -520,7 +520,11 @@ endif
 
 """ Hexokinase {{{2
 
-let g:Hexokinase_highlighters = ['virtual']
+if has('nvim')
+    let g:Hexokinase_highlighters = ['virtual']
+else
+    let g:Hexokinase_highlighters = ['backgroundfull']
+endif
 let g:Hexokinase_ftEnabled = ['vim', 'html', 'css', 'less', 'scss', 'stylus', 'javascript',
             \ 'markwhen']
 
