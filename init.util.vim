@@ -131,13 +131,17 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:tru
     endif
 endfunction
 
+function s:ShiftModifierIfNeeded(key)
+    let key = substitute(a:key, '.*-', '', '')
+    return strlen(key) == 1 && key >= 'A' && key <= 'Z' ||
+        \ index(['{', '}', '"', '+'], key) >= 0 ? 'S-' : ''
+endfunction
+
 " Maps the Command (⌘) key, or in TUIs the fallback Option (⌥), key.
 " That's because terminals like iTerm swallow up key bindings with the ⌘ key.
 function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true) abort
     if has("gui_running")
-        let l:extra_modifier = a:key >= 'A' && a:key <= 'Z' ||
-                    \ index(['{', '}', '"'], a:key) >= 0 ? 'S-' : ''
-        call MapKey('<' . l:extra_modifier . 'D-' . tolower(a:key) . '>',
+        call MapKey('<D-' . <SID>ShiftModifierIfNeeded(a:key) . tolower(a:key) . '>',
             \ a:rhs, a:modes, a:no_insert, a:no_remap)
     else
         call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap)
@@ -151,9 +155,20 @@ function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap =
     if has("gui_running")
         call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap)
     else
-        let l:extra_modifier = a:key >= 'A' && a:key <= 'Z' ? 'S-' : ''
-        call MapKey('<' . l:extra_modifier . 'C-' . tolower(a:key) . '>',
+        call MapKey('<C-' . <SID>ShiftModifierIfNeeded(a:key) . tolower(a:key) . '>',
             \ a:rhs, a:modes, a:no_insert, a:no_remap)
+    endif
+endfunction
+
+" Maps the Control (⌃) key in TUIs or the Command (⌘) key in GUIs.
+" 2022-10-30 That's because neither MacVim/VimR support modifyOtherKeys yet
+"   and thus treat <C-D-a> like <C-A>.
+function! MapSuperOrControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true) abort
+    if has("gui_running")
+        call MapKey('<D-' . <SID>ShiftModifierIfNeeded(a:key) . tolower(a:key) . '>',
+            \ a:rhs, a:modes, a:no_insert, a:no_remap)
+    else
+        call MapKey('<C-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap)
     endif
 endfunction
 

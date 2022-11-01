@@ -229,11 +229,7 @@ call MapKey('<M-D-Right>', '<C-I>')
 
 " Go to previous edit location
 call MapSuperKey('S-BS', 'g;')
-if has("gui_running")
-  call MapKey('<M-S-D-BS>', 'g,')
-else
-  call MapKey('<C-M-S-BS>', 'g,')
-endif
+call MapSuperOrControlKey('M-S-BS', 'g,')
 call MapKey('<C-S-BS>', 'dd')
 call MapKey('<D-Del>', 'D')
 call MapKey('<D-BS>', 'd0')
@@ -281,11 +277,35 @@ call MapControlKey('H', '<C-w>h')
 call MapControlKey('J', '<C-w>j')
 call MapControlKey('K', '<C-w>k')
 call MapControlKey('L', '<C-w>l')
-call MapKey('<M-S-D-+>', '<C-w>=')
-call MapKey('<M-S-D-h>', '<C-w>H')
-call MapKey('<M-S-D-j>', '<C-w>J')
-call MapKey('<M-S-D-k>', '<C-w>K')
-call MapKey('<M-S-D-l>', '<C-w>L')
+if has('gui_running') && has('nvim')
+    call MapKey('<M-S-D-+>', '<C-w>=')
+elseif has('gui_running') && !has('nvim')
+    call MapKey('<D-±>', '<C-w>=')
+elseif has('nvim')
+    call MapKey('<M-C-+>', '<C-w>=')
+else
+    " NOTE: Can't get it to work in vim in iTerm
+    " call MapKey('«', '<C-w>=')
+    " call MapKey('<S-«>', '<C-w>=')
+endif
+call MapSuperOrControlKey('M-S-Left', '<C-w>H')
+call MapSuperOrControlKey('M-S-Down', '<C-w>J')
+call MapSuperOrControlKey('M-S-Up', '<C-w>K')
+call MapSuperOrControlKey('M-S-Right', '<C-w>L')
+
+" TODO: should we make MapSuperOrControlKey handle the weird case of Bar and BSlash
+" For imap, we'd need to have <C-o> twice
+if has('gui_running') && has('nvim')
+    call MapKey('<M-S-D-Bar>', '<C-w>_<C-w><Bar>', ['nmap'])
+elseif has('gui_running') && !has('nvim')
+    call MapKey('<D-»>', '<C-w>_<C-w><Bar>', ['nmap'])
+elseif has('nvim')
+    call MapKey('<M-C-Bslash>', '<C-w>_<C-w><Bar>', ['nmap'])
+else
+    " NOTE: Can't get it to work in vim in iTerm
+    " call MapKey('ü', '<C-w>_<C-w><Bar>', ['nmap'])
+    " call MapKey('<S-ü>', '<C-w>_<C-w><Bar>', ['nmap'])
+endif
 
 " Toggle split orientation
 " https://stackoverflow.com/questions/1269603/to-switch-from-vertical-split-to-horizontal-split-fast-in-vim/45994525#45994525
@@ -301,8 +321,9 @@ function! ToggleSplitOrientation()
         let t:splitType = 'vertical'
     endif
 endfunction
-nnoremap <silent> <C-w><Bslash> <Cmd>call ToggleSplitOrientation()<CR>
-nnoremap <silent> <C-\> <Cmd>call ToggleSplitOrientation()<CR>
+" NOTE: For terminal, we need to use <C-Bslash> because <C-S-Bar> is not possible since <C-\> is
+" an ANSI control sequence
+call MapKey('<C-Bslash>', '<Cmd>call ToggleSplitOrientation()<CR>')
 
 """ Tabs {{{2
 
