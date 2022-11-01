@@ -57,7 +57,13 @@ function! s:NormalizeMetaModifier(str) abort
     elseif a:str == '<M->>'
         return '<Esc><gt>'
     endif
-    return substitute(a:str, '<M-\(.\)>', '<Esc>\1', 'g')
+    " If there is more than one modifier or Option+Function-key
+    let l:str2 = substitute(a:str, '<M-\(.-.\+\|F[0-9]\+\)>', '<Esc><\1>', 'g')
+    if l:str2 != a:str
+        return l:str2
+    endif
+    " If there's only the Meta modifier
+    return substitute(l:str2, '<M-\(.\)>', '<Esc>\1', 'g')
 endfunction
 
 " Allows mapping aliases for characters like `å` to `<M-a>`
@@ -130,14 +136,13 @@ endfunction
 function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true) abort
     if has("gui_running")
         let l:extra_modifier = a:key >= 'A' && a:key <= 'Z' ||
-                    \ index(['{', '}'], a:key) >= 0 ? 'S-' : ''
+                    \ index(['{', '}', '"'], a:key) >= 0 ? 'S-' : ''
         call MapKey('<' . l:extra_modifier . 'D-' . tolower(a:key) . '>',
             \ a:rhs, a:modes, a:no_insert, a:no_remap)
     else
         call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap)
     endif
 endfunction
-
 
 " Maps the Control (⌃) key, or in GUIs the fallback Option (⌥), key.
 " 2022-10-30 That's because neither MacVim/VimR support modifyOtherKeys yet

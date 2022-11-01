@@ -196,17 +196,7 @@ endif
 call MapSuperKey('e', '<F2>', 'all', v:false, v:false)
 call MapSuperKey('E', '<F2>', 'all', v:false, v:false)
 call MapSuperKey('F', '<F3>', 'all', v:false, v:false)
-" In terminal, we can't do ⌥⌘O, so we do ⌥O
-call MapSuperKey('o', '<F10>', 'all', v:false, v:false)
-if has("gui_running")
-    if has("gui_macvim")
-        " In GUI: <M-D-o>
-        call MapSuperKey('ø', '<F10>', 'all', v:false, v:false)
-    elseif has("gui_vimr")
-        " In GUI: <M-D-o>
-        call MapKey('<M-D-o>', '<F10>', 'all', v:false, v:false)
-    endif
-endif
+call MapSuperKey('"', '<F10>', 'all', v:false, v:false)
 
 """ System clipboard
 
@@ -231,12 +221,19 @@ call MapKey('<D-Left>', '0')
 call MapKey('<D-Right>', '$')
 
 " Go back/forward
-call MapKey('<M-D-Left>', '<C-o>')
-call MapKey('<M-D-Right>', '<C-i>')
+call MapKey('<M-C-Left>', '<Plug>CamelCaseMotion_b')
+call MapKey('<M-C-Right>', '<Plug>CamelCaseMotion_w')
+" XXX These don't work in terminal:
+call MapKey('<M-D-Left>', '<C-O>')
+call MapKey('<M-D-Right>', '<C-I>')
 
 " Go to previous edit location
-call MapKey('<S-D-BS>', '`.')
-" Delete line
+call MapSuperKey('S-BS', 'g;')
+if has("gui_running")
+  call MapKey('<M-S-D-BS>', 'g,')
+else
+  call MapKey('<C-M-S-BS>', 'g,')
+endif
 call MapKey('<C-S-BS>', 'dd')
 call MapKey('<D-Del>', 'D')
 call MapKey('<D-BS>', 'd0')
@@ -285,6 +282,10 @@ call MapControlKey('J', '<C-w>j')
 call MapControlKey('K', '<C-w>k')
 call MapControlKey('L', '<C-w>l')
 call MapKey('<M-S-D-+>', '<C-w>=')
+call MapKey('<M-S-D-h>', '<C-w>H')
+call MapKey('<M-S-D-j>', '<C-w>J')
+call MapKey('<M-S-D-k>', '<C-w>K')
+call MapKey('<M-S-D-l>', '<C-w>L')
 
 " Toggle split orientation
 " https://stackoverflow.com/questions/1269603/to-switch-from-vertical-split-to-horizontal-split-fast-in-vim/45994525#45994525
@@ -308,7 +309,8 @@ nnoremap <silent> <C-\> <Cmd>call ToggleSplitOrientation()<CR>
 " NOTE: we avoid <C-2> and <C-6> because these are ANSI control characters
 "   (even Shift isn't pressed)
 call MapSuperKey('t', '<Cmd>tabnew<CR>')
-call MapSuperKey('w', '<Cmd>tabclose<CR>')
+" NOTE: ⌥W closes a tab because GUI's ⌘W (and our ⌃⇧W) closes a split
+call MapKey('<M-w>', '<Cmd>tabclose<CR>')
 call MapSuperKey('1', '<Cmd>tabn 1<CR>')
 call MapSuperKey('2', '<Cmd>tabn 2<CR>')
 call MapSuperKey('3', '<Cmd>tabn 3<CR>')
@@ -345,6 +347,10 @@ call MapKey('<M-c>_', ':Screm<CR>', ['map'])
 " NOTE: These don't work in operator-pending mode or visual mode
 call MapKey('<M-c>D', 'cr.', ['map'])
 
+""" Code navigation
+
+call MapSuperKey('b', 'gd')
+
 """ Markdown
 
 call MapKey('<M-m><M-m>', '<Cmd>MarkdownPreview<CR>')
@@ -361,6 +367,15 @@ call MapKey('<M-F12>', '<Cmd>call OpenTerminal()<CR>')
 call MapControlKey('Z', '<Cmd>call RevealInTerminal()<CR>')
 
 call MapControlKey('T', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
+
+""" Internal Apps
+
+if has('nvim')
+  call MapControlKey('E', '<Cmd>NvimTreeFindFile<CR>')
+else
+  call MapControlKey('E', '<Cmd>NERDTreeFind<CR>')
+endif
+
 
 """ External Apps
 
