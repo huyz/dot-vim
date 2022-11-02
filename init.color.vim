@@ -7,17 +7,16 @@ function! SetBackgroundDark()
 
     " NOTE: this needs to be after setting background
     highlight ColorColumn term=reverse ctermbg=darkgrey guibg=grey25
-    " For reference: Auto colors by g:indent_guides_auto_colors=1
-    "highlight IndentGuidesOdd ctermfg=242 ctermbg=0 guifg=grey15 guibg=grey30
-    "highlight IndentGuidesEven ctermfg=0 ctermbg=242 guifg=grey30 guibg=grey15
-    " FIXME: can't get guibg to take effect on startup
-    highlight IndentGuidesEven guibg=grey23
 
     " 2021-07-02 On MacVim, can't see the cursor on top of yellow search results.  So tone down the yellow.
     " Don't really have time to make this cleaner
     if has("gui_running")
         highlight Search guifg=#282a2e guibg=#f0c674
     endif
+
+    " Workaround for refreshing indent-guides' color detection
+    silent! exe 'IndentGuidesToggle'
+    silent! exe 'IndentGuidesToggle'
 endfunction
 
 function! SetBackgroundLight()
@@ -26,10 +25,10 @@ function! SetBackgroundLight()
 
     " NOTE: this needs to be after setting background
     highlight ColorColumn term=reverse ctermbg=lightgrey guibg=grey75
-    " For reference: Auto colors by g:indent_guides_auto_colors=1
-    " Auto colors by g:indent_guides_auto_colors=1
-    "highlight IndentGuidesOdd ctermfg=7 ctermbg=15 guifg=grey70 guibg=grey85
-    "highlight IndentGuidesEven ctermfg=15 ctermbg=7 guifg=grey85 guibg=grey70
+
+    " Workaround for refreshing indent-guides' color detection
+    silent! exe 'IndentGuidesToggle'
+    silent! exe 'IndentGuidesToggle'
 endfunction
 
 function! ToggleBackground()
