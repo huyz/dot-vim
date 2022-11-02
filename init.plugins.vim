@@ -72,7 +72,8 @@ endif
 " Colorscheme
 " Plug 'f-person/auto-dark-mode.nvim', Cond(has('nvim'))
 Plug 'cormacrelf/dark-notify', Cond(has('nvim'))
-Plug 'L-TChen/auto-dark-mode.vim', Cond(!has('nvim') && has('gui_running'))
+" auto-dark-mode: doesn't work in terminal
+Plug 'L-TChen/auto-dark-mode.vim', Cond(has('gui_macvim') && has('gui_running'))
 Plug 'chriskempson/base16-vim'
 
 " UI
@@ -141,6 +142,7 @@ Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'Raimondi/delimitMate'
+Plug 'rizzatti/dash.vim', Cond(has('macunix'))
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }

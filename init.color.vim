@@ -13,7 +13,6 @@ function! SetBackgroundDark()
         " From https://github.com/macvim-dev/macvim/blob/master/runtime/colors/macvim.vim
         hi Normal       guifg=Grey50 guibg=Grey10
         hi Visual       guibg=MacSelectedTextBackgroundColor
-        echo 'macvim'
     endif
 
     " 2021-07-02 On MacVim, can't see the cursor on top of yellow search results.  So tone down the yellow.
@@ -42,7 +41,6 @@ function! SetBackgroundLight()
         " From https://github.com/macvim-dev/macvim/blob/master/runtime/colors/macvim.vim
         hi Normal       gui=NONE guifg=MacTextColor guibg=MacTextBackgroundColor
         hi Visual       guibg=MacSelectedTextBackgroundColor
-        echo 'macvim'
     endif
 
     " Needed in GUI MacVim
