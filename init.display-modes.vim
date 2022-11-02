@@ -48,17 +48,21 @@ function! CycleEditDisplay(mode = '')
     elseif a:mode == '0'
         " This is 'nopaste'
         let b:CycleEditDisplay_mode = 'default'
-    elseif b:CycleEditDisplay_mode == 'default'
-        let b:CycleEditDisplay_mode = 'full'
-    elseif b:CycleEditDisplay_mode == 'full'
-        let b:CycleEditDisplay_mode = 'none'
+    elseif exists("b:CycleEditDisplay_mode")
+        if b:CycleEditDisplay_mode == 'default'
+            let b:CycleEditDisplay_mode = 'full'
+        elseif b:CycleEditDisplay_mode == 'full'
+            let b:CycleEditDisplay_mode = 'none'
+        else
+            let b:CycleEditDisplay_mode = 'default'
+        endif
     else
         let b:CycleEditDisplay_mode = 'default'
     endif
 
     if b:CycleEditDisplay_mode == 'full'
         set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
-        set   list   number   relativenumber   cursorline showbreak=↪
+        set   list   number   relativenumber   cursorline showbreak=↪ cursorcolumn
         set colorcolumn=+1,80,100,120
     elseif b:CycleEditDisplay_mode == 'none'
         set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
@@ -66,7 +70,7 @@ function! CycleEditDisplay(mode = '')
         set colorcolumn=
     else
         set listchars=tab:→\ ,nbsp:␣,trail:·,precedes:«,extends:»
-        set   list   number   relativenumber   cursorline showbreak=↪
+        set   list   number   relativenumber   cursorline showbreak=↪ nocursorcolumn
         set colorcolumn=+1,80,100,120
     endif
     if a:mode != 'init'
