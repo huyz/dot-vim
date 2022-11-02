@@ -49,7 +49,7 @@ if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
 else
     let g:airline_theme = 'base16_colors'
     " if has("gui_vimr") || exists("g:neovide")
-    "     " VimR can't seem to understand what "default" combined with bg=light should end up with
+    "     " VimR can't seem to understand what `default` combined with `bg=light` should end up with
     "     let g:colorscheme_dark = "base16-tomorrow-night"
     "     let g:colorscheme_light = "base16-tomorrow"
     " else

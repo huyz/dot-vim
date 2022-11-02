@@ -121,6 +121,7 @@ Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'kana/vim-textobj-user'  " dependency of textobj-entire
 Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-line'
 Plug 'PeterRincker/vim-argumentative'
 
 " Markdown
@@ -131,6 +132,7 @@ Plug 'PeterRincker/vim-argumentative'
 " If you have nodejs and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'ellisonleao/glow.nvim', Cond(has('nvim'))
+" Plug 'RubenVerborgh/vim-markup-assistant'
 
 " Dev
 " polyglot: collection of language packs

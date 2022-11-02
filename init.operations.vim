@@ -24,10 +24,6 @@ nmap <Leader>t0 <Leader>_do_:v/./.,/./-1join<CR><Leader>_done_
 
 """ Complex edits {{{1
 
-" Quotes with backticks (useful for Markdown-style code words)
-" Like using vim-surround with ysiw`, just quicker
-nnoremap <Leader>` ciw`<C-R>-`<Esc>
-
 " Underlines the current line with '~', '-', '=' characters (good for markdown)
 nmap <Leader>= <Leader>_do_yyp:s/./=/g<CR><Leader>_done_
 nmap <Leader>- <Leader>_do_yyp:s/./-/g<CR><Leader>_done_

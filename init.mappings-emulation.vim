@@ -378,6 +378,27 @@ call MapKey('<M-m><M-m>', '<Cmd>MarkdownPreview<CR>')
 call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 
+" NOTE: for entire lines, don't use `V`; use `val` from textobj-line to avoid spurious newlines
+call MapSuperKey('C', 'ysiW`', ['nmap'], v:false, v:false)
+call MapSuperKey('C', 'S`', ['vmap'], v:false, v:false)
+
+function! s:MapMarkdown() abort
+    call MapSuperKey('M-C', 'O```<Esc>Yjp',    ['nmap'], v:false, v:true,  '<buffer>')
+    call MapSuperKey('M-C', '<Esc>`<lt>O```<Esc>yy`>pgv',    ['vmap'], v:false, v:true,  '<buffer>')
+    " TODO: vmap version of above
+    " call MapSuperKey('b',   '<Cmd>ruby Markdown::toggle_strong_at_cursor<CR>',    ['nmap'], v:false, v:false, '<buffer>')
+    call MapSuperKey('b',   'mAysiW*.`All',    ['nmap'], v:false, v:false, '<buffer>')
+    call MapSuperKey('b',   'S*gvS*gv<Esc>hh', ["vmap"], v:false, v:false, '<buffer>')
+    " call MapSuperKey('i',   '<Cmd>ruby Markdown::toggle_emphasis_at_cursor<CR>',      ['nmap'], v:false, v:false, '<buffer>')
+    call MapSuperKey('i',   'mAysiW_`Al',      ['nmap'], v:false, v:false, '<buffer>')
+    call MapSuperKey('i',   'S_gv<Esc>h',      ["vmap"], v:false, v:false, '<buffer>')
+    call MapSuperKey('X',   'mAysiW~.`All',    ['nmap'], v:false, v:false, '<buffer>')
+    call MapSuperKey('X',   'S~gvS~gv<Esc>hh', ["vmap"], v:false, v:false, '<buffer>')
+    call MapSuperKey('D',   'mAysiW=.`All',    ['nmap'], v:false, v:false, '<buffer>')
+    call MapSuperKey('D',   'S=gvS=gv<Esc>hh', ["vmap"], v:false, v:false, '<buffer>')
+endfunction
+autocmd FileType markdown call <SID>MapMarkdown()
+
 """ Colors
 
 call MapKey('<M-t>b', '<Cmd>call ToggleBackground()<CR>')

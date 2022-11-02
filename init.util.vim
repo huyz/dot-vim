@@ -86,7 +86,7 @@ endfunction
 
 " Maps the key sequence to RHS, optionally with specific modes
 " 'all' modes implies: map, imap, tmap (so no cmap or lmap)
-function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:true) abort
+function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
     let l:keys = a:keys
     let l:rhs = a:rhs
     let l:modes = a:modes
@@ -107,7 +107,7 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:tru
         endif
         call MapKey(s:NormalizeMetaModifier(a:keys),
                     \ s:NormalizeMetaModifier(a:rhs), l:modes, l:no_insert,
-                    \ a:no_remap)
+                    \ a:no_remap, a:map_flag)
         if has("gui_running")
             return
         endif
@@ -117,15 +117,15 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:tru
 
     let l:prefixes = s:RhsPrefixesForAllModes(l:rhs)
     if type(l:modes) == type("") && l:modes == 'all'
-        execute l:nore . 'map'  l:keys l:rhs
-        execute 't' . l:nore . 'map' l:keys l:prefixes[1] . l:rhs
+        execute l:nore . 'map' a:map_flag l:keys l:rhs
+        execute 't' . l:nore . 'map' a:map_flag l:keys l:prefixes[1] . l:rhs
         if a:no_insert == 0
-            execute 'i' . l:nore . 'map' l:keys l:prefixes[0] . l:rhs
+            execute 'i' . l:nore . 'map' a:map_flag l:keys l:prefixes[0] . l:rhs
         endif
     else
         for mode in l:modes
             if a:no_insert == 0 || !s:IsInsertLikeMode(mode)
-                execute mode l:keys s:RhsPrefixForMode(l:rhs, mode) . l:rhs
+                execute mode a:map_flag l:keys s:RhsPrefixForMode(l:rhs, mode) . l:rhs
             endif
         endfor
     endif
@@ -139,24 +139,24 @@ endfunction
 
 " Maps the Command (⌘) key, or in TUIs the fallback Option (⌥), key.
 " That's because terminals like iTerm swallow up key bindings with the ⌘ key.
-function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true) abort
+function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
     if has("gui_running")
         call MapKey('<D-' . <SID>ShiftModifierIfNeeded(a:key) . tolower(a:key) . '>',
-            \ a:rhs, a:modes, a:no_insert, a:no_remap)
+            \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
     else
-        call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap)
+        call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
     endif
 endfunction
 
 " Maps the Control (⌃) key, or in GUIs the fallback Option (⌥), key.
 " 2022-10-30 That's because neither MacVim/VimR support modifyOtherKeys yet
 "   and thus treat <C-S-A> like <C-A>.
-function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true) abort
+function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
     if has("gui_running")
-        call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap)
+        call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
     else
         call MapKey('<C-' . <SID>ShiftModifierIfNeeded(a:key) . tolower(a:key) . '>',
-            \ a:rhs, a:modes, a:no_insert, a:no_remap)
+            \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
     endif
 endfunction
 
