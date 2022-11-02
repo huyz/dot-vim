@@ -5,14 +5,25 @@ function! SetBackgroundDark()
     execute 'colorscheme ' . g:colorscheme_dark
     set background=dark
 
+    " Replace the default red color for the margin guides
     " NOTE: this needs to be after setting background
     highlight ColorColumn term=reverse ctermbg=darkgrey guibg=grey25
 
+    if has('gui_macvim')
+        " From https://github.com/macvim-dev/macvim/blob/master/runtime/colors/macvim.vim
+        hi Normal       guifg=Grey50 guibg=Grey10
+        hi Visual       guibg=MacSelectedTextBackgroundColor
+        echo 'macvim'
+    endif
+
     " 2021-07-02 On MacVim, can't see the cursor on top of yellow search results.  So tone down the yellow.
     " Don't really have time to make this cleaner
-    if has("gui_running")
+    if has('gui_running')
         highlight Search guifg=#282a2e guibg=#f0c674
     endif
+
+    " Needed in GUI MacVim
+    silent! exe 'AirlineRefresh'
 
     " Workaround for refreshing indent-guides' color detection
     silent! exe 'IndentGuidesToggle'
@@ -23,8 +34,19 @@ function! SetBackgroundLight()
     execute 'colorscheme ' . g:colorscheme_light
     set background=light
 
+    " Replace the default red color for the margin guides
     " NOTE: this needs to be after setting background
     highlight ColorColumn term=reverse ctermbg=lightgrey guibg=grey75
+
+    if has('gui_macvim')
+        " From https://github.com/macvim-dev/macvim/blob/master/runtime/colors/macvim.vim
+        hi Normal       gui=NONE guifg=MacTextColor guibg=MacTextBackgroundColor
+        hi Visual       guibg=MacSelectedTextBackgroundColor
+        echo 'macvim'
+    endif
+
+    " Needed in GUI MacVim
+    silent! exe 'AirlineRefresh'
 
     " Workaround for refreshing indent-guides' color detection
     silent! exe 'IndentGuidesToggle'
@@ -40,21 +62,11 @@ function! ToggleBackground()
 endfunction
 
 " Startup
+let g:colorscheme_dark = "base16-tomorrow-night"
+let g:colorscheme_light = "base16-tomorrow"
+let g:airline_theme = 'base16_tomorrow'
 if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
-    let g:airline_theme = 'base16_tomorrow'
     set termguicolors
-    let g:colorscheme_dark = "base16-tomorrow-night"
-    let g:colorscheme_light = "base16-tomorrow"
-else
-    let g:airline_theme = 'base16_colors'
-    " if has("gui_vimr") || exists("g:neovide")
-    "     " VimR can't seem to understand what `default` combined with `bg=light` should end up with
-    "     let g:colorscheme_dark = "base16-tomorrow-night"
-    "     let g:colorscheme_light = "base16-tomorrow"
-    " else
-        let g:colorscheme_dark = "default"
-        let g:colorscheme_light = "default"
-    " endif
 endif
 
 if &background == 'dark'

@@ -78,7 +78,8 @@ let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 if has("nvim")
-    " 2022-10-26 Doesn't work for me in neovim
+    " 2022-10-26 Doesn't work for me in VimR:
+    "   https://github.com/qvacua/vimr/issues/738
     set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
         \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
         \,sm:block-blinkwait175-blinkoff150-blinkon175
