@@ -8,8 +8,9 @@
 
 if has("nvim")
     autocmd TermOpen * setlocal nonumber norelativenumber
+    " NOTE: added lazygit check to avoid lua error
     " NOTE: added "silent!" to avoid error when FZF terminal window is closed.
-    autocmd TermClose * if !v:event.status | silent! exe 'bdelete! '..expand('<abuf>') | endif
+    autocmd TermClose * if &filetype != 'lazygit' && !v:event.status | silent! exe 'bdelete! '..expand('<abuf>') | endif
 else
     autocmd TerminalWinOpen * setlocal nonumber norelativenumber
 endif
