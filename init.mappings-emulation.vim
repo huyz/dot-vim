@@ -350,6 +350,10 @@ call MapControlKey('}', '<Cmd>+tabmove<CR>')
 
 """ Code editing
 
+" NOTE: as of 2022-11-02, `<Cmd>TComment*` doesn't work with ranges
+call MapSuperKey('/', ':TComment<CR>')
+call MapSuperOrControlKey('M-/', ':TCommentInline<CR>')
+
 " titlecase
 " NOTE: These also work in operator-pending
 call MapKey('<M-c>T', 'viW<Plug>Titlecase<CR>', ['nmap'])

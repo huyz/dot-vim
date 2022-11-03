@@ -531,11 +531,15 @@ if has("nvim")
 EOF
 endif
 
-""" polyglot {{{2
+""" tcomment {{{2
 
-" Sleuth requires that to avoid warning when invoked, but doesn't seem to make a
-" difference
-let g:polyglot_disabled = ["autoindent"]
+" Comment in first column and don't add spaces
+" Move the cursor to the next line
+let g:tcomment#options = {
+            \ 'col': 1,
+            \ 'whitespace': 'no',
+            \ 'mode_extra': '>|'
+            \ }
 
 """ Hexokinase {{{2
 
