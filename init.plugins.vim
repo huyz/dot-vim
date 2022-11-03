@@ -1,4 +1,13 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Plugins options pre-loading {{{1
+
+""" polyglot {{{2
+
+" Sleuth requires that to avoid warning when invoked, but doesn't seem to make a
+" difference
+let g:polyglot_disabled = ["autoindent"]
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugins {{{1
 " NOTE: this must run before `filetype plugin indent on` in order to pick
 " up new file types in bundle, CoffeeScript
@@ -101,8 +110,6 @@ Plug 'mg979/vim-visual-multi'
 Plug 'easymotion/vim-easymotion'
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-surround'
-" sleuth: automatic tab/space and indentation
-Plug 'tpope/vim-sleuth'
 Plug 'landock/vim-expand-region'
 Plug 'matze/vim-move'
 Plug 'junegunn/vim-easy-align'
@@ -140,6 +147,8 @@ Plug 'ellisonleao/glow.nvim', Cond(has('nvim'))
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
+" sleuth: automatic tab/space and indentation
+Plug 'tpope/vim-sleuth'
 Plug 'tomtom/tcomment_vim'
 Plug 'Raimondi/delimitMate'
 Plug 'rizzatti/dash.vim', Cond(has('macunix'))
@@ -409,7 +418,6 @@ let g:VM_maps = {}
 let g:VM_maps["Undo"] = 'u'
 let g:VM_maps["Redo"] = '<C-r>'
 
-
 if has("gui_running")
     " Until https://github.com/macvim-dev/macvim/issues/1325 is fixed, we have
     " to use <C> instead of <D>. For MacVim this means we have to run once:
@@ -521,6 +529,12 @@ if has("nvim")
     require('glow').setup()
 EOF
 endif
+
+""" polyglot {{{2
+
+" Sleuth requires that to avoid warning when invoked, but doesn't seem to make a
+" difference
+let g:polyglot_disabled = ["autoindent"]
 
 """ Hexokinase {{{2
 
