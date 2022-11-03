@@ -93,6 +93,7 @@ call MapAlias('¿', '<M-?>')
 call MapAlias('÷', '<M-/>')
 
 " TODO: automate these MapAlias whenever it's used
+call MapAlias('ßß', '<M-s><M-s>')
 call MapAlias('µµ', '<M-m><M-m>')
 call MapAlias('µπ', '<M-m><M-p>')
 "call MapAlias('µ¬', '<M-m><M-l>')
@@ -426,6 +427,11 @@ if has('macunix')
     call MapKey('<M-s>/', '<Plug>DashSearch')
     call MapKey('<M-s>?', '<Plug>DashGlobalSearch')
 endif
+call MapKey('<M-s>g', '<Plug>SearchNormal', ['map'])
+call MapKey('<M-s>g', '<Plug>SearchVisual', ['vmap'])
+" NOTE: for some reason `<Cmd>` doesn't work right in visual mode, so use `:`
+"   https://github.com/voldikss/vim-browser-search/issues/28
+call MapKey('<M-s><M-s>', ':BrowserSearch<CR>')
 
 call MapControlKey('F', '<Cmd>Reveal<CR>')
 call MapControlKey('C', '<Cmd>CodeCurrent<CR>')

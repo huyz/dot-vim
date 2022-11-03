@@ -151,7 +151,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-sleuth'
 Plug 'tomtom/tcomment_vim'
 Plug 'Raimondi/delimitMate'
-Plug 'rizzatti/dash.vim', Cond(has('macunix'))
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
@@ -172,7 +171,9 @@ Plug 'Kachyz/vim-gitmoji'
 Plug 'mattn/gist-vim'
 
 " External Apps
+Plug 'rizzatti/dash.vim', Cond(has('macunix'))
 Plug 'declancm/vim2vscode'
+Plug 'voldikss/vim-browser-search'
 
 " Misc
 Plug 'dbeniamine/cheat.sh-vim'
