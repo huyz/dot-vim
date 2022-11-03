@@ -428,8 +428,8 @@ endif
 """ External Apps
 
 if has('macunix')
-    call MapKey('<M-s>/', '<Plug>DashSearch')
-    call MapKey('<M-s>?', '<Plug>DashGlobalSearch')
+    call MapKey('<M-s>d', '<Plug>DashSearch')
+    call MapKey('<M-s>D', '<Plug>DashGlobalSearch')
 endif
 call MapKey('<M-s>g', '<Plug>SearchNormal', ['map'])
 call MapKey('<M-s>g', '<Plug>SearchVisual', ['vmap'])
