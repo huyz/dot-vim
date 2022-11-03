@@ -1,9 +1,29 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Color schemes
 
+function! ToggleColorscheme()
+    if g:colorscheme_light == 'default'
+        let g:colorscheme_dark = "base16-tomorrow-night"
+        let g:colorscheme_light = "base16-tomorrow"
+    elseif has('gui_macvim') && g:colorscheme_light == 'base16-tomorrow'
+        let g:colorscheme_dark = "macvim"
+        let g:colorscheme_light = "macvim"
+    else
+        let g:colorscheme_dark = "default"
+        let g:colorscheme_light = "default"
+    endif
+    call RefreshBackground()
+endfunction
+
 function! SetBackgroundDark()
     execute 'colorscheme ' . g:colorscheme_dark
     set background=dark
+
+    if g:colorscheme_light == 'base16-tomorrow'
+        silent! exec 'VMTheme sand'
+    else
+        silent! exec 'VMTheme'
+    endif
 
     " Replace the default red color for the margin guides
     " NOTE: this needs to be after setting background
@@ -13,6 +33,11 @@ function! SetBackgroundDark()
         " From https://github.com/macvim-dev/macvim/blob/master/runtime/colors/macvim.vim
         hi Normal       guifg=Grey50 guibg=Grey10
         hi Visual       guibg=MacSelectedTextBackgroundColor
+        hi Cursor       guibg=LightGoldenrod guifg=bg
+        hi CursorColumn guibg=Gray20
+        hi CursorIM     guibg=LightSlateGrey guifg=bg
+        hi CursorLine   guibg=Gray20
+        hi lCursor      guibg=LightSlateGrey guifg=bg
     endif
 
     " 2021-07-02 On MacVim, can't see the cursor on top of yellow search results.  So tone down the yellow.
@@ -33,6 +58,12 @@ function! SetBackgroundLight()
     execute 'colorscheme ' . g:colorscheme_light
     set background=light
 
+    if g:colorscheme_light == 'base16-tomorrow'
+        silent! exec 'VMTheme sand'
+    else
+        silent! exec 'VMTheme'
+    endif
+
     " Replace the default red color for the margin guides
     " NOTE: this needs to be after setting background
     highlight ColorColumn term=reverse ctermbg=lightgrey guibg=grey75
@@ -41,6 +72,17 @@ function! SetBackgroundLight()
         " From https://github.com/macvim-dev/macvim/blob/master/runtime/colors/macvim.vim
         hi Normal       gui=NONE guifg=MacTextColor guibg=MacTextBackgroundColor
         hi Visual       guibg=MacSelectedTextBackgroundColor
+        hi Cursor       guibg=fg guifg=bg
+        hi CursorColumn guibg=#F1F5FA
+        hi CursorIM     guibg=fg guifg=bg
+        hi CursorLine   guibg=#F1F5FA
+        hi lCursor      guibg=fg guifg=bg
+    elseif has('gui_running')
+        hi Cursor       guibg=fg guifg=bg
+        hi CursorColumn guibg=#F1F5FA
+        hi CursorIM     guibg=fg guifg=bg
+        hi CursorLine   guibg=#F1F5FA
+        hi lCursor      guibg=fg guifg=bg
     endif
 
     " Needed in GUI MacVim
@@ -59,19 +101,28 @@ function! ToggleBackground()
     endif
 endfunction
 
+function! RefreshBackground()
+    if &background == "dark"
+        call SetBackgroundDark()
+    else
+        call SetBackgroundLight()
+    endif
+endfunction
+
 " Startup
 let g:colorscheme_dark = "base16-tomorrow-night"
 let g:colorscheme_light = "base16-tomorrow"
 let g:airline_theme = 'base16_tomorrow'
 if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
     set termguicolors
+elseif has('gui_running') && has('nvim')
+    " NOTE: we don't use base16 in this case because for some reason the cursor disappears when we
+    " re-source configs
+    " let g:colorscheme_dark = "default"
+    " let g:colorscheme_light = "default"
 endif
 
-if &background == 'dark'
-    call SetBackgroundDark()
-else
-    call SetBackgroundLight()
-endif
+call RefreshBackground()
 
 if has("nvim")
     :lua <<EOF

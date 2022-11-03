@@ -402,7 +402,8 @@ autocmd FileType markdown call <SID>MapMarkdown()
 """ Colors
 
 call MapKey('<M-t>b', '<Cmd>call ToggleBackground()<CR>')
-call MapKey('<M-t>c', '<Cmd>HexokinaseToggle<CR>')
+call MapKey('<M-t>c', '<Cmd>call ToggleColorscheme()<CR>')
+call MapKey('<M-t>C', '<Cmd>HexokinaseToggle<CR>')
 
 """ Terminal
 
