@@ -422,22 +422,8 @@ endif
 """ External Apps
 
 if has('macunix')
-    " Dash for current selection: Support ⇧⌥/ in all cases
-    call MapKey('¿', '<Plug>DashSearch')
-    if has('nvim') && has('gui_running')
-        call MapKey('<M-S-D-?>', '<Plug>DashGlobalSearch')
-    elseif has('nvim') && !has('gui_running')
-        call MapKey('<M-C-?>', '<Plug>DashGlobalSearch')
-        " For some reason, neovim in terminal gets it as <M-?>
-        call MapKey('<M-?>', '<Plug>DashSearch')
-        " The only 1 out of 4 cases that can handle ⌃⇧/ too
-        call MapKey('<C-?>', '<Plug>DashSearch')
-    else
-        " XXX no way to do ⌃⇧⌥/ in vim within iTerm
-        if has('gui_running')
-            call MapKey('<D-¿>', '<Plug>DashGlobalSearch')
-        endif
-    endif
+    call MapKey('<M-s>/', '<Plug>DashSearch')
+    call MapKey('<M-s>?', '<Plug>DashGlobalSearch')
 endif
 
 call MapControlKey('F', '<Cmd>Reveal<CR>')
