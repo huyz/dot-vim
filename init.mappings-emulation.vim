@@ -289,6 +289,8 @@ else
     " call MapKey('«', '<C-w>=')
     " call MapKey('<S-«>', '<C-w>=')
 endif
+call MapKey('<M-z>', '<C-w>W')
+call MapKey('<M-q>', '<C-w>w')
 call MapSuperOrControlKey('M-S-Left', '<C-w>H')
 call MapSuperOrControlKey('M-S-Down', '<C-w>J')
 call MapSuperOrControlKey('M-S-Up', '<C-w>K')
