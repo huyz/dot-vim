@@ -3,11 +3,15 @@
 
 " Normal function key mappings (these don't change)
 if has("nvim")
-    nnoremap <F1> <Cmd>NvimTreeToggle<CR>
+    nnoremap <C-1> <Cmd>NvimTreeToggle<CR>
 else
-    nnoremap <F1> <Cmd>NERDTreeToggle<CR>
+    nnoremap <C-1> <Cmd>NERDTreeToggle<CR>
 endif
-call MapKey('<S-F1>', '<Cmd>helpclose<CR>')
+if has('nvim') && !has('gui_running')
+    call MapKey('<F13>', '<Cmd>helpclose<CR>')
+else
+    call MapKey('<S-F1>', '<Cmd>helpclose<CR>')
+endif
 if has('nvim')
     nmap <F2> <Cmd>Telescope buffers<CR>
     nmap <F3> <Cmd>Telescope live_grep<CR>
@@ -25,7 +29,7 @@ nmap <F6> <Leader>o2
 nmap <F7> <Cmd>SymbolsOutline<CR>
 "nmap <F8> <Leader>o4
 nmap <F9> <Cmd>LazyGit<CR>
-nmap <F10> <Cmd>Startify<CR>
+nmap <C-0> <Cmd>Startify<CR>
 nmap <F11> <Leader>o3
 nmap <F12> <Leader>o4
 
@@ -43,8 +47,20 @@ nmap <Leader>f7 <F7>
 nmap <Leader>f8 <F8>
 nmap <Leader>f9 <F9>
 nmap <Leader>f0 <F10>
-nmap <Leader>F1 <F11>
-nmap <Leader>F2 <F12>
+nmap <Leader>F11 <F11>
+nmap <Leader>F12 <F12>
+nmap <Leader>F13 <S-F1>
+nmap <Leader>F14 <S-F2>
+nmap <Leader>F15 <S-F3>
+nmap <Leader>F16 <S-F5>
+nmap <Leader>F17 <S-F5>
+nmap <Leader>F18 <S-F6>
+nmap <Leader>F19 <S-F7>
+nmap <Leader>F20 <S-F8>
+nmap <Leader>F21 <S-F9>
+nmap <Leader>F22 <S-F10>
+nmap <Leader>F23 <S-F11>
+nmap <Leader>F24 <S-F12>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

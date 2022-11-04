@@ -111,6 +111,7 @@ I tend to forgot I defined these mappings:
 | `q`                     | Skip current occurrence                                        |
 | `\\A`                   | Select all occurrences                                         |
 | `<C-down>` then `<Tab>` | Add cursor(s) vertically                                       |
+| `\\gS`                  | Reselect last                                                  |
 
 ### windowswap
 
