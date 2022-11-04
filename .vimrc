@@ -48,12 +48,17 @@ elseif filereadable(expand("~/.exrc"))
     source ~/.exrc
 endif
 
+""" Choose between coc or mason
+
+"let g:coc_or_mason = 'mason'
+let g:coc_or_mason = 'coc'
+
 """ Splitting .vimrc into smaller files
 
 source $MYVIM/init.util.vim
 source $MYVIM/init.options.vim
 source $MYVIM/init.plugins.vim
-if has("nvim") || v:version >= 801
+if g:coc_or_mason == 'coc' && (has("nvim") || v:version >= 801)
     source $MYVIM/init.plugins-coc.vim
 endif
 source $MYVIM/init.display-modes.vim

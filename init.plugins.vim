@@ -144,8 +144,8 @@ Plug 'ellisonleao/glow.nvim', Cond(has('nvim'))
 
 " Dev
 " polyglot: collection of language packs
+" TODO: how does this interact with coc/mason
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
 " sleuth: automatic tab/space and indentation
 Plug 'tpope/vim-sleuth'
@@ -154,13 +154,24 @@ Plug 'Raimondi/delimitMate'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'jsx', 'typescript'] }
-let coc_supported = has('nvim') || v:version >= 801
-Plug 'neoclide/coc.nvim', Cond(coc_supported, {'branch': 'release'})
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
 Plug 'simrat39/symbols-outline.nvim', Cond(has('nvim'))
 " illuminate: highlight other usages
 Plug 'RRethy/vim-illuminate'
+" trouble: pretty diagnostics, references, telescope results, …
+Plug 'folke/trouble.nvim', Cond(has('nvim'))
+
+" vim gets syntastic
+Plug 'scrooloose/syntastic', Cond(!has('nvim'))
+" neovim gets coc or mason
+let coc_supported = g:coc_or_mason == 'coc' && (has('nvim') || v:version >= 801)
+Plug 'neoclide/coc.nvim', Cond(coc_supported, {'branch': 'release'})
+let mason_supported = g:coc_or_mason == 'mason' && has('nvim')
+Plug 'williamboman/mason.nvim', Cond(mason_supported)
+Plug 'williamboman/mason-lspconfig.nvim', Cond(mason_supported)
+Plug 'neovim/nvim-lspconfig', Cond(mason_supported)
+Plug 'mfussenegger/nvim-dap', Cond(mason_supported)
+Plug 'jose-elias-alvarez/null-ls.nvim', Cond(mason_supported)
 
 " Git
 Plug 'rhysd/git-messenger.vim'
@@ -566,7 +577,34 @@ let g:syntastic_python_pylint_post_args  = "--max-line-length=100"
 " on macOS 10.15.7: system "python" is still python2
 let g:syntastic_python_checkers          = ['python3', 'pylint']
 
-""" git-messenger
+""" mason, lspconfig, null-ls {{{2
+
+if has("nvim") && g:coc_or_mason == 'mason'
+    lua << EOF
+    require("mason").setup({
+      ui = {
+        keymaps = {
+          apply_language_filter = "<D-f>",
+        }
+      }
+    })
+    require("mason-lspconfig").setup()
+
+    -- After setting up mason-lspconfig you may set up servers via lspconfig
+    -- require("lspconfig").sumneko_lua.setup {}
+    -- require("lspconfig").rust_analyzer.setup {}
+    -- ...
+
+    -- Or just setup all of the installed ones
+    require('mason-lspconfig').setup_handlers({
+      function(server)
+          require('lspconfig')[server].setup({})
+      end
+    })
+EOF
+endif
+
+""" messenger {{{2
 
 let g:git_messenger_no_default_mappings = v:false
 nmap <Leader>gb <Plug>(git-messenger)
