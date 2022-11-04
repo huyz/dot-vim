@@ -65,11 +65,14 @@ function! s:GoToDefinition()
 endfunction
 
 " GoTo code navigation.
-nmap <silent> gd :call <SID>GoToDefinition()<CR>
 "nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gd <Cmd>call <SID>GoToDefinition()<CR>
+nmap <silent> <C-w>d <Cmd>vsplit<CR><Cmd>call <SID>GoToDefinition()<CR>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" NOTE: `gr` conflicts with ReplaceWithRegister
+"nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gR <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call ShowDocumentation()<CR>

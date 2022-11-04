@@ -377,7 +377,14 @@ call MapKey('<M-c>D', 'cr.', ['map'])
 
 """ Code navigation
 
-call MapSuperKey('b', 'gd')
+" NOTE: second `v:false` to allow remapping by coc
+call MapKey('<F1>' , 'K', 'all', v:false, v:false)
+call MapSuperKey('b', 'gd', 'all', v:false, v:false)
+call MapSuperKey('B', 'gy', 'all', v:false, v:false)
+call MapSuperOrControlKey('M-b', 'gi', 'all', v:false, v:false)
+call MapSuperKey('y', '<Cmd>vsplit<CR>gd', 'all', v:false, v:false)
+call MapSuperKey('Y', '<Cmd>vsplit<CR>gy', 'all', v:false, v:false)
+call MapSuperKey('i', 'gR', 'all', v:false, v:false)
 
 """ Markdown
 
