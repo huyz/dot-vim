@@ -132,32 +132,43 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:tru
 endfunction
 
 function s:ShiftModifierIfNeeded(key)
-    let key = substitute(a:key, '.*-', '', '')
-    return strlen(key) == 1 && key >= 'A' && key <= 'Z' ||
-        \ index(['{', '}', '"', '+'], key) >= 0 ? 'S-' : ''
+    let l:key = substitute(a:key, '.*-', '', '')
+    return strlen(l:key) == 1 && l:key >= 'A' && l:key <= 'Z' ||
+        \ index(['{', '}', '"', '+'], l:key) >= 0 ? 'S-' : ''
 endfunction
 
 " Maps the Command (⌘) key, or in TUIs the fallback Option (⌥), key.
 " That's because terminals like iTerm swallow up key bindings with the ⌘ key.
 function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
+    let l:key = a:key
     if has("gui_running")
-        call MapKey('<D-' . <SID>ShiftModifierIfNeeded(a:key) . tolower(a:key) . '>',
-            \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
+        let l:mod = 'D-'
+        if has('nvim')
+            let l:key = <SID>ShiftModifierIfNeeded(a:key)
+            let l:key .= l:key != '' ? tolower(a:key) : a:key
+        endif
     else
-        call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
+        let l:mod = 'M-'
     endif
+    call MapKey('<' . l:mod . l:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
 endfunction
 
 " Maps the Control (⌃) key, or in GUIs the fallback Option (⌥), key.
 " 2022-10-30 That's because neither MacVim/VimR support modifyOtherKeys yet
 "   and thus treat <C-S-A> like <C-A>.
 function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
+    let l:key = a:key
     if has("gui_running")
-        call MapKey('<M-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
+        let l:mod = 'M-'
     else
-        call MapKey('<C-' . <SID>ShiftModifierIfNeeded(a:key) . tolower(a:key) . '>',
-            \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
+        let l:mod = 'C-'
+        if has('nvim')
+            let l:key = <SID>ShiftModifierIfNeeded(a:key)
+            " XXX I think the tolower isn't needed here because case doesn't matter with <C->
+            let l:key .= l:key != '' ? tolower(a:key) : a:key
+        endif
     endif
+    call MapKey('<' . l:mod . l:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
 endfunction
 
 " Maps the Control (⌃) key in TUIs or the Command (⌘) key in GUIs.
