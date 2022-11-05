@@ -1,131 +1,4 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" macOS: make composed keys act like Meta {{{1
-
-" TODO: to have macmeta working, I'd need to MapAlias a whole different
-"   set of accented characters.
-
-" NOTE: Won't remap –, —, ≠, ±, …  as these are useful special characters even to
-"   Americans
-" NOTE: Can't remap `, e, u, i, n as these are useful to compose digraph prefixes
-call MapAlias('å', '<M-a>')
-call MapAlias('Å', '<M-A>')
-call MapAlias('∫', '<M-b>')
-call MapAlias('ı', '<M-B>')
-call MapAlias('ç', '<M-c>')
-call MapAlias('Ç', '<M-C>')
-call MapAlias('∂', '<M-d>')
-call MapAlias('Î', '<M-D>')
-call MapAlias('ƒ', '<M-f>')
-call MapAlias('´', '<M-E>')
-call MapAlias('Ï', '<M-F>')
-call MapAlias('©', '<M-g>')
-call MapAlias('˝', '<M-G>')
-call MapAlias('˙', '<M-h>')
-call MapAlias('Ó', '<M-H>')
-call MapAlias('ˆ', '<M-I>')
-call MapAlias('∆', '<M-j>')
-call MapAlias('Ô', '<M-J>')
-call MapAlias('˚', '<M-k>')
-call MapAlias('', '<M-K>')
-call MapAlias('¬', '<M-l>')
-call MapAlias('Ò', '<M-L>')
-call MapAlias('µ', '<M-m>')
-call MapAlias('Â', '<M-M>')
-call MapAlias('˜', '<M-N>')
-call MapAlias('ø', '<M-o>')
-call MapAlias('Ø', '<M-O>')
-call MapAlias('π', '<M-p>')
-call MapAlias('∏', '<M-P>')
-call MapAlias('œ', '<M-q>')
-call MapAlias('Œ', '<M-Q>')
-call MapAlias('®', '<M-r>')
-call MapAlias('‰', '<M-R>')
-call MapAlias('ß', '<M-s>')
-call MapAlias('Í', '<M-S>')
-call MapAlias('†', '<M-t>')
-call MapAlias('ˇ', '<M-T>')
-call MapAlias('¨', '<M-U>')
-call MapAlias('√', '<M-v>')
-call MapAlias('◊', '<M-V>')
-call MapAlias('∑', '<M-w>')
-call MapAlias('„', '<M-W>')
-call MapAlias('≈', '<M-x>')
-call MapAlias('˛', '<M-X>')
-call MapAlias('¥', '<M-y>')
-call MapAlias('Á', '<M-Y>')
-call MapAlias('Ω', '<M-z>')
-call MapAlias('¸', '<M-Z>')
-call MapAlias('¡', '<M-1>')
-call MapAlias('⁄', '<M-!>')
-call MapAlias('™', '<M-2>')
-call MapAlias('€', '<M-@>')
-call MapAlias('£', '<M-3>')
-call MapAlias('‹', '<M-#>')
-call MapAlias('¢', '<M-4>')
-call MapAlias('›', '<M-$>')
-call MapAlias('∞', '<M-5>')
-call MapAlias('ﬁ', '<M-%>')
-call MapAlias('§', '<M-6>')
-call MapAlias('ﬂ', '<M-^>')
-call MapAlias('¶', '<M-7>')
-call MapAlias('‡', '<M-&>')
-call MapAlias('•', '<M-8>')
-call MapAlias('°', '<M-*>')
-call MapAlias('ª', '<M-9>')
-call MapAlias('·', '<M-(>')
-call MapAlias('º', '<M-0>')
-call MapAlias('‚', '<M-)>')
-call MapAlias('“', '<M-[>')
-call MapAlias('”', '<M-{>')
-call MapAlias('‘', '<M-]>')
-call MapAlias('’', '<M-}>')
-call MapAlias('«', '<M-Bslash>')
-call MapAlias('»', '<M-Bar>')
-call MapAlias("æ", "<M-'>")
-call MapAlias('Ú', '<M-:>')
-call MapAlias('æ', "<M-'>")
-call MapAlias('Æ', '<M-">')
-call MapAlias('≤', '<M-,>')
-call MapAlias('¯', '<M-lt>')
-call MapAlias('≥', '<M-.>')
-call MapAlias('˘', '<M->>')
-call MapAlias('¿', '<M-?>')
-call MapAlias('÷', '<M-/>')
-
-" TODO: automate these MapAlias whenever it's used
-call MapAlias('ßß', '<M-s><M-s>')
-call MapAlias('µµ', '<M-m><M-m>')
-call MapAlias('µπ', '<M-m><M-p>')
-"call MapAlias('µ¬', '<M-m><M-l>')
-
-call MapAlias('<D-”>', '<M-S-D-{>')
-call MapAlias('<D-’>', '<M-S-D-}>')
-call MapAlias('<D-±>', '<M-S-D-BS>')
-
-" In vim within iTerm, Opt+F12 is <Esc>[24~
-call MapAlias('<Esc>[24~', '<M-F12>')
-if has("nvim")
-    call MapAlias('<F60>', '<M-F12>')
-endif
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" PuTTY for Windows
-
-" NOTE: don't remap insert mode as they slow down the switch to Normal
-" mode, which often interferes with my ability to then quickly hit `Cmd+s` in
-" to save in vim GUIs.
-" This isn't a problem withVisual mode because there's already a delay no
-" matter what.
-nmap <Esc>OA <Up>
-nmap <Esc>OB <Down>
-nmap <ESC>[Z <S-Tab>
-vmap <Esc>OA <Up>
-vmap <Esc>OB <Down>
-vmap <ESC>[Z <S-Tab>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Emulate neovim {{{1"}}}
 
 if has("nvim")
@@ -190,14 +63,14 @@ nnoremap <Esc>u <Cmd>noh<CR>
 
 " Open recent
 if has('nvim')
-    call MapSuperKey('p', '<F4>', 'all', v:false, v:false)
+    call MapSuperKey('p', '<C-F4>', 'all', v:false, v:false)
 else
     call MapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
 endif
-call MapSuperKey('e', '<F2>', 'all', v:false, v:false)
-call MapSuperKey('E', '<F2>', 'all', v:false, v:false)
-call MapSuperKey('F', '<F3>', 'all', v:false, v:false)
-call MapSuperKey('"', '<F10>', 'all', v:false, v:false)
+call MapSuperKey('e', '<C-F2>', 'all', v:false, v:false)
+call MapSuperKey('E', '<C-F2>', 'all', v:false, v:false)
+call MapSuperKey('F', '<C-F3>', 'all', v:false, v:false)
+call MapSuperKey('"', '<C-F10>', 'all', v:false, v:false)
 
 """ System clipboard
 

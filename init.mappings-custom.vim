@@ -1,11 +1,11 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Function keys {{{1
 
-" Normal function key mappings (these don't change)
+" NOTE: reserving F1 for documentation lookup
 if has("nvim")
-    nnoremap <C-1> <Cmd>NvimTreeToggle<CR>
+    nnoremap <C-F1> <Cmd>NvimTreeToggle<CR>
 else
-    nnoremap <C-1> <Cmd>NERDTreeToggle<CR>
+    nnoremap <C-F1> <Cmd>NERDTreeToggle<CR>
 endif
 if has('nvim') && !has('gui_running')
     call MapKey('<F13>', '<Cmd>helpclose<CR>')
@@ -13,54 +13,28 @@ else
     call MapKey('<S-F1>', '<Cmd>helpclose<CR>')
 endif
 if has('nvim')
-    nmap <F2> <Cmd>Telescope buffers<CR>
-    nmap <F3> <Cmd>Telescope live_grep<CR>
-    nmap <F4> <Cmd>Telescope find_files<CR>
+    nmap <C-F2> <Cmd>Telescope buffers<CR>
+    nmap <C-F3> <Cmd>Telescope live_grep<CR>
+    nmap <C-F4> <Cmd>Telescope find_files<CR>
+    nmap <C-S-F2> <Cmd>CtrlPBuffer<CR>
+    nmap <C-S-F3> <Cmd>RG<CR>
+    nmap <C-S-F4> <Cmd>FZF<CR>
 else
-    nmap <F2> <Cmd>CtrlPBuffer<CR>
-    nmap <F3> <Cmd>RG<CR>
-    nmap <F4> <Cmd>FZF<CR>
+    nmap <C-F2> <Cmd>CtrlPBuffer<CR>
+    nmap <C-F3> <Cmd>RG<CR>
+    nmap <C-F4> <Cmd>FZF<CR>
 endif
-nmap <S-F2> <Cmd>CtrlPBuffer<CR>
-nmap <S-F3> <Cmd>RG<CR>
-nmap <S-F4> <Cmd>FZF<CR>
 nmap <F5> <Leader>o1
 nmap <F6> <Leader>o2
-nmap <F7> <Cmd>SymbolsOutline<CR>
+nmap <C-F7> <Cmd>SymbolsOutline<CR>
 "nmap <F8> <Leader>o4
-nmap <F9> <Cmd>LazyGit<CR>
-nmap <C-0> <Cmd>Startify<CR>
+nmap <C-F9> <Cmd>LazyGit<CR>
+nmap <C-F10> <Cmd>Startify<CR>
 nmap <F11> <Leader>o3
 nmap <F12> <Leader>o4
 
 " Make pastetoggle also work in insert mode
 set pastetoggle=<F5>
-
-" Aliases if function keys don't get passed through by the terminal
-nmap <Leader>f1 <F1>
-nmap <Leader>f2 <F2>
-nmap <Leader>f3 <F3>
-nmap <Leader>f4 <F4>
-nmap <Leader>f5 <F5>
-nmap <Leader>f6 <F6>
-nmap <Leader>f7 <F7>
-nmap <Leader>f8 <F8>
-nmap <Leader>f9 <F9>
-nmap <Leader>f0 <F10>
-nmap <Leader>F11 <F11>
-nmap <Leader>F12 <F12>
-nmap <Leader>F13 <S-F1>
-nmap <Leader>F14 <S-F2>
-nmap <Leader>F15 <S-F3>
-nmap <Leader>F16 <S-F5>
-nmap <Leader>F17 <S-F5>
-nmap <Leader>F18 <S-F6>
-nmap <Leader>F19 <S-F7>
-nmap <Leader>F20 <S-F8>
-nmap <Leader>F21 <S-F9>
-nmap <Leader>F22 <S-F10>
-nmap <Leader>F23 <S-F11>
-nmap <Leader>F24 <S-F12>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -100,10 +74,11 @@ vnoremap <Space><Space> zf
 " Suspend from insert mode
 noremap! <C-z> <Esc><C-z>
 
+
 " Edit .vimrc
 nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 " Re-source .vimrc and re-run Sleuth
-nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR>
+nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>echo 'Re-sourced'<CR>
 " Quick-save and re-source .vimrc, using emacs keybinding
 " NOTE: MacVim and VimR already handle <D-s>
 nmap <C-x><C-s> <Cmd>write<CR><Leader>so

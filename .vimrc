@@ -62,6 +62,7 @@ if g:coc_or_mason == 'coc' && (has("nvim") || v:version >= 801)
     source $MYVIM/init.plugins-coc.vim
 endif
 source $MYVIM/init.display-modes.vim
+source $MYVIM/init.mappings-aliases.vim
 source $MYVIM/init.mappings-emulation.vim
 source $MYVIM/init.mappings-custom.vim
 source $MYVIM/init.operations.vim
