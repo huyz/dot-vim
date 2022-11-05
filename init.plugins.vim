@@ -430,22 +430,14 @@ let g:VM_maps = {}
 let g:VM_maps["Undo"] = 'u'
 let g:VM_maps["Redo"] = '<C-r>'
 
-if has("gui_running")
-    " Until https://github.com/macvim-dev/macvim/issues/1325 is fixed, we have
-    " to use <C> instead of <D>. For MacVim this means we have to run once:
-    " `defaults write org.vim.MacVim MMTranslateCtrlClick 0` to disable the context menu
-    "let g:VM_maps["Mouse Cursor"] = '<D-LeftMouse>'
-    "let g:VM_maps["Mouse Word"] = '<D-RightMouse>'
-    "let g:VM_maps["Mouse Column"] = '<M-D-RightMouse>'
-    let g:VM_maps["Mouse Cursor"] = '<C-RightMouse>'
-    let g:VM_maps["Mouse Word"] = '<C-MiddleMouse>'
-    let g:VM_maps["Mouse Column"] = '<C-S-RightMouse>'
-else
-    " NOTE: iTerm2 sends Cmd+Click as <M>
-    let g:VM_maps["Mouse Cursor"] = '<M-RightMouse>'
-    let g:VM_maps["Mouse Word"] = '<M-MiddleMouse>'
-    let g:VM_maps["Mouse Column"] = '<S-M-RightMouse>'
-endif
+" NOTE: we can't use <C-Leftmouse> because that's already mapped to looking up tags
+" NOTE: we can't use <C-S-RightMouse> because MacVim doesn't pass it through,
+"   even if we did already liberate <C-LeftMouse> with:
+"   `defaults write org.vim.MacVim MMTranslateCtrlClick 0` to disable the context menu
+" NOTE: iTerm2 sends Cmd+Click as <M-LeftMouse>
+let g:VM_maps["Mouse Cursor"] = '<M-RightMouse>'
+let g:VM_maps["Mouse Word"] = '<M-MiddleMouse>'
+let g:VM_maps["Mouse Column"] = '<S-M-RightMouse>'
 
 """ easymotion {{{2
 
