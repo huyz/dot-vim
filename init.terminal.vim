@@ -32,19 +32,20 @@ function! RevealInTerminal()
     let l:dir = expand('%:p:h')
     if has("nvim")
         below new
-        call termopen([&shell], {'cwd': l:dir })
+        call termopen([&shell], {'cwd': expand('%:p:h') })
         normal i
     else
         terminal ++close
-        cd l:dir
+        " XXX Can't figure out how to change the diretory from within a function.
+        "   So we have to do it in the mapping.
     endif
     resize 10
 endfunction
 
 " Convenience map of <M-[> for escaping to normal mode, which is easier to
 " press than <C-\><C-N>
-call MapKey('<M-[>', '<C-\><C-N>', ['tnoremap'])
+call MapKey('<M-[>', '', ['tnoremap'])
 
-" For <C-/> to work in FZF window
+" For <C-/> to work in FZF window to toggle preview side view
 " NOTE: Doesn't work in MacVim (and other UIs may beep); using <C-_> is better
 tmap <C-/> <C-_>

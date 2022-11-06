@@ -90,47 +90,57 @@ call MapKey('<Down>', 'gj')
 call MapKey('<M-t>w', '<Cmd>set wrap!<CR>')
 
 " Move cursor
-call MapKey('<D-Up>', 'gg')
-call MapKey('<D-Down>', 'G')
-call MapKey('<D-Left>', '0')
-call MapKey('<D-Right>', '$')
+call MapSuperKey('Up', 'gg')
+call MapSuperKey('Down', 'G')
+call MapSuperKey('Left', '0')
+call MapSuperKey('Right', '$')
 
-" Go back/forward
-call MapKey('<M-C-Left>', '<Plug>CamelCaseMotion_b')
-call MapKey('<M-C-Right>', '<Plug>CamelCaseMotion_w')
-" XXX These don't work in terminal:
+" Go back/forward and/or CamelCaseMotion
+" NOTE: Luckily, iTerm passes <M-D-arrows> through
 call MapKey('<M-D-Left>', '<C-O>')
 call MapKey('<M-D-Right>', '<C-I>')
+call MapKey('<M-C-Left>', '<Plug>CamelCaseMotion_b')
+call MapKey('<M-C-Right>', '<Plug>CamelCaseMotion_w')
 
-" Go to previous edit location
+" Go to previous edit location and Delete parts of line
 call MapSuperKey('S-BS', 'g;')
 call MapSuperOrControlKey('M-S-BS', 'g,')
-call MapKey('<C-S-BS>', 'dd')
-call MapKey('<D-Del>', 'D')
-call MapKey('<D-BS>', 'd0')
+                        call MapSuperKey('Del', 'D')
+call MapSuperKey('BS', 'd0')
 
 " Go to previous/next git change
 call MapKey('<C-S-Up>', '[c', 'all', 0, 0)
 call MapKey('<C-S-Down>', ']c', 'all', 0, 0)
 
 " Go to previous/next method
-call MapKey('<C-S-D-Up>', '[m')
-call MapKey('<C-S-D-Down>', ']m')
+if has('gui_running')
+    call MapKey('<C-S-D-Up>', '[m')
+    call MapKey('<C-S-D-Down>', ']m')
+else
+    call MapKey('<C-S-M-Up>', '[m')
+    call MapKey('<C-S-M-Down>', ']m')
+endif
 
 """ Indent {{{2
 
-" XXX: can't remap normal-mode <Tab> as that's the same as <C-i>
-"nnoremap <Tab> >>
-nnoremap <S-Tab> <<
-nnoremap <D-]> >>
-inoremap <D-]> <C-t>
-nnoremap <D-[> <<
-inoremap <D-[> <C-d>
 " Need to reselect selection
-vnoremap <Tab> >gv
-vnoremap <D-]> >gv
-vnoremap <S-Tab> <gv
-vnoremap <D-[> <gv
+if has('gui_running')
+    nnoremap <D-]> >>
+    nnoremap <D-[> <<
+    noremap! <D-]> <C-t>
+    noremap! <D-[> <C-d>
+    vnoremap <D-]> >gv
+    vnoremap <D-[> <gv
+else
+    " NOTE: can't use `MapKey` because it doesn't handle `<M-[>;` shouldn't
+    "   normalize to `<Esc>[` which is the prefix of escape sequences
+    nnoremap <M-]> >>
+    nnoremap <M-[> <<
+    noremap! <M-]> <C-t>
+    noremap! <M-[> <C-d>
+    vnoremap <M-]> >gv
+    vnoremap <M-[> <gv
+endif
 
 """ Line manipulation {{{2
 
@@ -138,51 +148,51 @@ vnoremap <D-[> <gv
 call MapKey('<C-CR>', 'o')
 call MapKey('<S-C-CR>', 'O')
 
+" Delete lines
+call MapKey('<C-S-BS>', 'dd')
+
 " Shift argument (using vim-argumentative)
-call MapKey('<M-lt>', '<,', 'all', 0, 0)
-call MapKey('<M->>', '>,', 'all', 0, 0)
+call MapKey('<M-lt>', '<,', 'all', v:false, v:false)
+call MapKey('<M->>', '>,', 'all', v:false, v:false)
 
 """ Splits {{{2
 
 call MapControlKey('R', '<Cmd>vsplit<CR>')
 call MapControlKey('S', '<Cmd>split<CR>')
+" Make that equivalent to MacVim/VimR's ⌘W
+call MapKey('<M-w>', '<Cmd>close<CR>')
+
+" Focus split
 call MapControlKey('W', '<C-w>c')
 call MapControlKey('O', '<C-w>o')
 call MapControlKey('H', '<C-w>h')
 call MapControlKey('J', '<C-w>j')
 call MapControlKey('K', '<C-w>k')
 call MapControlKey('L', '<C-w>l')
-if has('gui_running') && has('nvim')
-    call MapKey('<M-S-D-+>', '<C-w>=')
-elseif has('gui_running') && !has('nvim')
-    call MapKey('<D-±>', '<C-w>=')
-elseif has('nvim')
-    call MapKey('<M-C-+>', '<C-w>=')
-else
-    " NOTE: Can't get it to work in vim in iTerm
-    " call MapKey('«', '<C-w>=')
-    " call MapKey('<S-«>', '<C-w>=')
-endif
 call MapKey('<M-z>', '<C-w>W')
 call MapKey('<M-q>', '<C-w>w')
-call MapSuperOrControlKey('M-S-Left', '<C-w>H')
-call MapSuperOrControlKey('M-S-Down', '<C-w>J')
-call MapSuperOrControlKey('M-S-Up', '<C-w>K')
-call MapSuperOrControlKey('M-S-Right', '<C-w>L')
 
-" TODO: should we make MapSuperOrControlKey handle the weird case of Bar and BSlash
-" For imap, we'd need to have <C-o> twice
-if has('gui_running') && has('nvim')
-    call MapKey('<M-S-D-Bar>', '<C-w>_<C-w><Bar>', ['nmap'])
-elseif has('gui_running') && !has('nvim')
-    call MapKey('<D-»>', '<C-w>_<C-w><Bar>', ['nmap'])
-elseif has('nvim')
-    call MapKey('<M-C-Bslash>', '<C-w>_<C-w><Bar>', ['nmap'])
+" Move splits
+call MapSuperOrControlKey('M-S-Left', '<C-w>H')
+call MapSuperOrControlKey('M-S-Right', '<C-w>L')
+" NOTE: we don't do MapSuperOrControlKey for up and down because they conflict
+"   in the terminal with previous/next member
+call MapSuperKey('M-S-Up', '<C-w>K')
+call MapSuperKey('M-S-Down', '<C-w>J')
+
+" Equalize splits
+call MapSuperOrControlKey('M-+', '<C-w>=')
+                                 kk
+" Maximize split
+if has('gui_running')
+    let s:key = '<M-S-D-Bar>'
 else
-    " NOTE: Can't get it to work in vim in iTerm
-    " call MapKey('ü', '<C-w>_<C-w><Bar>', ['nmap'])
-    " call MapKey('<S-ü>', '<C-w>_<C-w><Bar>', ['nmap'])
+    " FIXME: can't get vim in terminal to work
+    let s:key = '<M-C-Bar>'
 endif
+call MapKey(s:key, '<C-w>_<C-w><Bar>', ['nmap'])
+call MapKey(s:key, '<C-o><C-w>_<C-o><C-w><Bar>', ['map!'])
+call MapKey(s:key, '<C-\><C-N><C-w>_<C-\><C-N><C-w><Bar>', ['tmap'])
 
 " Toggle split orientation
 " https://stackoverflow.com/questions/1269603/to-switch-from-vertical-split-to-horizontal-split-fast-in-vim/45994525#45994525
@@ -207,8 +217,8 @@ call MapKey('<C-Bslash>', '<Cmd>call ToggleSplitOrientation()<CR>')
 " NOTE: we avoid <C-2> and <C-6> because these are ANSI control characters
 "   (even Shift isn't pressed)
 call MapSuperKey('t', '<Cmd>tabnew<CR>')
-" NOTE: ⌥W closes a tab because GUI's ⌘W (and our ⌃⇧W) closes a split
-call MapKey('<M-w>', '<Cmd>tabclose<CR>')
+" NOTE: ⇧⌥W closes a tab because GUI's ⌘W (and our ⇧W) closes a split
+call MapKey('<M-W>', '<Cmd>tabclose<CR>')
 call MapSuperKey('1', '<Cmd>tabn 1<CR>')
 call MapSuperKey('2', '<Cmd>tabn 2<CR>')
 call MapSuperKey('3', '<Cmd>tabn 3<CR>')
@@ -232,7 +242,7 @@ call MapSuperOrControlKey('M-/', ':TCommentInline<CR>')
 
 " titlecase
 " NOTE: These also work in operator-pending
-call MapKey('<M-c>T', 'viW<Plug>Titlecase<CR>', ['nmap'])
+call MapKey('<M-c>T', 'viW<Plug>Titlecase', ['nmap'])
 call MapKey('<M-c>t', '<Plug>Titlecase', ['map'])
 call MapKey('<M-c>tt', '<Plug>TitlecaseLine', ['nmap'])
 
@@ -255,7 +265,9 @@ call MapKey('<M-c>D', 'cr.', ['map'])
 call MapKey('<F1>' , 'K', 'all', v:false, v:false)
 call MapSuperKey('b', 'gd', 'all', v:false, v:false)
 call MapSuperKey('B', 'gy', 'all', v:false, v:false)
-call MapSuperOrControlKey('M-b', 'gi', 'all', v:false, v:false)
+" NOTE: iTerm must have its "Instant Replay" shortcutdisabled
+" FIXME: doesn't work in neovim in terminal
+call MapKey('<D-M-b>', 'gi', 'all', v:false, v:false)
 call MapSuperKey('y', '<Cmd>vsplit<CR>gd', 'all', v:false, v:false)
 call MapSuperKey('Y', '<Cmd>vsplit<CR>gy', 'all', v:false, v:false)
 call MapSuperKey('i', 'gR', 'all', v:false, v:false)
@@ -271,9 +283,15 @@ call MapSuperKey('C', 'ysiW`', ['nmap'], v:false, v:false)
 call MapSuperKey('C', 'S`', ['vmap'], v:false, v:false)
 
 function! s:MapMarkdown() abort
-    call MapSuperKey('M-C', 'O```<Esc>Yjp',    ['nmap'], v:false, v:true,  '<buffer>')
-    call MapSuperKey('M-C', '<Esc>`<lt>O```<Esc>yy`>pgv',    ['vmap'], v:false, v:true,  '<buffer>')
-    " TODO: vmap version of above
+    " NOTE: because I personally reserve <C-S-M-letter> to launch apps with BetterTouchTool,
+    "   I need touse the ⌘ key instead of ⌃ key; to get this to work in the terminal, I
+    "   have to specifically configure <S-M-D-C> to send `^[[27;8;67~` which is equivalent to
+    "   <C-S-M-C>
+    " FIXME: doesn't work in neovim in terminal
+    call MapKey('<M-S-D-c>', 'O```<Esc>Yjp', ['nmap'], v:false, v:true,  '<buffer>')
+    call MapKey('<M-S-D-c>', '<Esc>`<lt>O```<Esc>yy`>pgv', ['vmap'], v:false, v:true, '<buffer>')
+
+    " XXX: this markdown plugin doesn't work right:
     " call MapSuperKey('b',   '<Cmd>ruby Markdown::toggle_strong_at_cursor<CR>',    ['nmap'], v:false, v:false, '<buffer>')
     call MapSuperKey('b',   'mAysiW*.`All',    ['nmap'], v:false, v:false, '<buffer>')
     call MapSuperKey('b',   'S*gvS*gv<Esc>hh', ["vmap"], v:false, v:false, '<buffer>')
@@ -296,7 +314,14 @@ call MapKey('<M-t>C', '<Cmd>HexokinaseToggle<CR>')
 """ Terminal
 
 call MapKey('<M-F12>', '<Cmd>call OpenTerminal()<CR>')
-call MapControlKey('Z', '<Cmd>call RevealInTerminal()<CR>')
+if has('nvim')
+    call MapControlKey('Z', ':<C-u>call RevealInTerminal()<CR>')
+else
+    call MapControlKey('Z',
+                \ '<Cmd>let $_term_dir = expand("%:p:h")<CR>' .
+                \ '<Cmd>call RevealInTerminal()<CR>' .
+                \ 'cd $_term_dir; unset _term_dir<CR>')
+endif
 
 call MapControlKey('T', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
 

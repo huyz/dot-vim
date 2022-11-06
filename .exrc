@@ -26,14 +26,14 @@ map [21~   \f0
 map [23~   \F11
 map [24~   \F12
 " ftp://www.x.org/pub/X11R6.8.0/PDF/ctlseqs.pdf
-"   2: (0001) Shift
-"   3: (0010) Alt
-"   4: (0011) Shift+Alt
-"   5: (0100) Control
-"   6: (0101) Shift+Control
-"   7: (0110) Alt+Control
-"   8: (0111) Shift+Alt+Control
-"   9-16: Meta + the above modifiers
+"   ;2    (0001) +1  Shift
+"   ;3    (0010) +2  Alt
+"   ;4    (0011) +3  Shift+Alt
+"   ;5    (0100) +4  Control
+"   ;6    (0101) +5  Shift+Control
+"   ;7    (0110) +6  Alt+Control
+"   ;8    (0111) +7  Shift+Alt+Control
+"   ;9-16 (1XXX) +8  Meta + the above modifiers
 " F13 is equivalent to Shift+F1, hence the '2'
 map [1;2P  \F13
 map [1;2Q  \F14
@@ -102,7 +102,6 @@ map Ox \f0
 "
 """ Special keyboards mappings
 " Putty
-map [3~ 
 map [5~ 
 map [6~ 
 map Oy 
