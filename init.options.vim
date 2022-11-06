@@ -71,7 +71,7 @@ set shiftround          " Round indent to multiple of 'shiftwidth'
 
 " We want to be able to go everywhere when using visual blocks and when
 " in insert mode using the arrow keys--this is great for editing tables.
-set virtualedit=block,insert
+set virtualedit=block
 
 " Cursor shape in insert mode
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
