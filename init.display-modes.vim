@@ -16,9 +16,9 @@ function! CycleTextwidth()
 endfunction
 
 " Toggle virtual movement, which is useful for editing tables
-" By default, we have "block,insert" set
+" By default, we have "block" set
 function! ToggleVirtualEdit()
-    if &virtualedit == "block,insert"
+    if &virtualedit == "block"
         nnoremap r gr
         nnoremap R gR
         nnoremap k gk
@@ -34,7 +34,7 @@ function! ToggleVirtualEdit()
         nunmap j
         nnoremap <Up> gk
         nnoremap <Down> gj
-        set virtualedit=block,insert
+        set virtualedit=block
         set virtualedit?
     endif
 endfunction
