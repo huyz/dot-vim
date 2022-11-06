@@ -27,8 +27,9 @@ endif
 nmap <F5> <Leader>o1
 nmap <F6> <Leader>o2
 nmap <C-F7> <Cmd>SymbolsOutline<CR>
-"nmap <F8> <Leader>o4
-nmap <C-F9> <Cmd>LazyGit<CR>
+if has('nvim')
+    nmap <C-F9> <Cmd>LazyGit<CR>
+endif
 nmap <C-F10> <Cmd>Startify<CR>
 nmap <F11> <Leader>o3
 nmap <F12> <Leader>o4
@@ -78,7 +79,7 @@ noremap! <C-z> <Esc><C-z>
 " Edit .vimrc
 nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 " Re-source .vimrc and re-run Sleuth
-nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>echo 'Re-sourced'<CR>
+nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>echo 'Configs reloaded'<CR>
 " Quick-save and re-source .vimrc, using emacs keybinding
 " NOTE: MacVim and VimR already handle <D-s>
 nmap <C-x><C-s> <Cmd>write<CR><Leader>so

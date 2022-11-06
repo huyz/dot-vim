@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Emulate neovim {{{1"}}}
+""" Emulate neovim {{{1
 
 if has("nvim")
     " Can't remap `Y` as it's used incredibly often and needs to be pressed reliably
@@ -25,6 +25,7 @@ nnoremap & :&&<CR>
 
 """ File operations
 
+nnoremap <C-x>b :b<Space>
 nnoremap <C-x><C-f> :e<Space>
 " NOTE: <C-x><C-s> is overridden elsewhere to reload .vimrc
 nnoremap <C-x><C-s> <Cmd>w<CR>

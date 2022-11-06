@@ -119,7 +119,6 @@ I tend to forgot I defined these mappings:
 | ---     | ---                                 |
 | `\ww`   | Sets first or second window to swap |
 
-
 ### easymotion
 
 | Mapping | Description                                       |
