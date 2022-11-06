@@ -109,10 +109,14 @@ if has('macunix') && has('gui_running') && (has('nvim') || !has('macmeta'))
     " XXX What's this?
     call MapAlias('<D-”>', '<M-S-D-{>')
     call MapAlias('<D-’>', '<M-S-D-}>')
+    " Close tab
+    call MapAlias('<D-„>', '<M-S-D-w>')
     " Equalize splits
     call MapAlias('<D-±>', '<M-S-D-+>')
     " Maximize splits
     call MapAlias('<D-»>', '<M-S-D-Bar>')
+    " Code navigation
+    call MapAlias('<D-∫>', '<M-D-b>')
     " TCommentInline
     call MapAlias('<D-÷>', '<M-D-/>')
     " Markdown code block
@@ -234,9 +238,10 @@ elseif !has('nvim')
     call MapAlias('[1;14A', '<C-S-M-Up>')
     call MapAlias('[1;14B', '<C-S-M-Down>')
 
-    " Move splits
     call MapAlias('[1;14D', '<C-S-M-Left>')
     call MapAlias('[1;14C', '<C-S-M-Right>')
+    " Close tab
+    call MapAlias('[27;5;87~', '<M-C-w>')
     " Equalize splits
     " XXX iTerm inconsistent, as ⌥ is Alt here, but Meta elsewhere
     call MapAlias('[27;8;43~', '<M-C-+>')
@@ -247,13 +252,16 @@ elseif !has('nvim')
     call MapAlias('[27;6;123~', '<C-S-{>')
     call MapAlias('[27;6;125~', '<C-S-}>')
     " Code navigation.
-    " NOTE: manually added that made-up code (added +8 to `<M-b>`) in iTerm
-    call MapAlias('[27;11;98~', '<D-M-b>')
+    call MapAlias('[27;5;66~', '<M-C-b>')
     " Commenting
     call MapAlias('[27;7;47~', '<C-M-/>')
     " Markdown codeblock
+    " Because neovim in terminal can't seem to emit a key that I program into iTerm
+    "   (as I tried below; probably because of "CSi u Mode"), we have to rely on BetterTouchTool
+    "   to map <M-S-D-c> to <M-C-S-C>.
     " NOTE: manually added that made-up code (added +8 to `<M-S-c>`) in iTerm
-    call MapAlias('[27;12;67~', '<M-S-D-c>')
+    "call MapAlias('[27;12;67~', '<M-S-D-c>')
+    call MapAlias('[27;8;67~', '<M-C-S-c>')
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

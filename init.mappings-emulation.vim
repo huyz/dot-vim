@@ -182,7 +182,7 @@ call MapSuperKey('M-S-Down', '<C-w>J')
 
 " Equalize splits
 call MapSuperOrControlKey('M-+', '<C-w>=')
-                                 kk
+
 " Maximize split
 if has('gui_running')
     let s:key = '<M-S-D-Bar>'
@@ -215,10 +215,15 @@ call MapKey('<C-Bslash>', '<Cmd>call ToggleSplitOrientation()<CR>')
 """ Tabs {{{2
 
 " NOTE: we avoid <C-2> and <C-6> because these are ANSI control characters
-"   (even Shift isn't pressed)
+"   (even Shift isn't pressed
 call MapSuperKey('t', '<Cmd>tabnew<CR>')
-" NOTE: ⇧⌥W closes a tab because GUI's ⌘W (and our ⇧W) closes a split
-call MapKey('<M-W>', '<Cmd>tabclose<CR>')
+" NOTE: ⌥⌘W closes a tab because GUI's ⌘W (and our ⇧W) closes a split (like in iTerm)
+call MapSuperOrControlKey('M-w', '<Cmd>tabclose<CR>')
+" MacVim and VimR steal the ⌥⌘W mapping and don't offer a way to reset it, so we need
+" an alternate that BetterTouchTool can route through
+if has('gui_running')
+    call MapKey('<M-S-D-w>', '<Cmd>tabclose<CR>')
+endif
 call MapSuperKey('1', '<Cmd>tabn 1<CR>')
 call MapSuperKey('2', '<Cmd>tabn 2<CR>')
 call MapSuperKey('3', '<Cmd>tabn 3<CR>')
@@ -265,9 +270,7 @@ call MapKey('<M-c>D', 'cr.', ['map'])
 call MapKey('<F1>' , 'K', 'all', v:false, v:false)
 call MapSuperKey('b', 'gd', 'all', v:false, v:false)
 call MapSuperKey('B', 'gy', 'all', v:false, v:false)
-" NOTE: iTerm must have its "Instant Replay" shortcutdisabled
-" FIXME: doesn't work in neovim in terminal
-call MapKey('<D-M-b>', 'gi', 'all', v:false, v:false)
+call MapSuperOrControlKey('M-b', 'gi', 'all', v:false, v:false)
 call MapSuperKey('y', '<Cmd>vsplit<CR>gd', 'all', v:false, v:false)
 call MapSuperKey('Y', '<Cmd>vsplit<CR>gy', 'all', v:false, v:false)
 call MapSuperKey('i', 'gR', 'all', v:false, v:false)
@@ -283,13 +286,11 @@ call MapSuperKey('C', 'ysiW`', ['nmap'], v:false, v:false)
 call MapSuperKey('C', 'S`', ['vmap'], v:false, v:false)
 
 function! s:MapMarkdown() abort
-    " NOTE: because I personally reserve <C-S-M-letter> to launch apps with BetterTouchTool,
-    "   I need touse the ⌘ key instead of ⌃ key; to get this to work in the terminal, I
-    "   have to specifically configure <S-M-D-C> to send `^[[27;8;67~` which is equivalent to
-    "   <C-S-M-C>
-    " FIXME: doesn't work in neovim in terminal
-    call MapKey('<M-S-D-c>', 'O```<Esc>Yjp', ['nmap'], v:false, v:true,  '<buffer>')
-    call MapKey('<M-S-D-c>', '<Esc>`<lt>O```<Esc>yy`>pgv', ['vmap'], v:false, v:true, '<buffer>')
+    " NOTE: to get this to work in iTerm, I hvae to use ⌃ key instead of ⌘, but because
+    "   I personally reserve <C-S-M-letter> to launch apps (with BetterTouchTool),
+    "   I have to rely on BetterTouchTool to map <M-S-D-C> to <M-C-S-C> as intermediary
+    call MapSuperOrControlKey('M-C', 'O```<Esc>Yjp', ['nmap'], v:false, v:true,  '<buffer>')
+    call MapSuperOrControlKey('M-C', '<Esc>`<lt>O```<Esc>yy`>pgv', ['vmap'], v:false, v:true, '<buffer>')
 
     " XXX: this markdown plugin doesn't work right:
     " call MapSuperKey('b',   '<Cmd>ruby Markdown::toggle_strong_at_cursor<CR>',    ['nmap'], v:false, v:false, '<buffer>')

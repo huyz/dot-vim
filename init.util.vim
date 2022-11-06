@@ -169,9 +169,10 @@ endfunction
 function! MapSuperOrControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
     if has("gui_running")
         call MapKey('<D-' . <SID>ShiftModifierIfNeeded(a:key) . tolower(a:key) . '>',
-            \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
+                    \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
     else
-        call MapKey('<C-' . a:key . '>', a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
+        call MapKey('<C-' . <SID>ShiftModifierIfNeeded(a:key) . a:key . '>',
+                    \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
     endif
 endfunction
 
