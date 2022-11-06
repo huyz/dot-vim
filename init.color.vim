@@ -115,11 +115,10 @@ let g:colorscheme_light = "base16-tomorrow"
 let g:airline_theme = 'base16_tomorrow'
 if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
     set termguicolors
-elseif has('gui_running') && has('nvim')
-    " NOTE: we don't use base16 in this case because for some reason the cursor disappears when we
-    " re-source configs
-    " let g:colorscheme_dark = "default"
-    " let g:colorscheme_light = "default"
+elseif !has('gui_running')
+    let g:colorscheme_dark = "default"
+    let g:colorscheme_light = "default"
+    let g:airline_theme = 'default'
 endif
 
 call RefreshBackground()
