@@ -112,13 +112,13 @@ endfunction
 " Startup
 let g:colorscheme_dark = "base16-tomorrow-night"
 let g:colorscheme_light = "base16-tomorrow"
-let g:airline_theme = 'base16_tomorrow'
+let g:airline_theme = "base16_tomorrow"
 if $TERM_PROGRAM =~ "iTerm" && !exists('$TMUX') && !exists('$STY')
     set termguicolors
 elseif !has('gui_running')
     let g:colorscheme_dark = "default"
     let g:colorscheme_light = "default"
-    let g:airline_theme = 'default'
+    let g:airline_theme = "simple"
 endif
 
 call RefreshBackground()
