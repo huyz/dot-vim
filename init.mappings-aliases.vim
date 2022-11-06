@@ -342,7 +342,7 @@ nmap <Leader>F12 <F12>
 nmap <Leader>F13 <S-F1>
 nmap <Leader>F14 <S-F2>
 nmap <Leader>F15 <S-F3>
-nmap <Leader>F16 <S-F5>
+nmap <Leader>F16 <S-F4>
 nmap <Leader>F17 <S-F5>
 nmap <Leader>F18 <S-F6>
 nmap <Leader>F19 <S-F7>
@@ -354,7 +354,7 @@ nmap <Leader>F24 <S-F12>
 nmap <Leader>F25 <C-F1>
 nmap <Leader>F26 <C-F2>
 nmap <Leader>F27 <C-F3>
-nmap <Leader>F28 <C-F5>
+nmap <Leader>F28 <C-F4>
 nmap <Leader>F29 <C-F5>
 nmap <Leader>F30 <C-F6>
 nmap <Leader>F31 <C-F7>
@@ -366,7 +366,7 @@ nmap <Leader>F36 <C-F12>
 nmap <Leader>F37 <C-S-F1>
 nmap <Leader>F38 <C-S-F2>
 nmap <Leader>F39 <C-S-F3>
-nmap <Leader>F40 <C-S-F5>
+nmap <Leader>F40 <C-S-F4>
 nmap <Leader>F41 <C-S-F5>
 nmap <Leader>F42 <C-S-F6>
 nmap <Leader>F43 <C-S-F7>
@@ -378,7 +378,7 @@ nmap <Leader>F48 <C-S-F12>
 nmap <Leader>F49 <M-F1>
 nmap <Leader>F50 <M-F2>
 nmap <Leader>F51 <M-F3>
-nmap <Leader>F52 <M-F5>
+nmap <Leader>F52 <M-F4>
 nmap <Leader>F53 <M-F5>
 nmap <Leader>F54 <M-F6>
 nmap <Leader>F55 <M-F7>
