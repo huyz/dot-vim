@@ -316,15 +316,16 @@ call MapKey('<M-t>C', '<Cmd>HexokinaseToggle<CR>')
 
 call MapKey('<M-F12>', '<Cmd>call OpenTerminal()<CR>')
 if has('nvim')
-    call MapControlKey('Z', ':<C-u>call RevealInTerminal()<CR>')
+    call MapKey('<M-o>t', ':<C-u>call RevealInTerminal()<CR>')
 else
-    call MapControlKey('Z',
+    call MapKey('<M-o>t',
                 \ '<Cmd>let $_term_dir = expand("%:p:h")<CR>' .
                 \ '<Cmd>call RevealInTerminal()<CR>' .
                 \ 'cd $_term_dir; unset _term_dir<CR>')
 endif
 
-call MapControlKey('T', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
+" XXX Don't know why <M-o><M-t> doesn't work.
+call MapKey('<M-o>T', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
 
 """ Internal Apps
 
@@ -346,7 +347,7 @@ call MapKey('<M-s>g', '<Plug>SearchVisual', ['vmap'])
 "   https://github.com/voldikss/vim-browser-search/issues/28
 call MapKey('<M-s><M-s>', ':BrowserSearch<CR>')
 
-call MapControlKey('F', '<Cmd>Reveal<CR>')
-call MapControlKey('C', '<Cmd>CodeCurrent<CR>')
+call MapKey('<M-o>f', '<Cmd>Reveal<CR>')
+call MapKey('<M-o>c', '<Cmd>CodeCurrent<CR>')
 
 " vim:foldmethod=marker:

@@ -1,9 +1,12 @@
+" NOTE: this file needs to be run after init.color.vim for proper colors.
+"   Perhaps because `syntax on` must be done after the colorscheme is first set?
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Filetype-detection options
 
 " Enable file type detection, as per vimrc_example.vim
 " Load indent files, to automatically do language-dependent indenting.
-" NOTE: this must be run after loading plugins, to pick u pnew file types i
+" NOTE: this must be run after loading plugins, to pick up new file types i
 " bundle, CoffeeScript
 filetype plugin indent on
 

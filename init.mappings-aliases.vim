@@ -122,7 +122,13 @@ if has('macunix') && has('gui_running') && (has('nvim') || !has('macmeta'))
     " Markdown code block
     call MapAlias('<D-Ç>', '<M-S-D-c>')
 
-elseif !has('nvim')
+elseif !has('nvim') && v:false
+    " NOTE: These aliases are actually not necessary if the commands in init.options.vim
+    " were successful (and makes vim act like neovim:
+    "   " Enable CSI-u mode
+    "   let &t_TI = "\<Esc>[>4;2m"
+    "   let &t_TE = "\<Esc>[>4;m"
+
     call MapAlias('á', '<M-a>')
     call MapAlias('Á', '<M-A>')
     call MapAlias('â', '<M-b>')
