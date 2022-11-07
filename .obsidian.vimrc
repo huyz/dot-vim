@@ -57,21 +57,32 @@ exmap RenameFile obcommand workspace:edit-file-title
 nmap <A-ç>N :RenameFile
 
 exmap TransformTitlecase obcommand obsidian-editor-shortcuts:transformToTitlecase
-map <A-ç>T :TransformTitlecase
-" FIXME: selection is failing
+nmap <A-ç>T :TransformTitlecase
+" We have to use jscommand to get the selection
 "   See: https://github.com/esm7/obsidian-vimrc-support/issues/99#issuecomment-1128403004
-vmap <A-ç>T :TransformTitlecase
+exmap TransformTitlecaseSelection jscommand { editor.setSelections([selection]); this.app.commands.commands['obsidian-editor-shortcuts:transformToTitlecase'].editorCallback(editor) }
+vmap <A-ç>T :TransformTitlecaseSelection
 
 exmap CodeBlock obcommand code-block-from-selection:e3dea0f5-37f2-4d79-ae58-490af3228069
-map <A-µ>C :CodeBlock
+nmap <A-µ>C :CodeBlock
+exmap CodeBlockSelection jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:e3dea0f5-37f2-4d79-ae58-490af3228069'].callback() }
+vmap <A-µ>C :CodeBlockSelection
 exmap CodeBlockBash obcommand code-block-from-selection:06934685-62e1-4ac2-83c2-b42d2d753d6a
 map <A-µ>B :CodeBlockBash
+exmap CodeBlockSelectionBash jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:06934685-62e1-4ac2-83c2-b42d2d753d6a'].callback() }
+vmap <A-µ>B :CodeBlockSelectionBash
 exmap CodeBlockJS obcommand code-block-from-selection:4ef365c0-8932-4b1e-9947-844a4128ad71
 map <A-µ>J :CodeBlockJS
+exmap CodeBlockSelectionJS jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:4ef365c0-8932-4b1e-9947-844a4128ad71'].callback() }
+vmap <A-µ>J :CodeBlockSelectionJS
 exmap CodeBlockPython obcommand code-block-from-selection:f8b19c3a-9b67-428d-a88b-892811f5707a
 map <A-µ>P :CodeBlockPython
+exmap CodeBlockSelectionPython jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:f8b19c3a-9b67-428d-a88b-892811f5707a'].callback() }
+vmap <A-µ>P :CodeBlockSelectionPython
 exmap CodeBlockShell obcommand code-block-from-selection:e4a96b24-7cf7-4c34-95e6-30578c8222ce
 map <A-µ>S :CodeBlockShell
+exmap CodeBlockSelectionShell jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:e4a96b24-7cf7-4c34-95e6-30578c8222ce'].callback() }
+vmap <A-µ>S :CodeBlockSelectionShell
 
 exmap SearchInternet obcommand search-on-internet:search-on-internet
 map <A-ß><A-ß> :SearchInternet
