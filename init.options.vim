@@ -73,6 +73,10 @@ set shiftround          " Round indent to multiple of 'shiftwidth'
 " in insert mode using the arrow keys--this is great for editing tables.
 set virtualedit=block
 
+" Enable CSI-u mode
+let &t_TI = "\<Esc>[>4;2m"
+let &t_TE = "\<Esc>[>4;m"
+
 " Cursor shape in insert mode
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"

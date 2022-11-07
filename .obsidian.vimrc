@@ -2,7 +2,7 @@
 " https://github.com/esm7/obsidian-vimrc-support
 
 " Neovim mappings
-nmap <C-L> :nohl
+map <C-L> :nohl
 
 " Have j and k navigate visual lines rather than logical ones
 nmap j gj
@@ -13,9 +13,9 @@ nmap <Esc>u :nohl
 " Go back and forward with Ctrl+O and Ctrl+I
 " (make sure to remove default Obsidian shortcuts for these to work)
 exmap back obcommand app:go-back
-nmap <C-o> :back
+map <C-o> :back
 exmap forward obcommand app:go-forward
-nmap <C-i> :forward
+map <C-i> :forward
 
 " Emulate Folding https://vimhelp.org/fold.txt.html#fold-commands
 exmap togglefold obcommand editor:toggle-fold
@@ -25,6 +25,101 @@ nmap zR :unfoldall
 exmap foldall obcommand editor:fold-all
 nmap zM :foldall
 
+" Emulate Tab Switching https://vimhelp.org/tabpage.txt.html#gt
+" requires Cycle Through Panes Plugins https://obsidian.md/plugins?id=cycle-through-panes
+exmap tabnext obcommand cycle-through-panes:cycle-through-panes
+map gt :tabnext
+exmap tabprev obcommand cycle-through-panes:cycle-through-panes-reverse
+map gT :tabprev
+
+exmap FollowLink obcommand editor:follow-link
+nmap gx :FollowLink
+
+exmap SurroundWiki surround [[ ]]
+map <A-c>[ :SurroundWiki
+" Because of this bug https://github.com/replit/codemirror-vim/pull/60
+map <A-ç>[ :SurroundWiki
+
+exmap SurroundParens surround ( )
+map <A-c>( :SurroundParens
+" Because of this bug https://github.com/replit/codemirror-vim/pull/60
+map <A-ç>( :SurroundParens
+
+""" GUI Emulation mappings
+
+
+" FIXME: can't get any of the imap mappings to work but I can use the Sequence Hotkeys plugin for
+" that
+" TODO: when https://github.com/replit/codemirror-vim/pull/60 is merged into Obsidian
+"   we have to get rid of the <A-> and re-test
+
+exmap RenameFile obcommand workspace:edit-file-title
+nmap <A-ç>N :RenameFile
+
+exmap TransformTitlecase obcommand obsidian-editor-shortcuts:transformToTitlecase
+map <A-ç>T :TransformTitlecase
+" FIXME: selection is failing
+"   See: https://github.com/esm7/obsidian-vimrc-support/issues/99#issuecomment-1128403004
+vmap <A-ç>T :TransformTitlecase
+
+exmap CodeBlock obcommand code-block-from-selection:e3dea0f5-37f2-4d79-ae58-490af3228069
+map <A-µ>C :CodeBlock
+exmap CodeBlockBash obcommand code-block-from-selection:06934685-62e1-4ac2-83c2-b42d2d753d6a
+map <A-µ>B :CodeBlockBash
+exmap CodeBlockJS obcommand code-block-from-selection:4ef365c0-8932-4b1e-9947-844a4128ad71
+map <A-µ>J :CodeBlockJS
+exmap CodeBlockPython obcommand code-block-from-selection:f8b19c3a-9b67-428d-a88b-892811f5707a
+map <A-µ>P :CodeBlockPython
+exmap CodeBlockShell obcommand code-block-from-selection:e4a96b24-7cf7-4c34-95e6-30578c8222ce
+map <A-µ>S :CodeBlockShell
+
+exmap SearchInternet obcommand search-on-internet:search-on-internet
+map <A-ß><A-ß> :SearchInternet
+
+exmap OpenDefaultApp obcommand open-with-default-app:open
+nmap <A-ø>o :OpenDefaultApp
+exmap RevealInFinder obcommand open-with:show-file-in-explorer
+nmap <A-ø>f :RevealInFinder
+exmap RevealInTerminal obcommand obsidian-shellcommands:shell-command-v6sx70npxw
+nmap <A-ø>t :RevealInTerminal
+exmap OpenVSCode obcommand open-vscode:open-vscode-via-url
+nmap <A-ø>c :OpenVSCode
+exmap OpenMacVim obcommand open-with:open-file-with-macvim
+nmap <A-ø>v :OpenMacVim
+exmap OpenVimR obcommand open-with:open-file-with-vimr
+nmap <A-ø>V :OpenVimR
+exmap OpenMarkText obcommand open-with:open-file-with-marktext
+nmap <A-ø>m :OpenMarkText
+exmap OpenMacDown obcommand open-with:open-file-with-macdown
+nmap <A-ø>M :OpenMacDown
+exmap OpenCleanShot obcommand open-with:open-file-with-cleanshot x
+nmap <A-ø>x :OpenCleanShot
+"
+exmap SwitchTheme obcommand theme:switch
+nmap <A-†>c :SwitchTheme
+exmap SwitchThemeDark obcommand theme:use-dark
+nmap <A-†>b :SwitchThemeDark
+exmap SwitchThemeLight obcommand theme:use-light
+nmap <A-†>B :SwitchThemeLight
+
+exmap ToggleWhitespace obcommand control-characters:toggle
+nmap <A-†><Space> :ToggleWhitespace
+
+exmap ToggleBacklinks obcommand backlink:toggle-backlinks-in-document
+map <A-†>/ :ToggleBacklinks
+
+exmap TableControlBar obcommand table-editor-obsidian:table-control-bar
+map <A-S-ˇ><A-S-ˇ> :TableControlBar
+exmap TableFormat obcommand table-editor-obsidian:format-table
+map <A-S-ˇ>f :TableFormat
+exmap TableInsertColumn obcommand table-editor-obsidian:insert-column
+map <A-S-ˇ>i :TableInsertColumn
+exmap TableDeleteColumn obcommand table-editor-obsidian:delete-column
+map <A-S-ˇ>x :TableDeleteColumn
+exmap TableInsertRow obcommand table-editor-obsidian:insert-row
+map <A-S-ˇ>O :TableInsertRow
+exmap TableDeleteRow obcommand table-editor-obsidian:delete-row
+map <A-S-ˇ>d :TableDeleteRow
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
