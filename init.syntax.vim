@@ -1,6 +1,3 @@
-" NOTE: this file needs to be run after init.color.vim for proper colors.
-"   Perhaps because `syntax on` must be done after the colorscheme is first set?
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Filetype-detection options
 
