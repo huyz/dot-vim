@@ -260,7 +260,7 @@ function! GetUniqueSessionName()
     return substitute(path . branch, '/', '-', 'g')
 endfunction
 " XXX: This next line is giving me problems when I run :Startify
-autocmd User        StartifyReady silent execute 'SLoad '  . GetUniqueSessionName()
+"autocmd User        StartifyReady silent execute 'SLoad '  . GetUniqueSessionName()
 autocmd VimLeavePre *             silent execute 'SSave! ' . GetUniqueSessionName()
 
 " Need to make sure the session directory exists, or SSave will prompt (and beacuse of the
