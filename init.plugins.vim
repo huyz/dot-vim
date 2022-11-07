@@ -163,6 +163,8 @@ Plug 'folke/trouble.nvim', Cond(has('nvim'))
 
 " vim gets syntastic
 Plug 'scrooloose/syntastic', Cond(!has('nvim'))
+" treesitter: telescope apparently could use it
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " neovim gets coc or mason
 let coc_supported = g:coc_or_mason == 'coc' && (has('nvim') || v:version >= 801)
 Plug 'neoclide/coc.nvim', Cond(coc_supported, {'branch': 'release'})
