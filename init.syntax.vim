@@ -45,6 +45,10 @@ if &t_Co > 2 || has("gui_running") " If we have color
     " Turn on syntax highlighting
     syntax on
 
+    " HACK: 2022-11-07 No time to debug this, but colors are bad for indent guides
+    "   and completion menus unless I run `syntax on` again after starting vim.
+    autocmd BufReadPost * syntax on
+
 else " If we don't have color
     " Highlighting for monochrome screens (with underlines and crap) sucks
     syntax off

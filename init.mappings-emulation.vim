@@ -281,7 +281,7 @@ call MapKey('<M-m><M-m>', '<Cmd>MarkdownPreview<CR>')
 call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 
-" NOTE: for entire lines, don't use `V`; use `val` from textobj-line to avoid spurious newlines
+" Tip: for entire lines, don't use `V`; use `val` from textobj-line to avoid spurious newlines
 call MapSuperKey('C', 'ysiW`', ['nmap'], v:false, v:false)
 call MapSuperKey('C', 'S`', ['vmap'], v:false, v:false)
 
