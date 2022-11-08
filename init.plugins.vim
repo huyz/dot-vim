@@ -121,8 +121,10 @@ Plug 'tommcdo/vim-exchange'
 " Plug 'nicwest/vim-camelsnek'
 Plug 'zatchheems/vim-camelsnek'
 Plug 'christoomey/vim-titlecase'
-" abolish is good for :S case-preserving substitute but not for case conversions
+" abolish: `:Subvert` is good for case-preserving substitute (but not for case conversions)
 Plug 'tpope/vim-abolish'
+" eregex: Support PCRE with `:S`
+Plug 'othree/eregex.vim'
 
 " Text objects
 Plug 'wellle/targets.vim'
@@ -533,6 +535,13 @@ let g:titlecase_excluded_words = ["và"]
 " XXX: Until this is addressed:
 "   https://github.com/nicwest/vim-camelsnek/pull/1#issuecomment-1293417153
 let g:camelsnek_iskeyword_override = 0
+
+""" ergex {{{2
+
+" Disable the default mappings, but the commands can still be used.
+let g:eregex_default_enable = 0
+" We want `:S` substitutions to be case-sensitive.
+let g:eregex_force_case = 1
 
 """ glow {{{2
 
