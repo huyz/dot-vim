@@ -73,9 +73,17 @@ set shiftround          " Round indent to multiple of 'shiftwidth'
 " in insert mode using the arrow keys--this is great for editing tables.
 set virtualedit=block
 
-" Enable CSI-u mode
-let &t_TI = "\<Esc>[>4;2m"
-let &t_TE = "\<Esc>[>4;m"
+""" Terminal capabilities
+
+" Enable extended keys
+if exists('$TMUX')
+    " tmux 3.3 only supports modifyOtherKeys=1
+    let &t_TI = "\e[>4;1m"
+    let &t_TE = "\e[>4;m"
+else
+    let &t_TI = "\<Esc>[>4;2m"
+    let &t_TE = "\<Esc>[>4;m"
+endif
 
 " Cursor shape in insert mode
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
