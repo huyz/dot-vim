@@ -265,8 +265,8 @@ autocmd VimLeavePre *             silent execute 'SSave! ' . GetUniqueSessionNam
 
 " Need to make sure the session directory exists, or SSave will prompt (and beacuse of the
 " `silent`, you won't see a prompt to create a directory--just a pause
-if !filereadable(expand('$MYVIM/session/session.vim'))
-  silent execute "!mkdir -p '" . expand('$MYVIM/session/session.vim') . "'"
+if !isdirectory(expand('$MYVIM/session/session.vim'))
+    execute "!mkdir -p '" . expand('$MYVIM/session/session.vim') . "'"
 endif
 
 """ telescope {{{2
