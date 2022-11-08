@@ -1,6 +1,21 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Functions to cycle/toggle display modes
 
+" Toggle paste
+function! TogglePaste()
+    if exists('b:old_signcolumn')
+        let &signcolumn = b:old_signcolumn
+        unlet b:old_signcolumn
+    elseif &signcolumn != 'no'
+        let b:old_signcolumn = &signcolumn
+        set signcolumn=no
+    endif
+    set invpaste
+    GitGutterToggle
+    call CycleEditDisplay(&paste)
+    set paste?
+endfunction
+
 " Cycle textwidth
 function! CycleTextwidth()
     if &textwidth == 0

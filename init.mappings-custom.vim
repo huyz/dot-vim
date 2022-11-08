@@ -44,8 +44,7 @@ set pastetoggle=<F5>
 " Different display options
 nnoremap <Leader>o0 <Cmd>set sts=2 sw=2 wrap linebreak showbreak=↪ number
     \ relativenumber cursorline nocursorcolumn colorcolumn=+1,80,100,120<CR>
-nmap <Leader>o1 <Cmd>set invpaste<CR><Cmd>GitGutterToggle<CR>
-    \<Cmd>call CycleEditDisplay(&paste)<CR><Cmd>set paste?<CR>
+nnoremap <Leader>o1 <Cmd>call TogglePaste()<CR>
 nnoremap <Leader>o2 <Cmd>call CycleEditDisplay()<CR>
 nnoremap <Leader>o3 <Cmd>call CycleTextwidth()<CR>
 nnoremap <Leader>o4 <Cmd>call ToggleVirtualEdit()<CR>
