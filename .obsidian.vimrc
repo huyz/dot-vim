@@ -132,6 +132,31 @@ map <A-S-ˇ>O :TableInsertRow
 exmap TableDeleteRow obcommand table-editor-obsidian:delete-row
 map <A-S-ˇ>d :TableDeleteRow
 
+exmap GitOpenView obcommand obsidian-git:open-git-view
+map <A-©><A-©> :GitOpenView
+exmap GitDiff obcommand obsidian-git:open-diff-view
+map <A-©>d :GitDiff
+exmap GitBackupAndClose obcommand obsidian-git:backup-and-close
+map <A-©>u :GitBackupAndClose
+exmap GitCommit obcommand obsidian-git:commit
+map <A-©><A-S-Ç> :GitCommit
+exmap GitCommitStaged obcommand obsidian-git:commit-staged
+map <A-©>c :GitCommitStaged
+exmap GitListChangedFiles obcommand obsidian-git:list-changed-files
+map <A-©>t :GitListChangedFiles
+exmap GitPull obcommand obsidian-git:pull
+map <A-©>j :GitPull
+exmap GitPush obcommand obsidian-git:push
+map <A-©>k :GitPush
+exmap GitStageFile obcommand obsidian-git:stage-current-file
+map <A-©>a :GitStageFile
+exmap GitUnstageFile obcommand obsidian-git:unstage-current-file
+map <A-©>A :GitUnstageFile
+exmap GitViewFileOnRemote obcommand obsidian-git:view-file-on-github
+map <A-©>o :GitViewFileOnRemote
+exmap GitViewHistoryOnRemote obcommand obsidian-git:view-history-on-github
+map <A-©><A-˙> :GitViewHistoryOnRemote
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
 
