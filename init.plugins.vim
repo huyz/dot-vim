@@ -278,58 +278,58 @@ if has('nvim')
     require('telescope').load_extension('fzf')
 
     require('telescope').setup{
-      defaults = {
-        -- Default configuration for telescope goes here:
-        -- config_key = value,
-        mappings = {
-          i = {
-            -- map actions.which_key to <C-h> (default: <C-/>)
-            -- actions.which_key shows the mappings for your picker,
-            -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-            -- ["<C-h>"] = "which_key",
-            ["<C-j>"] = {
-              require('telescope.actions').move_selection_next, type = "action",
-              opts = { nowait = true, silent = true }
+        defaults = {
+            -- Default configuration for telescope goes here:
+            -- config_key = value,
+            mappings = {
+            i = {
+                -- map actions.which_key to <C-h> (default: <C-/>)
+                -- actions.which_key shows the mappings for your picker,
+                -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+                -- ["<C-h>"] = "which_key",
+                ["<C-j>"] = {
+                require('telescope.actions').move_selection_next, type = "action",
+                opts = { nowait = true, silent = true }
+                },
+                ["<C-k>"] = {
+                require('telescope.actions').move_selection_previous, type = "action",
+                opts = { nowait = true, silent = true }
+                },
+                ["<C-n>"] = require('telescope.actions').cycle_history_next,
+                ["<C-p>"] = require('telescope.actions').cycle_history_prev,
+            }
+            }
+        },
+        pickers = {
+            -- Default configuration for builtin pickers goes here:
+            -- picker_name = {
+            --   picker_config_key = value,
+            --   ...
+            -- }
+            -- Now the picker_config_key will be applied every time you call this
+            -- builtin picker
+            find_files = {
+                find_command = {'rg', '-L', '--hidden', '--glob', '!.git/', '--files'},
             },
-            ["<C-k>"] = {
-              require('telescope.actions').move_selection_previous, type = "action",
-              opts = { nowait = true, silent = true }
+            live_grep = {
+                glob_pattern = '!.git/',
+                additional_args = {
+                '-L',
+                '--hidden',
+                '--column',
+                '--line-number',
+                '--no-heading',
+                '--smart-case',
+                },
             },
-            ["<C-n>"] = require('telescope.actions').cycle_history_next,
-            ["<C-p>"] = require('telescope.actions').cycle_history_prev,
-          }
+        },
+        extensions = {
+            -- Your extension configuration goes here:
+            -- extension_name = {
+            --   extension_config_key = value,
+            -- }
+            -- please take a look at the readme of the extension you want to configure
         }
-      },
-      pickers = {
-        -- Default configuration for builtin pickers goes here:
-        -- picker_name = {
-        --   picker_config_key = value,
-        --   ...
-        -- }
-        -- Now the picker_config_key will be applied every time you call this
-        -- builtin picker
-        find_files = {
-            find_command = {'rg', '-L', '--hidden', '--glob', '!.git/', '--files'},
-        },
-        live_grep = {
-            glob_pattern = '!.git/',
-            additional_args = {
-              '-L',
-              '--hidden',
-              '--column',
-              '--line-number',
-              '--no-heading',
-              '--smart-case',
-            },
-        },
-      },
-      extensions = {
-        -- Your extension configuration goes here:
-        -- extension_name = {
-        --   extension_config_key = value,
-        -- }
-        -- please take a look at the readme of the extension you want to configure
-      }
     }
 EOF
 endif

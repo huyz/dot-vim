@@ -7,6 +7,14 @@ set nobackup            " gvim-win32 has it on by default
 set autoread            " Reload files changed outside vim
 set browsedir=current   " Make the file browser always open the current directory.
 
+""" Command-line options
+
+set laststatus=2        " Show the status line at all times
+set cmdheight=2         " Number of screen lines for the command line
+set shortmess=a         " Use short messages whenever possible
+set showcmd             " Display at the bottom right incomplete commands that are still being typed
+set history=1024        " New of lines of command line history
+set wildmenu wildmode=longest:full,full
 
 """ Display options
 
@@ -15,10 +23,6 @@ set title               " Let vim modify window title
                         " (We don't need to restore--our screen overwrites)
 set t_ti= t_te=         " Disable tite
 set ruler               " Show the cursor position all the time
-set laststatus=2        " Show the status line at all times
-set cmdheight=2         " Number of screen lines for the command line
-set showcmd             " Display at the bottom right incomplete commands that
-                        " are still being typed
 set ttyfast             " Connection is fast, so redraw well
 set visualbell          " Don't beep
 set number              " Show absolute line number at current line
@@ -50,12 +54,6 @@ set hidden              " Automatically hides buffers when abandoned
                         " without requiring them to be saved
                         " (this is vim's funny name for a feature that should
                         " be on by default for any multi-file editor)
-
-""" Command-line options
-
-set history=1024        " New of lines of command line history
-set wildmenu wildmode=longest:full,full
-set shortmess=a         " Use short messages whenever possible
 
 """ Editing options
 
