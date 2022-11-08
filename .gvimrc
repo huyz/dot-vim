@@ -4,6 +4,7 @@
 if has("gui_running")
   " For MacVim to display devicons
   set guifont=MesloLGS-NF-Regular:h12
+  set linespace=1
 
   "set background=dark
   " This is to counteract the 'colorscheme default' in .vimrc
