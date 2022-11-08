@@ -85,19 +85,19 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:tru
     "    unchanged. That's because we don't know if iTerm has modifyOtherKeys
     "    on or not.
     if !has('nvim')
-      let l:lhs_normalized = s:NormalizeMetaModifier(a:keys)
-      let l:rhs_normalized = s:NormalizeMetaModifier(a:rhs)
-      if l:lhs_normalized != a:keys || l:rhs_normalized != a:rhs
-          " If we're automatically normalizing to <Esc>, we don't want to
-          " map any insert-like mode because we don't want conflict with
-          " <Esc> key to get out of normal mode.
-          let l:no_insert = l:lhs_normalized != a:keys || a:no_insert
-          call MapKey(l:lhs_normalized, l:rhs_normalized,
-                      \ l:modes, l:no_insert, a:no_remap, a:map_flag)
-          if has("gui_running")
-              return
-          endif
-      endif
+        let l:lhs_normalized = s:NormalizeMetaModifier(a:keys)
+        let l:rhs_normalized = s:NormalizeMetaModifier(a:rhs)
+        if l:lhs_normalized != a:keys || l:rhs_normalized != a:rhs
+            " If we're automatically normalizing to <Esc>, we don't want to
+            " map any insert-like mode because we don't want conflict with
+            " <Esc> key to get out of normal mode.
+            let l:no_insert = l:lhs_normalized != a:keys || a:no_insert
+            call MapKey(l:lhs_normalized, l:rhs_normalized,
+                        \ l:modes, l:no_insert, a:no_remap, a:map_flag)
+            if has("gui_running")
+                return
+            endif
+        endif
     endif
 
     let l:nore = a:no_remap ? 'nore' : ''
@@ -120,7 +120,7 @@ endfunction
 
 function s:ShiftModifierIfNeeded(key)
     let l:key = substitute(a:key, '.*-', '', '')
-    return strlen(l:key) == 1 && l:key >= 'A' && l:key <= 'Z' ||
+    return strlen(l:key) == 1 && l:key >=# 'A' && l:key <=# 'Z' ||
         \ index(['{', '}', '"', '+'], l:key) >= 0 ? 'S-' : ''
 endfunction
 
@@ -138,7 +138,6 @@ function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v
         endif
         let l:keys = '<D-' . l:key . '>'
     else
-
         let l:keys = s:NormalizeMetaModifier('<M-' . a:key . '>')
         let l:no_insert = l:keys != '<M-' . a:key . '>' || l:no_insert
     endif

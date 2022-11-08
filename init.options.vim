@@ -99,6 +99,7 @@ endif
 """ Search options
 
 set incsearch           " Do incremental searching
+set ignorecase          " We can turn that on, now that we use eregex's `:S` case-sensitively
 set smartcase           " Override ignorecase if search contains uppercase
 
 " Search highlighting

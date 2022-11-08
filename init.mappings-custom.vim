@@ -60,13 +60,6 @@ nnoremap <Leader>t4 <Cmd>set noet<CR><Cmd>set sts=8 sw=8<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Misc {{{1
 
-" Case-insensitive search (doesn't make sense to set 'ignorecase'
-" as it's dangerous for substitutions)
-" NOTE: \v isn't completely like perl, even with the basics, because
-" the charaters <>= are now special that weren't with perl
-nnoremap / /\c
-nnoremap ? ?\c
-
 " Folding http://vim.wikia.com/wiki/Folding
 nnoremap <silent> <Space><Space> @=(foldlevel('.')?'za':'l')<CR>
 vnoremap <Space><Space> zf
