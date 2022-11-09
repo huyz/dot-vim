@@ -71,6 +71,7 @@ source $MYVIM/init.display-modes.vim
 source $MYVIM/init.mappings-aliases.vim
 source $MYVIM/init.mappings-emulation.vim
 source $MYVIM/init.mappings-custom.vim
+source $MYVIM/init.mappings-surround.vim
 source $MYVIM/init.operations.vim
 source $MYVIM/init.abbreviations.vim
 source $MYVIM/init.terminal.vim
