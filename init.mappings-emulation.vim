@@ -63,11 +63,20 @@ nnoremap <Esc>u <Cmd>noh<CR>
 """ General
 
 " Open recent
-if has('nvim')
-    call MapSuperKey('p', '<C-F4>', 'all', v:false, v:false)
-else
-    call MapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
+if exists('g:gui_running')
+    if has('nvim')
+        call MapSuperKey('p', '<C-F4>', 'all', v:false, v:false)
+    else
+        call MapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
+    endif
 endif
+" We actually need to map ⇧⌥P in terminals so as to not conflict with our ⌥P chord prefix.
+if has('nvim')
+    call MapSuperKey('P', '<C-F4>', 'all', v:false, v:false)
+else
+    call MapSuperKey('P', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
+endif
+
 call MapSuperKey('e', '<C-F2>', 'all', v:false, v:false)
 call MapSuperKey('E', '<C-F2>', 'all', v:false, v:false)
 call MapSuperKey('F', '<C-F3>', 'all', v:false, v:false)
@@ -334,6 +343,7 @@ if has('nvim')
 else
     call MapControlKey('E', '<Cmd>NERDTreeFind<CR>')
 endif
+imap <M-c>: <C-x><C-u>
 
 """ External Apps
 
