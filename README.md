@@ -41,52 +41,43 @@ occasionally.
 | `/<C-R>"`                                          | Pull in last yank                                                                                                                                  |
 | `[I`                                               | Show lines that match current word                                                                                                                 |
 | ```[ `` or `` `]``                                 | Go to beginning/end of last change                                                                                                                 |
-| `<C-X><C-L>`                                       | Line complete, then hit `<C-n>` and `<C-p>`                                                                                                        |
-| `<C-X><C-K>`                                       | Starts dictionary completion, then hit `<C-n>` and `<C-p>`                                                                                         |
+| `<C-X><C-L>`                                       | Starts line completion                                                                                                                             |
+| `<C-X><C-K>`                                       | Starts dictionary completion                                                                                                                       |
 | `==`                                               | Reindent line(s)                                                                                                                                   |
 | `:ce`                                              | Center line(s)                                                                                                                                     |
 | `!!date`                                           | Replace current line with date (different from my `\-d`)                                                                                           |
 | `:-1r`                                             | Read in file above current line                                                                                                                    |
-| `:reg`                                             | List registers                                                                                                                                     |
 | `:argdo %s/f//`                                    | Operate over all files listed on command line                                                                                                      |
 | `:windo %s/f//`                                    | Operate over all viewable split windows                                                                                                            |
 | `:bufdo normal :%s,^,^R%,^M`                       | perform an operation on all buffers when a register needs to be accessed (note that ^R ^M are typed by hitting control-v and then control-r or -m) |
 | `:bufdo exe "normal :%s,^,\<C-R>%,\<CR>"`          | same as above                                                                                                                                      |
 | `:verbose set history?`                            | Find where an option is set                                                                                                                        |
 | `:w !sudo tee %`                                   | Save the current file with sudo privileges                                                                                                         |
-| `:perldo s/p/r/`                                   | Do perl-compatible regex substitution                                                                                                              |
 
 ## My own mappings
 
 I tend to forgot I defined these mappings:
 
-| Mapping          | Description                                                                                     |
-| ----             | ---                                                                                             |
-| `<C-s>`          | Save buffer                                                                                     |
-| `<A-H>` `<A-J>`  | switch between split windows (note capitalization so there's no conflict with visual-multi) |
-| `<C-w><C-q>`     | Closes buffer without messing up split window                                                   |
-| `gb`             | Re-select last pasted block                                                                     |
-| `\lh`            | Swap words                                                                                      |
-| `Q` `gq` `<M-q>` | In visual mode, format by `par`, vim, or emacs-style                                            |
-| `\t0`            | Discard consecutive blank lines                                                                 |
-| `<Meta>q`        | Reformat paragraph (like emacs)                                                                 |
+| Mapping               | Description                          |
+| ----                  | ---                                  |
+| `gb`                  | Re-select last pasted block          |
+| `Q` `gq` `<M-q>`      | In visual mode, format by `par`, vim |
+| `<M-p><C-S-BS>`       | Discard consecutive blank lines      |
+| `<M-x>-` or `=` or`~` | Underline line                       |
+
+Archived:
+
+| Mapping | Description |
+| ----    | ---         |
+| `<C-s>` | Save buffer |
 
 ## Plugins I installed
 
-### Gundo
-
-| Mapping        | Description     |
-| ----           | ---             |
-| `:GundoToggle` | Shows undo tree |
-
 ### CtrlP
 
-| Mapping      | Description   |
-| ----         | ---           |
-| `<C-P>`      | switch buffer |
-| `<C-P><C-B>` | find file     |
-| `<C-P><C-F>` | find MRU file |
-| `F10`        | switch buffer |
+| Mapping for vim | Mapping for neovim | Description   |
+| ----            | ---                | ---           |
+| `<C-F2>`        | `<C-S-F2>`         | switch buffer |
 
 ### fzf
 
@@ -94,12 +85,27 @@ I tend to forgot I defined these mappings:
 |-----------------|------------------|
 | `:RG <pattern>` | Search all files |
 
-### vim-move
+| Mapping for vim | Mapping for neovim | Description                    |
+| ----            | ---                | ---                            |
+| `<C-F3>`        | `<C-S-F3>`         | Search all files interactively |
 
-| Mapping    | Description                           |
-|------------|---------------------------------------|
-| `<M-Up>` | Move current character/selection up |
-| `<M-Left>` | Move current character/selection left |
+### windowswap
+
+| Mapping | Description                         |
+| ---     | ---                                 |
+| `\ww`   | Sets first or second window to swap |
+
+### Gundo
+
+| Mapping        | Description     |
+| ----           | ---             |
+| `:GundoToggle` | Shows undo tree |
+
+### Bbye
+
+| Mapping      | Description                                   |
+| ----         | ---                                           |
+| `<C-w><C-q>` | Closes buffer without messing up split window |
 
 ### visual-multi
 
@@ -112,12 +118,6 @@ I tend to forgot I defined these mappings:
 | `\\A`                   | Select all occurrences                                         |
 | `<C-down>` then `<Tab>` | Add cursor(s) vertically                                       |
 | `\\gS`                  | Reselect last                                                  |
-
-### windowswap
-
-| Mapping | Description                         |
-| ---     | ---                                 |
-| `\ww`   | Sets first or second window to swap |
 
 ### easymotion
 
@@ -151,6 +151,13 @@ I tend to forgot I defined these mappings:
 | `cs't`    | change surrounding quotes to tag with prompt                       |
 | `csw(`    | shortcut for `ysiw(`                                               |
 
+### vim-move
+
+| Mapping    | Description                           |
+|------------|---------------------------------------|
+| `<M-Up>`   | Move current character/selection up   |
+| `<M-Left>` | Move current character/selection left |
+
 ### easy-align
 
 | Mapping    | Description                                                    |
@@ -158,12 +165,6 @@ I tend to forgot I defined these mappings:
 | V\_`gA= `  | in line visual mode, start aligning around first `=` character |
 | `gAip=`    | start aligning for inner paragraph                             |
 | V\_`\\`    | In Github-Flavored Markdown file, re-align current table       |
-
-### table-mode
-
-| Mapping | Description       |
-| ----    | ---               |
-| `\tm`   | Toggle table mode |
 
 ### ReplaceWithRegister
 
@@ -176,27 +177,23 @@ I tend to forgot I defined these mappings:
 
 | Mapping    | Description                 |
 | ---------- | ---------------------       |
-| `:S`       | case-preserving subsitution |
+| `:Subvert` | case-preserving subsitution |
 
-### titlecase
-
-| Mapping    | Description           |
-| ---------- | --------------------- |
-| `gz`       | title-case            |
-| `gzz`      | title-case line       |
-
-### gitmoji
+### eregex
 
 | Mapping    | Description           |
 | ---------- | --------------------- |
-| `^X^U`     | Trigger completion    |
+| `:S`       | PCRE2 substitution    |
+| `<M-t>/`   | Toggle PCRE search    |
 
 ### exchange
 
-| Mapping      | Description                                |
+| Mapping      Description |                                |
 | ---          | ---                                        |
 | `cx{motion}` | Sets first or second text to swap/exchange |
 | `cxx`        | Sets first or second line to swap/exchange |
+| `cxx`        | Sets first or second line to swap/exchange |
+| `<M-x><M-x>` | Swap last two words (my own function)      |
 
 ### argumentative
 
@@ -219,6 +216,12 @@ I tend to forgot I defined these mappings:
 | `vii`   | Select indentation level                                           |
 | `vaI`   | Select idnentation level + line below (useful for closing bracket) |
 
+### table-mode
+
+| Mapping | Description       |
+| ----    | ---               |
+| `\tm`   | Toggle table mode |
+
 ### splitjoin
 
 | Mapping    | Description                            |
@@ -226,12 +229,12 @@ I tend to forgot I defined these mappings:
 | `gS`       | Trigger smart split wherever cursor is |
 | `gJ`       | Trigger smart join wherever cursor is  |
 
+### gitmoji
 
-### emmet-vim
-
-| Mapping  | Description         |
-|----------|---------------------|
-| `<C-Y>,` | Expand abbreviation |
+| Mapping    | Description                              |
+| ---------- | ---------------------                    |
+| `<M-c>:`   | Trigger completion                       |
+| `\\^U`     | Convert :emoji_name: into unicode emojis |
 
 ### Gist: post buffers or selected text to https://gist.github.com/
 

@@ -13,21 +13,21 @@ noremap <Leader>_done_ <Cmd>let @/=hls<CR><Cmd>nohl<CR><C-O>
 
 " Halve the indentation of the file, assuming spaces
 " NOTE: makes sense only with expandtab on
-" TODO: doesn't work on mac
+" FIXME: doesn't work on mac
 nmap <Leader><TAB>< <Leader>_do_:%!unexpand --first-only -t 2<CR>:%!expand --initial -t 1<CR><Leader>_done_
 " Double the indentation of the file, assuming spaces
 nmap <Leader><TAB>> <Leader>_do_:%s/^\(\s*\)/\1\1/<CR><Leader>_done_
 
 " Discard consecutive blank lines
-nmap <Leader>t0 <Leader>_do_:v/./.,/./-1join<CR><Leader>_done_
+nmap <M-p><C-S-BS> <Leader>_do_:v/./.,/./-1join<CR><Leader>_done_
 
 
 """ Complex edits {{{1
 
 " Underlines the current line with '~', '-', '=' characters (good for markdown)
-nmap <Leader>= <Leader>_do_yyp:s/./=/g<CR><Leader>_done_
-nmap <Leader>- <Leader>_do_yyp:s/./-/g<CR><Leader>_done_
-nmap <Leader>~ <Leader>_do_yyp:s/./\~/g<CR><Leader>_done_
+nmap <M-c>= <Leader>_do_yyp:s/./=/g<CR><Leader>_done_
+nmap <M-c>- <Leader>_do_yyp:s/./-/g<CR><Leader>_done_
+nmap <M-c>~ <Leader>_do_yyp:s/./\~/g<CR><Leader>_done_
 
 
 """ Swap last two words {{{1
@@ -72,8 +72,8 @@ function! s:SwapLastTwoWordsInInsertMode()
     endif
 endfunction
 
-nnoremap <silent> <M-s> :<C-u>call <SID>SwapLastTwoWords()<CR>
+nnoremap <silent> <M-x><M-x> :<C-u>call <SID>SwapLastTwoWords()<CR>
 " NOTE: we can't use <Cmd> because we actually want a mode change to normal
 "   inside function to look at whitespace
-imap <silent> <M-s> <C-\><C-o>:<C-u>call <SID>SwapLastTwoWordsInInsertMode()<CR>
+imap <silent> <M-x><M-x> <C-\><C-o>:<C-u>call <SID>SwapLastTwoWordsInInsertMode()<CR>
 

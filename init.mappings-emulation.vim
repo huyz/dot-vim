@@ -44,13 +44,6 @@ nnoremap <C-x>+ <C-w>=
 
 cnoremap <C-g> <C-c>
 
-""" Formatting
-
-" Emulate emacs, saving the cursor position
-nnoremap <Esc>q m`gqip``
-" FIXME: can't get this to work -- cursor position is wrong at end of line
-"inoremap <Esc>q <C-o>m`<C-o>gqip<C-o>``
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Emulate misc apps {{{1
 
@@ -219,7 +212,7 @@ function! ToggleSplitOrientation()
 endfunction
 " NOTE: For terminal, we need to use <C-Bslash> because <C-S-Bar> is not possible since <C-\> is
 " an ANSI control sequence
-call MapKey('<C-Bslash>', '<Cmd>call ToggleSplitOrientation()<CR>')
+call MapKey('<C-Bslash>', '<Cmd>call ToggleSplitOrientation()<CR>', 'all', v:true)
 
 """ Tabs {{{2
 
