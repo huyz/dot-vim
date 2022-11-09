@@ -113,7 +113,6 @@ Plug 'tpope/vim-surround'
 Plug 'landock/vim-expand-region'
 Plug 'matze/vim-move'
 Plug 'junegunn/vim-easy-align'
-Plug 'dhruvasagar/vim-table-mode'
 Plug 'machakann/vim-highlightedyank'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tommcdo/vim-exchange'
@@ -124,7 +123,9 @@ Plug 'christoomey/vim-titlecase'
 " abolish: `:Subvert` is good for case-preserving substitute (but not for case conversions)
 Plug 'tpope/vim-abolish'
 " eregex: Support PCRE with `:S`
-Plug 'othree/eregex.vim'
+"Plug 'othree/eregex.vim'
+" This fork implements incsearch
+Plug 'https://github.com/ZSaberLv0/eregex.vim.git'
 
 " Text objects
 Plug 'wellle/targets.vim'
@@ -135,6 +136,7 @@ Plug 'kana/vim-textobj-line'
 Plug 'PeterRincker/vim-argumentative'
 
 " Markdown
+Plug 'dhruvasagar/vim-table-mode'
 " If you don't have nodejs and yarn
 " use pre build, add 'vim-plug' to the filetype list so vim-plug can update this plugin
 " see: https://github.com/iamcco/markdown-preview.nvim/issues/50
@@ -539,10 +541,45 @@ let g:camelsnek_iskeyword_override = 0
 
 """ ergex {{{2
 
-" Disable the default mappings, but the commands can still be used.
-let g:eregex_default_enable = 0
 " We want `:S` substitutions to be case-sensitive.
 let g:eregex_force_case = 1
+
+" Addd case-insensitivity to eregex's mappings
+nnoremap <expr> /  ":<C-U>".v:count1."M/\\c"
+nnoremap <expr> ? ":<C-U>".v:count1."M?\\c"
+
+" Disable the default mappings because we have to do the mapping ourselves
+let g:eregex_default_enable = 0
+let g:eregex_forward_delim = '/'
+let g:eregex_backward_delim = '?'
+
+" Code from eregex.vim
+let s:enable = 0
+function! EregexToggle(...)
+  let silent = 0
+  if exists('a:1') && a:1
+    let silent = 1
+  endif
+  if s:enable == 0
+    exec 'nnoremap <expr> '.g:eregex_forward_delim.' ":<C-U>".v:count1."M/\\c"'
+    exec 'nnoremap <expr> '.g:eregex_backward_delim.' ":<C-U>".v:count1."M?\\c"'
+    if silent != 1
+      echo "eregx.vim key mapping enabled"
+    endif
+  else
+    exec 'nunmap '.g:eregex_forward_delim
+    exec 'nunmap '.g:eregex_backward_delim
+    if silent != 1
+      echo "eregx.vim key mapping disabled"
+    endif
+  endif
+  let s:enable = 1 - s:enable
+endfun
+call MapKey('<M-t>/', '<Cmd>call EregexToggle()<CR>')
+
+" Start out enabled
+call EregexToggle()
+
 
 """ glow {{{2
 
