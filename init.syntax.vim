@@ -24,8 +24,8 @@ autocmd BufReadPost *
 
 let java_highlight_functions = 1
 
-" If defined, enhance with bash syntax (unless overridden by b:is_kornshell)
-let is_bash = 1
+" For .sh files, when in doubt, assume bash.
+let g:is_bash = 1
 
 """ Enable Syntax-highlighting options
 
@@ -47,7 +47,7 @@ if &t_Co > 2 || exists("g:gui_running") " If we have color
 
     " HACK: 2022-11-07 No time to debug this, but colors are bad for indent guides
     "   and completion menus unless I run `syntax on` again after starting vim.
-    autocmd BufReadPost * syntax on
+    autocmd BufWinEnter * syntax on | filetype detect
 
 else " If we don't have color
     " Highlighting for monochrome screens (with underlines and crap) sucks
