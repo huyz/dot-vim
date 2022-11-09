@@ -199,3 +199,44 @@ command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 " Usage: select range and invoke `\f`
 nnoremap <space>f <Plug>(coc-format-selected)
 vnoremap <space>f <Plug>(coc-format-selected)
+
+""" Use the settings from the coc help
+
+" Use <C-Space> to trigger completion
+if has('nvim')
+    inoremap <silent><expr> <C-Space> coc#refresh()
+else
+    " vim can't handle <C-Space>
+    inoremap <silent><expr> <C-@> coc#refresh()
+endif
+
+" Use <CR> to accept choice instead of <C-y>
+inoremap <expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+
+" Map <tab> for trigger completion, completion confirm, snippet expand and jump like VSCode:
+inoremap <silent><expr> <Tab>
+    \ coc#pum#visible() ? coc#_select_confirm() :
+    \ coc#expandableOrJumpable() ?
+    \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ CheckBackspace() ? "\<Tab>" :
+    \ coc#refresh()
+
+function! CheckBackspace() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+inoremap <expr> <S-Esc> coc#pum#cancel()
+
+" For vim, I'm apparently supposed to do handle the linking myself
+" https://github.com/neoclide/coc.nvim/issues/4081
+if !has('nvim')
+    function! s:LinkCocMenuHighlights()
+        hi! link CocMenuSel PMenuSel
+        hi! link CocSearch Identifier
+    endfunction
+    " Something's clearing the highlights for some reason.
+    autocmd VimEnter,ColorScheme,BufWinEnter * call timer_start(1, {-> s:LinkCocMenuHighlights()})
+endif

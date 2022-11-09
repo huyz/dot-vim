@@ -40,6 +40,13 @@ function! SetBackgroundDark()
     hi CursorLine   guibg=Gray20                    ctermbg=253
     hi lCursor      guibg=LightSlateGrey guifg=bg
 
+    " For vim, i'm apparently supposed to do handle the linking myself
+    " https://github.com/neoclide/coc.nvim/issues/4081
+    if !has('nvim')
+        hi! link cocmenusel pmenusel
+        hi! link cocsearch identifier
+    endif
+
     " 2021-07-02 On MacVim, can't see the cursor on top of yellow search results.  So tone down the yellow.
     " Don't really have time to make this cleaner
     if exists('g:gui_running')
@@ -78,6 +85,13 @@ function! SetBackgroundLight()
     hi CursorIM     guibg=fg guifg=bg
     hi CursorLine   guibg=#F1F1F1       ctermbg=6
     hi lCursor      guibg=fg guifg=bg
+
+    " For vim, i'm apparently supposed to do handle the linking myself
+    " https://github.com/neoclide/coc.nvim/issues/4081
+    if !has('nvim')
+        hi! link cocmenusel pmenusel
+        hi! link cocsearch identifier
+    endif
 
     " Needed in GUI MacVim
     silent! exe 'AirlineRefresh'
