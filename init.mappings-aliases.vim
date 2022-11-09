@@ -268,6 +268,10 @@ elseif !has('nvim') && v:false
     " NOTE: manually added that made-up code (added +8 to `<M-S-c>`) in iTerm
     "call MapAlias('[27;12;67~', '<M-S-D-c>')
     call MapAlias('[27;8;67~', '<M-C-S-c>')
+
+    " Invoke Startify
+    " TODO: not tested
+    "call MapAlias('[27;4;34~', '<D-S-">')
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
