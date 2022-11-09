@@ -118,10 +118,14 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:tru
     endif
 endfunction
 
-function s:ShiftModifierIfNeeded(key)
+function s:ShiftModifierIfNeededForSuper(key)
     let l:key = substitute(a:key, '.*-', '', '')
     return strlen(l:key) == 1 && l:key >=# 'A' && l:key <=# 'Z' ||
         \ index(['{', '}', '"', '+'], l:key) >= 0 ? 'S-' : ''
+endfunction
+function s:ShiftModifierIfNeededForControl(key)
+    let l:key = substitute(a:key, '.*-', '', '')
+    return strlen(l:key) == 1 && l:key >=# 'A' && l:key <=# 'Z' ? 'S-' : ''
 endfunction
 
 " Maps the Command (⌘) key, or in TUIs the fallback Option (⌥), key.
@@ -131,7 +135,7 @@ function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v
     let l:no_insert = a:no_insert
     if exists("g:gui_running")
         if has('nvim')
-            let l:key = <SID>ShiftModifierIfNeeded(a:key)
+            let l:key = <SID>ShiftModifierIfNeededForSuper(a:key)
             let l:key .= l:key != '' ? tolower(a:key) : a:key
         else
             let l:key = a:key
@@ -154,7 +158,7 @@ function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap =
         let l:keys = s:NormalizeMetaModifier('<M-' . a:key . '>')
         let l:no_insert = l:keys != '<M-' . a:key . '>' || l:no_insert
     else
-        let l:key = <SID>ShiftModifierIfNeeded(a:key)
+        let l:key = <SID>ShiftModifierIfNeededForControl(a:key)
         " XXX I think the tolower isn't needed here because case doesn't matter with <C->
         let l:key .= l:key != '' ? tolower(a:key) : a:key
         let l:keys = '<C-' . l:key . '>'
@@ -167,10 +171,10 @@ endfunction
 "   and thus treat <C-D-a> like <C-A>.
 function! MapSuperOrControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
     if exists("g:gui_running")
-        call MapKey('<D-' . <SID>ShiftModifierIfNeeded(a:key) . tolower(a:key) . '>',
+        call MapKey('<D-' . <SID>ShiftModifierIfNeededForSuper(a:key) . tolower(a:key) . '>',
                     \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
     else
-        call MapKey('<C-' . <SID>ShiftModifierIfNeeded(a:key) . a:key . '>',
+        call MapKey('<C-' . <SID>ShiftModifierIfNeededForControl(a:key) . a:key . '>',
                     \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
     endif
 endfunction
