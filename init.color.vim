@@ -27,18 +27,18 @@ function! SetBackgroundDark()
 
     " Replace the default red color for the margin guides
     " NOTE: this needs to be after setting background
-    highlight ColorColumn term=reverse ctermbg=darkgrey guibg=grey25
+    highlight ColorColumn term=reverse ctermbg=252 guibg=Grey15
 
     if has('gui_macvim')
         " From https://github.com/macvim-dev/macvim/blob/master/runtime/colors/macvim.vim
         hi Normal       guifg=Grey50 guibg=Grey10
         hi Visual       guibg=MacSelectedTextBackgroundColor
-        hi Cursor       guibg=LightGoldenrod guifg=bg
-        hi CursorColumn guibg=Gray20
-        hi CursorIM     guibg=LightSlateGrey guifg=bg
-        hi CursorLine   guibg=Gray20
-        hi lCursor      guibg=LightSlateGrey guifg=bg
     endif
+    hi Cursor       guibg=LightGoldenrod guifg=bg
+    hi CursorColumn guibg=Gray20                    ctermbg=253
+    hi CursorIM     guibg=LightSlateGrey guifg=bg
+    hi CursorLine   guibg=Gray20                    ctermbg=253
+    hi lCursor      guibg=LightSlateGrey guifg=bg
 
     " 2021-07-02 On MacVim, can't see the cursor on top of yellow search results.  So tone down the yellow.
     " Don't really have time to make this cleaner
@@ -66,24 +66,18 @@ function! SetBackgroundLight()
 
     " Replace the default red color for the margin guides
     " NOTE: this needs to be after setting background
-    highlight ColorColumn term=reverse ctermbg=lightgrey guibg=grey75
+    highlight ColorColumn term=reverse ctermbg=288 guibg=#F9F9F9
 
     if has('gui_macvim')
         " From https://github.com/macvim-dev/macvim/blob/master/runtime/colors/macvim.vim
         hi Normal       gui=NONE guifg=MacTextColor guibg=MacTextBackgroundColor
         hi Visual       guibg=MacSelectedTextBackgroundColor
-        hi Cursor       guibg=fg guifg=bg
-        hi CursorColumn guibg=#F1F5FA
-        hi CursorIM     guibg=fg guifg=bg
-        hi CursorLine   guibg=#F1F5FA
-        hi lCursor      guibg=fg guifg=bg
-    elseif has('gui_running')
-        hi Cursor       guibg=fg guifg=bg
-        hi CursorColumn guibg=#F1F5FA
-        hi CursorIM     guibg=fg guifg=bg
-        hi CursorLine   guibg=#F1F5FA
-        hi lCursor      guibg=fg guifg=bg
     endif
+    hi Cursor       guibg=fg guifg=bg
+    hi CursorColumn guibg=#F1F1F1       ctermbg=6
+    hi CursorIM     guibg=fg guifg=bg
+    hi CursorLine   guibg=#F1F1F1       ctermbg=6
+    hi lCursor      guibg=fg guifg=bg
 
     " Needed in GUI MacVim
     silent! exe 'AirlineRefresh'
