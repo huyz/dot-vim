@@ -113,7 +113,7 @@ call MapKey('<C-S-Up>', '[c', 'all', 0, 0)
 call MapKey('<C-S-Down>', ']c', 'all', 0, 0)
 
 " Go to previous/next method
-if has('gui_running')
+if exists('g:gui_running')
     call MapKey('<C-S-D-Up>', '[m')
     call MapKey('<C-S-D-Down>', ']m')
 else
@@ -124,7 +124,7 @@ endif
 """ Indent {{{2
 
 " Need to reselect selection
-if has('gui_running')
+if exists('g:gui_running')
     nnoremap <D-]> >>
     nnoremap <D-[> <<
     noremap! <D-]> <C-t>
@@ -184,7 +184,7 @@ call MapSuperKey('M-S-Down', '<C-w>J')
 call MapSuperOrControlKey('M-+', '<C-w>=')
 
 " Maximize split
-if has('gui_running')
+if exists('g:gui_running')
     let s:key = '<M-S-D-Bar>'
 else
     " FIXME: can't get vim in terminal to work
@@ -221,7 +221,7 @@ call MapSuperKey('t', '<Cmd>tabnew<CR>')
 call MapSuperOrControlKey('M-w', '<Cmd>tabclose<CR>')
 " MacVim and VimR steal the ⌥⌘W mapping and don't offer a way to reset it, so we need
 " an alternate that BetterTouchTool can route through
-if has('gui_running')
+if exists('g:gui_running')
     call MapKey('<M-S-D-w>', '<Cmd>tabclose<CR>')
 endif
 call MapSuperKey('1', '<Cmd>tabn 1<CR>')
@@ -330,14 +330,14 @@ call MapKey('<M-o>T', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
 """ Internal Apps
 
 if has('nvim')
-  call MapControlKey('E', '<Cmd>NvimTreeFindFile<CR>')
+    call MapControlKey('E', '<Cmd>NvimTreeFindFile<CR>')
 else
-  call MapControlKey('E', '<Cmd>NERDTreeFind<CR>')
+    call MapControlKey('E', '<Cmd>NERDTreeFind<CR>')
 endif
 
 """ External Apps
 
-if has('macunix')
+if has('mac')
     call MapKey('<M-s>d', '<Plug>DashSearch')
     call MapKey('<M-s>D', '<Plug>DashGlobalSearch')
 endif

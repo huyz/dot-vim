@@ -5,7 +5,7 @@
 "   Mac's composed characters, especially the digraphs.
 
 " If in neovim GUI, or in vim GUI in non-macmeta mode
-if has('macunix') && has('gui_running') && (has('nvim') || !has('macmeta'))
+if has('mac') && exists('g:gui_running') && (has('nvim') || !has('macmeta'))
     " Exceptions for insert mode:
     " - Can't remap `, e, u, i, n as these are used to compose digraph prefixes
     " - Won't remap ∞, ·, –, —, ≈, ≠, ±, ≤, ≥, …  as these are useful special characters even to
@@ -275,7 +275,7 @@ endif
 " neovim reads terminfo to decide what function key to assign:
 "   https://github.com/neovim/neovim/issues/8317#issuecomment-384577645
 " So we have to duplicate the work we've done in .exrc
-if !has('gui_running') && has("nvim")
+if !exists('g:gui_running') && has("nvim")
     call MapAlias('<F13>', '<S-F1>')
     call MapAlias('<F14>', '<S-F2>')
     call MapAlias('<F15>', '<S-F3>')

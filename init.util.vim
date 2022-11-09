@@ -42,7 +42,7 @@ endfunction
 " - in MacVim GUI, it is preferable to not have `macmeta` for the same reason
 "   as preferring iTerm to have modifyOtherKeys set to on.
 function! s:NormalizeMetaModifier(str) abort
-"    if has("nvim") || (has("gui_macvim") && has("gui_running") && !&macmeta)
+"    if has("nvim") || (has("gui_macvim") && exists("g:gui_running") && !&macmeta)
     if has("nvim")
         return a:str
     endif
@@ -94,7 +94,7 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:tru
             let l:no_insert = l:lhs_normalized != a:keys || a:no_insert
             call MapKey(l:lhs_normalized, l:rhs_normalized,
                         \ l:modes, l:no_insert, a:no_remap, a:map_flag)
-            if has("gui_running")
+            if exists("g:gui_running")
                 return
             endif
         endif
@@ -129,7 +129,7 @@ endfunction
 " NOTE: in some cases, `key` is allowed to contain a modifier, but not `M-`
 function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
     let l:no_insert = a:no_insert
-    if has("gui_running")
+    if exists("g:gui_running")
         if has('nvim')
             let l:key = <SID>ShiftModifierIfNeeded(a:key)
             let l:key .= l:key != '' ? tolower(a:key) : a:key
@@ -150,7 +150,7 @@ endfunction
 " NOTE: in some cases, `key` is allowed to contain a modifier, but not `M-`
 function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
     let l:no_insert = a:no_insert
-    if has("gui_running")
+    if exists("g:gui_running")
         let l:keys = s:NormalizeMetaModifier('<M-' . a:key . '>')
         let l:no_insert = l:keys != '<M-' . a:key . '>' || l:no_insert
     else
@@ -166,7 +166,7 @@ endfunction
 " 2022-10-30 That's because neither MacVim/VimR support modifyOtherKeys yet
 "   and thus treat <C-D-a> like <C-A>.
 function! MapSuperOrControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
-    if has("gui_running")
+    if exists("g:gui_running")
         call MapKey('<D-' . <SID>ShiftModifierIfNeeded(a:key) . tolower(a:key) . '>',
                     \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
     else

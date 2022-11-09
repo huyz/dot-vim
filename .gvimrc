@@ -1,10 +1,15 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MacVim-specific
 
-if has("gui_running")
-  " For MacVim to display devicons
-  set guifont=MesloLGS-NF-Regular:h12
-  set linespace=1
+if exists("g:gui_running")
+  if exists('g:neovide')
+    set guifont=Fira\ Mono\ for\ Powerline:h12
+  else
+    " To display devicons
+    set guifont=MesloLGS-NF-Regular:h12
+    " To make it spaced like in iTerm
+    set linespace=1
+  endif
 
   "set background=dark
   " This is to counteract the 'colorscheme default' in .vimrc

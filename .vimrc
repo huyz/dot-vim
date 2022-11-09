@@ -32,6 +32,12 @@ endif
 "
 set nocompatible
 
+""" Neovide: Set g:gui_running
+
+if has('gui_running') || exists('g:neovide')
+    let g:gui_running = 1
+endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Source other files {{{1
 
@@ -78,5 +84,11 @@ source $MYVIM/init.neovim.vim
 if filereadable(expand("$MYVIM/.vimrc.post"))
     source $MYVIM/.vimrc.post
 endif
+
+""" neovide doesn't load up .gvimrc for some reason
+if exists('g:neovide')
+    source $MYVIM/.gvimrc
+endif
+
 
 " vim:set ai et sts=4 sw=4 tw=98:

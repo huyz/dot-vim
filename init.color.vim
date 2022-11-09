@@ -42,7 +42,7 @@ function! SetBackgroundDark()
 
     " 2021-07-02 On MacVim, can't see the cursor on top of yellow search results.  So tone down the yellow.
     " Don't really have time to make this cleaner
-    if has('gui_running')
+    if exists('g:gui_running')
         highlight Search guifg=#282a2e guibg=#f0c674
     endif
 

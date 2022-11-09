@@ -29,9 +29,9 @@ let is_bash = 1
 
 """ Enable Syntax-highlighting options
 
-if &t_Co > 2 || has("gui_running") " If we have color
+if &t_Co > 2 || exists("g:gui_running") " If we have color
 
-    if !has("gui_running")
+    if !exists("g:gui_running")
         " Set background based on our environment variable with a default of light
         " (we default to light because dark colors on white are easier to see
         " than light colors on black)

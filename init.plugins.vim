@@ -82,7 +82,7 @@ endif
 " Plug 'f-person/auto-dark-mode.nvim', Cond(has('nvim'))
 Plug 'cormacrelf/dark-notify', Cond(has('nvim'))
 " auto-dark-mode: doesn't work in terminal
-Plug 'L-TChen/auto-dark-mode.vim', Cond(has('gui_macvim') && has('gui_running'))
+Plug 'L-TChen/auto-dark-mode.vim', Cond(has('gui_macvim') && exists('g:gui_running'))
 Plug 'chriskempson/base16-vim'
 
 " UI
@@ -186,7 +186,7 @@ Plug 'Kachyz/vim-gitmoji'
 Plug 'mattn/gist-vim'
 
 " External Apps
-Plug 'rizzatti/dash.vim', Cond(has('macunix'))
+Plug 'rizzatti/dash.vim', Cond(has('mac'))
 Plug 'declancm/vim2vscode'
 Plug 'voldikss/vim-browser-search'
 
@@ -489,7 +489,7 @@ map <C-S-Left> <Plug>(expand_region_shrink)
 " https://github.com/matze/vim-move/issues/69#issuecomment-1199891566
 let g:move_map_keys = 0
 
-if has("gui_running")
+if exists("g:gui_running")
     nmap <M-Down> <Plug>MoveLineDown
     nmap <M-Up> <Plug>MoveLineUp
     nmap <M-Left> <Plug>MoveCharLeft

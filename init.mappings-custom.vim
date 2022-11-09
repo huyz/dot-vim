@@ -7,7 +7,7 @@ if has("nvim")
 else
     nnoremap <C-F1> <Cmd>NERDTreeToggle<CR>
 endif
-if has('nvim') && !has('gui_running')
+if has('nvim') && !exists('g:gui_running')
     call MapKey('<F13>', '<Cmd>helpclose<CR>')
 else
     call MapKey('<S-F1>', '<Cmd>helpclose<CR>')
