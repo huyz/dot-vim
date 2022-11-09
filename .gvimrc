@@ -3,7 +3,9 @@
 
 if exists("g:gui_running")
   if exists('g:neovide')
-    set guifont=Fira\ Mono\ for\ Powerline:h12
+    " Default neovide font:
+    "set guifont=Fira\ Mono\ for\ Powerline:h12
+    set guifont=MesloLGS\ NF:h12
   else
     " To display devicons
     set guifont=MesloLGS-NF-Regular:h12
