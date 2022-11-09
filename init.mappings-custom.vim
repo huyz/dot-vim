@@ -12,6 +12,7 @@ if has('nvim') && !has('gui_running')
 else
     call MapKey('<S-F1>', '<Cmd>helpclose<CR>')
 endif
+call MapKey('<C-S-F1>', '<Cmd>messages<CR>')
 if has('nvim')
     nmap <C-F2> <Cmd>Telescope buffers<CR>
     nmap <C-F3> <Cmd>Telescope live_grep<CR>
