@@ -308,6 +308,15 @@ function! s:MapMarkdown() abort
 endfunction
 autocmd FileType markdown call <SID>MapMarkdown()
 
+""" Markdown table mode
+
+call MapKey('<M-T>T', '<Leader>tm', 'all', v:false, v:true)
+call MapKey('<M-T>f', '<Leader>tm', 'all', v:false, v:true)
+call MapKey('<M-T>i', '<Leader>tiC', 'all', v:false, v:true)
+call MapKey('<M-T>a', '<Leader>tic', 'all', v:false, v:true)
+call MapKey('<M-T>x', '<Leader>tdc', 'all', v:false, v:true)
+call MapKey('<M-T>d', '<Leader>tdd', 'all', v:false, v:true)
+
 """ Colors
 
 call MapKey('<M-t>b', '<Cmd>call ToggleBackground()<CR>')

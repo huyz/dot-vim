@@ -218,9 +218,14 @@ Archived:
 
 ### table-mode
 
-| Mapping | Description       |
-| ----    | ---               |
-| `\tm`   | Toggle table mode |
+| Mapping  | Description       |
+| ----     | ---               |
+| `<M-T>T` | Toggle table mode |
+| `<M-T>f` | Reformat table    |
+| `<M-T>i` | Insert column     |
+| `<M-T>a` | Append column     |
+| `<M-T>x` | Delete column     |
+| `<M-T>d` | Delete row        |
 
 ### splitjoin
 
