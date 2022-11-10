@@ -172,7 +172,7 @@ call MapControlKey('J', '<C-w>j')
 call MapControlKey('K', '<C-w>k')
 call MapControlKey('L', '<C-w>l')
 call MapKey('<M-z>', '<C-w>W')
-call MapKey('<M-q>', '<C-w>w')
+call MapKey('<M-Z>', '<C-w>w')
 
 " Move splits
 call MapSuperOrControlKey('M-S-Left', '<C-w>H')
