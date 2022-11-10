@@ -13,6 +13,7 @@ else
     call MapKey('<S-F1>', '<Cmd>helpclose<CR>')
 endif
 call MapKey('<C-S-F1>', '<Cmd>messages<CR>')
+
 if has('nvim')
     nmap <C-F2> <Cmd>Telescope buffers<CR>
     nmap <C-F3> <Cmd>Telescope live_grep<CR>
@@ -25,19 +26,22 @@ else
     nmap <C-F3> <Cmd>RG<CR>
     nmap <C-F4> <Cmd>FZF<CR>
 endif
+
 nmap <F5> <Leader>o1
+" Make pastetoggle also work in insert mode
+set pastetoggle=<F5>
+" Free up <C-p> for other uses (2022-11-10 for coc): use <C-F5>
+let g:ctrlp_map = '<C-F5>'
+
 nmap <F6> <Leader>o2
 nmap <C-F7> <Cmd>SymbolsOutline<CR>
+
 if has('nvim')
     nmap <C-F9> <Cmd>LazyGit<CR>
 endif
 nmap <C-F10> <Cmd>Startify<CR>
 nmap <F11> <Leader>o3
 nmap <F12> <Leader>o4
-
-" Make pastetoggle also work in insert mode
-set pastetoggle=<F5>
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Display modes {{{1
@@ -57,7 +61,6 @@ nnoremap <Leader>t2 <Cmd>set et<CR><Cmd>set sts=4 sw=2<CR>
 nnoremap <Leader>t3 <Cmd>set et<CR><Cmd>set sts=8 sw=4<CR>
 nnoremap <Leader>t4 <Cmd>set noet<CR><Cmd>set sts=8 sw=8<CR>
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Misc {{{1
 
@@ -68,7 +71,6 @@ vnoremap <Space><Space> zf
 " Suspend from insert mode
 noremap! <C-z> <Esc><C-z>
 
-
 " Edit .vimrc
 nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 " Re-source .vimrc and re-run Sleuth
@@ -77,6 +79,8 @@ nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>syn on<
 " NOTE: MacVim and VimR already handle <D-s>
 nmap <C-x><C-s> <Cmd>write<CR><Leader>so
 imap <C-x><C-s> <Cmd>write<CR><C-o><Leader>so
+call MapKey('<C-s>', '<Cmd>write<CR>')
+nmap ZA <Cmd>confirm qall<CR>
 
 " Allow saving of files as sudo when you forget to start vim using sudo.
 " Shortcut matches my zsh binding

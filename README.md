@@ -58,12 +58,13 @@ occasionally.
 
 I tend to forgot I defined these mappings:
 
-| Mapping               | Description                          |
-| ----                  | ---                                  |
-| `gb`                  | Re-select last pasted block          |
-| `Q` `gq` `<M-q>`      | In visual mode, format by `par`, vim |
-| `<M-p><C-S-BS>`       | Discard consecutive blank lines      |
-| `<M-x>-` or `=` or`~` | Underline line                       |
+| Mapping               | Description                             |
+| ----                  | ---                                     |
+| `ZA`                  | Exit vim but prompt for unsaved buffers |
+| `gb`                  | Re-select last pasted block             |
+| `Q` `gq` `<M-q>`      | In visual mode, format by `par`, vim    |
+| `<M-p><C-S-BS>`       | Discard consecutive blank lines         |
+| `<M-x>-` or `=` or`~` | Underline line                          |
 
 Archived:
 
