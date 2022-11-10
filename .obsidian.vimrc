@@ -36,14 +36,15 @@ exmap FollowLink obcommand editor:follow-link
 nmap gx :FollowLink
 
 exmap SurroundWiki surround [[ ]]
-map <A-c>[ :SurroundWiki
-" Because of this bug https://github.com/replit/codemirror-vim/pull/60
+" NOTE: ysw doesnt' work
+map ysw :SurroundWiki
 map <A-ç>[ :SurroundWiki
 
 exmap SurroundParens surround ( )
-map <A-c>( :SurroundParens
-" Because of this bug https://github.com/replit/codemirror-vim/pull/60
+" NOTE: ys) doesnt' work
+map ys) :SurroundParens
 map <A-ç>( :SurroundParens
+
 
 """ GUI Emulation mappings
 
