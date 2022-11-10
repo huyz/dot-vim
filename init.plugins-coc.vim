@@ -229,3 +229,15 @@ endfunction
 let g:coc_snippet_next = '<tab>'
 
 inoremap <expr> <S-Esc> coc#pum#cancel()
+
+" For vim, I'm apparently supposed to do handle the linking myself
+" https://github.com/neoclide/coc.nvim/issues/4081
+if !has('nvim')
+    function! s:LinkCocMenuHighlights()
+        hi! link CocMenuSel PMenuSel
+        hi! link CocSearch Identifier
+    endfunction
+    " HACK: something's clearing the highlights for some reason, and I can't figure out
+    " why my additions in init.color.vim aren't sufficient
+    autocmd BufWinEnter * call timer_start(1, {-> s:LinkCocMenuHighlights()})
+endif

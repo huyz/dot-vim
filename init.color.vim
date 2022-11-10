@@ -43,8 +43,8 @@ function! SetBackgroundDark()
     " For vim, i'm apparently supposed to do handle the linking myself
     " https://github.com/neoclide/coc.nvim/issues/4081
     if !has('nvim')
-        hi! link cocmenusel pmenusel
-        hi! link cocsearch identifier
+        hi! link CocMenuSel PMenuSel
+        hi! link CocSearch Identifier
     endif
 
     " 2021-07-02 On MacVim, can't see the cursor on top of yellow search results.  So tone down the yellow.
@@ -89,8 +89,8 @@ function! SetBackgroundLight()
     " For vim, i'm apparently supposed to do handle the linking myself
     " https://github.com/neoclide/coc.nvim/issues/4081
     if !has('nvim')
-        hi! link cocmenusel pmenusel
-        hi! link cocsearch identifier
+        hi! link CocMenuSel PMenuSel
+        hi! link CocSearch Identifier
     endif
 
     " Needed in GUI MacVim
