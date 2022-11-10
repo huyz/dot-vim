@@ -185,7 +185,6 @@ Plug 'kdheepak/lazygit.nvim', Cond(has('nvim'), {'branch': 'main'})
 " Needed for automatic session naming function below for Startify
 Plug 'itchyny/vim-gitbranch'
 Plug 'Kachyz/vim-gitmoji'
-Plug 'mattn/gist-vim'
 
 " External Apps
 Plug 'rizzatti/dash.vim', Cond(has('mac'))
@@ -665,12 +664,6 @@ nmap <Leader>gb <Plug>(git-messenger)
 set completefunc=emoji#complete
 " Replace all :emoji_name: into Unicode emojis
 nmap <Leader><C-U> <Cmd>%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
-
-""" gist {{{2
-
-" NOTE: set in .vimrc.post
-"let g:github_user  = "YOUR_GITHUB_USERNAME"
-"let g:github_token = "YOUR_GITHUB_API_TOKEN"
 
 """ gnupg {{{2
 

@@ -235,12 +235,3 @@ Archived:
 | ---------- | ---------------------                    |
 | `<M-c>:`   | Trigger completion                       |
 | `\\^U`     | Convert :emoji_name: into unicode emojis |
-
-### Gist: post buffers or selected text to https://gist.github.com/
-
-| Mapping           | Description                          |
-| ----              | ---                                  |
-| `:Gist`           | post entire buffer                   |
-| `:Gist -p`        | post entire buffer to a private gist |
-| ``:`<,`>Gist -a`` | post selected text anonymously       |
-| `:Gist -e`        | edit gist                            |
