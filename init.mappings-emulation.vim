@@ -279,7 +279,7 @@ call MapSuperKey('i', 'gR', 'all', v:false, v:true)
 
 """ Markdown
 
-call MapKey('<M-m><M-m>', '<Cmd>MarkdownPreview<CR>')
+call MapKey('<M-m>p', '<Cmd>MarkdownPreview<CR>')
 call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 
@@ -310,7 +310,7 @@ autocmd FileType markdown call <SID>MapMarkdown()
 
 """ Markdown table mode
 
-call MapKey('<M-T>T', '<Leader>tm', 'all', v:false, v:true)
+call MapKey('<M-T>t', '<Leader>tm', 'all', v:false, v:true)
 call MapKey('<M-T>f', '<Leader>tm', 'all', v:false, v:true)
 call MapKey('<M-T>i', '<Leader>tiC', 'all', v:false, v:true)
 call MapKey('<M-T>a', '<Leader>tic', 'all', v:false, v:true)

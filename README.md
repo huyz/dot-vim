@@ -220,7 +220,7 @@ Archived:
 
 | Mapping  | Description       |
 | ----     | ---               |
-| `<M-T>T` | Toggle table mode |
+| `<M-T>t` | Toggle table mode |
 | `<M-T>f` | Reformat table    |
 | `<M-T>i` | Insert column     |
 | `<M-T>a` | Append column     |

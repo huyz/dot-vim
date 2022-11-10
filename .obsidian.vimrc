@@ -38,12 +38,12 @@ nmap gx :FollowLink
 exmap SurroundWiki surround [[ ]]
 " NOTE: ysw doesnt' work
 map ysw :SurroundWiki
-map <A-ç>[ :SurroundWiki
+map <A-ç>w :SurroundWiki
 
 exmap SurroundParens surround ( )
 " NOTE: ys) doesnt' work
 map ys) :SurroundParens
-map <A-ç>( :SurroundParens
+map <A-ç>) :SurroundParens
 
 
 """ GUI Emulation mappings
