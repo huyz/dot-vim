@@ -544,41 +544,41 @@ let g:camelsnek_iskeyword_override = 0
 " We want `:S` substitutions to be case-sensitive.
 let g:eregex_force_case = 1
 
-" Addd case-insensitivity to eregex's mappings
-nnoremap <expr> /  ":<C-U>".v:count1."M/\\c"
-nnoremap <expr> ? ":<C-U>".v:count1."M?\\c"
-
 " Disable the default mappings because we have to do the mapping ourselves
 let g:eregex_default_enable = 0
 let g:eregex_forward_delim = '/'
 let g:eregex_backward_delim = '?'
 
+" Avoid total-file highlight because of the additional `\c`
+let g:Fn_eregex_incsearch_filter = {x -> x == '\c'}
+
 " Code from eregex.vim
 let s:enable = 0
 function! EregexToggle(...)
-  let silent = 0
-  if exists('a:1') && a:1
-    let silent = 1
-  endif
-  if s:enable == 0
-    exec 'nnoremap <expr> '.g:eregex_forward_delim.' ":<C-U>".v:count1."M/\\c"'
-    exec 'nnoremap <expr> '.g:eregex_backward_delim.' ":<C-U>".v:count1."M?\\c"'
-    if silent != 1
-      echo "eregx.vim key mapping enabled"
+    let silent = 0
+    if exists('a:1') && a:1
+        let silent = 1
     endif
-  else
-    exec 'nunmap '.g:eregex_forward_delim
-    exec 'nunmap '.g:eregex_backward_delim
-    if silent != 1
-      echo "eregx.vim key mapping disabled"
+    if s:enable == 0
+        " This is where I add the `\c` flag
+        exec 'nnoremap <expr> '.g:eregex_forward_delim.' ":<C-U>".v:count1."M/\\c"'
+        exec 'nnoremap <expr> '.g:eregex_backward_delim.' ":<C-U>".v:count1."M?\\c"'
+        if silent != 1
+            echo "eregex.vim key mapping enabled"
+        endif
+    else
+        exec 'nunmap '.g:eregex_forward_delim
+        exec 'nunmap '.g:eregex_backward_delim
+        if silent != 1
+            echo "eregex.vim key mapping disabled"
+        endif
     endif
-  endif
-  let s:enable = 1 - s:enable
+    let s:enable = 1 - s:enable
 endfun
 call MapKey('<M-t>/', '<Cmd>call EregexToggle()<CR>')
 
 " Start out enabled
-call EregexToggle()
+call EregexToggle(v:true)
 
 
 """ glow {{{2
@@ -633,11 +633,11 @@ let g:syntastic_python_checkers          = ['python3', 'pylint']
 if has("nvim") && g:coc_or_mason == 'mason'
     lua << EOF
     require("mason").setup({
-      ui = {
-        keymaps = {
-          apply_language_filter = "<D-f>",
+        ui = {
+            keymaps = {
+            apply_language_filter = "<D-f>",
+            }
         }
-      }
     })
     require("mason-lspconfig").setup()
 
@@ -648,9 +648,9 @@ if has("nvim") && g:coc_or_mason == 'mason'
 
     -- Or just setup all of the installed ones
     require('mason-lspconfig').setup_handlers({
-      function(server)
-          require('lspconfig')[server].setup({})
-      end
+        function(server)
+            require('lspconfig')[server].setup({})
+        end
     })
 EOF
 endif
