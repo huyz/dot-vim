@@ -74,7 +74,7 @@ endfunction
 
 " Maps the key sequence to RHS, optionally with specific modes
 " 'all' modes implies: map, imap, tmap (so no cmap or lmap)
-function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
+function! MapKey(keys, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
     let l:keys = a:keys
     let l:rhs = a:rhs
     let l:modes = a:modes
@@ -93,14 +93,14 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, no_remap = v:tru
             " <Esc> key to get out of normal mode.
             let l:no_insert = l:lhs_normalized != a:keys || a:no_insert
             call MapKey(l:lhs_normalized, l:rhs_normalized,
-                        \ l:modes, l:no_insert, a:no_remap, a:map_flag)
+                        \ l:modes, l:no_insert, a:remap, a:map_flag)
             if exists("g:gui_running")
                 return
             endif
         endif
     endif
 
-    let l:nore = a:no_remap ? 'nore' : ''
+    let l:nore = a:remap ? '' : 'nore'
 
     let l:prefixes = s:RhsPrefixesForAllModes(l:rhs)
     if type(l:modes) == type("") && l:modes == 'all'
@@ -131,7 +131,7 @@ endfunction
 " Maps the Command (⌘) key, or in TUIs the fallback Option (⌥), key.
 " That's because terminals like iTerm swallow up key bindings with the ⌘ key.
 " NOTE: in some cases, `key` is allowed to contain a modifier, but not `M-`
-function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
+function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
     let l:no_insert = a:no_insert
     if exists("g:gui_running")
         if has('nvim')
@@ -145,14 +145,14 @@ function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v
         let l:keys = s:NormalizeMetaModifier('<M-' . a:key . '>')
         let l:no_insert = l:keys != '<M-' . a:key . '>' || l:no_insert
     endif
-    call MapKey(l:keys, a:rhs, a:modes, l:no_insert, a:no_remap, a:map_flag)
+    call MapKey(l:keys, a:rhs, a:modes, l:no_insert, a:remap, a:map_flag)
 endfunction
 
 " Maps the Control (⌃) key, or in GUIs the fallback Option (⌥), key.
 " 2022-10-30 That's because neither MacVim/VimR support modifyOtherKeys yet
 "   and thus treat <C-S-A> like <C-A>.
 " NOTE: in some cases, `key` is allowed to contain a modifier, but not `M-`
-function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
+function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
     let l:no_insert = a:no_insert
     if exists("g:gui_running")
         let l:keys = s:NormalizeMetaModifier('<M-' . a:key . '>')
@@ -163,19 +163,19 @@ function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap =
         let l:key .= l:key != '' ? tolower(a:key) : a:key
         let l:keys = '<C-' . l:key . '>'
     endif
-    call MapKey(l:keys, a:rhs, a:modes, l:no_insert, a:no_remap, a:map_flag)
+    call MapKey(l:keys, a:rhs, a:modes, l:no_insert, a:remap, a:map_flag)
 endfunction
 
 " Maps the Control (⌃) key in TUIs or the Command (⌘) key in GUIs.
 " 2022-10-30 That's because neither MacVim/VimR support modifyOtherKeys yet
 "   and thus treat <C-D-a> like <C-A>.
-function! MapSuperOrControlKey(key, rhs, modes = "all", no_insert = v:false, no_remap = v:true, map_flag = '') abort
+function! MapSuperOrControlKey(key, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
     if exists("g:gui_running")
         call MapKey('<D-' . <SID>ShiftModifierIfNeededForSuper(a:key) . tolower(a:key) . '>',
-                    \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
+                    \ a:rhs, a:modes, a:no_insert, a:remap, a:map_flag)
     else
         call MapKey('<C-' . <SID>ShiftModifierIfNeededForControl(a:key) . a:key . '>',
-                    \ a:rhs, a:modes, a:no_insert, a:no_remap, a:map_flag)
+                    \ a:rhs, a:modes, a:no_insert, a:remap, a:map_flag)
     endif
 endfunction
 

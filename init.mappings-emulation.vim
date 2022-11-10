@@ -58,22 +58,23 @@ nnoremap <Esc>u <Cmd>noh<CR>
 " Open recent
 if exists('g:gui_running')
     if has('nvim')
-        call MapSuperKey('p', '<C-F4>', 'all', v:false, v:false)
+        call MapSuperKey('p', '<C-F4>', 'all', v:false, v:true)
     else
         call MapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
     endif
 endif
-" We actually need to map ⇧⌥P in terminals so as to not conflict with our ⌥P chord prefix.
+" We actually need to map ⇧⌥P in terminals so as to not conflict with our ⌥P chord prefix,
+" and BetterTouchTool can handle the detour
 if has('nvim')
-    call MapSuperKey('P', '<C-F4>', 'all', v:false, v:false)
+    call MapSuperKey('P', '<C-F4>', 'all', v:false, v:true)
 else
     call MapSuperKey('P', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
 endif
 
-call MapSuperKey('e', '<C-F2>', 'all', v:false, v:false)
-call MapSuperKey('E', '<C-F2>', 'all', v:false, v:false)
-call MapSuperKey('F', '<C-F3>', 'all', v:false, v:false)
-call MapSuperKey('"', '<C-F10>', 'all', v:false, v:false)
+call MapSuperKey('e', '<C-F2>', 'all', v:false, v:true)
+call MapSuperKey('E', '<C-F2>', 'all', v:false, v:true)
+call MapSuperKey('F', '<C-F3>', 'all', v:false, v:true)
+call MapSuperKey('"', '<C-F10>', 'all', v:false, v:true)
 
 """ System clipboard
 
@@ -154,8 +155,8 @@ call MapKey('<S-C-CR>', 'O')
 call MapKey('<C-S-BS>', 'dd')
 
 " Shift argument (using vim-argumentative)
-call MapKey('<M-lt>', '<,', 'all', v:false, v:false)
-call MapKey('<M->>', '>,', 'all', v:false, v:false)
+call MapKey('<M-lt>', '<,', 'all', v:false, v:true)
+call MapKey('<M->>', '>,', 'all', v:false, v:true)
 
 """ Splits {{{2
 
@@ -268,14 +269,13 @@ call MapKey('<M-c>D', 'cr.', ['map'])
 
 """ Code navigation
 
-" NOTE: second `v:false` to allow remapping by coc
-call MapKey('<F1>' , 'K', 'all', v:false, v:false)
-call MapSuperKey('b', 'gd', 'all', v:false, v:false)
-call MapSuperKey('B', 'gy', 'all', v:false, v:false)
-call MapSuperOrControlKey('M-b', 'gi', 'all', v:false, v:false)
-call MapSuperKey('y', '<Cmd>vsplit<CR>gd', 'all', v:false, v:false)
-call MapSuperKey('Y', '<Cmd>vsplit<CR>gy', 'all', v:false, v:false)
-call MapSuperKey('i', 'gR', 'all', v:false, v:false)
+call MapKey('<F1>' , 'K', 'all', v:false, v:true)
+call MapSuperKey('b', 'gd', 'all', v:false, v:true)
+call MapSuperKey('B', 'gy', 'all', v:false, v:true)
+call MapSuperOrControlKey('M-b', 'gi', 'all', v:false, v:true)
+call MapSuperKey('y', '<Cmd>vsplit<CR>gd', 'all', v:false, v:true)
+call MapSuperKey('Y', '<Cmd>vsplit<CR>gy', 'all', v:false, v:true)
+call MapSuperKey('i', 'gR', 'all', v:false, v:true)
 
 """ Markdown
 
@@ -284,27 +284,27 @@ call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 
 " Tip: for entire lines, don't use `V`; use `val` from textobj-line to avoid spurious newlines
-call MapSuperKey('C', 'ysiW`', ['nmap'], v:false, v:false)
-call MapSuperKey('C', 'S`', ['vmap'], v:false, v:false)
+call MapSuperKey('C', 'ysiW`', ['nmap'], v:false, v:true)
+call MapSuperKey('C', 'S`', ['vmap'], v:false, v:true)
 
 function! s:MapMarkdown() abort
     " NOTE: to get this to work in iTerm, I hvae to use ⌃ key instead of ⌘, but because
     "   I personally reserve <C-S-M-letter> to launch apps (with BetterTouchTool),
     "   I have to rely on BetterTouchTool to map <M-S-D-C> to <M-C-S-C> as intermediary
-    call MapSuperOrControlKey('M-C', 'O```<Esc>Yjp', ['nmap'], v:false, v:true,  '<buffer>')
-    call MapSuperOrControlKey('M-C', '<Esc>`<lt>O```<Esc>yy`>pgv', ['vmap'], v:false, v:true, '<buffer>')
+    call MapSuperOrControlKey('M-C', 'O```<Esc>Yjp', ['nmap'], v:false, v:false,  '<buffer>')
+    call MapSuperOrControlKey('M-C', '<Esc>`<lt>O```<Esc>yy`>pgv', ['vmap'], v:false, v:false, '<buffer>')
 
     " XXX: this markdown plugin doesn't work right:
-    " call MapSuperKey('b',   '<Cmd>ruby Markdown::toggle_strong_at_cursor<CR>',    ['nmap'], v:false, v:false, '<buffer>')
-    call MapSuperKey('b',   'mAysiW*.`All',    ['nmap'], v:false, v:false, '<buffer>')
-    call MapSuperKey('b',   'S*gvS*gv<Esc>hh', ["vmap"], v:false, v:false, '<buffer>')
-    " call MapSuperKey('i',   '<Cmd>ruby Markdown::toggle_emphasis_at_cursor<CR>',      ['nmap'], v:false, v:false, '<buffer>')
-    call MapSuperKey('i',   'mAysiW_`Al',      ['nmap'], v:false, v:false, '<buffer>')
-    call MapSuperKey('i',   'S_gv<Esc>h',      ["vmap"], v:false, v:false, '<buffer>')
-    call MapSuperKey('X',   'mAysiW~.`All',    ['nmap'], v:false, v:false, '<buffer>')
-    call MapSuperKey('X',   'S~gvS~gv<Esc>hh', ["vmap"], v:false, v:false, '<buffer>')
-    call MapSuperKey('D',   'mAysiW=.`All',    ['nmap'], v:false, v:false, '<buffer>')
-    call MapSuperKey('D',   'S=gvS=gv<Esc>hh', ["vmap"], v:false, v:false, '<buffer>')
+    " call MapSuperKey('b',   '<Cmd>ruby Markdown::toggle_strong_at_cursor<CR>',    ['nmap'], v:false, v:true, '<buffer>')
+    call MapSuperKey('b',   'mAysiW*.`All',    ['nmap'], v:false, v:true, '<buffer>')
+    call MapSuperKey('b',   'S*gvS*gv<Esc>hh', ["vmap"], v:false, v:true, '<buffer>')
+    " call MapSuperKey('i',   '<Cmd>ruby Markdown::toggle_emphasis_at_cursor<CR>',      ['nmap'], v:false, v:true, '<buffer>')
+    call MapSuperKey('i',   'mAysiW_`Al',      ['nmap'], v:false, v:true, '<buffer>')
+    call MapSuperKey('i',   'S_gv<Esc>h',      ["vmap"], v:false, v:true, '<buffer>')
+    call MapSuperKey('X',   'mAysiW~.`All',    ['nmap'], v:false, v:true, '<buffer>')
+    call MapSuperKey('X',   'S~gvS~gv<Esc>hh', ["vmap"], v:false, v:true, '<buffer>')
+    call MapSuperKey('D',   'mAysiW=.`All',    ['nmap'], v:false, v:true, '<buffer>')
+    call MapSuperKey('D',   'S=gvS=gv<Esc>hh', ["vmap"], v:false, v:true, '<buffer>')
 endfunction
 autocmd FileType markdown call <SID>MapMarkdown()
 
