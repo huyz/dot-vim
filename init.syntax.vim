@@ -46,7 +46,7 @@ if &t_Co > 2 || exists("g:gui_running") " If we have color
     syntax on
 
     " HACK: 2022-11-07 No time to debug this, but colors are bad for indent guides
-    "   and completion menus unless I run `syntax on` again after starting vim.
+    "   and completion menus unless I run `syntax on` again after reloading a buffer.
     autocmd BufWinEnter * syntax on | filetype detect
 
 else " If we don't have color

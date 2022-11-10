@@ -72,7 +72,7 @@ noremap! <C-z> <Esc><C-z>
 " Edit .vimrc
 nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 " Re-source .vimrc and re-run Sleuth
-nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>echo 'Configs reloaded'<CR>
+nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>syn on<CR><Cmd>echo 'Configs reloaded'<CR>
 " Quick-save and re-source .vimrc, using emacs keybinding
 " NOTE: MacVim and VimR already handle <D-s>
 nmap <C-x><C-s> <Cmd>write<CR><Leader>so
