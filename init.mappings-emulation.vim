@@ -53,7 +53,7 @@ nnoremap <Esc>u <Cmd>noh<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Emulate common GUI apps {{{1
 
-""" General
+""" General {{{2
 
 " Open recent
 if exists('g:gui_running')
@@ -75,91 +75,6 @@ call MapSuperKey('e', '<C-F2>', 'all', v:false, v:true)
 call MapSuperKey('E', '<C-F2>', 'all', v:false, v:true)
 call MapSuperKey('F', '<C-F3>', 'all', v:false, v:true)
 call MapSuperKey('"', '<C-F10>', 'all', v:false, v:true)
-
-""" System clipboard
-
-" GUI apps should already have the ⌘ versions mapped
-if !has('gui_running')
-    vnoremap <M-x> "+d
-    vnoremap <M-c> "+y
-    vnoremap <M-v> "+gP
-    nnoremap <M-v> "+gP
-    cnoremap <M-v> <C-R>+
-    inoremap <M-v> <C-R><C-O>+
-endif
-
-""" Movement {{{2
-
-" Wrapped line navigation
-call MapKey('<Up>', 'gk')
-call MapKey('<Down>', 'gj')
-call MapKey('<M-t>w', '<Cmd>set wrap!<CR>')
-
-" Move cursor
-call MapSuperKey('Up', 'gg')
-call MapSuperKey('Down', 'G')
-call MapSuperKey('Left', '0')
-call MapSuperKey('Right', '$')
-
-" Go back/forward and/or CamelCaseMotion
-" NOTE: Luckily, iTerm passes <M-D-arrows> through
-call MapKey('<M-D-Left>', '<C-O>')
-call MapKey('<M-D-Right>', '<C-I>')
-call MapKey('<M-C-Left>', '<Plug>CamelCaseMotion_b')
-call MapKey('<M-C-Right>', '<Plug>CamelCaseMotion_w')
-
-" Go to previous edit location and Delete parts of line
-call MapSuperKey('S-BS', 'g;')
-call MapSuperOrControlKey('M-S-BS', 'g,')
-                        call MapSuperKey('Del', 'D')
-call MapSuperKey('BS', 'd0')
-
-" Go to previous/next git change
-call MapKey('<C-S-Up>', '[c', 'all', 0, 0)
-call MapKey('<C-S-Down>', ']c', 'all', 0, 0)
-
-" Go to previous/next method
-if exists('g:gui_running')
-    call MapKey('<C-S-D-Up>', '[m')
-    call MapKey('<C-S-D-Down>', ']m')
-else
-    call MapKey('<C-S-M-Up>', '[m')
-    call MapKey('<C-S-M-Down>', ']m')
-endif
-
-""" Indent {{{2
-
-" Need to reselect selection
-if exists('g:gui_running')
-    nnoremap <D-]> >>
-    nnoremap <D-[> <<
-    noremap! <D-]> <C-t>
-    noremap! <D-[> <C-d>
-    vnoremap <D-]> >gv
-    vnoremap <D-[> <gv
-else
-    " NOTE: can't use `MapKey` because it doesn't handle `<M-[>;` shouldn't
-    "   normalize to `<Esc>[` which is the prefix of escape sequences
-    nnoremap <M-]> >>
-    nnoremap <M-[> <<
-    noremap! <M-]> <C-t>
-    noremap! <M-[> <C-d>
-    vnoremap <M-]> >gv
-    vnoremap <M-[> <gv
-endif
-
-""" Line manipulation {{{2
-
-" Insert empty line above/below
-call MapKey('<C-CR>', 'o')
-call MapKey('<S-C-CR>', 'O')
-
-" Delete lines
-call MapKey('<C-S-BS>', 'dd')
-
-" Shift argument (using vim-argumentative)
-call MapKey('<M-lt>', '<,', 'all', v:false, v:true)
-call MapKey('<M->>', '>,', 'all', v:false, v:true)
 
 """ Splits {{{2
 
@@ -245,7 +160,90 @@ call MapSuperKey('}', '<Cmd>tabnext<CR>')
 call MapControlKey('{', '<Cmd>-tabmove<CR>')
 call MapControlKey('}', '<Cmd>+tabmove<CR>')
 
-""" Code editing
+""" Movement {{{2
+
+" Wrapped line navigation
+call MapKey('<Up>', 'gk')
+call MapKey('<Down>', 'gj')
+call MapKey('<M-t>w', '<Cmd>set wrap!<CR>')
+
+" Move cursor
+call MapSuperKey('Up', 'gg')
+call MapSuperKey('Down', 'G')
+call MapSuperKey('Left', '0')
+call MapSuperKey('Right', '$')
+
+" Go back/forward and/or CamelCaseMotion
+" NOTE: Luckily, iTerm passes <M-D-arrows> through
+call MapKey('<M-D-Left>', '<C-O>')
+call MapKey('<M-D-Right>', '<C-I>')
+call MapKey('<M-C-Left>', '<Plug>CamelCaseMotion_b')
+call MapKey('<M-C-Right>', '<Plug>CamelCaseMotion_w')
+
+" Go to previous edit location and Delete parts of line
+call MapSuperKey('S-BS', 'g;')
+call MapSuperOrControlKey('M-S-BS', 'g,')
+                        call MapSuperKey('Del', 'D')
+call MapSuperKey('BS', 'd0')
+
+" Go to previous/next git change
+call MapKey('<C-S-Up>', '[c', 'all', v:false, v:true)
+call MapKey('<C-S-Down>', ']c', 'all', v:false, v:true)
+
+" Go to previous/next method
+if exists('g:gui_running')
+    call MapKey('<C-S-D-Up>', '[m')
+    call MapKey('<C-S-D-Down>', ']m')
+else
+    call MapKey('<C-S-M-Up>', '[m')
+    call MapKey('<C-S-M-Down>', ']m')
+endif
+
+""" Indent {{{2
+
+" Need to reselect selection
+if exists('g:gui_running')
+    nnoremap <D-]> >>
+    nnoremap <D-[> <<
+    noremap! <D-]> <C-t>
+    noremap! <D-[> <C-d>
+    vnoremap <D-]> >gv
+    vnoremap <D-[> <gv
+else
+    " NOTE: can't use `MapKey` because it doesn't handle `<M-[>;` shouldn't
+    "   normalize to `<Esc>[` which is the prefix of escape sequences
+    nnoremap <M-]> >>
+    nnoremap <M-[> <<
+    noremap! <M-]> <C-t>
+    noremap! <M-[> <C-d>
+    vnoremap <M-]> >gv
+    vnoremap <M-[> <gv
+endif
+
+""" Edit text {{{2
+
+" Insert empty line above/below
+call MapKey('<C-CR>', 'o')
+call MapKey('<S-C-CR>', 'O')
+
+" Delete lines
+call MapKey('<C-S-BS>', 'dd')
+
+" Increment/Decrement/Toggle
+call MapKey('<M-a>-', '<C-x>')
+call MapKey('<M-a>=', '<C-a>')
+call MapKey('<M-A>', '<Cmd>Toggle<CR>')
+" These are for this fork: taku-o/vim-toggle
+" NOTE: we need to define all 3 so that the vim-toggle plugin doesn't do its default maps
+" call MapKey('<M-a><Bslash>', '<Plug>ToggleN', ['map'])
+" call MapKey('<M-a><Bslash>', '<Plug>ToggleI', ['map!'])
+" call MapKey('<M-a><Bslash>', '<Plug>ToggleV', ['vmap'])
+
+""" Edit code {{{2
+
+" Shift argument (using vim-argumentative)
+call MapKey('<M-lt>', '<,', 'all', v:false, v:true)
+call MapKey('<M->>', '>,', 'all', v:false, v:true)
 
 " NOTE: as of 2022-11-02, `<Cmd>TComment*` doesn't work with ranges
 call MapSuperKey('/', ':TComment<CR>')
@@ -270,7 +268,7 @@ call MapKey('<M-c>_', ':Screm<CR>', ['map'])
 " NOTE: These don't work in operator-pending mode or visual mode
 call MapKey('<M-c>D', 'cr.', ['map'])
 
-""" Code navigation
+""" Code navigation {{{2
 
 call MapKey('<F1>' , 'K', 'all', v:false, v:true)
 call MapSuperKey('b', 'gd', 'all', v:false, v:true)
@@ -280,10 +278,9 @@ call MapSuperKey('y', '<Cmd>vsplit<CR>gd', 'all', v:false, v:true)
 call MapSuperKey('Y', '<Cmd>vsplit<CR>gy', 'all', v:false, v:true)
 call MapSuperKey('i', 'gR', 'all', v:false, v:true)
 
-""" Markdown
+""" Markdown {{{2
 
 call MapKey('<M-m>p', '<Cmd>MarkdownPreview<CR>')
-call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 
 " Tip: for entire lines, don't use `V`; use `val` from textobj-line to avoid spurious newlines
@@ -311,7 +308,7 @@ function! s:MapMarkdown() abort
 endfunction
 autocmd FileType markdown call <SID>MapMarkdown()
 
-""" Markdown table mode
+""" Markdown table mode {{{2
 
 call MapKey('<M-T><M-T>', '<Leader>tr', 'all', v:false, v:true)
 call MapKey('<M-T>t', '<Leader>tm', 'all', v:false, v:true)
@@ -320,13 +317,13 @@ call MapKey('<M-T>a', '<Leader>tic', 'all', v:false, v:true)
 call MapKey('<M-T>x', '<Leader>tdc', 'all', v:false, v:true)
 call MapKey('<M-T>d', '<Leader>tdd', 'all', v:false, v:true)
 
-""" Colors
+""" Colors {{{2
 
 call MapKey('<M-t>b', '<Cmd>call ToggleBackground()<CR>')
 call MapKey('<M-t>c', '<Cmd>call ToggleColorscheme()<CR>')
 call MapKey('<M-t>C', '<Cmd>HexokinaseToggle<CR>')
 
-""" Terminal
+""" Terminal {{{2
 
 call MapKey('<M-F12>', '<Cmd>call OpenTerminal()<CR>')
 if has('nvim')
@@ -341,16 +338,18 @@ endif
 " XXX Don't know why <M-o><M-t> doesn't work.
 call MapKey('<M-o>T', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
 
-""" Internal Apps
+""" Internal Apps {{{2
 
 if has('nvim')
     call MapControlKey('E', '<Cmd>NvimTreeFindFile<CR>')
 else
     call MapControlKey('E', '<Cmd>NERDTreeFind<CR>')
 endif
-imap <M-c>: <C-x><C-u>
+" Insert gitmoji
+" NOTE: conflict with <M-c> clipboard copy because this is insert mode
+call MapKey('<M-c>:', '<C-x><C-u>', ['map!'])
 
-""" External Apps
+""" External Apps {{{2
 
 if has('mac')
     call MapKey('<M-s>d', '<Plug>DashSearch')
@@ -361,8 +360,26 @@ call MapKey('<M-s>g', '<Plug>SearchVisual', ['vmap'])
 " NOTE: for some reason `<Cmd>` doesn't work right in visual mode, so use `:`
 "   https://github.com/voldikss/vim-browser-search/issues/28
 call MapKey('<M-s><M-s>', ':BrowserSearch<CR>')
+" FIXME: 2022-11-12 cheat.sh API may have changed
+call MapKey('<M-s>c', '<Leader>KB', 'all', v:false, v:true)
 
 call MapKey('<M-o>f', '<Cmd>Reveal<CR>')
 call MapKey('<M-o>c', '<Cmd>CodeCurrent<CR>')
+
+""" System clipboard {{{2
+
+" GUI apps should already have the ⌘ versions mapped
+if !has('gui_running')
+    vnoremap <M-x> "+d
+    vnoremap <M-c> "+y
+    vnoremap <M-v> "+gP
+    nnoremap <M-v> "+gP
+    cnoremap <M-v> <C-R>+
+    inoremap <M-v> <C-R><C-O>+
+endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Prologue {{{1
 
 " vim:foldmethod=marker:

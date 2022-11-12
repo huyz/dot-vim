@@ -1,8 +1,8 @@
 # Files
 
-| File          | Description                                                                                                         |
-| ---           | ---                                                                                                                 |
-| `.exrc`       | basic initialization file for the original ex/vi, in case vim isn't installed.  It has to be symlinked to `~/.exrc` |
+| File    | Description                                                                                                         |
+|---------|---------------------------------------------------------------------------------------------------------------------|
+| `.exrc` | basic initialization file for the original ex/vi, in case vim isn't installed.  It has to be symlinked to `~/.exrc` |
 | `.vimrc`      | main initialization file.  It has to be symlinked to `~/.vimrc`
 | `.vimrc.post` | contains personal commands invoked after `.vimrc`.  You can create this file with your own customizations here.     |
 | `setup.sh`    | sets up the files to be ready for vim.                                                                              |
@@ -28,10 +28,10 @@ cd ~/.vim
 These are useful commands that are easy to forget because they're needed only
 occasionally.
 
-| Mapping                                            | Description                                                                                                                                        |
-| ----                                               | ---                                                                                                                                                |
-| `cgn` + `.`                                        | Incrementally change matches                                                                                                                       |
-| `q:`  `q/`  `q?`                                   | Open comand-line window (`^F` if already in command-line)                                                                                          |
+| Mapping          | Description                                               |
+|------------------|-----------------------------------------------------------|
+| `cgn` + `.`      | Incrementally change matches                              |
+| `q:`  `q/`  `q?` | Open comand-line window (`^F` if already in command-line) |
 | ``\`.``                                            | Jump to last modification                                                                                                                          |
 | `gv`                                               | Reselect last visual selection                                                                                                                     |
 | `ga`                                               | ASCII/Unicode value of current character                                                                                                           |
@@ -58,18 +58,19 @@ occasionally.
 
 I tend to forgot I defined these mappings:
 
-| Mapping               | Description                             |
-| ----                  | ---                                     |
-| `ZA`                  | Exit vim but prompt for unsaved buffers |
-| `gb`                  | Re-select last pasted block             |
-| `Q` `gq` `<M-q>`      | In visual mode, format by `par`, vim    |
-| `<M-p><C-S-BS>`       | Discard consecutive blank lines         |
-| `<M-x>-` or `=` or`~` | Underline line                          |
+| Mapping                  | Description                                      |
+|--------------------------|--------------------------------------------------|
+| `ZA`                     | Exit vim but prompt for unsaved buffers          |
+| `gb`                     | Re-select last pasted block                      |
+| `Q` `gq` `<M-q>`         | In visual mode, format by `par`, vim             |
+| `<M-p><C-S-BS>`          | Discard consecutive blank lines                  |
+| `<M-a>#-` or `#=` or`#~` | Underline line                                   |
+| `<M-a>-` `<M-a>=`        | Increment/decrement (to free `<C-a>` and `<C-x>` |
 
 Archived:
 
 | Mapping | Description |
-| ----    | ---         |
+|---------|-------------|
 | `<C-s>` | Save buffer |
 
 ## Plugins I installed
@@ -77,7 +78,7 @@ Archived:
 ### CtrlP
 
 | Mapping for vim | Mapping for neovim | Description   |
-| ----            | ---                | ---           |
+|-----------------|--------------------|---------------|
 | `<C-F2>`        | `<C-S-F2>`         | switch buffer |
 
 ### fzf
@@ -87,25 +88,25 @@ Archived:
 | `:RG <pattern>` | Search all files |
 
 | Mapping for vim | Mapping for neovim | Description                    |
-| ----            | ---                | ---                            |
+|-----------------|--------------------|--------------------------------|
 | `<C-F3>`        | `<C-S-F3>`         | Search all files interactively |
 
 ### windowswap
 
 | Mapping | Description                         |
-| ---     | ---                                 |
+|---------|-------------------------------------|
 | `\ww`   | Sets first or second window to swap |
 
 ### Gundo
 
 | Mapping        | Description     |
-| ----           | ---             |
+|----------------|-----------------|
 | `:GundoToggle` | Shows undo tree |
 
 ### Bbye
 
 | Mapping      | Description                                   |
-| ----         | ---                                           |
+|--------------|-----------------------------------------------|
 | `<C-w><C-q>` | Closes buffer without messing up split window |
 
 ### visual-multi
@@ -123,7 +124,7 @@ Archived:
 ### easymotion
 
 | Mapping | Description                                       |
-| ---     | ---                                               |
+|---------|---------------------------------------------------|
 | `-abc`  | Highlight n-character matches                     |
 | `_`     | Go to previous n-character match                  |
 | `+`     | Go to nextncharacter match                        |
@@ -133,7 +134,7 @@ Archived:
 ### CamelCaseMotion
 
 | Mapping                 | Description                                               |
-| ---                     | ---                                                       |
+|-------------------------|-----------------------------------------------------------|
 | `,w` `,b` `,e`          | like regular motions but respecting word boundaries       |
 | `ci,w` `di,w`           | like regular change/delete but respecting word boundaries |
 | `c2i,b` `y2i,b` `v2i,b` | change/yank/select the current word and previous word     |
@@ -141,7 +142,7 @@ Archived:
 ### surround
 
 | Mapping   | Description                                                        |
-| --------- | --------------------                                               |
+|-----------|--------------------------------------------------------------------|
 | `ysiw'`   | surround inner word with single quotes                             |
 | `yss)`    | surround sentence with parentheses and no space                    |
 | `ys2w(`   | surround next 2 words with parentheses and spaces                  |
@@ -161,83 +162,83 @@ Archived:
 
 ### easy-align
 
-| Mapping    | Description                                                    |
-| ---------- | ---------------------                                          |
-| V\_`gA= `  | in line visual mode, start aligning around first `=` character |
-| `gAip=`    | start aligning for inner paragraph                             |
-| V\_`\\`    | In Github-Flavored Markdown file, re-align current table       |
+| Mapping   | Description                                                    |
+|-----------|----------------------------------------------------------------|
+| V\_`gA= ` | in line visual mode, start aligning around first `=` character |
+| `gAip=`   | start aligning for inner paragraph                             |
+| V\_`\\`   | In Github-Flavored Markdown file, re-align current table       |
 
 ### ReplaceWithRegister
 
-| Mapping | Description                      |
-| ---     | ---                              |
+| Mapping      | Description                         |
+|--------------|-------------------------------------|
 | `gr{motion}` | Replace {motion} text with register |
-| `grr`   | Replace line(s) with register |
+| `grr`        | Replace line(s) with register       |
 
 ### abolish
 
 | Mapping    | Description                 |
-| ---------- | ---------------------       |
+|------------|-----------------------------|
 | `:Subvert` | case-preserving subsitution |
 
 ### eregex
 
-| Mapping    | Description           |
-| ---------- | --------------------- |
-| `:S`       | PCRE2 substitution    |
-| `<M-t>/`   | Toggle PCRE search    |
+| Mapping  | Description        |
+|----------|--------------------|
+| `:S`     | PCRE2 substitution |
+| `<M-t>/` | Toggle PCRE search |
 
 ### exchange
 
-| Mapping      Description |                                |
-| ---          | ---                                        |
-| `cx{motion}` | Sets first or second text to swap/exchange |
-| `cxx`        | Sets first or second line to swap/exchange |
-| `cxx`        | Sets first or second line to swap/exchange |
-| `<M-x><M-x>` | Swap last two words (my own function)      |
+| Mapping      Description |                                            |
+|--------------------------|--------------------------------------------|
+| `cx{motion}`             | Sets first or second text to swap/exchange |
+| `cxx`                    | Sets first or second line to swap/exchange |
+| `cxx`                    | Sets first or second line to swap/exchange |
+| `<M-a><M-a>`             | Swap last two words (my own function)      |
 
 ### argumentative
 
 | Mapping       | Description                   |
-| ---           | ---                           |
+|---------------|-------------------------------|
 | `⇧⌥.` or `<.` | Shift function argument right |
 
 ### targets
 
 | Mapping | Description              |
-| ----    | ---                      |
+|---------|--------------------------|
 | `cia`   | Change function argument |
 | `daa`   | Delete function argument |
 
 ### indent-object (useful for Python)
 
 | Mapping | Description                                                        |
-| ---     | ---                                                                |
+|---------|--------------------------------------------------------------------|
 | `vai`   | Select indentation level + line above                              |
 | `vii`   | Select indentation level                                           |
 | `vaI`   | Select idnentation level + line below (useful for closing bracket) |
 
 ### table-mode
 
-| Mapping  | Description       |
-| ----     | ---               |
+| Mapping      | Description       |
+|--------------|-------------------|
 | `<M-T><M-t>` | Reformat table    |
-| `<M-T>t` | Toggle table mode |
-| `<M-T>i` | Insert column     |
-| `<M-T>a` | Append column     |
-| `<M-T>x` | Delete column     |
-| `<M-T>d` | Delete row        |
+| `<M-T>t`     | Toggle table mode |
+| `<M-T>i`     | Insert column     |
+| `<M-T>a`     | Append column     |
+| `<M-T>x`     | Delete column     |
+| `<M-T>d`     | Delete row        |
 
 ### splitjoin
 
-| Mapping    | Description                            |
-| ---------- | ---------------------                  |
-| `gS`       | Trigger smart split wherever cursor is |
-| `gJ`       | Trigger smart join wherever cursor is  |
+| Mapping | Description                            |
+|---------|----------------------------------------|
+| `gS`    | Trigger smart split wherever cursor is |
+| `gJ`    | Trigger smart join wherever cursor is  |
 
 ### gitmoji
 
-| Mapping    | Description                              |
-| ---------- | ---------------------                    |
-| `<M-c>:`   | Trigger completion                       |
-| `\\^U`     | Convert :emoji_name: into unicode emojis |
+| Mapping  | Description                              |
+|----------|------------------------------------------|
+| `<M-c>:` | Trigger completion                       |
+| `\\^U`   | Convert :emoji_name: into unicode emojis |

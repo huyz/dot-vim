@@ -79,6 +79,7 @@ nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>syn on<
 " NOTE: MacVim and VimR already handle <D-s>
 nmap <C-x><C-s> <Cmd>write<CR><Leader>so
 imap <C-x><C-s> <Cmd>write<CR><C-o><Leader>so
+" NOTE: we don't use MapControlKey because we don't want to conflict with <M-s>
 call MapKey('<C-s>', '<Cmd>write<CR>')
 nmap ZA <Cmd>confirm qall<CR>
 

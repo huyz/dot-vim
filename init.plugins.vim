@@ -104,6 +104,7 @@ Plug 'ryvnf/readline.vim'
 " Text
 " you-keep-using-that-word: remap `cw`
 Plug 'ap/vim-you-keep-using-that-word'
+Plug 'lukelbd/vim-toggle'
 Plug 'tpope/vim-repeat'
 Plug 'bronson/vim-visual-star-search'
 Plug 'mg979/vim-visual-multi'
@@ -429,6 +430,30 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 noremap <C-w><C-q> <Cmd>Bdelete<CR>
 
+""" Toggle
+
+" Just set that so that the plugin doesn't create spurious mapping. But we still have to do it
+" ourselves because we use the <M> key which may need to be converted to <Esc>
+let g:toggle_map = '<M-A>'
+
+" 2022-11-12 generated from https://github.com/HiDeoo/toggler-vscode/blob/4b3dcdb8b944aa7d6a63bcaa80d93a746c741f32/src/defaults.json
+" XXX: most of the symbols won't work because vim-toggle only supports repeated symbols.
+" ```python
+" import json
+" with open('defaults.json') as f:
+"     d = json.load(f)
+" print('let g:toggle_words_on   = ["' + '", "'.join([x[0] for x in d if len(x) == 2]) + '"]')
+" print('let g:toggle_words_off  = ["' + '", "'.join([x[1] for x in d if len(x) == 2]) + '"]')
+" ```
+let g:toggle_words_on   = ["absolute", "high", "horizontal", "inner", "left", "top", "black", "import", "join", "JSON.parse", "parse", "pop", "unshift", "test.only", "onAnimationStart", "onClick", "onCompositionStart", "onDragEnter", "onDragStart", "onFocus", "onKeyDown", "onMouseDown", "onMouseEnter", "onTouchStart", "addEventListener", "animationstart", "dblclick", "compositionstart", "dragenter", "dragstart", "focus", "keydown", "mousedown", "mouseenter", "touchstart", "getState", "container", "atan", "ceil", "cos", "Math.atan", "Math.ceil", "Math.cos", "Math.min", "min", "deactivate", "address", "add", "unavailable", "background", "before", "client", "disconnected", "disconnect", "development", "dev", "drag", "file", "first", "from", "get", "input", "uninstall", "key", "unload", "minor", "online", "open", "parent", "positive", "prefix", "previous", "public", "request", "req", "row", "short", "show", "source", "start", "invalid", "visible", "width", "x", "0", "enabled", "enable", "if", "on", "true", "yes", "div", "head", "header", "ol", "tr", "in", "up", "[]", "(", "[", "{", "*=", "*", "&&", "&", "++", "+=", "+", "<<", "<=", "<", "===", "=="]
+let g:toggle_words_off  = ["relative", "low", "vertical", "outer", "right", "bottom", "white", "export", "split", "JSON.stringify", "stringify", "push", "shift", "test", "onAnimationEnd", "onDoubleClick", "onCompositionEnd", "onDragLeave", "onDragEnd", "onBlur", "onKeyUp", "onMouseUp", "onMouseLeave", "onTouchEnd", "removeEventListener", "animationend", "click", "compositionend", "dragleave", "dragend", "blur", "keyup", "mouseup", "mouseleave", "touchend", "setState", "component", "tan", "floor", "sin", "Math.tan", "Math.floor", "Math.sin", "Math.max", "max", "activate", "port", "remove", "available", "foreground", "after", "server", "connected", "connect", "production", "prod", "drop", "folder", "last", "to", "set", "output", "install", "value", "load", "major", "offline", "close", "child", "negative", "suffix", "next", "private", "response", "res", "column", "long", "hide", "destination", "stop", "valid", "hidden", "height", "y", "1", "disabled", "disable", "else", "off", "false", "no", "span", "body", "footer", "ul", "td", "out", "down", "{}", ")", "]", "}", "/=", "/", "||", "|", "--", "-=", "-", ">>", ">=", ">", "!==", "!="]
+let g:toggle_consecutive_on  = ["&", "<"]
+let g:toggle_consecutive_off = ["|", ">"]
+
+" Plus some manual additions for non-binary choices
+let g:toggle_words_on  += ['const', 'all']
+let g:toggle_words_off += ['let',   'each']
+
 """ indent-guides {{{2
 
 let g:indent_guides_enable_on_vim_startup = 1
@@ -664,6 +689,10 @@ nmap <Leader>gb <Plug>(git-messenger)
 set completefunc=emoji#complete
 " Replace all :emoji_name: into Unicode emojis
 nmap <Leader><C-U> <Cmd>%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
+
+""" cheat.sh {{{2
+
+let g:CheatDoNotReplaceKeywordPrg = 1
 
 """ gnupg {{{2
 
