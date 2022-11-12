@@ -132,6 +132,8 @@ exmap TableInsertRow obcommand table-editor-obsidian:insert-row
 map <A-S-ˇ>O :TableInsertRow
 exmap TableDeleteRow obcommand table-editor-obsidian:delete-row
 map <A-S-ˇ>d :TableDeleteRow
+exmap ExcelToTable obcommand obsidian-excel-to-markdown-table:excel-to-markdown-table
+map <A-S-ˇ>X :ExcelToTable
 
 exmap GitOpenView obcommand obsidian-git:open-git-view
 map <A-©><A-©> :GitOpenView
