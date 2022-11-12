@@ -78,12 +78,15 @@ call MapSuperKey('"', '<C-F10>', 'all', v:false, v:true)
 
 """ System clipboard
 
-vnoremap <M-x> "+d
-vnoremap <M-c> "+y
-vnoremap <M-v> "+gP
-nnoremap <M-v> "+gP
-cnoremap <M-v> <C-R>+
-inoremap <M-v> <C-R><C-O>+
+" GUI apps should already have the ⌘ versions mapped
+if !has('gui_running')
+    vnoremap <M-x> "+d
+    vnoremap <M-c> "+y
+    vnoremap <M-v> "+gP
+    nnoremap <M-v> "+gP
+    cnoremap <M-v> <C-R>+
+    inoremap <M-v> <C-R><C-O>+
+endif
 
 """ Movement {{{2
 
