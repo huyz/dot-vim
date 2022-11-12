@@ -18,14 +18,14 @@ if has('nvim')
     nmap <C-F2> <Cmd>Telescope buffers<CR>
     nmap <C-F3> <Cmd>Telescope live_grep<CR>
     nmap <C-F4> <Cmd>Telescope find_files<CR>
-    nmap <C-S-F2> <Cmd>CtrlPBuffer<CR>
-    nmap <C-S-F3> <Cmd>RG<CR>
-    nmap <C-S-F4> <Cmd>FZF<CR>
 else
     nmap <C-F2> <Cmd>CtrlPBuffer<CR>
     nmap <C-F3> <Cmd>RG<CR>
     nmap <C-F4> <Cmd>FZF<CR>
 endif
+nmap <C-S-F2> <Cmd>CtrlPBuffer<CR>
+nmap <C-S-F3> <Cmd>RG<CR>
+nmap <C-S-F4> <Cmd>FZF<CR>
 
 nmap <F5> <Leader>o1
 " Make pastetoggle also work in insert mode
