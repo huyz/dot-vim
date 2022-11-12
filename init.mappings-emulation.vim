@@ -313,8 +313,8 @@ autocmd FileType markdown call <SID>MapMarkdown()
 
 """ Markdown table mode
 
+call MapKey('<M-T><M-T>', '<Leader>tr', 'all', v:false, v:true)
 call MapKey('<M-T>t', '<Leader>tm', 'all', v:false, v:true)
-call MapKey('<M-T>f', '<Leader>tm', 'all', v:false, v:true)
 call MapKey('<M-T>i', '<Leader>tiC', 'all', v:false, v:true)
 call MapKey('<M-T>a', '<Leader>tic', 'all', v:false, v:true)
 call MapKey('<M-T>x', '<Leader>tdc', 'all', v:false, v:true)

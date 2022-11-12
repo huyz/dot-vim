@@ -221,8 +221,8 @@ Archived:
 
 | Mapping  | Description       |
 | ----     | ---               |
+| `<M-T><M-t>` | Reformat table    |
 | `<M-T>t` | Toggle table mode |
-| `<M-T>f` | Reformat table    |
 | `<M-T>i` | Insert column     |
 | `<M-T>a` | Append column     |
 | `<M-T>x` | Delete column     |

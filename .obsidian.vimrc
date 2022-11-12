@@ -121,9 +121,9 @@ exmap ToggleBacklinks obcommand backlink:toggle-backlinks-in-document
 map <A-†>/ :ToggleBacklinks
 
 exmap TableControlBar obcommand table-editor-obsidian:table-control-bar
-map <A-S-ˇ><A-S-ˇ> :TableControlBar
+map <A-S-ˇ>t :TableControlBar
 exmap TableFormat obcommand table-editor-obsidian:format-table
-map <A-S-ˇ>f :TableFormat
+map <A-S-ˇ><A-S-ˇ> :TableFormat
 exmap TableInsertColumn obcommand table-editor-obsidian:insert-column
 map <A-S-ˇ>i :TableInsertColumn
 exmap TableDeleteColumn obcommand table-editor-obsidian:delete-column
