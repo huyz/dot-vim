@@ -515,35 +515,6 @@ map <C-S-Left> <Plug>(expand_region_shrink)
 " https://github.com/matze/vim-move/issues/69#issuecomment-1199891566
 let g:move_map_keys = 0
 
-if exists("g:gui_running")
-    nmap <M-Down> <Plug>MoveLineDown
-    nmap <M-Up> <Plug>MoveLineUp
-    nmap <M-Left> <Plug>MoveCharLeft
-    nmap <M-Right> <Plug>MoveCharRight
-    vmap <M-Down> <Plug>MoveBlockDown
-    vmap <M-Up> <Plug>MoveBlockUp
-    vmap <M-Left> <Plug>MoveBlockLeft
-    vmap <M-Right> <Plug>MoveBlockRight
-else
-    nmap <Esc><Down> <Plug>MoveLineDown
-    nmap <Esc><Up> <Plug>MoveLineUp
-    nmap <Esc><Left> <Plug>MoveCharLeft
-    nmap <Esc><Right> <Plug>MoveCharRight
-
-    " WARNING: if instead of using h,j,k,l, you tend to use arrow keys for motion
-    " in Normal mode, then the mappings below may interfere when you try to exit
-    " out of Visual mode with <Esc> and immediately hit an arrow key. In that
-    " case, you might want to use the `C` modifier instead as here:
-    "vmap <C-Down> <Plug>MoveBlockDown
-    "vmap <C-Up> <Plug>MoveBlockUp
-    "vmap <C-Left> <Plug>MoveBlockLeft
-    "vmap <C-Right> <Plug>MoveBlockRight
-    vmap <Esc><Down> <Plug>MoveBlockDown
-    vmap <Esc><Up> <Plug>MoveBlockUp
-    vmap <Esc><Left> <Plug>MoveBlockLeft
-    vmap <Esc><Right> <Plug>MoveBlockRight
-endif
-
 """ easy-align {{{2
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)

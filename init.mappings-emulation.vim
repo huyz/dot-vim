@@ -169,10 +169,13 @@ call MapKey('<Down>', 'gj')
 call MapKey('<M-t>w', '<Cmd>set wrap!<CR>')
 
 " Move cursor
-call MapSuperKey('Up', 'gg')
-call MapSuperKey('Down', 'G')
-call MapSuperKey('Left', '0')
-call MapSuperKey('Right', '$')
+" NOTE: we don't do this in TUIs because <M-Arrow> is reserved for vim-move
+if has('gui_running')
+    call MapSuperKey('Up', 'gg')
+    call MapSuperKey('Down', 'G')
+    call MapSuperKey('Left', '0')
+    call MapSuperKey('Right', '$')
+endif
 
 " Go back/forward and/or CamelCaseMotion
 " NOTE: Luckily, iTerm passes <M-D-arrows> through
@@ -184,7 +187,7 @@ call MapKey('<M-C-Right>', '<Plug>CamelCaseMotion_w')
 " Go to previous edit location and Delete parts of line
 call MapSuperKey('S-BS', 'g;')
 call MapSuperOrControlKey('M-S-BS', 'g,')
-                        call MapSuperKey('Del', 'D')
+call MapSuperKey('Del', 'D')
 call MapSuperKey('BS', 'd0')
 
 " Go to previous/next git change
@@ -220,6 +223,47 @@ else
     vnoremap <M-]> >gv
     vnoremap <M-[> <gv
 endif
+
+""" vim-move {{{2
+
+call MapKey('<M-Down>', '<Plug>MoveLineDown', ['nmap', 'map!'])
+call MapKey('<M-Up>', '<Plug>MoveLineUp', ['nmap', 'map!'])
+call MapKey('<M-Left>', '<Plug>MoveCharLeft', ['nmap', 'map!'])
+call MapKey('<M-Right>', '<Plug>MoveCharRight', ['nmap', 'map!'])
+call MapKey('<M-Up>', '<Plug>MoveBlockUp', ['vmap'])
+call MapKey('<M-Down>', '<Plug>MoveBlockDown', ['vmap'])
+call MapKey('<M-Left>', '<Plug>MoveBlockLeft', ['vmap'])
+call MapKey('<M-Right>', '<Plug>MoveBlockRight', ['vmap'])
+
+" if exists("g:gui_running")
+"     nmap <M-Down> <Plug>MoveLineDown
+"     nmap <M-Up> <Plug>MoveLineUp
+"     nmap <M-Left> <Plug>MoveCharLeft
+"     nmap <M-Right> <Plug>MoveCharRight
+"     vmap <M-Down> <Plug>MoveBlockDown
+"     vmap <M-Up> <Plug>MoveBlockUp
+"     vmap <M-Left> <Plug>MoveBlockLeft
+"     vmap <M-Right> <Plug>MoveBlockRight
+" else
+"     nmap <Esc><Down> <Plug>MoveLineDown
+"     nmap <Esc><Up> <Plug>MoveLineUp
+"     nmap <Esc><Left> <Plug>MoveCharLeft
+"     nmap <Esc><Right> <Plug>MoveCharRight
+"
+"     " WARNING: if instead of using h,j,k,l, you tend to use arrow keys for motion
+"     " in Normal mode, then the mappings below may interfere when you try to exit
+"     " out of Visual mode with <Esc> and immediately hit an arrow key. In that
+"     " case, you might want to use the `C` modifier instead as here:
+"     "vmap <C-Down> <Plug>MoveBlockDown
+"     "vmap <C-Up> <Plug>MoveBlockUp
+"     "vmap <C-Left> <Plug>MoveBlockLeft
+"     "vmap <C-Right> <Plug>MoveBlockRight
+"     vmap <Esc><Down> <Plug>MoveBlockDown
+"     vmap <Esc><Up> <Plug>MoveBlockUp
+"     vmap <Esc><Left> <Plug>MoveBlockLeft
+"     vmap <Esc><Right> <Plug>MoveBlockRight
+" endif
+
 
 """ Edit text {{{2
 
