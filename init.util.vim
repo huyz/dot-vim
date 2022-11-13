@@ -38,12 +38,15 @@ endfunction
 " NOTE:
 " - in iTerm, it's preferable to have modifyOtherKeys on, because that way,
 "   keymaps will work in insert-like modes too (if modifyOtherKeys is off, then
-"   <Esc>x keymaps would conflict with the <Esc> used to exit insert mode)
+"   <Esc>x keymaps would conflict with the <Esc> used to exit insert mode; also
+"   vmaps <Esc><Up> interfere for when you're trying to exit out of visual mode
+"   and quickly use an arrow key)
 " - in MacVim GUI, it is preferable to not have `macmeta` for the same reason
 "   as preferring iTerm to have modifyOtherKeys set to on.
+"   XXX 2022-11-13 I'm not sure if this is true; maybe it's because of the way I coded it; but I
+"     don't want to try to fix it and go through another full round of testing.
 function! s:NormalizeMetaModifier(str) abort
-"    if has("nvim") || (has("gui_macvim") && exists("g:gui_running") && !&macmeta)
-    if has("nvim")
+    if has("nvim") || (has("gui_macvim") && (exists("g:gui_running") || g:use_extended_keys_in_terminal))
         return a:str
     endif
     let l:str = substitute(a:str, '<M->>', '<Esc><gt>', 'g')
@@ -73,7 +76,9 @@ function! MapAlias(keys, rhs, modes = 'all', no_insert = v:false) abort
 endfunction
 
 " Maps the key sequence to RHS, optionally with specific modes
-" 'all' modes implies: map, imap, tmap (so no cmap or lmap)
+" - modes: 'all' implies: map, imap, tmap (so no cmap or lmap)
+" - no_insert: filters modes to exclude insert-like modes. See s:IsInsertLikeMode
+" - remap: only applies to modes='all'
 function! MapKey(keys, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
     let l:keys = a:keys
     let l:rhs = a:rhs

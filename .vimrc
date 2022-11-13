@@ -54,10 +54,22 @@ elseif filereadable(expand("~/.exrc"))
     source ~/.exrc
 endif
 
-""" Choose between coc or mason
+""" Meta options (to configure the behavior of the rest of these config files)
 
 "let g:coc_or_mason = 'mason'
 let g:coc_or_mason = 'coc'
+
+" For terminals, set true if you can make your terminal use modifyOtherKeys or "CSI u" mode,
+" in which case there's no need to transform <M-key> to <Esc>key, which eliminates a lot of
+" conflicts (in insert mode, exiting is still fast; in visual mode, exiting and using an immediate
+" arrow key won't interfere with vim-move)
+" In iTerm, this means you must turn on "Report keys using CSI u" and "Apps can change how keys are reported",
+"   as this will override the setting "Left Option key: Esc+" (Don't know what "Apps can change
+"   this" does)
+" And in tmux you may need to:
+" - set -s extended-keys on
+" - set -sa terminal-features 'xterm*:extkeys'
+let g:use_extended_keys_in_terminal = v:true
 
 """ Splitting .vimrc into smaller files
 

@@ -71,31 +71,6 @@ set shiftround          " Round indent to multiple of 'shiftwidth'
 " in insert mode using the arrow keys--this is great for editing tables.
 set virtualedit=block
 
-""" Terminal capabilities
-
-" Enable extended keys
-if exists('$TMUX')
-    " tmux 3.3 only supports modifyOtherKeys=1
-    let &t_TI = "\e[>4;1m"
-    let &t_TE = "\e[>4;m"
-else
-    let &t_TI = "\<Esc>[>4;2m"
-    let &t_TE = "\<Esc>[>4;m"
-endif
-
-" Cursor shape in insert mode
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-if has('nvim') && !exists('g:gui_running')
-    " 2022-10-26 Doesn't work for me in VimR and makes cursor disappear:
-    "   https://github.com/qvacua/vimr/issues/738
-    set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-        \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-        \,sm:block-blinkwait175-blinkoff150-blinkon175
-endif
-
-
 """ Search options
 
 set incsearch           " Do incremental searching
@@ -151,3 +126,31 @@ set sessionoptions+=winpos,terminal,folds
 
 set keywordprg=man            " Command when hitting K: default to man
 set mouse=a                   " Enable the mouse where possible. (Great for Tagbar)
+
+""" Terminal capabilities
+
+if g:use_extended_keys_in_terminal
+    " Enable extended keys
+    if exists('$TMUX')
+        " tmux 3.3 only supports modifyOtherKeys=1
+        let &t_TI = "\e[>4;1m"
+        let &t_TE = "\e[>4;m"
+    else
+        let &t_TI = "\<Esc>[>4;2m"
+        let &t_TE = "\<Esc>[>4;m"
+    endif
+endif
+
+" Cursor shape in insert mode
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+if has('nvim') && !exists('g:gui_running')
+    " 2022-10-26 Doesn't work for me in VimR and makes cursor disappear:
+    "   https://github.com/qvacua/vimr/issues/738
+    set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+        \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+        \,sm:block-blinkwait175-blinkoff150-blinkon175
+endif
+
+
