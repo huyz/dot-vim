@@ -33,12 +33,13 @@ inoremap <C-x><C-s> <Cmd>w<CR>
 
 """ Window operations
 
-nnoremap <C-x>2 <C-w>s
-nnoremap <C-x>3 <C-w>v
-nnoremap <C-x>0 <C-w>c
-nnoremap <C-x>1 <C-w>o
-nnoremap <C-x>o <C-w>w
-nnoremap <C-x>+ <C-w>=
+" Disabled because we don't use emacs and these slow down normal-mode <C-x>
+" nnoremap <C-x>2 <C-w>s
+" nnoremap <C-x>3 <C-w>v
+" nnoremap <C-x>0 <C-w>c
+" nnoremap <C-x>1 <C-w>o
+" nnoremap <C-x>o <C-w>w
+" nnoremap <C-x>+ <C-w>=
 
 """ Command-line
 
