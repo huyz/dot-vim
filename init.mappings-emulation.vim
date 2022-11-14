@@ -212,6 +212,15 @@ else
     vnoremap <M-[> <gv
 endif
 
+""" Fold {{{2
+
+" 2022-11-14 MacVim doesn't support modifyOtherKeys yet
+" We could fall back to using the meta key but right :alembic:plug
+call MapControlKey('-', 'zc')
+call MapControlKey('=', 'zo')
+call MapControlKey('_', 'zM')
+call MapControlKey('+', 'zR')
+
 """ vim-move {{{2
 
 call MapKey('<M-Down>', '<Plug>MoveLineDown', ['nmap', 'map!'])
