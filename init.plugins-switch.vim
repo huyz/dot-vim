@@ -1,5 +1,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ switch {{{1
+" Prerequisite: switch plugin must be loaded so that we can access switch#NormalizedCaseWords
+
+if !exists('g:loaded_switch')
+    finish
+endif
 
 " Disable default mapping
 let g:switch_mapping = ""
