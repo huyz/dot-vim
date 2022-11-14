@@ -72,8 +72,8 @@ function! s:SwapLastTwoWordsInInsertMode()
     endif
 endfunction
 
-nnoremap <silent> <M-a><M-a> :<C-u>call <SID>SwapLastTwoWords()<CR>
+nnoremap <silent> <M-x><M-x> :<C-u>call <SID>SwapLastTwoWords()<CR>
 " NOTE: we can't use <Cmd> because we actually want a mode change to normal
 "   inside function to look at whitespace
-imap <silent> <M-a><M-a> <C-\><C-o>:<C-u>call <SID>SwapLastTwoWordsInInsertMode()<CR>
+imap <silent> <M-x><M-x> <C-\><C-o>:<C-u>call <SID>SwapLastTwoWordsInInsertMode()<CR>
 
