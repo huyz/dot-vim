@@ -152,12 +152,12 @@ let s:switch_definitions =
             \       '\(\k\+=\){\([[:keyword:].]\+\)}':      '\1{`${\2}`}',
             \       '\(\k\+=\){`${\([[:keyword:].]\+\)}`}': '\1{\2}',
             \     },
-            \   'markdown_ul': {
+            \   'markdown_ul_checkbox': {
             \       '\v^(\s*[*+-] )?\[ \]': '\1[x]',
             \       '\v^(\s*[*+-] )?\[x\]': '\1[\~]',
             \       '\v^(\s*[*+-] )?\[\~\]': '\1[ ]',
             \     },
-            \   'markdown_ol': {
+            \   'markdown_ol_checkbox': {
             \       '\v^(\s*\d+\. )?\[ \]': '\1[x]',
             \       '\v^(\s*\d+\. )?\[x\]': '\1[\~]',
             \       '\v^(\s*\d+\. )?\[\~\]': '\1[ ]',
@@ -172,19 +172,29 @@ let s:switch_definitions =
 
 let g:switch_custom_definitions =
             \ [
-            \   g:switch_builtins.vim_script_local_function,
-            \   g:switch_builtins.javascript_function,
-            \   g:switch_builtins.javascript_arrow_function,
-            \   g:switch_builtins.javascript_es6_declarations,
-            \   s:switch_definitions.react,
-            \   s:switch_definitions.markdown_ul,
-            \   s:switch_definitions.markdown_ol,
-            \   s:switch_definitions.markdown_ol,
             \   s:switch_definitions.equality,
             \ ]
 call extend(g:switch_custom_definitions, s:switch_words)
 call extend(g:switch_custom_definitions, s:switch_toggler_vscode_defaults_symbols)
 
+autocmd FileType vim let b:switch_definitions =
+    \ [
+    \   g:switch_builtins.vim_script_local_function,
+    \ ]
+
+autocmd FileType javascript,typescript let b:switch_definitions =
+    \ [
+    \   g:switch_builtins.javascript_function,
+    \   g:switch_builtins.javascript_arrow_function,
+    \   g:switch_builtins.javascript_es6_declarations,
+    \   s:switch_definitions.react,
+    \ ]
+
+autocmd FileType markdown let b:switch_definitions =
+    \ [
+    \   s:switch_definitions.markdown_ul_checkbox,
+    \   s:switch_definitions.markdown_ol_checkbox,
+    \ ]
 
 """ Make it work with the usual increment/decrement functions, including speeddating
 
