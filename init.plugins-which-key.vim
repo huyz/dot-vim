@@ -1,16 +1,20 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ which-key {{{1
+" TODO: add commands that are hard to remember
 
 set timeoutlen=500
 
 "nnoremap <silent> <Leader> <Cmd>WhichKey '\\'<CR>
 "vnoremap <silent> <Leader> <Cmd>WhichKey '\\'<CR>
 "nnoremap <silent> g <Cmd>WhichKey 'g'<CR>
-for letter in ['c', 'f', 'g', 'm', 'o', 'r', 's', 'x']
+" for letter in ['c', 'f', 'g', 'm', 'o', 'r', 's', 'x']
+for letter in ['c']
     exe "call MapKey('<M-" . letter . ">', '<Cmd>WhichKey " . '"M_' . letter . '" ' . "<CR>')"
 endfor
 
 function! WhichKeyRegister()
-    for letter in ['c', 'f', 'g', 'm', 'o', 'r', 's', 'x']
+"     for letter in ['c', 'f', 'g', 'm', 'o', 'r', 's', 'x']
+    for letter in ['c']
         exe " call which_key#register('M_" . letter . "', " . '"g:which_key_map_M_' . letter . '")'
     endfor
 endfunction
