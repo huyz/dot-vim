@@ -286,7 +286,7 @@ endif
 " neovim reads terminfo to decide what function key to assign:
 "   https://github.com/neovim/neovim/issues/8317#issuecomment-384577645
 " So we have to duplicate the work we've done in .exrc
-if has('tui_nvim')
+if exists('g:tui_nvim')
     call MapAlias('<F13>', '<S-F1>')
     call MapAlias('<F14>', '<S-F2>')
     call MapAlias('<F15>', '<S-F3>')
