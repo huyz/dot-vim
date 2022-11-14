@@ -75,22 +75,6 @@ Archived:
 
 ## Plugins I installed
 
-### CtrlP
-
-| Mapping for vim | Mapping for neovim | Description   |
-|-----------------|--------------------|---------------|
-| `<C-F2>`        | `<C-S-F2>`         | switch buffer |
-
-### fzf
-
-| Mapping         | Description      |
-|-----------------|------------------|
-| `:RG <pattern>` | Search all files |
-
-| Mapping for vim | Mapping for neovim | Description                    |
-|-----------------|--------------------|--------------------------------|
-| `<C-F3>`        | `<C-S-F3>`         | Search all files interactively |
-
 ### windowswap
 
 | Mapping | Description                         |

@@ -56,25 +56,11 @@ nnoremap <Esc>u <Cmd>noh<CR>
 call MapSuperKey('q', '<Cmd>confirm qall<CR>')
 call MapSuperKey('n', '<Cmd>new<CR>')
 
-" Open recent
-if exists('g:gui_running')
-    if exists('g:nvim')
-        call MapSuperKey('p', '<C-F4>', 'all', v:false, v:true)
-    else
-        call MapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
-    endif
-endif
-" We actually need to map ⇧⌥P in terminals so as to not conflict with our ⌥P chord prefix,
-" and BetterTouchTool can handle the detour
-if exists('g:nvim')
-    call MapSuperKey('P', '<C-F4>', 'all', v:false, v:true)
-else
-    call MapSuperKey('P', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
-endif
-
 call MapSuperKey('e', '<C-F2>', 'all', v:false, v:true)
-call MapSuperKey('E', '<C-F2>', 'all', v:false, v:true)
+" NOTE: <C-S-F2> doesn't match the meaning of "Recent Locations" in JetBrains
+call MapSuperKey('E', '<C-S-F2>', 'all', v:false, v:true)
 call MapSuperKey('F', '<C-F3>', 'all', v:false, v:true)
+call MapSuperKey('p', '<C-F4>', 'all', v:false, v:true)
 call MapSuperKey('"', '<C-F10>', 'all', v:false, v:true)
 
 call MapControlKey('X', '<Cmd>PlugUpdate<CR>')

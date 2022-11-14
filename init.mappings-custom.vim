@@ -15,17 +15,19 @@ endif
 call MapKey('<C-S-F1>', '<Cmd>messages<CR>')
 
 if exists('g:nvim')
-    nmap <C-F2> <Cmd>Telescope buffers<CR>
+    nmap <C-F2> <Cmd>Telescope buffers show_all_buffers=false ignore_current_buffer=true sort_mru=true<CR>
+    nmap <C-S-F2> <Cmd>Telescope buffers sort_mru=true<CR>
     nmap <C-F3> <Cmd>Telescope live_grep<CR>
+    nmap <C-S-F3> <Cmd>Telescope live_grep no_ignore=true follow=true<CR>
     nmap <C-F4> <Cmd>Telescope find_files<CR>
+    nmap <C-S-F4> <Cmd>Telescope find_files no_ignore=true follow=true<CR>
 else
-    nmap <C-F2> <Cmd>CtrlPBuffer<CR>
-    nmap <C-F3> <Cmd>RG<CR>
-    nmap <C-F4> <Cmd>FZF<CR>
+    nmap <C-F2> <Cmd>Buffers<CR>
+    nmap <C-F3> <Cmd>Rg<CR>
+    nmap <C-S-F3> <Cmd>RG<CR>
+    nmap <C-F4> <Cmd>GFiles --cached --others --exclude-standard<CR>
+    nmap <C-S-F4> <Cmd>FZF<CR>
 endif
-nmap <C-S-F2> <Cmd>CtrlPBuffer<CR>
-nmap <C-S-F3> <Cmd>RG<CR>
-nmap <C-S-F4> <Cmd>FZF<CR>
 
 nmap <F5> <Leader>o1
 " Make pastetoggle also work in insert mode

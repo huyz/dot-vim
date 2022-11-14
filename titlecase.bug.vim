@@ -50,7 +50,7 @@ function! Cond(cond, ...)
 endfunction
 
 " WARNING: Make sure you use single quotes in the Plug lines below.
-"   Even for the `has("nvim")` pieces.  Weird, I know.
+"   Even for the `exists('g:nvim')` pieces.  Weird, I know.
 
 Plug 'christoomey/vim-titlecase'
 

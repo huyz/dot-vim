@@ -53,7 +53,6 @@ Plug 'mhinz/vim-startify'
 Plug 'nvim-lua/plenary.nvim', Cond(exists('g:nvim'))
 Plug 'nvim-telescope/telescope.nvim', Cond(exists('g:nvim'))
 Plug 'nvim-telescope/telescope-fzf-native.nvim', Cond(exists('g:nvim'), { 'do': 'make' })
-Plug 'kien/ctrlp.vim'
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -209,7 +208,7 @@ call plug#end()
 """ startify {{{2
 
 let g:startify_session_dir = '~/.vim/session'
-if has("nvim")
+if exists('g:nvim')
     let g:startify_session_before_save = [ 'silent! tabdo NvimTreeClose' ]
 else
     let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
@@ -337,18 +336,6 @@ if exists('g:nvim')
     }
 EOF
 endif
-
-""" CtrlP {{{2
-
-let g:ctrlp_cmd = 'CtrlPBuffer'
-
-"set wildignore+=/tmp/,.so,.so p,*.zip
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](\.(git|hg|svn)|.venv|venv.*|node_modules)$',
-    \ 'file': '\v\.(pyc|class|DS_Store)$',
-    \ }
-
-let g:ctrlp_max_files = 20000
 
 """ fzf {{{2
 
