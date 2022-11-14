@@ -86,7 +86,6 @@ call MapKey('<C-s>', '<Cmd>write<CR>')
 " NOTE: MacVim and VimR already handle <D-s>
 " NOTE: we don't use MapControlKey because we don't want to conflict with <M-S>
 call MapKey('g<C-s>', '<Cmd>write<CR><Leader>so', ['map'])
-call MapKey('g<C-s>', '<Cmd>write<CR><C-o><Leader>so', ['map!'])
 
 " Allow saving of files as sudo when you forget to start vim using sudo.
 " Shortcut matches my zsh binding
