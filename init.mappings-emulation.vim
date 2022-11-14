@@ -25,11 +25,11 @@ nnoremap & :&&<CR>
 
 """ File operations
 
-nnoremap <C-x>b :b<Space>
-nnoremap <C-x><C-f> :e<Space>
-" NOTE: <C-x><C-s> is overridden elsewhere to reload .vimrc
-nnoremap <C-x><C-s> <Cmd>w<CR>
-inoremap <C-x><C-s> <Cmd>w<CR>
+" Disabled because we don't use emacs and these slow down normal-mode <C-x>
+" nnoremap <C-x>b :b<Space>
+" nnoremap <C-x><C-f> :e<Space>
+" nnoremap <C-x><C-s> <Cmd>w<CR>
+" inoremap <C-x><C-s> <Cmd>w<CR>
 
 """ Window operations
 
@@ -41,10 +41,6 @@ inoremap <C-x><C-s> <Cmd>w<CR>
 " nnoremap <C-x>o <C-w>w
 " nnoremap <C-x>+ <C-w>=
 
-""" Command-line
-
-cnoremap <C-g> <C-c>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Emulate misc apps {{{1
 
@@ -55,6 +51,10 @@ nnoremap <Esc>u <Cmd>noh<CR>
 """ Emulate common GUI apps {{{1
 
 """ General {{{2
+
+" TODO: could be used as chord prefix cause they're not that useful
+call MapSuperKey('q', '<Cmd>confirm qall<CR>')
+call MapSuperKey('n', '<Cmd>new<CR>')
 
 " Open recent
 if exists('g:gui_running')
@@ -76,6 +76,9 @@ call MapSuperKey('e', '<C-F2>', 'all', v:false, v:true)
 call MapSuperKey('E', '<C-F2>', 'all', v:false, v:true)
 call MapSuperKey('F', '<C-F3>', 'all', v:false, v:true)
 call MapSuperKey('"', '<C-F10>', 'all', v:false, v:true)
+
+call MapControlKey('X', '<Cmd>PlugUpdate<CR>')
+call MapControlKey('"', '<Cmd>verbose map<CR>')
 
 """ Splits {{{2
 
@@ -103,7 +106,7 @@ call MapSuperKey('M-S-Up', '<C-w>K')
 call MapSuperKey('M-S-Down', '<C-w>J')
 
 " Equalize splits
-call MapSuperOrControlKey('M-+', '<C-w>=')
+call MapSuperOrControlKey('M-)', '<C-w>=')
 
 " Maximize split
 if exists('g:gui_running')
@@ -166,7 +169,6 @@ call MapControlKey('}', '<Cmd>+tabmove<CR>')
 " Wrapped line navigation
 call MapKey('<Up>', 'gk')
 call MapKey('<Down>', 'gj')
-call MapKey('<M-t>w', '<Cmd>set wrap!<CR>')
 
 " Move cursor
 " NOTE: we don't do this in TUIs because <M-Arrow> is reserved for vim-move
@@ -275,14 +277,12 @@ call MapKey('<S-C-CR>', 'O')
 call MapKey('<C-S-BS>', 'dd')
 
 " Increment/Decrement/Toggle
-call MapKey('<M-a>-', '<C-x>')
-call MapKey('<M-a>=', '<C-a>')
-call MapKey('<M-A>', '<Cmd>Toggle<CR>')
-" These are for this fork: taku-o/vim-toggle
-" NOTE: we need to define all 3 so that the vim-toggle plugin doesn't do its default maps
-" call MapKey('<M-a><Bslash>', '<Plug>ToggleN', ['map'])
-" call MapKey('<M-a><Bslash>', '<Plug>ToggleI', ['map!'])
-" call MapKey('<M-a><Bslash>', '<Plug>ToggleV', ['vmap'])
+" Allow remapping so that they work for tpope/vim-speeddating
+call MapSuperOrControlKey('M-+', '<C-a>', 'all', v:false, v:true)
+call MapSuperOrControlKey('M-_', '<C-x>', 'all', v:false, v:true)
+call MapKey('<M-X>', '<Cmd>set opfunc=switch#OpfuncForward<CR>g@l', ['nmap'])
+call MapKey('<M-X>', '<Cmd>set opfunc=switch#OpfuncForward<CR>g@lgv', ['vmap'])
+call MapKey('<M-X>', '<Cmd>set opfunc=switch#OpfuncForward<CR><C-o>g@l', ['map!'])
 
 """ Edit code {{{2
 
@@ -353,20 +353,16 @@ function! s:MapMarkdown() abort
 endfunction
 autocmd FileType markdown call <SID>MapMarkdown()
 
+
+
 """ Markdown table mode {{{2
 
-call MapKey('<M-T><M-T>', '<Leader>tr', 'all', v:false, v:true)
-call MapKey('<M-T>t', '<Leader>tm', 'all', v:false, v:true)
-call MapKey('<M-T>i', '<Leader>tiC', 'all', v:false, v:true)
-call MapKey('<M-T>a', '<Leader>tic', 'all', v:false, v:true)
-call MapKey('<M-T>x', '<Leader>tdc', 'all', v:false, v:true)
-call MapKey('<M-T>d', '<Leader>tdd', 'all', v:false, v:true)
-
-""" Colors {{{2
-
-call MapKey('<M-t>b', '<Cmd>call ToggleBackground()<CR>')
-call MapKey('<M-t>c', '<Cmd>call ToggleColorscheme()<CR>')
-call MapKey('<M-t>C', '<Cmd>HexokinaseToggle<CR>')
+call MapKey('<M-m>t', '<Leader>tm', 'all', v:false, v:true)
+call MapKey('<M-m>f', '<Leader>tr', 'all', v:false, v:true)
+call MapKey('<M-m>i', '<Leader>tiC', 'all', v:false, v:true)
+call MapKey('<M-m>a', '<Leader>tic', 'all', v:false, v:true)
+call MapKey('<M-m>x', '<Leader>tdc', 'all', v:false, v:true)
+call MapKey('<M-m>d', '<Leader>tdd', 'all', v:false, v:true)
 
 """ Terminal {{{2
 
@@ -386,27 +382,26 @@ call MapKey('<M-o>T', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
 """ Internal Apps {{{2
 
 if has('nvim')
-    call MapControlKey('E', '<Cmd>NvimTreeFindFile<CR>')
+    call MapControlKey('F', '<Cmd>NvimTreeFindFile<CR>')
 else
-    call MapControlKey('E', '<Cmd>NERDTreeFind<CR>')
+    call MapControlKey('F', '<Cmd>NERDTreeFind<CR>')
 endif
 " Insert gitmoji
-" NOTE: conflict with <M-c> clipboard copy because this is insert mode
-call MapKey('<M-c>:', '<C-x><C-u>', ['map!'])
+map! <M-x>: <C-x><C-u>
 
 """ External Apps {{{2
 
 if has('mac')
-    call MapKey('<M-s>d', '<Plug>DashSearch')
-    call MapKey('<M-s>D', '<Plug>DashGlobalSearch')
+    call MapKey('<M-o>/', '<Plug>DashSearch')
+    call MapKey('<M-o>?', '<Plug>DashGlobalSearch')
 endif
-call MapKey('<M-s>g', '<Plug>SearchNormal', ['map'])
-call MapKey('<M-s>g', '<Plug>SearchVisual', ['vmap'])
+call MapKey('<M-o>g', '<Plug>SearchNormal', ['map'])
+call MapKey('<M-o>g', '<Plug>SearchVisual', ['vmap'])
 " NOTE: for some reason `<Cmd>` doesn't work right in visual mode, so use `:`
 "   https://github.com/voldikss/vim-browser-search/issues/28
-call MapKey('<M-s><M-s>', ':BrowserSearch<CR>')
+call MapKey('<M-o>w', ':BrowserSearch<CR>')
 " FIXME: 2022-11-12 cheat.sh API may have changed
-call MapKey('<M-s>c', '<Leader>KB', 'all', v:false, v:true)
+call MapKey('<M-o>p', '<Leader>KB', 'all', v:false, v:true)
 
 call MapKey('<M-o>f', '<Cmd>Reveal<CR>')
 call MapKey('<M-o>c', '<Cmd>CodeCurrent<CR>')
@@ -415,13 +410,21 @@ call MapKey('<M-o>c', '<Cmd>CodeCurrent<CR>')
 
 " GUI apps should already have the ⌘ versions mapped
 if !has('gui_running')
-    vnoremap <M-x> "+d
-    vnoremap <M-c> "+y
-    vnoremap <M-v> "+gP
-    nnoremap <M-v> "+gP
-    cnoremap <M-v> <C-R>+
-    inoremap <M-v> <C-R><C-O>+
+    vnoremap <C-S-x> "+d
+    vnoremap <C-S-c> "+y
+    vnoremap <C-S-v> "+gP
+    nnoremap <C-S-v> "+gP
+    cnoremap <C-S-v> <C-R>+
+    inoremap <C-S-v> <C-R><C-O>+
 endif
+
+""" Settings {{{2
+
+call MapKey('<M-s>w', '<Cmd>set wrap!<CR>')
+call MapKey('<M-s>b', '<Cmd>call ToggleBackground()<CR>')
+call MapKey('<M-s>c', '<Cmd>call ToggleColorscheme()<CR>')
+call MapKey('<M-s>C', '<Cmd>HexokinaseToggle<CR>')
+call MapKey('<M-s>/', '<Cmd>call EregexToggle()<CR>')
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

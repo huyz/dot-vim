@@ -25,9 +25,9 @@ nmap <M-p><C-S-BS> <Leader>_do_:v/./.,/./-1join<CR><Leader>_done_
 """ Complex edits {{{1
 
 " Underlines the current line with '~', '-', '=' characters (good for markdown)
-nmap <M-a>#= <Leader>_do_yyp:s/./=/g<CR><Leader>_done_
-nmap <M-a>#- <Leader>_do_yyp:s/./-/g<CR><Leader>_done_
-nmap <M-a>#~ <Leader>_do_yyp:s/./\~/g<CR><Leader>_done_
+nmap <M-x>#= <Leader>_do_yyp:s/./=/g<CR><Leader>_done_
+nmap <M-x>#- <Leader>_do_yyp:s/./-/g<CR><Leader>_done_
+nmap <M-x>#~ <Leader>_do_yyp:s/./\~/g<CR><Leader>_done_
 
 
 """ Swap last two words {{{1

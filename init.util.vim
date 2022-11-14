@@ -126,7 +126,8 @@ endfunction
 function s:ShiftModifierIfNeededForSuper(key)
     let l:key = substitute(a:key, '.*-', '', '')
     return strlen(l:key) == 1 && l:key >=# 'A' && l:key <=# 'Z' ||
-        \ index(['{', '}', '"', '+'], l:key) >= 0 ? 'S-' : ''
+        \ index(['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+',
+        \ '{', '}', '|', ':', '"', '<', '>', '?'], l:key) >= 0 ? 'S-' : ''
 endfunction
 function s:ShiftModifierIfNeededForControl(key)
     let l:key = substitute(a:key, '.*-', '', '')

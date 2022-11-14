@@ -75,13 +75,16 @@ noremap! <C-z> <Esc><C-z>
 nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 " Re-source .vimrc and re-run Sleuth
 nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>syn on<CR><Cmd>echo 'Configs reloaded'<CR>
+
+" Saving
+nmap ZA <Cmd>confirm qall<CR>
 " Quick-save and re-source .vimrc, using emacs keybinding
-" NOTE: MacVim and VimR already handle <D-s>
-nmap <C-x><C-s> <Cmd>write<CR><Leader>so
-imap <C-x><C-s> <Cmd>write<CR><C-o><Leader>so
 " NOTE: we don't use MapControlKey because we don't want to conflict with <M-s>
 call MapKey('<C-s>', '<Cmd>write<CR>')
-nmap ZA <Cmd>confirm qall<CR>
+" NOTE: MacVim and VimR already handle <D-s>
+" NOTE: we don't use MapControlKey because we don't want to conflict with <M-S>
+call MapKey('g<C-s>', '<Cmd>write<CR><Leader>so', ['map'])
+call MapKey('g<C-s>', '<Cmd>write<CR><C-o><Leader>so', ['map!'])
 
 " Allow saving of files as sudo when you forget to start vim using sudo.
 " Shortcut matches my zsh binding

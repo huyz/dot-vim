@@ -58,14 +58,14 @@ occasionally.
 
 I tend to forgot I defined these mappings:
 
-| Mapping                  | Description                                      |
-|--------------------------|--------------------------------------------------|
-| `ZA`                     | Exit vim but prompt for unsaved buffers          |
-| `gb`                     | Re-select last pasted block                      |
-| `Q` `gq` `<M-q>`         | In visual mode, format by `par`, vim             |
-| `<M-p><C-S-BS>`          | Discard consecutive blank lines                  |
-| `<M-a>#-` or `#=` or`#~` | Underline line                                   |
-| `<M-a>-` `<M-a>=`        | Increment/decrement (to free `<C-a>` and `<C-x>` |
+| Mapping                  | Description                                       |
+|--------------------------|---------------------------------------------------|
+| `ZA`                     | Exit vim but prompt for unsaved buffers           |
+| `gb`                     | Re-select last pasted block                       |
+| `Q` `gq` `<M-q>`         | In visual mode, format by `par`, vim              |
+| `<M-p><C-S-BS>`          | Discard consecutive blank lines                   |
+| `<M-x>#-` or `#=` or`#~` | Underline line                                    |
+| `<D-M-S-->` `<D-M-S-+>`  | Increment/decrement (to free `<C-a>` and `<C-x>`) |
 
 Archived:
 
@@ -195,7 +195,7 @@ Archived:
 | `cx{motion}`             | Sets first or second text to swap/exchange |
 | `cxx`                    | Sets first or second line to swap/exchange |
 | `cxx`                    | Sets first or second line to swap/exchange |
-| `<M-a><M-a>`             | Swap last two words (my own function)      |
+| `<M-x><M-x>`             | Swap last two words (my own function)      |
 
 ### argumentative
 
@@ -222,12 +222,12 @@ Archived:
 
 | Mapping      | Description       |
 |--------------|-------------------|
-| `<M-T><M-t>` | Reformat table    |
-| `<M-T>t`     | Toggle table mode |
-| `<M-T>i`     | Insert column     |
-| `<M-T>a`     | Append column     |
-| `<M-T>x`     | Delete column     |
-| `<M-T>d`     | Delete row        |
+| `<M-m>f    ` | Reformat table    |
+| `<M-m>t`     | Toggle table mode |
+| `<M-m>i`     | Insert column     |
+| `<M-m>a`     | Append column     |
+| `<M-m>x`     | Delete column     |
+| `<M-m>d`     | Delete row        |
 
 ### splitjoin
 
