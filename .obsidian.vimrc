@@ -38,12 +38,12 @@ nmap gx :FollowLink
 exmap SurroundWiki surround [[ ]]
 " NOTE: ysw doesnt' work
 map ysw :SurroundWiki
-map <A-ç>w :SurroundWiki
+map <A-µ>w :SurroundWiki
 
 exmap SurroundParens surround ( )
 " NOTE: ys) doesnt' work
 map ys) :SurroundParens
-map <A-ç>) :SurroundParens
+map <A-µ>) :SurroundParens
 
 
 """ GUI Emulation mappings
@@ -63,6 +63,21 @@ nmap <A-ç>T :TransformTitlecase
 "   See: https://github.com/esm7/obsidian-vimrc-support/issues/99#issuecomment-1128403004
 exmap TransformTitlecaseSelection jscommand { editor.setSelections([selection]); this.app.commands.commands['obsidian-editor-shortcuts:transformToTitlecase'].editorCallback(editor) }
 vmap <A-ç>T :TransformTitlecaseSelection
+
+exmap TableControlBar obcommand table-editor-obsidian:table-control-bar
+map <A-µ>t :TableControlBar
+exmap TableFormat obcommand table-editor-obsidian:format-table
+map <A-µ>f :TableFormat
+exmap TableInsertColumn obcommand table-editor-obsidian:insert-column
+map <A-µ>i :TableInsertColumn
+exmap TableDeleteColumn obcommand table-editor-obsidian:delete-column
+map <A-µ>x :TableDeleteColumn
+exmap TableInsertRow obcommand table-editor-obsidian:insert-row
+map <A-µ>O :TableInsertRow
+exmap TableDeleteRow obcommand table-editor-obsidian:delete-row
+map <A-µ>d :TableDeleteRow
+exmap ExcelToTable obcommand obsidian-excel-to-markdown-table:excel-to-markdown-table
+map <A-µ>X :ExcelToTable
 
 exmap CodeBlock obcommand code-block-from-selection:e3dea0f5-37f2-4d79-ae58-490af3228069
 nmap <A-µ>C :CodeBlock
@@ -86,7 +101,7 @@ exmap CodeBlockSelectionShell jscommand { editor.setSelections([selection]); thi
 vmap <A-µ>S :CodeBlockSelectionShell
 
 exmap SearchInternet obcommand search-on-internet:search-on-internet
-map <A-ß><A-ß> :SearchInternet
+map <A-ø>w :SearchInternet
 
 exmap OpenDefaultApp obcommand open-with-default-app:open
 nmap <A-ø>o :OpenDefaultApp
@@ -108,32 +123,17 @@ exmap OpenCleanShot obcommand open-with:open-file-with-cleanshot x
 nmap <A-ø>x :OpenCleanShot
 "
 exmap SwitchTheme obcommand theme:switch
-nmap <A-†>c :SwitchTheme
+nmap <A-ß>c :SwitchTheme
 exmap SwitchThemeDark obcommand theme:use-dark
-nmap <A-†>b :SwitchThemeDark
+nmap <A-ß>b :SwitchThemeDark
 exmap SwitchThemeLight obcommand theme:use-light
-nmap <A-†>B :SwitchThemeLight
+nmap <A-ß>B :SwitchThemeLight
 
 exmap ToggleWhitespace obcommand control-characters:toggle
-nmap <A-†><Space> :ToggleWhitespace
+nmap <A-ß><Space> :ToggleWhitespace
 
 exmap ToggleBacklinks obcommand backlink:toggle-backlinks-in-document
-map <A-†>/ :ToggleBacklinks
-
-exmap TableControlBar obcommand table-editor-obsidian:table-control-bar
-map <A-S-ˇ>t :TableControlBar
-exmap TableFormat obcommand table-editor-obsidian:format-table
-map <A-S-ˇ><A-S-ˇ> :TableFormat
-exmap TableInsertColumn obcommand table-editor-obsidian:insert-column
-map <A-S-ˇ>i :TableInsertColumn
-exmap TableDeleteColumn obcommand table-editor-obsidian:delete-column
-map <A-S-ˇ>x :TableDeleteColumn
-exmap TableInsertRow obcommand table-editor-obsidian:insert-row
-map <A-S-ˇ>O :TableInsertRow
-exmap TableDeleteRow obcommand table-editor-obsidian:delete-row
-map <A-S-ˇ>d :TableDeleteRow
-exmap ExcelToTable obcommand obsidian-excel-to-markdown-table:excel-to-markdown-table
-map <A-S-ˇ>X :ExcelToTable
+map <A-ß>/ :ToggleBacklinks
 
 exmap GitOpenView obcommand obsidian-git:open-git-view
 map <A-©><A-©> :GitOpenView
