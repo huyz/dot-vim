@@ -105,6 +105,7 @@ if g:coc_or_mason == 'coc' && (exists('g:nvim') || v:version >= 801)
 endif
 " Load switch config after the vim-switch plugin has loade
 autocmd VimEnter * source $MYVIM/init.plugins-switch.vim
+source $MYVIM/init.plugins-which-key.vim
 source $MYVIM/init.display-modes.vim
 source $MYVIM/init.mappings-aliases.vim
 source $MYVIM/init.mappings-emulation.vim

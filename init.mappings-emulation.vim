@@ -339,8 +339,6 @@ function! s:MapMarkdown() abort
 endfunction
 autocmd FileType markdown call <SID>MapMarkdown()
 
-
-
 """ Markdown table mode {{{2
 
 call MapKey('<M-m>t', '<Leader>tm', 'all', v:false, v:true)

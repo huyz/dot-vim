@@ -85,6 +85,7 @@ Plug 'L-TChen/auto-dark-mode.vim', Cond(exists('g:gui_vim') && exists('g:gui_run
 Plug 'chriskempson/base16-vim'
 
 " UI
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 Plug 'kyazdani42/nvim-tree.lua', Cond(exists('g:nvim'))
 Plug 'preservim/nerdtree', Cond(!exists('g:nvim'))
 Plug 'vim-airline/vim-airline'
