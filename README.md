@@ -204,14 +204,14 @@ Archived:
 
 ### table-mode
 
-| Mapping      | Description       |
-|--------------|-------------------|
-| `<M-m>f    ` | Reformat table    |
-| `<M-m>t`     | Toggle table mode |
-| `<M-m>i`     | Insert column     |
-| `<M-m>a`     | Append column     |
-| `<M-m>x`     | Delete column     |
-| `<M-m>d`     | Delete row        |
+| Mapping  | Description       |
+| -------- | ----------------- |
+| `<M-m>f` | Reformat table    |
+| `<M-m>t` | Toggle table mode |
+| `<M-m>i` | Insert column     |
+| `<M-m>a` | Append column     |
+| `<M-m>x` | Delete column     |
+| `<M-m>d` | Delete row        |
 
 ### splitjoin
 
