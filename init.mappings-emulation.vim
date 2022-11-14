@@ -282,8 +282,8 @@ call MapKey('<M-X>', '<Cmd>set opfunc=switch#OpfuncForward<CR><C-o>g@l', ['map!'
 """ Edit code {{{2
 
 " Shift argument (using vim-argumentative)
-call MapKey('<M-lt>', '<,', 'all', v:false, v:true)
-call MapKey('<M->>', '>,', 'all', v:false, v:true)
+call MapSuperOrControlKey('M-lt', '<,', 'all', v:false, v:true)
+call MapSuperOrControlKey('M->', '>,', 'all', v:false, v:true)
 
 " NOTE: as of 2022-11-02, `<Cmd>TComment*` doesn't work with ranges
 call MapSuperKey('/', ':TComment<CR>')
@@ -347,6 +347,10 @@ function! s:MapMarkdown() abort
     call MapSuperKey('D',   'S=gvS=gv<Esc>hh', ["vmap"], v:false, v:true, '<buffer>')
 endfunction
 autocmd FileType markdown call <SID>MapMarkdown()
+
+" Shift argument (using vim-argumentative)
+"call MapSuperOrControlKey('lt', '', 'all', v:false, v:true)
+call MapSuperKey('>', '<Cmd>ToggleCB<CR>')
 
 """ Markdown table mode {{{2
 

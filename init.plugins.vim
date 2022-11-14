@@ -138,6 +138,7 @@ Plug 'kana/vim-textobj-line'
 Plug 'PeterRincker/vim-argumentative'
 
 " Markdown
+Plug 'jkramer/vim-checkbox'
 Plug 'dhruvasagar/vim-table-mode'
 " If you don't have nodejs and yarn
 " use pre build, add 'vim-plug' to the filetype list so vim-plug can update this plugin
@@ -539,6 +540,10 @@ endfun
 " Start out enabled
 call EregexToggle(v:true)
 
+""" checkbox {{{2
+
+let g:checkbox_states = [' ', 'x', '\~']
+let g:insert_checkbox_prefix = '- '
 
 """ glow {{{2
 
