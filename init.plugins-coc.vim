@@ -40,7 +40,7 @@ function! CheckBackspace() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-if has('nvim')
+if exists('g:nvim')
     inoremap <silent><expr> <c-space> coc#refresh()
 else
     inoremap <silent><expr> <c-@> coc#refresh()
@@ -204,7 +204,7 @@ vnoremap <space>f <Plug>(coc-format-selected)
 """ Use the settings from the coc help
 
 " Use <C-Space> to trigger completion
-if has('nvim')
+if exists('g:nvim')
     inoremap <silent><expr> <C-Space> coc#refresh()
 else
     " vim can't handle <C-Space>
@@ -233,7 +233,7 @@ inoremap <expr> <S-Esc> coc#pum#cancel()
 
 " For vim, I'm apparently supposed to do handle the linking myself
 " https://github.com/neoclide/coc.nvim/issues/4081
-if !has('nvim')
+if !exists('g:nvim')
     function! s:LinkCocMenuHighlights()
         hi! link CocMenuSel PMenuSel
         hi! link CocSearch Identifier

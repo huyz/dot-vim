@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MacVim-specific
 
-if exists("g:gui_running")
+if exists('g:gui_running')
   if exists('g:neovide')
     " Default neovide font:
     "set guifont=Fira\ Mono\ for\ Powerline:h12
@@ -20,7 +20,7 @@ if exists("g:gui_running")
   "highlight ColorColumn term=reverse ctermbg=darkgrey guibg=black
 
   " Overwrite functions of https://github.com/L-TChen/auto-dark-mode.vim/blob/master/plugin/autoDark.vim
-  if !has("nvim")
+  if exists('g:vim')
     func! s:ChangeBackground()
       if (v:os_appearance)
         call SetBackgroundDark()

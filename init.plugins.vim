@@ -34,7 +34,7 @@ function! Cond(cond, ...)
 endfunction
 
 " WARNING: Make sure you use single quotes in the Plug lines below.
-"   Even for the `has("nvim")` pieces.  Weird, I know.
+"   Even for the `exists('g:nvim')` pieces.  Weird, I know.
 
 """ Built-in plugins {{{2
 
@@ -50,9 +50,9 @@ Plug 'mattn/webapi-vim'
 " Files
 Plug 'mhinz/vim-startify'
 " plenary: dependency of telescope
-Plug 'nvim-lua/plenary.nvim', Cond(has('nvim'))
-Plug 'nvim-telescope/telescope.nvim', Cond(has('nvim'))
-Plug 'nvim-telescope/telescope-fzf-native.nvim', Cond(has('nvim'), { 'do': 'make' })
+Plug 'nvim-lua/plenary.nvim', Cond(exists('g:nvim'))
+Plug 'nvim-telescope/telescope.nvim', Cond(exists('g:nvim'))
+Plug 'nvim-telescope/telescope-fzf-native.nvim', Cond(exists('g:nvim'), { 'do': 'make' })
 Plug 'kien/ctrlp.vim'
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -62,7 +62,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'henrik/vim-reveal-in-finder'
 
 " wilder
-if has('nvim')
+if exists('g:nvim')
     function! UpdateRemotePlugins(...)
         " Needed to refresh runtime files
         let &rtp=&rtp
@@ -75,26 +75,26 @@ else
 endif
 " For wilder: To use Python remote plugin features in Vim, can be skipped
 " 2022-10-25 Can't get python options to work in vim or neovim
-" Plug 'roxma/nvim-yarp', Cond(!has('nvim'))
-" Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim'))
+" Plug 'roxma/nvim-yarp', Cond(!exists('g:nvim'))
+" Plug 'roxma/vim-hug-neovim-rpc', Cond(!exists('g:nvim'))
 
 " Colorscheme
-" Plug 'f-person/auto-dark-mode.nvim', Cond(has('nvim'))
-Plug 'cormacrelf/dark-notify', Cond(has('nvim'))
+" Plug 'f-person/auto-dark-mode.nvim', Cond(exists('g:nvim'))
+Plug 'cormacrelf/dark-notify', Cond(exists('g:nvim'))
 " auto-dark-mode: doesn't work in terminal
-Plug 'L-TChen/auto-dark-mode.vim', Cond(has('gui_macvim') && exists('g:gui_running'))
+Plug 'L-TChen/auto-dark-mode.vim', Cond(exists('g:gui_vim') && exists('g:gui_running'))
 Plug 'chriskempson/base16-vim'
 
 " UI
-Plug 'kyazdani42/nvim-tree.lua', Cond(has('nvim'))
-Plug 'preservim/nerdtree', Cond(!has('nvim'))
+Plug 'kyazdani42/nvim-tree.lua', Cond(exists('g:nvim'))
+Plug 'preservim/nerdtree', Cond(!exists('g:nvim'))
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
 Plug 'wesQ3/vim-windowswap'
-Plug 'ryanoasis/vim-devicons', Cond(!has('nvim'))
-Plug 'kyazdani42/nvim-web-devicons', Cond(has('nvim'))
+Plug 'ryanoasis/vim-devicons', Cond(!exists('g:nvim'))
+Plug 'kyazdani42/nvim-web-devicons', Cond(exists('g:nvim'))
 Plug 'sjl/gundo.vim'
 Plug 'brglng/vim-im-select'
 " bbye: delete buffer preserving window layout
@@ -144,7 +144,7 @@ Plug 'dhruvasagar/vim-table-mode'
 "Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " If you have nodejs and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'ellisonleao/glow.nvim', Cond(has('nvim'))
+Plug 'ellisonleao/glow.nvim', Cond(exists('g:nvim'))
 " Plug 'RubenVerborgh/vim-markup-assistant'
 
 " Dev
@@ -160,20 +160,20 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
-Plug 'simrat39/symbols-outline.nvim', Cond(has('nvim'))
+Plug 'simrat39/symbols-outline.nvim', Cond(exists('g:nvim'))
 " illuminate: highlight other usages
 Plug 'RRethy/vim-illuminate'
 " trouble: pretty diagnostics, references, telescope results, …
-Plug 'folke/trouble.nvim', Cond(has('nvim'))
+Plug 'folke/trouble.nvim', Cond(exists('g:nvim'))
 
 " vim gets syntastic
-Plug 'scrooloose/syntastic', Cond(!has('nvim'))
+Plug 'scrooloose/syntastic', Cond(!exists('g:nvim'))
 " treesitter: telescope apparently could use it
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " neovim gets coc or mason
-let coc_supported = g:coc_or_mason == 'coc' && (has('nvim') || v:version >= 801)
+let coc_supported = g:coc_or_mason == 'coc' && (exists('g:nvim') || v:version >= 801)
 Plug 'neoclide/coc.nvim', Cond(coc_supported, {'branch': 'release'})
-let mason_supported = g:coc_or_mason == 'mason' && has('nvim')
+let mason_supported = g:coc_or_mason == 'mason' && exists('g:nvim')
 Plug 'williamboman/mason.nvim', Cond(mason_supported)
 Plug 'williamboman/mason-lspconfig.nvim', Cond(mason_supported)
 Plug 'neovim/nvim-lspconfig', Cond(mason_supported)
@@ -182,7 +182,7 @@ Plug 'jose-elias-alvarez/null-ls.nvim', Cond(mason_supported)
 
 " Git
 Plug 'rhysd/git-messenger.vim'
-Plug 'kdheepak/lazygit.nvim', Cond(has('nvim'), {'branch': 'main'})
+Plug 'kdheepak/lazygit.nvim', Cond(exists('g:nvim'), {'branch': 'main'})
 " Needed for automatic session naming function below for Startify
 Plug 'itchyny/vim-gitbranch'
 Plug 'Kachyz/vim-gitmoji'
@@ -195,7 +195,7 @@ Plug 'voldikss/vim-browser-search'
 " Misc
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'jamessan/vim-gnupg'
-Plug 'glacambre/firenvim', Cond(has('nvim'), { 'do': { _ -> firenvim#install(0) } })
+Plug 'glacambre/firenvim', Cond(exists('g:nvim'), { 'do': { _ -> firenvim#install(0) } })
 
 
 """ Initialize plugin system {{{2
@@ -275,7 +275,7 @@ endif
 
 """ telescope {{{2
 
-if has('nvim')
+if exists('g:nvim')
     lua << EOF
     -- To get fzf loaded and working with telescope, you need to call
     -- load_extension, somewhere after setup function:
@@ -415,7 +415,7 @@ call wilder#set_option('renderer', wilder#popupmenu_renderer())
 
 """ nvim-tree {{{2
 
-if has("nvim")
+if exists('g:nvim')
     lua << EOF
     require("nvim-tree").setup()
 EOF
@@ -424,7 +424,7 @@ endif
 """ NERDtree {{{2
 
 " Automatically close nvim if NERDTree is only thing left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
 
 """ bbye {{{2
 
@@ -570,7 +570,6 @@ function! EregexToggle(...)
     endif
     let s:enable = 1 - s:enable
 endfun
-call MapKey('<M-t>/', '<Cmd>call EregexToggle()<CR>')
 
 " Start out enabled
 call EregexToggle(v:true)
@@ -578,7 +577,7 @@ call EregexToggle(v:true)
 
 """ glow {{{2
 
-if has("nvim")
+if exists('g:nvim')
     lua << EOF
     require('glow').setup()
 EOF
@@ -598,7 +597,7 @@ let g:tcomment#mode_extra = '>|'
 
 """ Hexokinase {{{2
 
-if has('nvim')
+if exists('g:nvim')
     let g:Hexokinase_highlighters = ['virtual']
 else
     let g:Hexokinase_highlighters = ['backgroundfull']
@@ -609,7 +608,7 @@ let g:Hexokinase_ftEnabled = ['vim', 'html', 'css', 'less', 'scss', 'stylus', 'j
 """ syntastic {{{2
 
 set statusline+=%#warningmsg#
-if !has('nvim')
+if exists('g:vim')
     set statusline+=%{SyntasticStatuslineFlag()}
 endif
 set statusline+=%*
@@ -625,7 +624,7 @@ let g:syntastic_python_checkers          = ['python3', 'pylint']
 
 """ mason, lspconfig, null-ls {{{2
 
-if has("nvim") && g:coc_or_mason == 'mason'
+if exists('g:nvim') && g:coc_or_mason == 'mason'
     lua << EOF
     require("mason").setup({
         ui = {
@@ -672,7 +671,7 @@ let g:CheatDoNotReplaceKeywordPrg = 1
 
 """ Firenvim {{{2
 
-if has("nvim")
+if exists('g:nvim')
     let g:firenvim_config = {
                 \ 'localSettings': {
                     \ '.*': { 'takeover': 'once', 'priority': 0 },

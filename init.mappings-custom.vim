@@ -2,19 +2,19 @@
 """ Function keys {{{1
 
 " NOTE: reserving F1 for documentation lookup
-if has("nvim")
+if exists('g:nvim')
     nnoremap <C-F1> <Cmd>NvimTreeToggle<CR>
 else
     nnoremap <C-F1> <Cmd>NERDTreeToggle<CR>
 endif
-if has('nvim') && !exists('g:gui_running')
+if exists('g:tui_nvim')
     call MapKey('<F13>', '<Cmd>helpclose<CR>')
 else
     call MapKey('<S-F1>', '<Cmd>helpclose<CR>')
 endif
 call MapKey('<C-S-F1>', '<Cmd>messages<CR>')
 
-if has('nvim')
+if exists('g:nvim')
     nmap <C-F2> <Cmd>Telescope buffers<CR>
     nmap <C-F3> <Cmd>Telescope live_grep<CR>
     nmap <C-F4> <Cmd>Telescope find_files<CR>
@@ -36,7 +36,7 @@ let g:ctrlp_map = '<C-F5>'
 nmap <F6> <Leader>o2
 nmap <C-F7> <Cmd>SymbolsOutline<CR>
 
-if has('nvim')
+if exists('g:nvim')
     nmap <C-F9> <Cmd>LazyGit<CR>
 endif
 nmap <C-F10> <Cmd>Startify<CR>

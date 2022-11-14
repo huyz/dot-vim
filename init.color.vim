@@ -42,7 +42,7 @@ function! SetBackgroundDark()
 
     " For vim, i'm apparently supposed to do handle the linking myself
     " https://github.com/neoclide/coc.nvim/issues/4081
-    if !has('nvim')
+    if exists('g:vim')
         hi! link CocMenuSel PMenuSel
         hi! link CocSearch Identifier
     endif
@@ -88,7 +88,7 @@ function! SetBackgroundLight()
 
     " For vim, i'm apparently supposed to do handle the linking myself
     " https://github.com/neoclide/coc.nvim/issues/4081
-    if !has('nvim')
+    if exists('g:vim')
         hi! link CocMenuSel PMenuSel
         hi! link CocSearch Identifier
     endif
@@ -128,7 +128,7 @@ set termguicolors
 
 call RefreshBackground()
 
-if has("nvim")
+if exists('g:nvim')
     :lua <<EOF
     require('dark_notify').run({
         onchange = function(mode)
@@ -147,7 +147,7 @@ if has("nvim")
 EOF
 endif
 
-" if has("nvim")
+" if exists('g:nvim')
 "     lua << EOF
 "     local auto_dark_mode = require('auto-dark-mode')
 

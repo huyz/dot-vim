@@ -5,7 +5,7 @@
 "   Mac's composed characters, especially the digraphs.
 
 " If in neovim GUI, or in vim GUI in non-macmeta mode
-if has('mac') && exists('g:gui_running') && (has('nvim') || !has('macmeta'))
+if has('mac') && (exists('g:gui_nvim') || (exists('g:gui_macvim') && !has('macmeta')))
     " Exceptions for insert mode:
     " - Can't remap `, e, u, i, n as these are used to compose digraph prefixes
     " - Won't remap ∞, ·, –, —, ≈, ≠, ±, ≤, ≥, …  as these are useful special characters even to
@@ -96,38 +96,45 @@ if has('mac') && exists('g:gui_running') && (has('nvim') || !has('macmeta'))
     call MapAlias('¿', '<M-?>')
     call MapAlias('÷', '<M-/>')
 
-    " TODO: automate these MapAlias whenever they're used
-    "   instead of mapping them ahead of time.
-    " BrowserSearch
-    call MapAlias('ßß', '<M-s><M-s>')
-    " MarkdownPreview
-    call MapAlias('µµ', '<M-m><M-m>')
-    " Glow
-    call MapAlias('µπ', '<M-m><M-p>')
-    "call MapAlias('µ¬', '<M-m><M-l>')
+    if exists('g:gui_macvim')
+        " TODO: automate these MapAlias whenever they're used
+        "   instead of mapping them ahead of time.
+        " BrowserSearch
+        call MapAlias('ßß', '<M-s><M-s>')
+        " MarkdownPreview
+        call MapAlias('µµ', '<M-m><M-m>')
+        " Glow
+        call MapAlias('µπ', '<M-m><M-p>')
+        "call MapAlias('µ¬', '<M-m><M-l>')
 
-    " XXX What's this?
-    call MapAlias('<D-”>', '<M-S-D-{>')
-    call MapAlias('<D-’>', '<M-S-D-}>')
-    " Close tab
-    call MapAlias('<D-„>', '<M-S-D-w>')
-    " Equalize splits
-    call MapAlias('<D-±>', '<M-S-D-+>')
-    " Maximize splits
-    call MapAlias('<D-»>', '<M-S-D-Bar>')
-    " Code navigation
-    call MapAlias('<D-∫>', '<M-D-b>')
-    " TCommentInline
-    call MapAlias('<D-÷>', '<M-D-/>')
-    " Markdown code block
-    call MapAlias('<D-Ç>', '<M-S-D-c>')
+        " XXX What's this?
+        "call MapAlias('<D-”>', '<M-S-D-{>')
+        "call MapAlias('<D-’>', '<M-S-D-}>')
+        " Close tab
+        call MapAlias('<D-„>', '<M-S-D-w>')
+        " Equalize splits
+        call MapAlias('<D-‚>', '<M-S-D-)>')
+        " Maximize splits
+        call MapAlias('<D-»>', '<M-S-D-Bar>')
+        " Increment/decremenet
+        call MapAlias('<D-—>', '<M-S-D-_>')
+        call MapAlias('<D-±>', '<M-S-D-+>')
+        " Code navigation
+        call MapAlias('<D-∫>', '<M-D-b>')
+        " TCommentInline
+        call MapAlias('<D-÷>', '<M-D-/>')
+        " Markdown code block
+        call MapAlias('<D-Ç>', '<M-S-D-c>')
+    endif
 
-elseif !has('nvim') && v:false
-    " NOTE: These aliases are actually no longer necessary if the commands in init.options.vim
-    " were successful (and makes vim act like neovim):
-    "   " Enable CSI-u mode
-    "   let &t_TI = "\<Esc>[>4;2m"
-    "   let &t_TE = "\<Esc>[>4;m"
+
+" NOTE: These aliases are actually no longer necessary if the commands in init.options.vim
+" were successful (and makes vim act like neovim):
+"   " Enable CSI-u mode
+"   let &t_TI = "\<Esc>[>4;2m"
+"   let &t_TE = "\<Esc>[>4;m"
+"elseif exists('g:tui_vim')
+elseif v:false
 
     call MapAlias('á', '<M-a>')
     call MapAlias('Á', '<M-A>')
@@ -279,7 +286,7 @@ endif
 " neovim reads terminfo to decide what function key to assign:
 "   https://github.com/neovim/neovim/issues/8317#issuecomment-384577645
 " So we have to duplicate the work we've done in .exrc
-if !exists('g:gui_running') && has("nvim")
+if has('tui_nvim')
     call MapAlias('<F13>', '<S-F1>')
     call MapAlias('<F14>', '<S-F2>')
     call MapAlias('<F15>', '<S-F3>')

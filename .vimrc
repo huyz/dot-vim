@@ -32,10 +32,34 @@ endif
 "
 set nocompatible
 
-""" Neovide: Set g:gui_running
+""" Come up with a sensible set of app flags
 
-if has('gui_running') || exists('g:neovide')
+if exists('g:neovide')
+    " neovide doesn't have has('gui_running')
     let g:gui_running = 1
+    let g:gui_nvim = 1
+    let g:nvim = 1
+endif
+if has('gui_running')
+    let g:gui_running = 1
+    if has('gui_vimr')
+        let g:gui_nvim = 1
+        let g:gui_vimr = 1
+        let g:nvim = 1
+    elseif has('gui_macvim')
+        let g:gui_vim = 1
+        let g:gui_macvim = 1
+        let g:vim = 1
+    endif
+else
+    let g:tui_running = 0
+    if has('nvim')
+        let g:tui_nvim = 1
+        let g:nvim = 1
+    else
+        let g:tui_vim = 1
+        let g:vim = 1
+    endif
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -76,9 +100,10 @@ let g:use_extended_keys_in_terminal = v:true
 source $MYVIM/init.util.vim
 source $MYVIM/init.options.vim
 source $MYVIM/init.plugins.vim
-if g:coc_or_mason == 'coc' && (has("nvim") || v:version >= 801)
+if g:coc_or_mason == 'coc' && (exists('g:nvim') || v:version >= 801)
     source $MYVIM/init.plugins-coc.vim
 endif
+source $MYVIM/init.plugins-switch.vim
 source $MYVIM/init.display-modes.vim
 source $MYVIM/init.mappings-aliases.vim
 source $MYVIM/init.mappings-emulation.vim

@@ -63,7 +63,7 @@ function! CycleEditDisplay(mode = '')
     elseif a:mode == '0'
         " This is 'nopaste'
         let b:CycleEditDisplay_mode = 'default'
-    elseif exists("b:CycleEditDisplay_mode")
+    elseif exists('b:CycleEditDisplay_mode')
         if b:CycleEditDisplay_mode == 'default'
             let b:CycleEditDisplay_mode = 'full'
         elseif b:CycleEditDisplay_mode == 'full'

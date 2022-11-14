@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Emulate neovim {{{1
 
-if has("nvim")
+if exists('g:nvim')
     " Can't remap `Y` as it's used incredibly often and needs to be pressed reliably
     silent! nunmap Y
 endif
@@ -58,7 +58,7 @@ call MapSuperKey('n', '<Cmd>new<CR>')
 
 " Open recent
 if exists('g:gui_running')
-    if has('nvim')
+    if exists('g:nvim')
         call MapSuperKey('p', '<C-F4>', 'all', v:false, v:true)
     else
         call MapSuperKey('p', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
@@ -66,7 +66,7 @@ if exists('g:gui_running')
 endif
 " We actually need to map ⇧⌥P in terminals so as to not conflict with our ⌥P chord prefix,
 " and BetterTouchTool can handle the detour
-if has('nvim')
+if exists('g:nvim')
     call MapSuperKey('P', '<C-F4>', 'all', v:false, v:true)
 else
     call MapSuperKey('P', '<Cmd>GFiles --cached --others --exclude-standard<CR>')
@@ -172,7 +172,7 @@ call MapKey('<Down>', 'gj')
 
 " Move cursor
 " NOTE: we don't do this in TUIs because <M-Arrow> is reserved for vim-move
-if has('gui_running')
+if exists('g:gui_running')
     call MapSuperKey('Up', 'gg')
     call MapSuperKey('Down', 'G')
     call MapSuperKey('Left', '0')
@@ -237,7 +237,7 @@ call MapKey('<M-Down>', '<Plug>MoveBlockDown', ['vmap'])
 call MapKey('<M-Left>', '<Plug>MoveBlockLeft', ['vmap'])
 call MapKey('<M-Right>', '<Plug>MoveBlockRight', ['vmap'])
 
-" if exists("g:gui_running")
+" if exists('g:gui_running')
 "     nmap <M-Down> <Plug>MoveLineDown
 "     nmap <M-Up> <Plug>MoveLineUp
 "     nmap <M-Left> <Plug>MoveCharLeft
@@ -367,7 +367,7 @@ call MapKey('<M-m>d', '<Leader>tdd', 'all', v:false, v:true)
 """ Terminal {{{2
 
 call MapKey('<M-F12>', '<Cmd>call OpenTerminal()<CR>')
-if has('nvim')
+if exists('g:nvim')
     call MapKey('<M-o>t', ':<C-u>call RevealInTerminal()<CR>')
 else
     call MapKey('<M-o>t',
@@ -381,7 +381,7 @@ call MapKey('<M-o>T', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
 
 """ Internal Apps {{{2
 
-if has('nvim')
+if exists('g:nvim')
     call MapControlKey('F', '<Cmd>NvimTreeFindFile<CR>')
 else
     call MapControlKey('F', '<Cmd>NERDTreeFind<CR>')
@@ -409,7 +409,7 @@ call MapKey('<M-o>c', '<Cmd>CodeCurrent<CR>')
 """ System clipboard {{{2
 
 " GUI apps should already have the ⌘ versions mapped
-if !has('gui_running')
+if exists('g:tui_running')
     vnoremap <C-S-x> "+d
     vnoremap <C-S-c> "+y
     vnoremap <C-S-v> "+gP

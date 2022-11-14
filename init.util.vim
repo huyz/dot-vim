@@ -46,7 +46,7 @@ endfunction
 "   XXX 2022-11-13 I'm not sure if this is true; maybe it's because of the way I coded it; but I
 "     don't want to try to fix it and go through another full round of testing.
 function! s:NormalizeMetaModifier(str) abort
-    if has("nvim") || (has("gui_macvim") && (exists("g:gui_running") || g:use_extended_keys_in_terminal))
+    if exists('g:nvim') || (exists('g:vim') && (exists('g:gui_macvim') && has('macmeta') || exists('g:tui_vim') && g:use_extended_keys_in_terminal))
         return a:str
     endif
     let l:str = substitute(a:str, '<M->>', '<Esc><gt>', 'g')
@@ -89,7 +89,7 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, remap = v:false,
     " 3) If vim TUI, then we do two mappings: one normalized and one
     "    unchanged. That's because we don't know if iTerm has modifyOtherKeys
     "    on or not.
-    if !has('nvim')
+    if exists('g:vim')
         let l:lhs_normalized = s:NormalizeMetaModifier(a:keys)
         let l:rhs_normalized = s:NormalizeMetaModifier(a:rhs)
         if l:lhs_normalized != a:keys || l:rhs_normalized != a:rhs
@@ -99,7 +99,7 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, remap = v:false,
             let l:no_insert = l:lhs_normalized != a:keys || a:no_insert
             call MapKey(l:lhs_normalized, l:rhs_normalized,
                         \ l:modes, l:no_insert, a:remap, a:map_flag)
-            if exists("g:gui_running")
+            if exists('g:gui_running')
                 return
             endif
         endif
@@ -139,8 +139,8 @@ endfunction
 " NOTE: in some cases, `key` is allowed to contain a modifier, but not `M-`
 function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
     let l:no_insert = a:no_insert
-    if exists("g:gui_running")
-        if has('nvim')
+    if exists('g:gui_running')
+        if exists('g:nvim')
             let l:key = <SID>ShiftModifierIfNeededForSuper(a:key)
             let l:key .= l:key != '' ? tolower(a:key) : a:key
         else
@@ -160,7 +160,7 @@ endfunction
 " NOTE: in some cases, `key` is allowed to contain a modifier, but not `M-`
 function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
     let l:no_insert = a:no_insert
-    if exists("g:gui_running")
+    if exists('g:gui_running')
         let l:keys = s:NormalizeMetaModifier('<M-' . a:key . '>')
         let l:no_insert = l:keys != '<M-' . a:key . '>' || l:no_insert
     else
@@ -176,7 +176,7 @@ endfunction
 " 2022-10-30 That's because neither MacVim/VimR support modifyOtherKeys yet
 "   and thus treat <C-D-a> like <C-A>.
 function! MapSuperOrControlKey(key, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
-    if exists("g:gui_running")
+    if exists('g:gui_running')
         call MapKey('<D-' . <SID>ShiftModifierIfNeededForSuper(a:key) . tolower(a:key) . '>',
                     \ a:rhs, a:modes, a:no_insert, a:remap, a:map_flag)
     else

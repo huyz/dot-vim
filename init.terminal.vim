@@ -6,7 +6,7 @@
 "   vim and not neovim:
 "     <C-W> .   Send <C-w> to terminal
 
-if has("nvim")
+if exists('g:nvim')
     autocmd TermOpen * setlocal nonumber norelativenumber
     " NOTE: added lazygit check to avoid lua error
     " NOTE: added "silent!" to avoid error when FZF terminal window is closed.
@@ -20,7 +20,7 @@ autocmd BufEnter * if &buftype == 'terminal' | set nonumber norelativenumber | :
 
 " Open terminal with opt+F12 (just like in JetBrains).
 function! OpenTerminal()
-    if has("nvim")
+    if exists('g:nvim')
         split term://zsh
     else
         terminal ++close
@@ -30,7 +30,7 @@ endfunction
 " Open in current buffer's directory
 function! RevealInTerminal()
     let l:dir = expand('%:p:h')
-    if has("nvim")
+    if exists('g:nvim')
         below new
         call termopen([&shell], {'cwd': expand('%:p:h') })
         normal i
