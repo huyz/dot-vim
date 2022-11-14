@@ -73,6 +73,9 @@ vnoremap <Space><Space> zf
 " Suspend from insert mode
 noremap! <C-z> <Esc><C-z>
 
+" Switch to alternate file
+call MapKey('<M-a>', '<C-^>')
+
 " Edit .vimrc
 nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 " Re-source .vimrc and re-run Sleuth
