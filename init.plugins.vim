@@ -53,6 +53,7 @@ Plug 'mhinz/vim-startify'
 Plug 'nvim-lua/plenary.nvim', Cond(exists('g:nvim'))
 Plug 'nvim-telescope/telescope.nvim', Cond(exists('g:nvim'))
 Plug 'nvim-telescope/telescope-fzf-native.nvim', Cond(exists('g:nvim'), { 'do': 'make' })
+Plug 'kien/ctrlp.vim'
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -340,7 +341,22 @@ if exists('g:nvim')
 EOF
 endif
 
+""" CtrlP {{{2
+
+let g:ctrlp_cmd = 'CtrlPBuffer'
+
+"set wildignore+=/tmp/,.so,.so p,*.zip
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/](\.(git|hg|svn)|.venv|venv.*|node_modules)$',
+    \ 'file': '\v\.(pyc|class|DS_Store)$',
+    \ }
+
+let g:ctrlp_max_files = 20000
+
 """ fzf {{{2
+
+" Focus buffer if it's already viewable
+let g:fzf_buffers_jump = 1
 
 " Tip: remember to keep these envvars in sync in your shell config files
 let $FZF_DEFAULT_OPTS="--bind=ctrl-/:toggle-preview,ctrl-f:preview-page-down,ctrl-b:preview-page-up --preview '

@@ -14,15 +14,21 @@ else
 endif
 call MapKey('<C-S-F1>', '<Cmd>messages<CR>')
 
+" Override default so that we don't have the slow preview
+command! -bar -bang -nargs=? -complete=buffer MyBuffers  call fzf#vim#buffers(<q-args>, <bang>0)'
+" But FZF is too slow
+"nmap <C-F2> <Cmd>MyBuffers<CR>
+nmap <C-F2> <Cmd>CtrlPBuffer<CR>
+
 if exists('g:nvim')
-    nmap <C-F2> <Cmd>Telescope buffers show_all_buffers=false ignore_current_buffer=true sort_mru=true<CR>
+    " Until telescope can do this: https://github.com/nvim-telescope/telescope.nvim/issues/2188
+    "nmap <C-F2> <Cmd>Telescope buffers show_all_buffers=false ignore_current_buffer=true sort_mru=true<CR>
     nmap <C-S-F2> <Cmd>Telescope buffers sort_mru=true<CR>
     nmap <C-F3> <Cmd>Telescope live_grep<CR>
     nmap <C-S-F3> <Cmd>Telescope live_grep no_ignore=true follow=true<CR>
     nmap <C-F4> <Cmd>Telescope find_files<CR>
     nmap <C-S-F4> <Cmd>Telescope find_files no_ignore=true follow=true<CR>
 else
-    nmap <C-F2> <Cmd>Buffers<CR>
     nmap <C-F3> <Cmd>Rg<CR>
     nmap <C-S-F3> <Cmd>RG<CR>
     nmap <C-F4> <Cmd>GFiles --cached --others --exclude-standard<CR>
