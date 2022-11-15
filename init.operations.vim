@@ -49,7 +49,7 @@ function! s:SwapLastTwoWordsInInsertMode()
     let l:addone = 0
     let l:beyondeol = 0
     let l:pos = getpos('.')
-    if col(".") == col("$")
+    if col('.') == col('$')
         let l:beyondeol = 1
     endif
     normal \<Esc>
@@ -75,5 +75,56 @@ endfunction
 nnoremap <silent> <M-x><M-x> :<C-u>call <SID>SwapLastTwoWords()<CR>
 " NOTE: we can't use <Cmd> because we actually want a mode change to normal
 "   inside function to look at whitespace
-imap <silent> <M-x><M-x> <C-\><C-o>:<C-u>call <SID>SwapLastTwoWordsInInsertMode()<CR>
+inoremap <silent> <M-x><M-x> <C-\><C-o>:<C-u>call <SID>SwapLastTwoWordsInInsertMode()<CR>
 
+
+""" Swap last two characters {{{1
+
+" Usage: cursor must be after the last two characters to be swapped.
+"   Unlike emacs' <C-t>, this is useful for typo correctin anywhere in the line.
+function! s:SwapTwoLastCharactersInInsertMode()
+    let l:beyondeol = 0
+    let l:ateol = 0
+    if col('.') == col('$')
+        let l:beyondeol = 1
+    endif
+    normal \<Esc>
+    normal h
+    if !l:beyondeol
+        normal h
+    endif
+    normal xp
+    if l:beyondeol
+        startinsert!
+    else
+        normal l
+        startinsert
+    endif
+endfunction
+
+" Usage: cursor must be in between the two characters, or at the end of the line
+"   in which case the last two charcters before the cursor are swapped.
+"   This is like emacs' <C-t> except at the very left column.
+function! s:SwapTwoCharactersLikeEmacsInInsertMode()
+    let l:beyondeol = 0
+    let l:ateol = 0
+    if col('.') == col('$')
+        let l:beyondeol = 1
+    elseif col('.') == col('$') - 1
+        let l:ateol = 1
+    endif
+    normal \<Esc>
+    " If at end of the line, we want to swap last two charactesr
+    normal h
+    normal xp
+    if l:beyondeol || l:ateol
+        startinsert!
+    else
+        normal l
+        startinsert
+    endif
+endfunction
+
+" NOTE: we can't use <Cmd> because we actually want a mode change to normal
+"   inside function to look at whitespace
+inoremap <silent> <C-s> <C-\><C-o>:<C-u>call <SID>SwapTwoLastCharactersInInsertMode()<CR>

@@ -59,7 +59,7 @@ occasionally.
 I tend to forgot I defined these mappings:
 
 | Mapping                  | Description                                       |
-|--------------------------|---------------------------------------------------|
+| ------------------------ | ------------------------------------------------- |
 | `ZA`                     | Exit vim but prompt for unsaved buffers           |
 | `Zw`                     | Close buffer without saving                       |
 | `gb`                     | Re-select last pasted block                       |
@@ -67,6 +67,7 @@ I tend to forgot I defined these mappings:
 | `<M-p><C-S-BS>`          | Discard consecutive blank lines                   |
 | `<M-x>#-` or `#=` or`#~` | Underline line                                    |
 | `<D-M-S-->` `<D-M-S-+>`  | Increment/decrement (to free `<C-a>` and `<C-x>`) |
+| i\_`<C-s>`               | Swap last two characters (my own function)        |
 
 Archived:
 
