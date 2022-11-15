@@ -82,6 +82,9 @@ inoremap <silent> <M-x><M-x> <C-\><C-o>:<C-u>call <SID>SwapLastTwoWordsInInsertM
 
 " Usage: cursor must be after the last two characters to be swapped.
 "   Unlike emacs' <C-t>, this is useful for typo correctin anywhere in the line.
+" NOTE: this is just a more complex version of:
+"     inoremap <C-s> <Esc>hxpa
+"   but that's buggy at the beginning of the line.
 function! s:SwapTwoLastCharactersInInsertMode()
     let l:beyondeol = 0
     let l:ateol = 0
@@ -105,6 +108,7 @@ endfunction
 " Usage: cursor must be in between the two characters, or at the end of the line
 "   in which case the last two charcters before the cursor are swapped.
 "   This is like emacs' <C-t> except at the very left column.
+" NOTE: This can be simplified by combining ateol and beyondeol
 function! s:SwapTwoCharactersLikeEmacsInInsertMode()
     let l:beyondeol = 0
     let l:ateol = 0
@@ -127,4 +131,8 @@ endfunction
 
 " NOTE: we can't use <Cmd> because we actually want a mode change to normal
 "   inside function to look at whitespace
+" inoremap <silent> <C-s> <C-\><C-o>:<C-u>call <SID>SwapTwoLastCharactersInInsertMode()<CR>
+
+" Usage: cursor must be after the last two characters to be swapped.
+"   Unlike emacs' <C-t>, this is useful for typo correctin anywhere in the line.
 inoremap <silent> <C-s> <C-\><C-o>:<C-u>call <SID>SwapTwoLastCharactersInInsertMode()<CR>

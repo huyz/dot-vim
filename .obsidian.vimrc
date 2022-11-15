@@ -10,6 +10,9 @@ nmap k gk
 " Quickly remove search highlights
 nmap <Esc>u :nohl
 
+" Interestingly, this works better than in vim at the beginning of the line
+imap <C-s> <Esc>hxpa
+
 " Go back and forward with Ctrl+O and Ctrl+I
 " (make sure to remove default Obsidian shortcuts for these to work)
 exmap back obcommand app:go-back
