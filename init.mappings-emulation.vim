@@ -63,7 +63,7 @@ call MapSuperKey('F', '<C-F3>', 'all', v:false, v:true)
 call MapSuperKey('p', '<C-F4>', 'all', v:false, v:true)
 call MapSuperKey('"', '<C-F10>', 'all', v:false, v:true)
 
-call MapControlKey('X', '<Cmd>PlugUpdate<CR>')
+call MapControlKey('X', '<Cmd>PlugClean<CR><Cmd>PlugInstall<CR>')
 call MapControlKey('"', '<Cmd>verbose map<CR>')
 
 """ Splits {{{2
@@ -360,6 +360,9 @@ call MapKey('<M-m>i', '<Leader>tiC', 'all', v:false, v:true)
 call MapKey('<M-m>a', '<Leader>tic', 'all', v:false, v:true)
 call MapKey('<M-m>x', '<Leader>tdc', 'all', v:false, v:true)
 call MapKey('<M-m>d', '<Leader>tdd', 'all', v:false, v:true)
+
+autocmd FileType markdown call MapKey('<M-[>', '[<Bar>', ['map', 'imap'], v:false, v:true, '<buffer>')
+autocmd FileType markdown call MapKey('<M-]>', ']<Bar>', ['map', 'imap'], v:false, v:true, '<buffer>')
 
 """ Terminal {{{2
 
