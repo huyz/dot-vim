@@ -81,6 +81,9 @@ nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 " Re-source .vimrc and re-run Sleuth
 nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>syn on<CR><Cmd>echo 'Configs reloaded'<CR>
 
+" Killing
+nmap Zw <Cmd>bdelete!<CR>
+
 " Saving
 nmap ZA <Cmd>confirm qall<CR>
 " Quick-save and re-source .vimrc, using emacs keybinding
