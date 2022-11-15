@@ -61,6 +61,7 @@ I tend to forgot I defined these mappings:
 | Mapping                  | Description                                       |
 |--------------------------|---------------------------------------------------|
 | `ZA`                     | Exit vim but prompt for unsaved buffers           |
+| `Zw`                     | Close buffer without saving                       |
 | `gb`                     | Re-select last pasted block                       |
 | `Q` `gq` `<M-q>`         | In visual mode, format by `par`, vim              |
 | `<M-p><C-S-BS>`          | Discard consecutive blank lines                   |

@@ -81,9 +81,6 @@ nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
 " Re-source .vimrc and re-run Sleuth
 nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>syn on<CR><Cmd>echo 'Configs reloaded'<CR>
 
-" Killing
-nmap Zw <Cmd>bdelete!<CR>
-
 " Saving
 nmap ZA <Cmd>confirm qall<CR>
 " Quick-save and re-source .vimrc, using emacs keybinding
@@ -97,6 +94,8 @@ call MapKey('g<C-s>', '<Cmd>write<CR><Leader>so', ['map'])
 " Shortcut matches my zsh binding
 cnoremap <C-x><C-s> w !sudo tee > /dev/null %
 
+" Closing
+nmap Zw <Cmd>bdelete!<CR>
 " Closes buffer without messing up split window
 " (goes to the next buffer first so that the split window is not closed)
 " 2022-10-25 Now use bbye plugin
