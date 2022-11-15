@@ -44,6 +44,7 @@ endif
 nmap <C-F10> <Cmd>Startify<CR>
 nmap <F11> <Leader>o3
 nmap <F12> <Leader>o4
+nmap <C-F12> <Cmd>UndotreeToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Display modes {{{1
@@ -88,7 +89,7 @@ nmap ZA <Cmd>confirm qall<CR>
 call MapKey('<C-s>', '<Cmd>write<CR>')
 " NOTE: MacVim and VimR already handle <D-s>
 " NOTE: we don't use MapControlKey because we don't want to conflict with <M-S>
-call MapKey('g<C-s>', '<Cmd>write<CR><Leader>so', ['map'])
+call MapKey('<C-q><C-s>', '<Cmd>write<CR><Leader>so', ['map'])
 
 " Allow saving of files as sudo when you forget to start vim using sudo.
 " Shortcut matches my zsh binding

@@ -91,11 +91,10 @@ Plug 'preservim/nerdtree', Cond(!exists('g:nvim'))
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'airblade/vim-gitgutter'
 Plug 'wesQ3/vim-windowswap'
 Plug 'ryanoasis/vim-devicons', Cond(!exists('g:nvim'))
 Plug 'kyazdani42/nvim-web-devicons', Cond(exists('g:nvim'))
-Plug 'sjl/gundo.vim'
+Plug 'mbbill/undotree'
 Plug 'brglng/vim-im-select'
 " bbye: delete buffer preserving window layout
 Plug 'moll/vim-bbye'
@@ -150,6 +149,7 @@ Plug 'ellisonleao/glow.nvim', Cond(exists('g:nvim'))
 " Plug 'RubenVerborgh/vim-markup-assistant'
 
 " Dev
+Plug 'airblade/vim-gitgutter'
 " polyglot: collection of language packs
 " TODO: how does this interact with coc/mason
 Plug 'sheerun/vim-polyglot'

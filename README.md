@@ -82,12 +82,6 @@ Archived:
 |---------|-------------------------------------|
 | `\ww`   | Sets first or second window to swap |
 
-### Gundo
-
-| Mapping        | Description     |
-|----------------|-----------------|
-| `:GundoToggle` | Shows undo tree |
-
 ### Bbye
 
 | Mapping      | Description                                   |
