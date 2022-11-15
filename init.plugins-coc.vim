@@ -50,6 +50,8 @@ endif
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
+call MapKey('<S-F8>', '<Plug>(coc-diagnostic-prev)')
+call MapKey('<F8>', '<Plug>(coc-diagnostic-next)')
 
 " Try coc definition, otherwise search tags, otherwise fall back to `gd`
 " https://github.com/neoclide/coc.nvim/issues/1445#issuecomment-570856671
@@ -90,10 +92,12 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+call MapKey('<M-c>n', '<Plug>(coc-rename)', ['nmap', 'imap'])
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+"xmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
+call MapKey('<M-f>f', '<Plug>(coc-format-selected)', ['xnoremap'])
 
 augroup mygroup
     autocmd!
@@ -111,7 +115,8 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+"nmap <leader>qf  <Plug>(coc-fix-current)
+call MapSuperKey('.', '<Plug>(coc-fix-current)', ['nmap'])
 
 " Run the Code Lens action on the current line.
 nmap <leader>cl  <Plug>(coc-codelens-action)
@@ -137,20 +142,22 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
     vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
-" 2022-11-10 huy: <C-s> is to save files so use <C-p> instead
+" 2022-11-10 huy: <C-S> is to save files so use <C-P> instead
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-p> <Plug>(coc-range-select)
-xmap <silent> <C-p> <Plug>(coc-range-select)
+nmap <silent> <C-G> <Plug>(coc-range-select)
+xmap <silent> <C-G> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocActionAsync('format')
+call MapKey('<M-f>f', '<Cmd>Format<CR>', ['nmap', 'imap'])
 
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+call MapKey('<M-f>o', '<Cmd>OR<CR>', ['nmap', 'imap'])
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
@@ -196,10 +203,8 @@ let g:python3_host_prog = expand("~/.pyenv/versions/py3nvim/bin/python")
 
 " Usage: type `:Prettier` to format whole document
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+call MapKey('<M-f>p', '<Cmd>Prettier<CR>', ['nnoremap', 'inoremap'])
 
-" Usage: select range and invoke `\f`
-nnoremap <space>f <Plug>(coc-format-selected)
-vnoremap <space>f <Plug>(coc-format-selected)
 
 """ Use the settings from the coc help
 
@@ -211,9 +216,6 @@ else
     inoremap <silent><expr> <C-@> coc#refresh()
 endif
 
-" Use <CR> to accept choice instead of <C-y>
-inoremap <expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
-
 " Map <tab> for trigger completion, completion confirm, snippet expand and jump like VSCode:
 inoremap <silent><expr> <Tab>
     \ coc#pum#visible() ? coc#_select_confirm() :
@@ -222,10 +224,9 @@ inoremap <silent><expr> <Tab>
     \ CheckBackspace() ? "\<Tab>" :
     \ coc#refresh()
 
-function! CheckBackspace() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" Use <CR> to accept choice instead of <C-y>
+inoremap <expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+
 
 let g:coc_snippet_next = '<tab>'
 
