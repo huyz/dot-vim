@@ -28,6 +28,10 @@ nmap zR :unfoldall
 exmap foldall obcommand editor:fold-all
 nmap zM :foldall
 
+" Space must first be unbound
+unmap <Space>
+nmap <Space><Space> :togglefold
+
 " Emulate Tab Switching https://vimhelp.org/tabpage.txt.html#gt
 " requires Cycle Through Panes Plugins https://obsidian.md/plugins?id=cycle-through-panes
 exmap tabnext obcommand cycle-through-panes:cycle-through-panes
