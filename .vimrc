@@ -83,13 +83,14 @@ endif
 "let g:coc_or_mason = 'mason'
 let g:coc_or_mason = 'coc'
 
-" For terminals, set true if you can make your terminal use modifyOtherKeys or "CSI u" mode,
+" This only applies to vim and not neovim, which uses "CSI u" mode..
+" For terminals, set true if you can make your terminal use modifyOtherKeys,
 " in which case there's no need to transform <M-key> to <Esc>key, which eliminates a lot of
 " conflicts (in insert mode, exiting is still fast; in visual mode, exiting and using an immediate
 " arrow key won't interfere with vim-move)
-" In iTerm, this means you must turn on "Report keys using CSI u" and "Apps can change how keys are reported",
-"   as this will override the setting "Left Option key: Esc+" (Don't know what "Apps can change
-"   this" does)
+" In iTerm, this means you must turn on "Apps can change how keys are reported";
+"   among other things, this will override the setting "Left Option key: Esc+"
+"   (Don't know what "Apps can change this" does)
 " And in tmux you may need to:
 " - set -s extended-keys on
 " - set -sa terminal-features 'xterm*:extkeys'

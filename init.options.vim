@@ -129,13 +129,25 @@ set mouse=a                   " Enable the mouse where possible. (Great for Tagb
 
 """ Terminal capabilities
 
-if g:use_extended_keys_in_terminal
+" XXX As of 2022-11-16 and iTerm v3.4, all the terminal state switching is very buggy:
+"   I get inconsistent behavior when toggling "Report modifiers using CSI u", especially when
+"   running inside tmux. Sometimes restarting iTerm will change the behavior.
+"   Bottom line: can't use vim inside of tmux, let alone tmux within mosh.
+"   I have to rely on neovim.
+" NOTE: must not be set this for neovim, as it will already automatically send the right sequences
+"   to the terminal to turn on "CSI u" mode.
+if exists('g:vim') && g:use_extended_keys_in_terminal
     " Enable extended keys
     if exists('$TMUX')
         " tmux 3.3 only officially supports modifyOtherKeys=1, but does support some
         " extended keys anyway:
         " https://github.com/tmux/tmux/issues/3086#issuecomment-1050808319
-        let &t_TI = "\<Esc>[>4;1m"
+        " We use tmux 3.3's passthrough functionality to force modifyOtherKeys=2
+        " as tmux would otherwise downgrade to modifyOtherKeys=1
+        " XXX 2022-11-16 I can't get any of these to work reliably:
+        "let &t_TI = "\<Esc>Ptmux;\<Esc>\<Esc>[>4;2m\<Esc>\\"
+        "let &t_TI = "\<Esc>[>4;2m\<Esc>Ptmux;\<Esc>\<Esc>[>4;2m\<Esc>\\"
+        let &t_TI = "\<Esc>[>4;2m"
         let &t_TE = "\<Esc>[>4;m"
     else
         let &t_TI = "\<Esc>[>4;2m"
