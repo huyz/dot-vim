@@ -40,7 +40,7 @@ occasionally.
 | `/<C-R><C-W>`                                        | Pull current word into search                                                                                                                      |
 | `/<C-R>"`                                            | Pull in last yank                                                                                                                                  |
 | `[I`                                                 | Show lines that match current word                                                                                                                 |
-| ``[ ` or `` `]``                                     | Go to beginning/end of last change                                                                                                                 |
+| `` `[ `` or `` `]``                                  | Go to beginning/end of last change                                                                                                                 |
 | `<C-X><C-L>`                                         | Starts line completion                                                                                                                             |
 | `<C-X><C-K>`                                         | Starts dictionary completion                                                                                                                       |
 | `==`                                                 | Reindent line(s)                                                                                                                                   |
@@ -60,6 +60,9 @@ I tend to forgot I defined these mappings:
 
 | Mapping                  | Description                                       |
 | ------------------------ | ------------------------------------------------- |
+| `<C-s>`                  | Save buffer                                       |
+| `<C-q><C-s>`             | Save buffer and reload configs                    |
+| `<C-q><C-r>`             | Reload configs                                    |
 | `ZA`                     | Exit vim but prompt for unsaved buffers           |
 | `Zw`                     | Close buffer without saving                       |
 | `gb`                     | Re-select last pasted block                       |
@@ -69,25 +72,19 @@ I tend to forgot I defined these mappings:
 | `<D-M-S-->` `<D-M-S-+>`  | Increment/decrement (to free `<C-a>` and `<C-x>`) |
 | i\_`<C-s>`               | Swap last two characters (my own function)        |
 
-Archived:
-
-| Mapping | Description |
-| ------- | ----------- |
-| `<C-s>` | Save buffer |
-
 ## Plugins I installed
 
 ### windowswap
 
-| Mapping | Description                         |
-| ------- | ----------------------------------- |
-| `\ww`   | Sets first or second window to swap |
+| Mapping | Description                        |
+| ------- | ---------------------------------- |
+| `\ww`   | Set first or second window to swap |
 
 ### Bbye
 
-| Mapping      | Description                                   |
-| ------------ | --------------------------------------------- |
-| `<C-w><C-q>` | Closes buffer without messing up split window |
+| Mapping      | Description                                  |
+| ------------ | -------------------------------------------- |
+| `<C-q><C-w>` | Close buffer without messing up split window |
 
 ### visual-multi
 

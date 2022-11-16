@@ -2,7 +2,7 @@
 """ which-key {{{1
 " TODO: add commands that are hard to remember
 
-set timeoutlen=500
+"set timeoutlen=500
 
 "nnoremap <silent> <Leader> <Cmd>WhichKey '\\'<CR>
 "vnoremap <silent> <Leader> <Cmd>WhichKey '\\'<CR>

@@ -434,7 +434,7 @@ autocmd BufEnter * if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isT
 
 """ bbye {{{2
 
-noremap <C-w><C-q> <Cmd>Bdelete<CR>
+call MapKey('<C-q><C-w>', '<Cmd>Bdelete<CR>')
 
 """ indent-guides {{{2
 

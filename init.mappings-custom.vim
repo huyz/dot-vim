@@ -80,33 +80,31 @@ vnoremap <Space><Space> zf
 " Suspend from insert mode
 noremap! <C-z> <Esc><C-z>
 
-" Switch to alternate file
-call MapKey('<M-a>', '<C-^>')
-
-" Edit .vimrc
-nnoremap <Leader>vi <Cmd>e $MYVIM/.vimrc<CR>
-" Re-source .vimrc and re-run Sleuth
-nnoremap <Leader>so <Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>syn on<CR><Cmd>echo 'Configs reloaded'<CR>
-
-" Saving
+" Closing without saving
+nmap Zw <Cmd>bdelete!<CR>
+" Save all and exit
 nmap ZA <Cmd>confirm qall<CR>
-" Quick-save and re-source .vimrc, using emacs keybinding
-" NOTE: we don't use MapControlKey because we don't want to conflict with <M-s>
+" Closes buffer without messing up split window
+" (goes to the next buffer first so that the split window is not closed)
+" 2022-10-25 Now use bbye plugin
+"noremap <C-w><C-q> <Cmd>bnext<CR><Cmd>bdel #<CR>
+" Switch to alternate buffer
+call MapKey('<M-a>', '<C-^>')
+" Reload configs and re-run Sleuth
+call MapKey('<C-q><C-r>', '<Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>syn on<CR><Cmd>echo "Configs reloaded"<CR>')
+" Save buffer
+" NOTE: MacVim and VimR already map <D-s>
+" NOTE: we don't use MapControlKey because we don't want to conflict with <M-s>, which is one of
+"   our chord prefixes
 call MapKey('<C-s>', '<Cmd>write<CR>')
-" NOTE: MacVim and VimR already handle <D-s>
-" NOTE: we don't use MapControlKey because we don't want to conflict with <M-S>
-call MapKey('<C-q><C-s>', '<Cmd>write<CR><Leader>so', ['map'])
+" Save buffer and reload configs
+" NOTE: we don't use MapControlKey because we don't want to conflict with <M-q>
+call MapKey('<C-q><C-s>', '<Cmd>write<CR><C-q><C-r>', 'all', v:false, v:true)
 
 " Allow saving of files as sudo when you forget to start vim using sudo.
 " Shortcut matches my zsh binding
 cnoremap <C-x><C-s> w !sudo tee > /dev/null %
 
-" Closing
-nmap Zw <Cmd>bdelete!<CR>
-" Closes buffer without messing up split window
-" (goes to the next buffer first so that the split window is not closed)
-" 2022-10-25 Now use bbye plugin
-"noremap <C-w><C-q> <Cmd>bnext<CR><Cmd>bdel #<CR>
 
 " Use Q for par formating
 " NOTE: regular formatting is still done with `gq` and emacs formatting with <M-q>
