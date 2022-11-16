@@ -289,22 +289,26 @@ if exists('g:nvim')
             -- Default configuration for telescope goes here:
             -- config_key = value,
             mappings = {
-            i = {
-                -- map actions.which_key to <C-h> (default: <C-/>)
-                -- actions.which_key shows the mappings for your picker,
-                -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-                -- ["<C-h>"] = "which_key",
-                ["<C-j>"] = {
-                require('telescope.actions').move_selection_next, type = "action",
-                opts = { nowait = true, silent = true }
-                },
-                ["<C-k>"] = {
-                require('telescope.actions').move_selection_previous, type = "action",
-                opts = { nowait = true, silent = true }
-                },
-                ["<C-n>"] = require('telescope.actions').cycle_history_next,
-                ["<C-p>"] = require('telescope.actions').cycle_history_prev,
-            }
+                i = {
+                    ["<C-a>"] = { "<C-o>0", type = "command" },
+                    ["<C-e>"] = { "<C-o>A", type = "command" },
+                    ["<C-u>"] = { "<C-u>", type = "command" },
+
+                    -- map actions.which_key to <C-h> (default: <C-/>)
+                    -- actions.which_key shows the mappings for your picker,
+                    -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+                    -- ["<C-h>"] = "which_key",
+                    ["<C-j>"] = {
+                        require('telescope.actions').move_selection_next, type = "action",
+                        opts = { nowait = true, silent = true }
+                    },
+                    ["<C-k>"] = {
+                        require('telescope.actions').move_selection_previous, type = "action",
+                        opts = { nowait = true, silent = true }
+                    },
+                    ["<C-n>"] = require('telescope.actions').cycle_history_next,
+                    ["<C-p>"] = require('telescope.actions').cycle_history_prev,
+                }
             }
         },
         pickers = {
@@ -321,12 +325,12 @@ if exists('g:nvim')
             live_grep = {
                 glob_pattern = '!.git/',
                 additional_args = {
-                '-L',
-                '--hidden',
-                '--column',
-                '--line-number',
-                '--no-heading',
-                '--smart-case',
+                    '-L',
+                    '--hidden',
+                    '--column',
+                    '--line-number',
+                    '--no-heading',
+                    '--smart-case',
                 },
             },
         },
