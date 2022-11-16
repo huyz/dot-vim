@@ -132,9 +132,11 @@ set mouse=a                   " Enable the mouse where possible. (Great for Tagb
 if g:use_extended_keys_in_terminal
     " Enable extended keys
     if exists('$TMUX')
-        " tmux 3.3 only supports modifyOtherKeys=1
-        let &t_TI = "\e[>4;1m"
-        let &t_TE = "\e[>4;m"
+        " tmux 3.3 only officially supports modifyOtherKeys=1, but does support some
+        " extended keys anyway:
+        " https://github.com/tmux/tmux/issues/3086#issuecomment-1050808319
+        let &t_TI = "\<Esc>[>4;1m"
+        let &t_TE = "\<Esc>[>4;m"
     else
         let &t_TI = "\<Esc>[>4;2m"
         let &t_TE = "\<Esc>[>4;m"
