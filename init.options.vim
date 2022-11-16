@@ -133,7 +133,7 @@ set mouse=a                   " Enable the mouse where possible. (Great for Tagb
 "   I get inconsistent behavior when toggling "Report modifiers using CSI u", especially when
 "   running inside tmux. Sometimes restarting iTerm will change the behavior.
 "   Bottom line: can't use vim inside of tmux, let alone tmux within mosh.
-"   I have to rely on neovim.
+"   I have to rely on neovim and just have "CSI u" mode on.
 " NOTE: must not be set this for neovim, as it will already automatically send the right sequences
 "   to the terminal to turn on "CSI u" mode.
 if exists('g:vim') && g:use_extended_keys_in_terminal
