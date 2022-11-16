@@ -381,6 +381,7 @@ call MapKey('<M-o>T', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
 
 """ Internal Apps {{{2
 
+call MapKey('<M-s>i', '<Cmd>verb Sleuth<CR>')
 if exists('g:nvim')
     call MapControlKey('F', '<Cmd>NvimTreeFindFile<CR>')
 else
