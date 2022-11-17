@@ -149,6 +149,8 @@ call MapSuperKey('}', '<Cmd>tabnext<CR>')
 
 call MapControlKey('{', '<Cmd>-tabmove<CR>')
 call MapControlKey('}', '<Cmd>+tabmove<CR>')
+call MapSuperOrControlKey('M-{', '<Cmd>0tabmove<CR>')
+call MapSuperOrControlKey('M-}', '<Cmd>$tabmove<CR>')
 
 """ Movement {{{2
 

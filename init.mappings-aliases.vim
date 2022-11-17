@@ -111,16 +111,16 @@ if has('mac') && (exists('g:gui_nvim') || (exists('g:gui_macvim') && !has('macme
         call MapAlias('µπ', '<M-m><M-p>')
         "call MapAlias('µ¬', '<M-m><M-l>')
 
-        " XXX What's this?
-        "call MapAlias('<D-”>', '<M-S-D-{>')
-        "call MapAlias('<D-’>', '<M-S-D-}>')
+        " Move tab first or last
+        call MapAlias('<D-”>', '<M-S-D-{>')
+        call MapAlias('<D-’>', '<M-S-D-}>')
         " Close tab
         call MapAlias('<D-„>', '<M-S-D-w>')
         " Equalize splits
         call MapAlias('<D-‚>', '<M-S-D-)>')
         " Maximize splits
         call MapAlias('<D-»>', '<M-S-D-Bar>')
-        " Increment/decremenet
+        " Increment/decrement
         call MapAlias('<D-—>', '<M-S-D-_>')
         call MapAlias('<D-±>', '<M-S-D-+>')
         " Code navigation

@@ -137,6 +137,7 @@ endfunction
 " Maps the Command (⌘) key, or in TUIs the fallback Option (⌥), key.
 " That's because terminals like iTerm swallow up key bindings with the ⌘ key.
 " NOTE: in some cases, `key` is allowed to contain a modifier, but not `M-`
+"   in which case, use MapSuperOrControlKey()
 function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
     let l:no_insert = a:no_insert
     if exists('g:gui_running')
@@ -157,7 +158,8 @@ endfunction
 " Maps the Control (⌃) key, or in GUIs the fallback Option (⌥), key.
 " 2022-10-30 That's because neither MacVim/VimR support modifyOtherKeys yet
 "   and thus treat <C-S-A> like <C-A>.
-" NOTE: in some cases, `key` is allowed to contain a modifier, but not `M-`
+" NOTE: in some cases, `key` is allowed to contain a modifier, but not `M-`,
+"   in which case, use MapSuperOrControlKey()
 function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
     let l:no_insert = a:no_insert
     if exists('g:gui_running')
