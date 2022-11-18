@@ -447,21 +447,6 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'startify']
 
 let g:indent_guides_color_change_percent = 3
 
-""" visual-multi {{{2
-
-let g:VM_maps = {}
-let g:VM_maps["Undo"] = 'u'
-let g:VM_maps["Redo"] = '<C-r>'
-
-" NOTE: we can't use <C-Leftmouse> because that's already mapped to looking up tags
-" NOTE: we can't use <C-S-RightMouse> because MacVim doesn't pass it through,
-"   even if we did already liberate <C-LeftMouse> with:
-"   `defaults write org.vim.MacVim MMTranslateCtrlClick 0` to disable the context menu
-" NOTE: iTerm2 sends Cmd+Click as <M-LeftMouse>
-let g:VM_maps["Mouse Cursor"] = '<M-RightMouse>'
-let g:VM_maps["Mouse Word"] = '<M-MiddleMouse>'
-let g:VM_maps["Mouse Column"] = '<S-M-RightMouse>'
-
 """ easymotion {{{2
 
 let g:EasyMotion_smartcase = 1

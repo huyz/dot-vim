@@ -88,15 +88,16 @@ I tend to forgot I defined these mappings:
 
 ### visual-multi
 
-| Mapping                 | Description                                                    |
-| ----------------------- | -------------------------------------------------------------- |
-| `<C-n>`                 | Select word at cursor, or next occurrence of current selection |
-| `N`                     | Select previous occurrence of current selection                |
-| `Q`                     | Unselect occurrence                                            |
-| `q`                     | Skip current occurrence                                        |
-| `\\A`                   | Select all occurrences                                         |
-| `<C-down>` then `<Tab>` | Add cursor(s) vertically                                       |
-| `\\gS`                  | Reselect last                                                  |
+| Mapping            | Description                                                    |
+| ------------------ | -------------------------------------------------------------- |
+| `<C-n>` or `n`     | Select word at cursor, or next occurrence of current selection |
+| `<C-S-n>` or `N`   | Select previous occurrence of current selection                |
+| `<M-q>` or `q`     | Skip current occurrence                                        |
+| `<M-S-Q>` or `Q`   | Unselect occurrence                                            |
+| `<M-S-G>` or `\\A` | Select all occurrences                                         |
+| `<M-S-/>` or `\\/` | Select by regex                                                |
+| `<C-Down>`         | Add cursor(s) vertically                                       |
+| `\\S` or `\\gS`    | Reselect last                                                  |
 
 ### easymotion
 

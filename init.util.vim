@@ -45,7 +45,7 @@ endfunction
 "   as preferring iTerm to have modifyOtherKeys set to on.
 "   XXX 2022-11-13 I'm not sure if this is true; maybe it's because of the way I coded it; but I
 "     don't want to try to fix it and go through another full round of testing.
-function! s:NormalizeMetaModifier(str) abort
+function! g:NormalizeMetaModifier(str) abort
     if exists('g:nvim') || (exists('g:vim') && (exists('g:gui_macvim') && has('macmeta') || exists('g:tui_vim') && g:use_extended_keys_in_terminal))
         return a:str
     endif
@@ -58,7 +58,7 @@ endfunction
 " Allows mapping aliases for characters like `å` to `<M-a>`
 function! MapAlias(keys, rhs, modes = 'all', no_insert = v:false) abort
     let l:modes = a:modes
-    let l:rhs = s:NormalizeMetaModifier(a:rhs)
+    let l:rhs = g:NormalizeMetaModifier(a:rhs)
     if type(l:modes) == type("") && l:modes == 'all'
         execute 'map'  a:keys l:rhs
         " Exclude insert mode because we don't want the <Esc> to slow down exiting insert mode
@@ -90,8 +90,8 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, remap = v:false,
     "    unchanged. That's because we don't know if iTerm has modifyOtherKeys
     "    on or not.
     if exists('g:vim')
-        let l:lhs_normalized = s:NormalizeMetaModifier(a:keys)
-        let l:rhs_normalized = s:NormalizeMetaModifier(a:rhs)
+        let l:lhs_normalized = g:NormalizeMetaModifier(a:keys)
+        let l:rhs_normalized = g:NormalizeMetaModifier(a:rhs)
         if l:lhs_normalized != a:keys || l:rhs_normalized != a:rhs
             " If we're automatically normalizing to <Esc>, we don't want to
             " map any insert-like mode because we don't want conflict with
@@ -149,7 +149,7 @@ function! MapSuperKey(key, rhs, modes = "all", no_insert = v:false, remap = v:fa
         endif
         let l:keys = '<D-' . l:key . '>'
     else
-        let l:keys = s:NormalizeMetaModifier('<M-' . a:key . '>')
+        let l:keys = g:NormalizeMetaModifier('<M-' . a:key . '>')
         let l:no_insert = l:keys != '<M-' . a:key . '>' || l:no_insert
     endif
     call MapKey(l:keys, a:rhs, a:modes, l:no_insert, a:remap, a:map_flag)
@@ -163,7 +163,7 @@ endfunction
 function! MapControlKey(key, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
     let l:no_insert = a:no_insert
     if exists('g:gui_running')
-        let l:keys = s:NormalizeMetaModifier('<M-' . a:key . '>')
+        let l:keys = g:NormalizeMetaModifier('<M-' . a:key . '>')
         let l:no_insert = l:keys != '<M-' . a:key . '>' || l:no_insert
     else
         let l:key = <SID>ShiftModifierIfNeededForControl(a:key)

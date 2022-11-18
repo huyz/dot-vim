@@ -226,6 +226,46 @@ call MapControlKey('=', 'zo')
 call MapControlKey('_', 'zM')
 call MapControlKey('+', 'zR')
 
+""" visual-multi {{{2
+
+let g:VM_maps = {}
+let g:VM_maps["Undo"] = 'u'
+let g:VM_maps["Redo"] = '<C-r>'
+
+" We prefer to add not replace the existing defaults, so we don't use g:VM_maps
+" Because \\gS is hard to remember
+exe 'nnoremap ' . g:NormalizeMetaModifier('<C-G>') . ' <Plug>(VM-Find-Under)'
+nnoremap \\S <Plug>(VM-Reselect-Last)
+exe 'nnoremap ' . g:NormalizeMetaModifier('<M-?>') . ' <Plug>(VM-Start-Regex-Search)'
+exe 'nnoremap ' . g:NormalizeMetaModifier('<M-G>') . ' <Plug>(VM-Select-All)'
+exe 'xnoremap ' . g:NormalizeMetaModifier('<M-G>') . ' <Plug>(VM-Visual-All)'
+" In any case, these don't work
+"   let g:VM_maps["Find Previous"] = '<C-S-N>'
+"   let g:VM_maps["Select All Words"] = g:NormalizeMetaModifier('<M-G>')
+" even if these do:
+"   let g:VM_maps["Skip Region"] = g:NormalizeMetaModifier('<M-q>')
+"   let g:VM_maps["Remove Region"] = g:NormalizeMetaModifier('<M-Q>')
+"   let g:VM_maps["Visual All"] = g:NormalizeMetaModifier('<M-G>')
+function! VM_Start()
+    nnoremap <buffer> <C-S-G> <Plug>(VM-Find-Prev)
+    exe 'nnoremap <buffer> ' . g:NormalizeMetaModifier('<M-q>') . ' <Plug>(VM-Skip-Region)'
+    exe 'nnoremap <buffer> ' . g:NormalizeMetaModifier('<M-Q>') . ' <Plug>(VM-Remove-Region)'
+endfunction
+function! VM_Exit()
+    nunmap <buffer> <C-S-G>
+    exe 'nunmap <buffer> ' . g:NormalizeMetaModifier('<M-q>')
+    exe 'nunmap <buffer> ' . g:NormalizeMetaModifier('<M-Q>')
+endfunction
+
+" NOTE: we can't use <C-Leftmouse> because that's already mapped to looking up tags
+" NOTE: we can't use <C-S-RightMouse> because MacVim doesn't pass it through,
+"   even if we did already liberate <C-LeftMouse> with:
+"   `defaults write org.vim.MacVim MMTranslateCtrlClick 0` to disable the context menu
+" NOTE: iTerm2 sends Cmd+Click as <M-LeftMouse>
+let g:VM_maps["Mouse Cursor"] = '<M-RightMouse>'
+let g:VM_maps["Mouse Word"] = '<M-MiddleMouse>'
+let g:VM_maps["Mouse Column"] = '<S-M-RightMouse>'
+
 """ vim-move {{{2
 
 call MapKey('<M-Down>', '<Plug>MoveLineDown', ['nmap', 'map!'])
