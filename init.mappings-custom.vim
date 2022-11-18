@@ -90,6 +90,8 @@ nmap ZA <Cmd>confirm qall<CR>
 "noremap <C-w><C-q> <Cmd>bnext<CR><Cmd>bdel #<CR>
 " Switch to alternate buffer
 call MapKey('<M-a>', '<C-^>')
+" Edit .vimrc
+call MapKey('<C-q><C-e>', '<Cmd> $MYVIM/.vimrc<CR>')
 " Reload configs and re-run Sleuth
 call MapKey('<C-q><C-r>', '<Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>syn on<CR><Cmd>echo "Configs reloaded"<CR>')
 " Save buffer
