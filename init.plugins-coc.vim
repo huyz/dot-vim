@@ -27,7 +27,7 @@ inoremap <silent><expr> <TAB>
     \ coc#pum#visible() ? coc#pum#next(1) :
     \ CheckBackspace() ? "\<Tab>" :
     \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <expr> <S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice.
@@ -145,8 +145,8 @@ endif
 " 2022-11-10 huy: <C-S> is to save files so use <C-P> instead
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-G> <Plug>(coc-range-select)
-xmap <silent> <C-G> <Plug>(coc-range-select)
+nmap <silent> <C-P> <Plug>(coc-range-select)
+xmap <silent> <C-P> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocActionAsync('format')
