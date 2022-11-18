@@ -148,7 +148,7 @@ call MapKey('<M-7>', '<Cmd>tabn 7<CR>')
 call MapKey('<M-8>', '<Cmd>tabn 8<CR>')
 call MapKey('<M-9>', '<Cmd>tablast<CR>')
 call MapKey('<M-{>', '<Cmd>tabprev<CR>')
-call MapKey('<M-}<', '<Cmd>tabnext<CR>')
+call MapKey('<M-}>', '<Cmd>tabnext<CR>')
 
 call MapControlKey('{', '<Cmd>-tabmove<CR>')
 call MapControlKey('}', '<Cmd>+tabmove<CR>')
