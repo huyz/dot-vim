@@ -105,7 +105,7 @@ I tend to forgot I defined these mappings:
 | ------- | ------------------------------------------------- |
 | `-abc`  | Highlight n-character matches                     |
 | `_`     | Go to previous n-character match                  |
-| `+`     | Go to nextncharacter match                        |
+| `+`     | Go to next n-character match                      |
 | `\\w`   | Highlight consecutive targets of word motion      |
 | `\\t`   | Highlight consecutive targets of character motion |
 
@@ -130,6 +130,12 @@ I tend to forgot I defined these mappings:
 | `dst`     | delete surrounding tags                                            |
 | `cs't`    | change surrounding quotes to tag with prompt                       |
 | `csw(`    | shortcut for `ysiw(`                                               |
+
+### vim-switch
+
+| Mapping   | Description  |
+| --------- | ------------ |
+| `<M-S-x>` | Toggle value |
 
 ### vim-move
 
