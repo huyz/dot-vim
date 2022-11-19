@@ -8,26 +8,31 @@
 "| ^6       | Select Tab #6                     | IDE     |
 "| ^A       | Select First Item                 | Vim     |
 "| ^B       | Select Parent Node                | Vim     |
+"| ^C       |                                   | Vim     |
 "| ^D       | Directory Structure               | Vim     |
 "| ^E       | Move Caret to Line End            | Vim     |
 "| ^F       | Right                             | Vim     |
 "| ⌥F       | Check Current File                | Vim     |
 "| ^G       | Add Selection for Next Occurrence | IDE     |
-"| ^H       | Base on This Class                | IDE     |
+"| ^H       | Base on This Class                | Vim 🆓  |
 "| ^I       | Implement Methods...              | Vim     |
 "| ^J       | Activate / Cycle AceJump Mode     | Vim     |
 "| ^K       | Cut up to Line End                | Vim     |
 "| ^L       | Scroll to Center                  | Vim     |
-"| ^M       | Module                            | IDE     |
-"| ^N       | Cyclic Expand Word (Backward)     | IDE     |
+"| ^M       | Module                            | IDE 🆓  |
+"| ^N       | Cyclic Expand Word (Backward)     | Vim     |
 "| ^O       | Override Methods…                 | Vim     |
-"| ^P       | Directory                         | IDE     |
+"| ^P       | Directory                         | Vim      |
+"| ^Q       |                                   | Vim     |
 "| ^R       | Show Read Access                  | Vim     |
 "| ^S       | File Structure                    | Vim     |
 "| ^T       | Service Type                      | Vim     |
 "| ^V       | VCS Operations                    | Vim     |
 "| ^W       | Show Write Access                 | Vim     |
 "| ⌥X       | Gitmoji                           | Vim     |
+"| ^X       |                                   | Vim     |
+"| ^Y       |                                   | Vim     |
+"| ^Z       |                                   | Vim     |
 
 "
 " Enable IdeaVim emulated plugins
@@ -70,6 +75,12 @@ Plug 'terryma/vim-multiple-cursors'
     source ~/.intellimacs/extra.vim
     source ~/.intellimacs/major.vim
     source ~/.intellimacs/hybrid.vim
+    " Undo some mappings that conflict with our scheme
+    nunmap <A-x>
+    iunmap <A-x>
+    vunmap <A-x>
+    iunmap <A-f>
+    iunmap <A-b>
 
     " (Optional) Enable which-key plugin
     source ~/.intellimacs/which-key.vim
@@ -96,6 +107,10 @@ augroup END
 "
 
 source ~/.vim/init.mappings-surround.vim
+
+" NOTE: yes, "Backward" is actually "Forawrd"
+inoremap <C-p> :action HippieCompletion<CR>
+inoremap <C-n> :action HippieBackwardCompletion<CR>
 
 
 " To have most of the same defaults as neovim
