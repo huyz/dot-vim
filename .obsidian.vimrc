@@ -2,13 +2,14 @@
 " https://github.com/esm7/obsidian-vimrc-support
 
 " Neovim mappings
-map <C-L> :nohl
+" FIXME: doesn't work
+map <C-l> :nohl
 
 " Have j and k navigate visual lines rather than logical ones
-nmap j gj
-nmap k gk
-" Quickly remove search highlights
-nmap <Esc>u :nohl
+map <Down> gj
+map <Up> gk
+imap <Down> <C-o>gj
+imap <Up> <C-o>gk
 
 " Interestingly, this works better than in vim at the beginning of the line
 imap <C-s> <Esc>hxpa
@@ -54,7 +55,6 @@ map <A-µ>) :SurroundParens
 
 
 """ GUI Emulation mappings
-
 
 " FIXME: can't get any of the imap mappings to work but I can use the Sequence Hotkeys plugin for
 " that

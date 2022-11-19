@@ -2,7 +2,8 @@
 """ Emulate neovim {{{1
 
 if exists('g:nvim')
-    " Can't remap `Y` as it's used incredibly often and needs to be pressed reliably
+    " Don't allow neovim to remap `Y` as it's used incredibly often and needs to be pressed
+    " reliably
     silent! nunmap Y
 endif
 " Clear search highlight, update diff, and redraw screen
@@ -40,6 +41,9 @@ nnoremap & :&&<CR>
 " nnoremap <C-x>1 <C-w>o
 " nnoremap <C-x>o <C-w>w
 " nnoremap <C-x>+ <C-w>=
+
+" Since vim steals <C-k>, we'll make <C-k><C-k> work like it
+inoremap <C-k><C-k> <C-o>DA
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Emulate misc apps {{{1

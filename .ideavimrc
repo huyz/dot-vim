@@ -1,25 +1,36 @@
 "
-" Copied over from .vimrc
+" Configure jetbrains
 "
 
-" To have most of the same defaults as neovim
-" Can't remap `Y` as it's used incredibly often and needs to be pressed reliably
-"nnoremap Y y$
-nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
-inoremap <C-U> <C-G>u<C-U>
-inoremap <C-W> <C-G>u<C-W>
-xnoremap * y/\V<C-R>"<CR>
-xnoremap # y?\V<C-R>"<CR>
-nnoremap & :&&<CR>
-
-" Quotes with backticks (useful for Markdown-style code words)
-" Like using vim-surround with ysiw`
-" NOTE: in some contexts IntelliJ will add matching backtick, so we only insert one
-nnoremap <Leader>` ciw`<C-R>-`<Esc>
-
+"| Shortcut | IDE Action                        | Handler |
+"| ---      | ---                               | ---     |
+"| ^2       | Select Tab #2                     | IDE     |
+"| ^6       | Select Tab #6                     | IDE     |
+"| ^A       | Select First Item                 | Vim     |
+"| ^B       | Select Parent Node                | Vim     |
+"| ^D       | Directory Structure               | Vim     |
+"| ^E       | Move Caret to Line End            | Vim     |
+"| ^F       | Right                             | Vim     |
+"| ⌥F       | Check Current File                | Vim     |
+"| ^G       | Add Selection for Next Occurrence | IDE     |
+"| ^H       | Base on This Class                | IDE     |
+"| ^I       | Implement Methods...              | Vim     |
+"| ^J       | Activate / Cycle AceJump Mode     | Vim     |
+"| ^K       | Cut up to Line End                | Vim     |
+"| ^L       | Scroll to Center                  | Vim     |
+"| ^M       | Module                            | IDE     |
+"| ^N       | Cyclic Expand Word (Backward)     | IDE     |
+"| ^O       | Override Methods…                 | Vim     |
+"| ^P       | Directory                         | IDE     |
+"| ^R       | Show Read Access                  | Vim     |
+"| ^S       | File Structure                    | Vim     |
+"| ^T       | Service Type                      | Vim     |
+"| ^V       | VCS Operations                    | Vim     |
+"| ^W       | Show Write Access                 | Vim     |
+"| ⌥X       | Gitmoji                           | Vim     |
 
 "
-" Enable emulated plugins
+" Enable IdeaVim emulated plugins
 "
 
 packadd matchit
@@ -34,18 +45,19 @@ Plug 'kana/vim-textobj-entire'
 Plug 'machakann/vim-highlightedyank'
 
 Plug 'easymotion/vim-easymotion'
-" NOTE: this is better than the real vim-easymotion because you don't have to hit `<CR>`
+" NOTE: this is better than the real vim-easymotion because you don't have to hit `<CR>`, thanks to ACE
 nmap - <Plug>(easymotion-s2)
 
 Plug 'terryma/vim-multiple-cursors'
-" These mappings are to match vim-surround in vim and because of conflict with the Mac
-"   option key which prints out unicode chars.
-"   Unfortunately,$ we lose the ability to do ^N and ^P in insert mode for cyclical word search
-"   (which we would assign to IDE in "Vim Emulation" settings)
-map <C-N> <A-N>
-map <C-P> <A-P>
-map <C-X> <A-X>
-map g<C-N> g<A-N>
+
+"
+" IdeaVim-specific features
+"
+
+" https://github.com/JetBrains/ideavim/wiki/%60ideajoin%60-examples
+" TODO: wait until it matures; doesn't work except for maybe `comments`.
+"   I think it's designed for Java and Kotlin
+"set ideajoin
 
 "
 " intellimacs
@@ -67,27 +79,8 @@ map g<C-N> g<A-N>
 set which-key
 
 "
-" Enable IdeaVim-specific features
+" Options
 "
-
-" https://github.com/JetBrains/ideavim/wiki/%60ideajoin%60-examples
-" TODO: wait until it matures; doesn't work except for maybe `comments`.
-"   I think it's designed for Java and Kotlin
-"set ideajoin
-
-"
-" Key mappings
-"
-
-" To emulate CamelCaseMotion
-map ,w [w
-map ,e ]w
-map ,b [b
-map ,ge ]b
-
-" For formatting, especially comments
-" Depends on https://plugins.jetbrains.com/plugin/7234-wrap-to-column/
-vnoremap gq :action com.andrewbrookins.idea.wrap.WrapAction<CR>
 
 " Enable relative numbers
 " source: https://youtrack.jetbrains.com/issue/VIM-410
@@ -97,3 +90,49 @@ augroup numbertoggle
     autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber
     autocmd BufLeave,FocusLost,InsertEnter   * set nonumber norelativenumber
 augroup END
+
+"
+" Key mappings
+"
+
+source ~/.vim/init.mappings-surround.vim
+
+
+" To have most of the same defaults as neovim
+" Can't remap `Y` as it's used incredibly often and needs to be pressed reliably
+"nnoremap Y y$
+nnoremap <C-l> :<C-u>nohl <Bar> normal! '<C-l>'<CR>
+inoremap <C-u> <C-g>u<C-u>
+inoremap <C-w> <C-g>u<C-w>
+xnoremap * y/\V<C-r>"<CR>
+xnoremap # y?\V<C-r>"<CR>
+nnoremap & :&&<CR>
+
+" Have j and k navigate visual lines rather than logical ones
+map <Down> gj
+map <Up> gk
+imap <Down> <C-o>gj
+imap <Up> <C-o>gk
+
+" To emulate CamelCaseMotion
+map ,w [w
+map ,e ]w
+map ,b [b
+map ,ge ]b
+
+nnoremap <C-s> :w<CR>
+" Interestingly, this works better than in vim at the beginning of the line
+inoremap <C-s> <Esc>hxpa
+
+" Folding shortcut
+nmap <Space><Space> za
+
+" These mappings are to match vim-surround in vim and because of conflict with the Mac "   option key which prints out unicode chars. "   Unfortunately, we lose the ability to do ^N and ^P in insert mode for cyclical word search "   but we can assign them to IDE in "Vim Emulation" settings.
+"map <C-N> <A-N>
+"map <C-P> <A-P>
+"map <C-X> <A-X>
+"map g<C-N> g<A-N>
+
+" For formatting, especially comments
+" Depends on https://plugins.jetbrains.com/plugin/7234-wrap-to-column/
+vnoremap gq :action com.andrewbrookins.idea.wrap.WrapAction<CR>

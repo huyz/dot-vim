@@ -131,6 +131,14 @@ I tend to forgot I defined these mappings:
 | `cs't`    | change surrounding quotes to tag with prompt                       |
 | `csw(`    | shortcut for `ysiw(`                                               |
 
+My more concise shortcuts:
+
+| Mapping  | Description                                      |
+| -------- | ------------------------------------------------ |
+| ``ys` `` | surround inner word with backticks               |
+| `yS*`    | surround outer word with `**` markdown bold `**` |
+| v\_`sw`  | surround with `[[` wikilink `]]`                 |
+
 ### vim-switch
 
 | Mapping   | Description  |

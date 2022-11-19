@@ -38,8 +38,10 @@ function! ToggleVirtualEdit()
         nnoremap R gR
         nnoremap k gk
         nnoremap j gj
-        nnoremap <Up> k
         nnoremap <Down> j
+        nnoremap <Up> k
+        xnoremap <Down> j
+        xnoremap <Up> k
         set virtualedit=all
         set virtualedit?
     else
@@ -47,8 +49,10 @@ function! ToggleVirtualEdit()
         nunmap R
         nunmap k
         nunmap j
-        nnoremap <Up> gk
         nnoremap <Down> gj
+        nnoremap <Up> gk
+        noremap <Down> gj
+        xnoremap <Up> gk
         set virtualedit=block
         set virtualedit?
     endif
