@@ -15,9 +15,6 @@ xnoremap * y/<C-r>"<CR>
 xnoremap # y?<C-r>"<CR>
 nnoremap & :&&<CR>
 
-" Quickly remove search highlights
-nmap <Esc>u <C-l>
-
 " Have j and k navigate visual lines rather than logical ones
 map <Down> gj
 map <Up> gk
