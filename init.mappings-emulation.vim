@@ -236,9 +236,13 @@ let g:VM_maps = {}
 let g:VM_maps["Undo"] = 'u'
 let g:VM_maps["Redo"] = '<C-r>'
 
+" Free up <C-g> for visual-multi
+" We could use `:f` in the general case but we still need `1<C-q><C-g>` for full path
+nnoremap <C-q><C-g> <C-g>
+
 " We prefer to add not replace the existing defaults, so we don't use g:VM_maps
 " Because \\gS is hard to remember
-exe 'nnoremap ' . g:NormalizeMetaModifier('<C-G>') . ' <Plug>(VM-Find-Under)'
+exe 'nnoremap ' . g:NormalizeMetaModifier('<C-g>') . ' <Plug>(VM-Find-Under)'
 nnoremap \\S <Plug>(VM-Reselect-Last)
 exe 'nnoremap ' . g:NormalizeMetaModifier('<M-?>') . ' <Plug>(VM-Start-Regex-Search)'
 exe 'nnoremap ' . g:NormalizeMetaModifier('<M-G>') . ' <Plug>(VM-Select-All)'

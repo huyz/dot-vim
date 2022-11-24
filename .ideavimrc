@@ -22,7 +22,7 @@
 "| ^M       | Module                            | IDE 🆓  |
 "| ^N       | Cyclic Expand Word (Backward)     | Vim     |
 "| ^O       | Override Methods…                 | Vim     |
-"| ^P       | Directory                         | Vim      |
+"| ^P       | Directory                         | Vim     |
 "| ^Q       |                                   | Vim     |
 "| ^R       | Show Read Access                  | Vim     |
 "| ^S       | File Structure                    | Vim     |
