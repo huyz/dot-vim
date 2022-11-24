@@ -43,15 +43,73 @@ map gT :tabprev
 exmap FollowLink obcommand editor:follow-link
 nmap gx :FollowLink
 
-exmap SurroundWiki surround [[ ]]
-" NOTE: ysw doesnt' work
-map ysw :SurroundWiki
-map <A-µ>w :SurroundWiki
+""" vim-surround emulation
+
+" Free up `s` in visual mode
+vunmap s
+vunmap S
+
+exmap SurroundSquared surround [ ]
+" NOTE: ys) doesnt' work
+nmap ys] :SurroundSquared
+vmap S] :SurroundSquared
+map <A-µ>] :SurroundSquared
 
 exmap SurroundParens surround ( )
 " NOTE: ys) doesnt' work
-map ys) :SurroundParens
+nmap ys) :SurroundParens
+vmap S) :SurroundParens
 map <A-µ>) :SurroundParens
+
+exmap SurroundAngled surround < >
+" NOTE: ys> doesnt' work
+nmap ys> :SurroundAngled
+map S> :SurroundAngled
+map <A-µ>> :SurroundAngled
+
+exmap SurroundUnderlines surround _ _
+" NOTE: ys_ doesnt' work
+nmap ys_ :SurroundUnderlines
+map S_ :SurroundUnderlines
+map <A-µ>_ :SurroundUnderlines
+
+exmap SurroundDoubleQuotes surround " "
+" NOTE: ys" doesnt' work
+nmap ys" :SurroundDoubleQuotes
+map S" :SurroundDoubleQuotes
+map <A-µ>" :SurroundDoubleQuotes
+
+exmap SurroundSingleQuotes surround ' '
+" NOTE: ys' doesnt' work
+nmap ys' :SurroundSingleQuotes
+map S' :SurroundSingleQuotes
+map <A-µ>' :SurroundSingleQuotes
+
+exmap SurroundBackticks surround ` `
+" NOTE: ys` doesnt' work
+nmap ys` :SurroundBackticks
+map S` :SurroundBackticks
+map <A-µ>` :SurroundBackticks
+
+""" My own surround additions
+
+exmap SurroundStars surround ** **
+" NOTE: ys* doesnt' work
+nmap ys* :SurroundStars
+vmap s* :SurroundStars
+map <A-µ>* :SurroundStars
+
+exmap SurroundEquals surround == ==
+" NOTE: ys= doesnt' work
+nmap ys= :SurroundEquals
+vmap s= :SurroundEquals
+map <A-µ>= :SurroundEquals
+
+exmap SurroundWiki surround [[ ]]
+" NOTE: ysw doesnt' work
+nmap ysw :SurroundWiki
+vmap sw :SurroundWiki
+map <A-µ>w :SurroundWiki
 
 
 """ GUI Emulation mappings
