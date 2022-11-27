@@ -43,6 +43,11 @@ map gT :tabprev
 exmap FollowLink obcommand editor:follow-link
 nmap gx :FollowLink
 
+" https://forum.obsidian.md/t/vim-o-and-o-dont-respect-current-context/48232/3
+" XXX Only works for CM5
+"exmap NewlineAndIndent cmcommand newlineAndIndent
+"nmap o :NewlineAndIndent
+
 """ vim-surround emulation
 
 " Free up `s` in visual mode
@@ -113,6 +118,10 @@ map <A-µ>w :SurroundWiki
 
 
 """ GUI Emulation mappings
+
+unmap <C-q>
+exmap EditVimrc obcommand obsidian-shellcommands:shell-command-d5mbqygiaw
+nmap <C-q><C-e> :EditVimrc
 
 " FIXME: can't get any of the imap mappings to work but I can use the Sequence Hotkeys plugin for
 " that
