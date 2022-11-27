@@ -2,37 +2,37 @@
 " Configure jetbrains
 "
 
-"| Shortcut | IDE Action                        | Handler |
-"| ---      | ---                               | ---     |
-"| ^2       | Select Tab #2                     | IDE     |
-"| ^6       | Select Tab #6                     | IDE     |
-"| ^A       | Select First Item                 | Vim     |
-"| ^B       | Select Parent Node                | Vim     |
-"| ^C       |                                   | Vim     |
-"| ^D       | Directory Structure               | Vim     |
-"| ^E       | Move Caret to Line End            | Vim     |
-"| ^F       | Right                             | Vim     |
-"| ⌥F       | Check Current File                | Vim     |
-"| ^G       | Add Selection for Next Occurrence | IDE     |
-"| ^H       | Base on This Class                | Vim 🆓  |
-"| ^I       | Implement Methods...              | Vim     |
-"| ^J       | Activate / Cycle AceJump Mode     | Vim     |
-"| ^K       | Cut up to Line End                | Vim     |
-"| ^L       | Scroll to Center                  | Vim     |
-"| ^M       | Module                            | IDE 🆓  |
-"| ^N       | Cyclic Expand Word (Backward)     | Vim     |
-"| ^O       | Override Methods…                 | Vim     |
-"| ^P       | Directory                         | Vim     |
-"| ^Q       |                                   | Vim     |
-"| ^R       | Show Read Access                  | Vim     |
-"| ^S       | File Structure                    | Vim     |
-"| ^T       | Service Type                      | Vim     |
-"| ^V       | VCS Operations                    | Vim     |
-"| ^W       | Show Write Access                 | Vim     |
-"| ⌥X       | Gitmoji                           | Vim     |
-"| ^X       |                                   | Vim     |
-"| ^Y       |                                   | Vim     |
-"| ^Z       |                                   | Vim     |
+"| Shortcut | IDE Action                        | Handler          |
+"| ---      | ---                               | ---              |
+"| ^2       | Select Tab #2                     | IDE              |
+"| ^6       | Select Tab #6                     | IDE              |
+"| ^A       | Select First Item                 | Vim              |
+"| ^B       | Select Parent Node                | Vim              |
+"| ^C       |                                   | Vim              |
+"| ^D       | Directory Structure               | Vim              |
+"| ^E       | Move Caret to Line End            | Vim              |
+"| ^F       | Right                             | Vim              |
+"| ⌥F       | Check Current File                | Vim              |
+"| ^G       | Add Selection for Next Occurrence | IDE in n-v modes |
+"| ^H       | Base on This Class                | Vim 🆓           |
+"| ^I       | Implement Methods...              | Vim              |
+"| ^J       | Activate / Cycle AceJump Mode     | Vim              |
+"| ^K       | Cut up to Line End                | Vim              |
+"| ^L       | Scroll to Center                  | Vim              |
+"| ^M       | Module                            | IDE 🆓           |
+"| ^N       | Cyclic Expand Word (Backward)     | Vim              |
+"| ^O       | Override Methods…                 | Vim              |
+"| ^P       | Directory                         | Vim              |
+"| ^Q       |                                   | Vim              |
+"| ^R       | Show Read Access                  | Vim              |
+"| ^S       | File Structure                    | Vim              |
+"| ^T       | Service Type                      | Vim              |
+"| ^V       | VCS Operations                    | Vim              |
+"| ^W       | Show Write Access                 | Vim              |
+"| ⌥X       | Gitmoji                           | Vim              |
+"| ^X       |                                   | Vim              |
+"| ^Y       |                                   | Vim              |
+"| ^Z       |                                   | Vim              |
 
 "
 " Enable IdeaVim emulated plugins
@@ -90,8 +90,23 @@ Plug 'terryma/vim-multiple-cursors'
 set which-key
 
 "
+" IdeavVim-customized options
+"
+
+set ideastatusicon=gray
+set keymodel=startsel,stopselect,continueselect  " Act like in VS Code with selection using shifted movement keys
+
+"
 " Options
 "
+
+set selectmode=key  " Use Select mode instead of Visual when using shifted cursor and other movement keys
+
+set smartcase
+set visualbell
+set nowrapscan nostartofline
+set scrolloff=3 sidescrolloff=3
+set history=1024
 
 " Enable relative numbers
 " source: https://youtrack.jetbrains.com/issue/VIM-410
@@ -106,12 +121,38 @@ augroup END
 " Key mappings
 "
 
+nmap <C-q><C-r> <Action>(IdeaVim.ReloadVimRc.reload)
+
+" Use ^G as an ide shortcut in normal and visual modes
+sethandler <C-G> n-v:ide i:vim
+
+" These don't work:
+"sethandler <C-Left> a:ide
+"sethandler <C-Right> a:ide
+map <C-Left> [b
+map <C-Right> ]w
+imap <C-Left> <C-o>[b
+imap <C-Right> <C-o>]w
+" These don't work:
+"sethandler <C-Up> a:ide
+"sethandler <C-Down> a:ide
+" NOTE: noremap doesn't work with Actions
+map <C-Up> <Action>(MethodUp)
+map <C-Down> <Action>(MethodDown)
+imap <C-Up> <Action>(MethodUp)
+imap <C-Down> <Action>(MethodDown)
+
+" To emulate CamelCaseMotion
+map ,w [w
+map ,e ]w
+map ,b [b
+map ,ge ]b
+
 source ~/.vim/init.mappings-surround.vim
 
-" NOTE: yes, "Backward" is actually "Forawrd"
+" NOTE: yes, "Backward" is actually "Forward"
 inoremap <C-p> :action HippieCompletion<CR>
 inoremap <C-n> :action HippieBackwardCompletion<CR>
-
 
 " To have most of the same defaults as neovim
 " Can't remap `Y` as it's used incredibly often and needs to be pressed reliably
@@ -129,12 +170,6 @@ map <Up> gk
 imap <Down> <C-o>gj
 imap <Up> <C-o>gk
 
-" To emulate CamelCaseMotion
-map ,w [w
-map ,e ]w
-map ,b [b
-map ,ge ]b
-
 nnoremap <C-s> :w<CR>
 " Interestingly, this works better than in vim at the beginning of the line
 inoremap <C-s> <Esc>hxpa
@@ -142,7 +177,10 @@ inoremap <C-s> <Esc>hxpa
 " Folding shortcut
 nmap <Space><Space> za
 
-" These mappings are to match vim-surround in vim and because of conflict with the Mac "   option key which prints out unicode chars. "   Unfortunately, we lose the ability to do ^N and ^P in insert mode for cyclical word search "   but we can assign them to IDE in "Vim Emulation" settings.
+" These mappings are to match vim-surround in vim and because of conflict with the Mac
+"   option key which prints out unicode chars.
+"   Unfortunately, we lose the ability to do ^N and ^P in insert mode for cyclical word search
+"   but we can assign them to IDE in "Vim Emulation" settings.
 "map <C-N> <A-N>
 "map <C-P> <A-P>
 "map <C-X> <A-X>
@@ -150,4 +188,5 @@ nmap <Space><Space> za
 
 " For formatting, especially comments
 " Depends on https://plugins.jetbrains.com/plugin/7234-wrap-to-column/
-vnoremap gq :action com.andrewbrookins.idea.wrap.WrapAction<CR>
+" NOTE: vnoremap doesn't work with Actions
+vmap gq <Action>(com.andrewbrookins.idea.wrap.WrapAction)
