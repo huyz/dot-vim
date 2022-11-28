@@ -125,6 +125,11 @@ nmap <C-q><C-r> <Action>(IdeaVim.ReloadVimRc.reload)
 
 " Use ^G as an ide shortcut in normal and visual modes
 sethandler <C-G> n-v:ide i:vim
+sethandler <C-X> n-v:ide i:vim
+sethandler <C-Z> a:ide
+" This doesn't work:
+"sethandler <C-A> n-v:ide i:vim
+map <C-A> <Action>(osmedile.intellij.stringmanip.IncrementAction)
 
 " These don't work:
 "sethandler <C-Left> a:ide
