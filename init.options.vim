@@ -31,6 +31,8 @@ set cursorline          " Underline current line
 set list                " Display tabs
 set linebreak           " Wrap at word boundaries (see 'breakat' option)
 set showbreak=↪         " String to put at start of lines that are soft-wrapped
+set scrolloff=2         " Min number of lines above and below cursor
+set sidescrolloff=4     " Min number of columns to the left and right of cursor
 
 " Define how ':set list' will give visual cues
 " Test: [ ] [ ]

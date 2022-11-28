@@ -105,7 +105,7 @@ set selectmode=key  " Use Select mode instead of Visual when using shifted curso
 set smartcase
 set visualbell
 set nowrapscan nostartofline
-set scrolloff=3 sidescrolloff=3
+set scrolloff=2 sidescrolloff=4
 set history=1024
 
 " Enable relative numbers
