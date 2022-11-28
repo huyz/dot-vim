@@ -138,7 +138,7 @@ set mouse=a                   " Enable the mouse where possible. (Great for Tagb
 "   I have to rely on neovim and just have "CSI u" mode on.
 " NOTE: must not be set this for neovim, as it will already automatically send the right sequences
 "   to the terminal to turn on "CSI u" mode.
-if exists('g:vim') && g:use_extended_keys_in_terminal
+if exists('g:tui_vim') && exists('g:use_extended_keys_in_terminal') && g:use_extended_keys_in_terminal
     " Enable extended keys
     if exists('$TMUX')
         " tmux 3.3 only officially supports modifyOtherKeys=1, but does support some
