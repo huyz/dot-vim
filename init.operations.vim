@@ -19,7 +19,7 @@ nmap <Leader><TAB>< <Leader>_do_:%!unexpand --first-only -t 2<CR>:%!expand --ini
 nmap <Leader><TAB>> <Leader>_do_:%s/^\(\s*\)/\1\1/<CR><Leader>_done_
 
 " Discard consecutive blank lines
-nmap <M-p><C-S-BS> <Leader>_do_:v/./.,/./-1join<CR><Leader>_done_
+nmap <M-f><C-S-BS> <Leader>_do_:v/./.,/./-1join<CR><Leader>_done_
 
 
 """ Complex edits {{{1
