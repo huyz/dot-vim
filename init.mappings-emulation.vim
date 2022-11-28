@@ -17,7 +17,6 @@ xnoremap # y?\V<C-r>"<CR>
 " Repeat last substitute with all the same flags
 nnoremap & :&&<CR>
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Emulate Emacs {{{1
 " Also to replace the useless and dangerous ^A and ^X in normal mode,
@@ -46,10 +45,39 @@ nnoremap & :&&<CR>
 inoremap <C-k><C-k> <C-o>DA
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Emulate misc apps {{{1
+""" Emulate Apple HIG {{{1
 
-" `less`: Remove search highlight (NOTE: neovim's `<C-l>` is better)
-nnoremap <Esc>u <Cmd>noh<CR>
+" Based on /Applications/MacVim.app/Contents/Resources/vim/gvimrc
+
+" Disable so we can do it ourselves and avoid <M-Down> overriding vim-visual-multi
+" And have VimR behave the same as MacVim
+let macvim_skip_cmd_opt_movement = 1
+
+no   <D-Left>       <Home>
+no!  <D-Left>       <Home>
+" Go for word, not WORD
+"no   <M-Left>       <C-Left>
+"no!  <M-Left>       <C-Left>
+
+no   <D-Right>      <End>
+no!  <D-Right>      <End>
+" Go for word, not WORD
+"no   <M-Right>      <C-Right>
+"no!  <M-Right>      <C-Right>
+
+no   <D-Up>         <C-Home>
+ino  <D-Up>         <C-Home>
+"no   <M-Up>         {
+"ino  <M-Up>         <C-o>{
+
+no   <D-Down>       <C-End>
+ino  <D-Down>       <C-End>
+"no   <M-Down>       }
+"ino  <M-Down>       <C-o>}
+
+ino  <M-BS>         <C-w>
+ino  <D-BS>         <C-u>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Emulate common GUI apps {{{1
@@ -87,28 +115,6 @@ call MapControlKey('L', '<C-w>l')
 call MapKey('<M-z>', '<C-w>W')
 call MapKey('<M-Z>', '<C-w>w')
 
-" Move splits
-call MapSuperOrControlKey('M-S-Left', '<C-w>H')
-call MapSuperOrControlKey('M-S-Right', '<C-w>L')
-" NOTE: we don't do MapSuperOrControlKey for up and down because they conflict
-"   in the terminal with previous/next member
-call MapSuperKey('M-S-Up', '<C-w>K')
-call MapSuperKey('M-S-Down', '<C-w>J')
-
-" Equalize splits
-call MapSuperOrControlKey('M-)', '<C-w>=')
-
-" Maximize split
-if exists('g:gui_running')
-    let s:key = '<M-S-D-Bar>'
-else
-    " FIXME: can't get vim in terminal to work
-    let s:key = '<M-C-Bar>'
-endif
-call MapKey(s:key, '<C-w>_<C-w><Bar>', ['nmap'])
-call MapKey(s:key, '<C-o><C-w>_<C-o><C-w><Bar>', ['map!'])
-call MapKey(s:key, '<C-\><C-N><C-w>_<C-\><C-N><C-w><Bar>', ['tmap'])
-
 " Toggle split orientation
 " https://stackoverflow.com/questions/1269603/to-switch-from-vertical-split-to-horizontal-split-fast-in-vim/45994525#45994525
 function! ToggleSplitOrientation()
@@ -123,9 +129,33 @@ function! ToggleSplitOrientation()
         let t:splitType = 'vertical'
     endif
 endfunction
-" NOTE: For terminal, we need to use <C-Bslash> because <C-S-Bar> is not possible since <C-\> is
-" an ANSI control sequence
-call MapKey('<C-Bslash>', '<Cmd>call ToggleSplitOrientation()<CR>', 'all', v:true)
+call MapControlKey('Bar', '<Cmd>call ToggleSplitOrientation()<CR>', 'all', v:true)
+
+" Equalize splits
+call MapSuperOrControlKey('M-)', '<C-w>=')
+
+" Maximize split
+if exists('g:gui_running')
+    let s:key = '<M-S-D-Bar>'
+else
+    let s:key = '<M-C-Bar>'
+endif
+call MapKey(s:key, '<C-w>_', ['nnoremap'])
+call MapKey(s:key, '<C-o><C-w>_<C-o><C-w><Bar>', ['noremap!'])
+call MapKey(s:key, '<C-\><C-N><C-w>_<C-\><C-N><C-w><Bar>', ['tnoremap'])
+
+" Change split size
+call MapKey('<M-C-S-Up>', '2<C-w>+')
+call MapKey('<M-C-S-Down>', '2<C-w>-')
+call MapKey('<M-C-S-Left>', '4<C-w><lt>')
+call MapKey('<M-C-S-Right>', '4<C-w>>')
+
+" Move splits
+call MapKey('<C-M-D-Up>', '<C-w>K')
+call MapKey('<C-M-D-Down>', '<C-w>J')
+call MapKey('<C-M-D-Left>', '<C-w>H')
+call MapKey('<C-M-D-Right>', '<C-w>L')
+
 
 """ Tabs {{{2
 
@@ -165,6 +195,9 @@ call MapSuperOrControlKey('M-}', '<Cmd>$tabmove<CR>')
 call MapKey('<Up>', 'gk')
 call MapKey('<Down>', 'gj')
 
+call MapKey('<M-Left>', 'b')
+call MapKey('<M-Right>', 'w')
+
 " Move cursor
 " NOTE: we don't do this in TUIs because <M-Arrow> is reserved for vim-move
 if exists('g:gui_running')
@@ -178,8 +211,8 @@ endif
 " NOTE: Luckily, iTerm passes <M-D-arrows> through
 call MapKey('<M-D-Left>', '<C-O>')
 call MapKey('<M-D-Right>', '<C-I>')
-call MapKey('<M-C-Left>', '<Plug>CamelCaseMotion_b')
-call MapKey('<M-C-Right>', '<Plug>CamelCaseMotion_w')
+call MapKey('<C-Left>', '<Plug>CamelCaseMotion_b')
+call MapKey('<C-Right>', '<Plug>CamelCaseMotion_w')
 
 " Go to previous edit location and Delete parts of line
 call MapSuperKey('S-BS', 'g;')
@@ -192,13 +225,8 @@ call MapKey('<C-S-Up>', '[c', 'all', v:false, v:true)
 call MapKey('<C-S-Down>', ']c', 'all', v:false, v:true)
 
 " Go to previous/next method
-if exists('g:gui_running')
-    call MapKey('<C-S-D-Up>', '[m')
-    call MapKey('<C-S-D-Down>', ']m')
-else
-    call MapKey('<C-S-M-Up>', '[m')
-    call MapKey('<C-S-M-Down>', ']m')
-endif
+call MapKey('<C-Up>', '[m')
+call MapKey('<C-Down>', ']m')
 
 """ Indent {{{2
 
@@ -230,6 +258,16 @@ call MapControlKey('=', 'zo')
 call MapControlKey('_', 'zM')
 call MapControlKey('+', 'zR')
 
+""" expand-region {{{2
+
+map <S-D-Up> <Plug>(expand_region_expand)
+map <S-D-Down> <Plug>(expand_region_shrink)
+if exists('g:tui_running')
+    " iTerm doesn't send the ⌘ modifier
+    map <S-Up> <Plug>(expand_region_expand)
+    map <S-Down> <Plug>(expand_region_shrink)
+endif
+
 """ visual-multi {{{2
 
 let g:VM_maps = {}
@@ -247,6 +285,8 @@ nnoremap \\S <Plug>(VM-Reselect-Last)
 exe 'nnoremap ' . g:NormalizeMetaModifier('<M-?>') . ' <Plug>(VM-Start-Regex-Search)'
 exe 'nnoremap ' . g:NormalizeMetaModifier('<M-G>') . ' <Plug>(VM-Select-All)'
 exe 'xnoremap ' . g:NormalizeMetaModifier('<M-G>') . ' <Plug>(VM-Visual-All)'
+" This is like "Add cursors to line ends"
+exe 'xnoremap ' . g:NormalizeMetaModifier('<M-I>') . ' <Plug>(VM-Visual-Cursors)'
 " In any case, these don't work
 "   let g:VM_maps["Find Previous"] = '<C-S-N>'
 "   let g:VM_maps["Select All Words"] = g:NormalizeMetaModifier('<M-G>')
@@ -265,6 +305,13 @@ function! VM_Exit()
     exe 'nunmap <buffer> ' . g:NormalizeMetaModifier('<M-Q>')
 endfunction
 
+let g:VM_maps["Add Cursor Up"] = '<M-Up>'
+let g:VM_maps["Add Cursor Down"] = '<M-Down>'
+"exe 'nnoremap ' . g:NormalizeMetaModifier('<M-Up>') . ' <Plug>(VM-Add-Cursor-Up)'
+"exe 'xnoremap ' . g:NormalizeMetaModifier('<M-Up>') . ' <Plug>(VM-Add-Cursor-Up)'
+"exe 'nnoremap ' . g:NormalizeMetaModifier('<M-Down>') . ' <Plug>(VM-Add-Cursor-Down)'
+"exe 'xnoremap ' . g:NormalizeMetaModifier('<M-Down>') . ' <Plug>(VM-Add-Cursor-Down)'
+
 " NOTE: we can't use <C-Leftmouse> because that's already mapped to looking up tags
 " NOTE: we can't use <C-S-RightMouse> because MacVim doesn't pass it through,
 "   even if we did already liberate <C-LeftMouse> with:
@@ -276,14 +323,14 @@ let g:VM_maps["Mouse Column"] = '<S-M-RightMouse>'
 
 """ vim-move {{{2
 
-call MapKey('<M-Down>', '<Plug>MoveLineDown', ['nmap', 'map!'])
-call MapKey('<M-Up>', '<Plug>MoveLineUp', ['nmap', 'map!'])
-call MapKey('<M-Left>', '<Plug>MoveCharLeft', ['nmap', 'map!'])
-call MapKey('<M-Right>', '<Plug>MoveCharRight', ['nmap', 'map!'])
-call MapKey('<M-Up>', '<Plug>MoveBlockUp', ['vmap'])
-call MapKey('<M-Down>', '<Plug>MoveBlockDown', ['vmap'])
-call MapKey('<M-Left>', '<Plug>MoveBlockLeft', ['vmap'])
-call MapKey('<M-Right>', '<Plug>MoveBlockRight', ['vmap'])
+call MapKey('<C-M-Down>', '<Plug>MoveLineDown', ['nmap', 'map!'])
+call MapKey('<C-M-Up>', '<Plug>MoveLineUp', ['nmap', 'map!'])
+call MapKey('<C-M-Left>', '<Plug>MoveCharLeft', ['nmap', 'map!'])
+call MapKey('<C-M-Right>', '<Plug>MoveCharRight', ['nmap', 'map!'])
+call MapKey('<C-M-Up>', '<Plug>MoveBlockUp', ['vmap'])
+call MapKey('<C-M-Down>', '<Plug>MoveBlockDown', ['vmap'])
+call MapKey('<C-M-Left>', '<Plug>MoveBlockLeft', ['vmap'])
+call MapKey('<C-M-Right>', '<Plug>MoveBlockRight', ['vmap'])
 
 " if exists('g:gui_running')
 "     nmap <M-Down> <Plug>MoveLineDown

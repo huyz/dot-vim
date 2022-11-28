@@ -475,11 +475,6 @@ xmap <silent> i<leader>e <Plug>CamelCaseMotion_ie
 imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
 imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
 
-""" expand-region {{{2
-
-map <C-S-Right> <Plug>(expand_region_expand)
-map <C-S-Left> <Plug>(expand_region_shrink)
-
 """ vim-move {{{2
 
 " Disable the default mappings because they're bad on macOS

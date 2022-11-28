@@ -132,157 +132,183 @@ if has('mac') && (exists('g:gui_nvim') || (exists('g:gui_macvim') && !has('macme
     endif
 
 
-" NOTE: These aliases are actually no longer necessary if the commands in init.options.vim
-" were successful (and makes vim act like neovim):
-"   " Enable CSI-u mode
-"   let &t_TI = "\<Esc>[>4;2m"
-"   let &t_TE = "\<Esc>[>4;m"
-"elseif exists('g:tui_vim')
-elseif v:false
+elseif exists('g:tui_vim') && exists('g:use_extended_keys_in_terminal') && g:use_extended_keys_in_terminal
 
-    call MapAlias('á', '<M-a>')
-    call MapAlias('Á', '<M-A>')
-    call MapAlias('â', '<M-b>')
-    call MapAlias('Â', '<M-B>')
-    call MapAlias('ã', '<M-c>')
-    call MapAlias('Ã', '<M-C>')
-    call MapAlias('ä', '<M-d>')
-    call MapAlias('Ä', '<M-D>')
-    call MapAlias('å', '<M-e>')
-    call MapAlias('å', '<M-E>')
-    call MapAlias('æ', '<M-f>')
-    call MapAlias('Æ', '<M-F>')
-    call MapAlias('ç', '<M-g>')
-    call MapAlias('Ç', '<M-G>')
-    call MapAlias('è', '<M-h>')
-    call MapAlias('È', '<M-H>')
-    call MapAlias('é', '<M-i>')
-    call MapAlias('É', '<M-I>')
-    call MapAlias('ê', '<M-j>')
-    call MapAlias('Ê', '<M-J>')
-    call MapAlias('ë', '<M-k>')
-    call MapAlias('Ë', '<M-K>')
-    call MapAlias('ì', '<M-l>')
-    call MapAlias('Ì', '<M-L>')
-    call MapAlias('í', '<M-m>')
-    call MapAlias('Í', '<M-M>')
-    call MapAlias('î', '<M-n>')
-    call MapAlias('Î', '<M-N>')
-    call MapAlias('ï', '<M-o>')
-    call MapAlias('Ï', '<M-O>')
-    call MapAlias('ð', '<M-p>')
-    call MapAlias('Ð', '<M-P>')
-    call MapAlias('ñ', '<M-q>')
-    call MapAlias('Ñ', '<M-Q>')
-    call MapAlias('ò', '<M-r>')
-    call MapAlias('Ò', '<M-R>')
-    call MapAlias('ó', '<M-s>')
-    call MapAlias('Ó', '<M-S>')
-    call MapAlias('ô', '<M-t>')
-    call MapAlias('Ô', '<M-T>')
-    call MapAlias('õ', '<M-u>')
-    call MapAlias('Õ', '<M-U>')
-    call MapAlias('ö', '<M-v>')
-    call MapAlias('Ö', '<M-V>')
-    call MapAlias('÷', '<M-w>')
-    call MapAlias('×', '<M-W>')
-    call MapAlias('ø', '<M-x>')
-    call MapAlias('Ø', '<M-X>')
-    call MapAlias('ù', '<M-y>')
-    call MapAlias('Ù', '<M-Y>')
-    call MapAlias('ú', '<M-z>')
-    call MapAlias('Ú', '<M-Z>')
-    call MapAlias('±', '<M-1>')
-    call MapAlias('¡', '<M-!>')
-    call MapAlias('²', '<M-2>')
-    call MapAlias('À', '<M-@>')
-    call MapAlias('³', '<M-3>')
-    call MapAlias('£', '<M-#>')
-    call MapAlias('´', '<M-4>')
-    call MapAlias('¤', '<M-$>')
-    call MapAlias('µ', '<M-5>')
-    call MapAlias('¥', '<M-%>')
-    call MapAlias('¶', '<M-6>')
-    call MapAlias('Þ', '<M-^>')
-    call MapAlias('·', '<M-7>')
-    call MapAlias('¦', '<M-&>')
-    call MapAlias('¸', '<M-8>')
-    call MapAlias('ª', '<M-*>')
-    call MapAlias('¹', '<M-9>')
-    call MapAlias('¨', '<M-(>')
-    call MapAlias('°', '<M-0>')
-    call MapAlias('©', '<M-)>')
-    call MapAlias('­', '<M-->')
-    call MapAlias('ß', '<M-_>')
-    call MapAlias('½', '<M-=>')
-    call MapAlias('«', '<M-+>')
-    call MapAlias('ÿ', '<M-BS>')
-    call MapAlias('Û', '<M-[>')
-    call MapAlias('û', '<M-{>')
-    call MapAlias('Ý', '<M-]>')
-    call MapAlias('ý', '<M-}>')
-    call MapAlias('Ü', '<M-Bslash>')
-    call MapAlias('ü', '<M-Bar>')
-    call MapAlias('»', '<M-;>')
-    call MapAlias('º', '<M-:>')
-    call MapAlias('§', "<M-'>")
-    call MapAlias('¢', '<M-">')
-    call MapAlias('¬', '<M-,>')
-    call MapAlias('¼', '<M-lt>')
-    call MapAlias('®', '<M-.>')
-    call MapAlias('¾', '<M->>')
-    call MapAlias('¯', '<M-/>')
-    call MapAlias('¿', '<M-?>')
+    " NOTE: Most of these aliases are actually no longer necessary if the commands in init.options.vim
+    " were successful (and makes vim act like neovim):
+    "   " Enable CSI-u mode
+    "   let &t_TI = "\<Esc>[>4;2m"
+    "   let &t_TE = "\<Esc>[>4;m"
+    if v:false
+        call MapAlias('á', '<M-a>')
+        call MapAlias('Á', '<M-A>')
+        call MapAlias('â', '<M-b>')
+        call MapAlias('Â', '<M-B>')
+        call MapAlias('ã', '<M-c>')
+        call MapAlias('Ã', '<M-C>')
+        call MapAlias('ä', '<M-d>')
+        call MapAlias('Ä', '<M-D>')
+        call MapAlias('å', '<M-e>')
+        call MapAlias('å', '<M-E>')
+        call MapAlias('æ', '<M-f>')
+        call MapAlias('Æ', '<M-F>')
+        call MapAlias('ç', '<M-g>')
+        call MapAlias('Ç', '<M-G>')
+        call MapAlias('è', '<M-h>')
+        call MapAlias('È', '<M-H>')
+        call MapAlias('é', '<M-i>')
+        call MapAlias('É', '<M-I>')
+        call MapAlias('ê', '<M-j>')
+        call MapAlias('Ê', '<M-J>')
+        call MapAlias('ë', '<M-k>')
+        call MapAlias('Ë', '<M-K>')
+        call MapAlias('ì', '<M-l>')
+        call MapAlias('Ì', '<M-L>')
+        call MapAlias('í', '<M-m>')
+        call MapAlias('Í', '<M-M>')
+        call MapAlias('î', '<M-n>')
+        call MapAlias('Î', '<M-N>')
+        call MapAlias('ï', '<M-o>')
+        call MapAlias('Ï', '<M-O>')
+        call MapAlias('ð', '<M-p>')
+        call MapAlias('Ð', '<M-P>')
+        call MapAlias('ñ', '<M-q>')
+        call MapAlias('Ñ', '<M-Q>')
+        call MapAlias('ò', '<M-r>')
+        call MapAlias('Ò', '<M-R>')
+        call MapAlias('ó', '<M-s>')
+        call MapAlias('Ó', '<M-S>')
+        call MapAlias('ô', '<M-t>')
+        call MapAlias('Ô', '<M-T>')
+        call MapAlias('õ', '<M-u>')
+        call MapAlias('Õ', '<M-U>')
+        call MapAlias('ö', '<M-v>')
+        call MapAlias('Ö', '<M-V>')
+        call MapAlias('÷', '<M-w>')
+        call MapAlias('×', '<M-W>')
+        call MapAlias('ø', '<M-x>')
+        call MapAlias('Ø', '<M-X>')
+        call MapAlias('ù', '<M-y>')
+        call MapAlias('Ù', '<M-Y>')
+        call MapAlias('ú', '<M-z>')
+        call MapAlias('Ú', '<M-Z>')
+        call MapAlias('±', '<M-1>')
+        call MapAlias('¡', '<M-!>')
+        call MapAlias('²', '<M-2>')
+        call MapAlias('À', '<M-@>')
+        call MapAlias('³', '<M-3>')
+        call MapAlias('£', '<M-#>')
+        call MapAlias('´', '<M-4>')
+        call MapAlias('¤', '<M-$>')
+        call MapAlias('µ', '<M-5>')
+        call MapAlias('¥', '<M-%>')
+        call MapAlias('¶', '<M-6>')
+        call MapAlias('Þ', '<M-^>')
+        call MapAlias('·', '<M-7>')
+        call MapAlias('¦', '<M-&>')
+        call MapAlias('¸', '<M-8>')
+        call MapAlias('ª', '<M-*>')
+        call MapAlias('¹', '<M-9>')
+        call MapAlias('¨', '<M-(>')
+        call MapAlias('°', '<M-0>')
+        call MapAlias('©', '<M-)>')
+        call MapAlias('­', '<M-->')
+        call MapAlias('ß', '<M-_>')
+        call MapAlias('½', '<M-=>')
+        call MapAlias('«', '<M-+>')
+        call MapAlias('ÿ', '<M-BS>')
+        call MapAlias('Û', '<M-[>')
+        call MapAlias('û', '<M-{>')
+        call MapAlias('Ý', '<M-]>')
+        call MapAlias('ý', '<M-}>')
+        call MapAlias('Ü', '<M-Bslash>')
+        call MapAlias('ü', '<M-Bar>')
+        call MapAlias('»', '<M-;>')
+        call MapAlias('º', '<M-:>')
+        call MapAlias('§', "<M-'>")
+        call MapAlias('¢', '<M-">')
+        call MapAlias('¬', '<M-,>')
+        call MapAlias('¼', '<M-lt>')
+        call MapAlias('®', '<M-.>')
+        call MapAlias('¾', '<M->>')
+        call MapAlias('¯', '<M-/>')
+        call MapAlias('¿', '<M-?>')
 
-    " Go back/forward and/or CamelCaseMotion
-    " NOTE: that should actually be `;10` but iTerm seems to ignore ⌘
-    "   (which is ok because iTerm grabs ⌘← anyway)
-    " XXX iTerm inconsistent, as ⌥ is Meta here, but Alt elsewhere
-    call MapAlias('[1;9D', '<M-D-Left>')
-    call MapAlias('[1;9C', '<M-D-Right>')
+        " Go back/forward and/or CamelCaseMotion
+        " NOTE: that should actually be `;10` but iTerm seems to ignore ⌘
+        "   (which is ok because iTerm grabs ⌘← anyway)
+        " XXX iTerm inconsistent, as ⌥ is Meta here, but Alt elsewhere
+        call MapAlias('[1;9D', '<M-D-Left>')
+        call MapAlias('[1;9C', '<M-D-Right>')
+        call MapAlias('[1;13D', '<M-C-Left>')
+        call MapAlias('[1;13C', '<M-C-Right>')
+
+        " Previous edit location
+        " XXX iTerm inconsistent, as ⌥ is Alt here, but Meta elsewhere
+        call MapAlias('[27;4;127~', '<M-S-BS>')
+        " Delete parts of line
+        call MapAlias('[3;3~', '<M-Del>')
+        call MapAlias('[27;3;127~', '<M-BS>')
+
+        " Go to previous/next method
+        " XXX iTerm inconsistent, as ⌥ is Meta here, but Alt elsewhere
+        "call MapAlias('[1;14A', '<C-S-M-Up>')
+        "call MapAlias('[1;14B', '<C-S-M-Down>')
+
+        call MapAlias('[1;14D', '<C-S-M-Left>')
+        call MapAlias('[1;14C', '<C-S-M-Right>')
+        " Close tab
+        call MapAlias('[27;5;87~', '<M-C-w>')
+        " Equalize splits
+        " XXX iTerm inconsistent, as ⌥ is Alt here, but Meta elsewhere
+        call MapAlias('[27;8;43~', '<M-C-+>')
+        " Maximize split. FIXME: can't get vim in terminal to work
+        " XXX iTerm inconsistent, as ⌥ is Alt here, but Meta elsewhere
+        call MapAlias('[27;8;124~', '<M-C-Bar>')
+        " Move tabs
+        call MapAlias('[27;6;123~', '<C-S-{>')
+        call MapAlias('[27;6;125~', '<C-S-}>')
+        " Code navigation.
+        call MapAlias('[27;5;66~', '<M-C-b>')
+        " Commenting
+        call MapAlias('[27;7;47~', '<C-M-/>')
+        " Markdown codeblock
+        " Because neovim in terminal can't seem to emit a key that I program into iTerm
+        "   (as I tried below; probably because of "CSi u Mode"), we have to rely on BetterTouchTool
+        "   to map <M-S-D-c> to <M-C-S-C>.
+        " NOTE: manually added that made-up code (added +8 to `<M-S-c>`) in iTerm
+        "call MapAlias('[27;12;67~', '<M-S-D-c>')
+        call MapAlias('[27;8;67~', '<M-C-S-c>')
+
+        " Invoke Startify
+        " TODO: not tested
+        "call MapAlias('[27;4;34~', '<D-S-">')
+    endif
+
+    " Equalize splits
+    call MapAlias('[27;8;41~', '<M-C-)>')
+    " Maximize splits
+    call MapAlias('[27;8;124~', '<M-C-Bar>')
+    call MapAlias('[1;14A', '<M-C-S-Up>')
+    call MapAlias('[1;14B', '<M-C-S-Down>')
+    call MapAlias('[1;14D', '<M-C-S-Left>')
+    call MapAlias('[1;14C', '<M-C-S-Right>')
+
+    " visual-multi
+    call MapAlias('[1;9A', '<M-Up>')
+    call MapAlias('[1;9B', '<M-Down>')
+    call MapAlias('[1;9D', '<M-Left>')
+    call MapAlias('[1;9C', '<M-Right>')
+
+    " vim-move
+    call MapAlias('[1;13A', '<M-C-Up>')
+    call MapAlias('[1;13B', '<M-C-Down>')
     call MapAlias('[1;13D', '<M-C-Left>')
     call MapAlias('[1;13C', '<M-C-Right>')
 
-    " Previous edit location
-    " XXX iTerm inconsistent, as ⌥ is Alt here, but Meta elsewhere
-    call MapAlias('[27;4;127~', '<M-S-BS>')
-    " Delete parts of line
-    call MapAlias('[3;3~', '<M-Del>')
-    call MapAlias('[27;3;127~', '<M-BS>')
-
-    " Go to previous/next method
-    " XXX iTerm inconsistent, as ⌥ is Meta here, but Alt elsewhere
-    call MapAlias('[1;14A', '<C-S-M-Up>')
-    call MapAlias('[1;14B', '<C-S-M-Down>')
-
-    call MapAlias('[1;14D', '<C-S-M-Left>')
-    call MapAlias('[1;14C', '<C-S-M-Right>')
-    " Close tab
-    call MapAlias('[27;5;87~', '<M-C-w>')
-    " Equalize splits
-    " XXX iTerm inconsistent, as ⌥ is Alt here, but Meta elsewhere
+    " increment/decrement
+    call MapAlias('[28;8;95~', '<M-C-_>')
     call MapAlias('[27;8;43~', '<M-C-+>')
-    " Maximize split. FIXME: can't get vim in terminal to work
-    " XXX iTerm inconsistent, as ⌥ is Alt here, but Meta elsewhere
-    call MapAlias('[27;8;124~', '<M-C-Bar>')
-    " Move tabs
-    call MapAlias('[27;6;123~', '<C-S-{>')
-    call MapAlias('[27;6;125~', '<C-S-}>')
-    " Code navigation.
-    call MapAlias('[27;5;66~', '<M-C-b>')
-    " Commenting
-    call MapAlias('[27;7;47~', '<C-M-/>')
-    " Markdown codeblock
-    " Because neovim in terminal can't seem to emit a key that I program into iTerm
-    "   (as I tried below; probably because of "CSi u Mode"), we have to rely on BetterTouchTool
-    "   to map <M-S-D-c> to <M-C-S-C>.
-    " NOTE: manually added that made-up code (added +8 to `<M-S-c>`) in iTerm
-    "call MapAlias('[27;12;67~', '<M-S-D-c>')
-    call MapAlias('[27;8;67~', '<M-C-S-c>')
-
-    " Invoke Startify
-    " TODO: not tested
-    "call MapAlias('[27;4;34~', '<D-S-">')
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
