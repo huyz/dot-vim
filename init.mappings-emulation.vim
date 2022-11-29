@@ -375,9 +375,9 @@ call MapKey('<C-S-BS>', 'dd')
 " Allow remapping so that they work for tpope/vim-speeddating
 call MapSuperOrControlKey('M-+', '<C-a>', 'all', v:false, v:true)
 call MapSuperOrControlKey('M-_', '<C-x>', 'all', v:false, v:true)
-call MapKey('<M-X>', '<Cmd>set opfunc=switch#OpfuncForward<CR>g@l', ['nmap'])
-call MapKey('<M-X>', '<Cmd>set opfunc=switch#OpfuncForward<CR>g@lgv', ['vmap'])
-call MapKey('<M-X>', '<Cmd>set opfunc=switch#OpfuncForward<CR><C-o>g@l', ['map!'])
+call MapKey('<C-z>', '<Cmd>set opfunc=switch#OpfuncForward<CR>g@l', ['nmap'])
+call MapKey('<C-z>', '<Cmd>set opfunc=switch#OpfuncForward<CR>g@lgv', ['vmap'])
+call MapKey('<C-z>', '<Cmd>set opfunc=switch#OpfuncForward<CR><C-o>g@l', ['map!'])
 
 """ Edit code {{{2
 

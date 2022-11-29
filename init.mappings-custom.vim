@@ -77,8 +77,8 @@ nnoremap <Leader>t4 <Cmd>set noet<CR><Cmd>set sts=8 sw=8<CR>
 nnoremap <silent> <Space><Space> @=(foldlevel('.')?'za':'l')<CR>
 vnoremap <Space><Space> zf
 
-" Suspend from insert mode
-noremap! <C-z> <Esc><C-z>
+" Suspend from any mode, liberating <C-z> for toggling value
+call MapKey('<C-S-z>', '<C-z>')
 
 " Closing without saving
 nmap Zw <Cmd>bdelete!<CR>
