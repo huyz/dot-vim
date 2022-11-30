@@ -11,8 +11,8 @@
 
 Requires:
 
--   curl
--   gpg [just for my private .vimrc.post.gpg]
+- curl
+- gpg [just for my private .vimrc.post.gpg]
 
 ```
 [ -d ~/.vim ] && mv ~/.vim ~/.vim-OLD

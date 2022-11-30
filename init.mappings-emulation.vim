@@ -95,7 +95,7 @@ call MapSuperKey('F', '<C-F3>', 'all', v:false, v:true)
 call MapSuperKey('p', '<C-F4>', 'all', v:false, v:true)
 call MapSuperKey('"', '<C-F10>', 'all', v:false, v:true)
 
-call MapControlKey('X', '<Cmd>PlugClean<CR><Cmd>PlugInstall<CR>')
+call MapControlKey('X', '<Cmd>PlugClean<CR><Cmd>PlugInstall<CR>', ['noremap', 'inoremap'])
 call MapControlKey('"', '<Cmd>verbose map<CR>')
 
 """ Splits {{{2
@@ -509,15 +509,10 @@ call MapKey('<M-o>c', '<Cmd>CodeCurrent<CR>')
 
 """ System clipboard {{{2
 
-" GUI apps should already have the ⌘ versions mapped
-if exists('g:tui_running')
-    vnoremap <C-S-x> "+d
-    vnoremap <C-S-c> "+y
-    vnoremap <C-S-v> "+gP
-    nnoremap <C-S-v> "+gP
-    cnoremap <C-S-v> <C-R>+
-    inoremap <C-S-v> <C-R><C-O>+
-endif
+" NOTE: GUI apps should already have the ⌘ versions mapped
+call MapControlKey('C', '"+y', ['vnoremap'])
+call MapControlKey('X', '"+d', ['vnoremap'])
+call MapControlKey('V', '"+gP')
 
 """ Settings {{{2
 
