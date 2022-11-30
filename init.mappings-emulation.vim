@@ -112,8 +112,8 @@ call MapControlKey('H', '<C-w>h')
 call MapControlKey('J', '<C-w>j')
 call MapControlKey('K', '<C-w>k')
 call MapControlKey('L', '<C-w>l')
-call MapKey('<M-z>', '<C-w>W')
-call MapKey('<M-Z>', '<C-w>w')
+" NOTE: <M-z> is different from <C-Tab> because it's for splits and not tabs
+call MapKey('<M-z>', '<C-w>p')
 
 " Toggle split orientation
 " https://stackoverflow.com/questions/1269603/to-switch-from-vertical-split-to-horizontal-split-fast-in-vim/45994525#45994525
@@ -183,6 +183,10 @@ call MapKey('<M-8>', '<Cmd>tabn 8<CR>')
 call MapKey('<M-9>', '<Cmd>tablast<CR>')
 call MapKey('<M-{>', '<Cmd>tabprev<CR>')
 call MapKey('<M-}>', '<Cmd>tabnext<CR>')
+" NOTE: MacVim and VimR already have <C-Tab> mapped
+call MapKey('<C-Tab>', 'g<Tab>')
+" Mainly for TUI vim
+call MapKey('<C-S-Tab>', 'g<Tab>')
 
 call MapControlKey('{', '<Cmd>-tabmove<CR>')
 call MapControlKey('}', '<Cmd>+tabmove<CR>')
