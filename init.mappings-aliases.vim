@@ -4,8 +4,15 @@
 " TODO: test macmeta. I don't really want to use macmeta because I want to retain some of the
 "   Mac's composed characters, especially the digraphs.
 
-" If in neovim GUI, or in vim GUI in non-macmeta mode
-if has('mac') && (exists('g:gui_nvim') || (exists('g:gui_macvim') && !has('macmeta')))
+" We need to accept unicode characters if on mac and:
+" - in neovim in Kitty terminal (despite having "macos_option_as_alt left"), or
+" - in neovim GUI, or
+" - in vim GUI in non-macmeta mode.
+" For iTerm, we assume that
+if has('mac') &&
+            \ (exists('g:tui_nvim') && exists('g:kitty_term') ||
+            \ (exists('g:gui_nvim')) ||
+            \ (exists('g:gui_macvim') && !has('macmeta')))
     " Exceptions for insert mode:
     " - Can't remap `, e, u, i, n as these are used to compose digraph prefixes
     " - Won't remap ∞, ·, –, —, ≈, ≠, ±, ≤, ≥, …  as these are useful special characters even to

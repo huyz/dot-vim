@@ -60,6 +60,9 @@ else
         let g:tui_vim = 1
         let g:vim = 1
     endif
+    if $TERM == "xterm-kitty"
+        let g:kitty_term = 1
+    endif
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
