@@ -123,15 +123,45 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, remap = v:false,
     endif
 endfunction
 
+" US qwerty keyboard
+let s:lower_key = {
+            \ '!': '1',
+            \ '@': '2',
+            \ '#': '3',
+            \ '$': '4',
+            \ '%': '5',
+            \ '^': '6',
+            \ '&': '7',
+            \ '*': '8',
+            \ '(': '9',
+            \ ')': '0',
+            \ '_': '-',
+            \ '+': '=',
+            \ '{': '[',
+            \ '}': ']',
+            \ '|': '\\',
+            \ ':': ';',
+            \ '"': "'",
+            \ '<': ',',
+            \ '>': '.',
+            \ '?': '/',
+            \}
+
+
 function s:ShiftModifierIfNeededForSuper(key)
     let l:key = substitute(a:key, '.*-', '', '')
     return strlen(l:key) == 1 && l:key >=# 'A' && l:key <=# 'Z' ||
-        \ index(['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+',
-        \ '{', '}', '|', ':', '"', '<', '>', '?'], l:key) >= 0 ? 'S-' : ''
+        \ has_key(s:lower_key, l:key) ? 'S-' : ''
 endfunction
 function s:ShiftModifierIfNeededForControl(key)
     let l:key = substitute(a:key, '.*-', '', '')
     return strlen(l:key) == 1 && l:key >=# 'A' && l:key <=# 'Z' ? 'S-' : ''
+endfunction
+function s:LowerKey(key)
+    if has('g:kitty_term') and has_key(s:lower_key, a:key)
+        return s:lower_key[a:key]
+    endif
+    return tolower(a:key)
 endfunction
 
 " Maps the Command (⌘) key, or in TUIs the fallback Option (⌥), key.
@@ -179,7 +209,7 @@ endfunction
 "   and thus treat <C-D-a> like <C-A>.
 function! MapSuperOrControlKey(key, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort
     if exists('g:gui_running')
-        call MapKey('<D-' . <SID>ShiftModifierIfNeededForSuper(a:key) . tolower(a:key) . '>',
+        call MapKey('<D-' . <SID>ShiftModifierIfNeededForSuper(a:key) . <SID>LowerKey(a:key) . '>',
                     \ a:rhs, a:modes, a:no_insert, a:remap, a:map_flag)
     else
         call MapKey('<C-' . <SID>ShiftModifierIfNeededForControl(a:key) . a:key . '>',
