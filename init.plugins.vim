@@ -194,10 +194,11 @@ Plug 'Kachyz/vim-gitmoji'
 Plug 'rizzatti/dash.vim', Cond(has('mac'))
 Plug 'declancm/vim2vscode'
 Plug 'voldikss/vim-browser-search'
+Plug 'jamessan/vim-gnupg'
+Plug 'lambdalisue/suda.vim', Cond(exists('g:nvim'))
 
 " Misc
 Plug 'dbeniamine/cheat.sh-vim'
-Plug 'jamessan/vim-gnupg'
 Plug 'glacambre/firenvim', Cond(exists('g:nvim'), { 'do': { _ -> firenvim#install(0) } })
 
 

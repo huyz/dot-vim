@@ -105,7 +105,11 @@ call MapKey('<C-q><C-s>', '<Cmd>write<CR><C-q><C-r>', 'all', v:false, v:true)
 
 " Allow saving of files as sudo when you forget to start vim using sudo.
 " Shortcut matches my zsh binding
-cnoremap <C-x><C-s> w !sudo tee > /dev/null %
+if exists('g:nvim')
+    cnoremap <C-x><C-s> <C-u>SudaWrite
+else
+    cnoremap <C-x><C-s> <C-u>w !sudo tee > /dev/null %
+endif
 
 
 " Use Q for par formating
