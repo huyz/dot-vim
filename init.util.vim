@@ -6,6 +6,49 @@ function! StartsWith(longer, shorter) abort
     return a:longer[0:len(a:shorter)-1] ==# a:shorter
 endfunction
 
+" US qwerty keyboard
+let s:lower_key = {
+            \ '!': '1',
+            \ '@': '2',
+            \ '#': '3',
+            \ '$': '4',
+            \ '%': '5',
+            \ '^': '6',
+            \ '&': '7',
+            \ '*': '8',
+            \ '(': '9',
+            \ ')': '0',
+            \ '_': '-',
+            \ '+': '=',
+            \ '{': '[',
+            \ '}': ']',
+            \ '|': '\\',
+            \ ':': ';',
+            \ '"': "'",
+            \ '<': ',',
+            \ '>': '.',
+            \ '?': '/',
+            \}
+" Neovim, unlike iTerm, requires shifting for neovim
+function s:ShiftModifierIfNeededForMetaInNeovimInKitty(key)
+    return has_key(s:lower_key, a:key) ? 'S-' : ''
+endfunction
+function s:ShiftModifierIfNeededForSuper(key)
+    let l:key = substitute(a:key, '.*-', '', '')
+    return strlen(l:key) == 1 && l:key >=# 'A' && l:key <=# 'Z' ||
+        \ has_key(s:lower_key, l:key) ? 'S-' : ''
+endfunction
+function s:ShiftModifierIfNeededForControl(key)
+    let l:key = substitute(a:key, '.*-', '', '')
+    return strlen(l:key) == 1 && l:key >=# 'A' && l:key <=# 'Z' ? 'S-' : ''
+endfunction
+function s:LowerKey(key)
+    if exists('g:kitty_term') && has_key(s:lower_key, a:key)
+        return s:lower_key[a:key]
+    endif
+    return tolower(a:key)
+endfunction
+
 function! s:IsInsertLikeMode(mode) abort
     return index(['map!', 'noremap!', 'imap', 'inoremap', 'cmap', 'cnoremap', 'lmap', 'lnoremap'], a:mode) >= 0
 endfunction
@@ -46,7 +89,11 @@ endfunction
 "   XXX 2022-11-13 I'm not sure if this is true; maybe it's because of the way I coded it; but I
 "     don't want to try to fix it and go through another full round of testing.
 function! g:NormalizeMetaModifier(str) abort
-    if exists('g:nvim') || (exists('g:vim') && (exists('g:gui_macvim') && has('macmeta') || exists('g:tui_vim') && g:use_extended_keys_in_terminal))
+    if exists('g:nvim') && exists('g:kitty_term')
+        " FIXME: this only works for a single <M-key> sequence, not multiple
+        let l:key = substitute(a:str, '^<M-\(.\)>$', '\1', '')
+        return '<M-' . <SID>ShiftModifierIfNeededForMetaInNeovimInKitty(l:key) . <SID>LowerKey(l:key) . '>'
+    elseif exists('g:nvim') || (exists('g:vim') && (exists('g:gui_macvim') && has('macmeta') || exists('g:tui_vim') && g:use_extended_keys_in_terminal))
         return a:str
     endif
     let l:str = substitute(a:str, '<M->>', '<Esc><gt>', 'g')
@@ -121,47 +168,6 @@ function! MapKey(keys, rhs, modes = "all", no_insert = v:false, remap = v:false,
             endif
         endfor
     endif
-endfunction
-
-" US qwerty keyboard
-let s:lower_key = {
-            \ '!': '1',
-            \ '@': '2',
-            \ '#': '3',
-            \ '$': '4',
-            \ '%': '5',
-            \ '^': '6',
-            \ '&': '7',
-            \ '*': '8',
-            \ '(': '9',
-            \ ')': '0',
-            \ '_': '-',
-            \ '+': '=',
-            \ '{': '[',
-            \ '}': ']',
-            \ '|': '\\',
-            \ ':': ';',
-            \ '"': "'",
-            \ '<': ',',
-            \ '>': '.',
-            \ '?': '/',
-            \}
-
-
-function s:ShiftModifierIfNeededForSuper(key)
-    let l:key = substitute(a:key, '.*-', '', '')
-    return strlen(l:key) == 1 && l:key >=# 'A' && l:key <=# 'Z' ||
-        \ has_key(s:lower_key, l:key) ? 'S-' : ''
-endfunction
-function s:ShiftModifierIfNeededForControl(key)
-    let l:key = substitute(a:key, '.*-', '', '')
-    return strlen(l:key) == 1 && l:key >=# 'A' && l:key <=# 'Z' ? 'S-' : ''
-endfunction
-function s:LowerKey(key)
-    if has('g:kitty_term') and has_key(s:lower_key, a:key)
-        return s:lower_key[a:key]
-    endif
-    return tolower(a:key)
 endfunction
 
 " Maps the Command (⌘) key, or in TUIs the fallback Option (⌥), key.
