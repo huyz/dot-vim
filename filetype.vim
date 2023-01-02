@@ -26,6 +26,7 @@ augroup filetype
   au BufNewFile,BufRead /*/.spamassassin/user_prefs,/*/spamassassin/*.cf,/*/spamassassin/*.pre setf spamassassin
 
   " My files (I came up with these filenames)
+  au BufNewFile,BufRead /*/.ssh/config.local setf sshconfig
   au BufNewFile,BufRead procmailrc*     setf procmail
   au BufNewFile,BufRead tfrc*           setf tf
   au BufNewFile,BufRead screenrc*       setf screen
