@@ -18,19 +18,19 @@ indent_size = 4
 switch_case_indent = true
 space_redirects = true
 
-[{*.zsh,.zsh*,.zlog*,.zprofile*,.zprezto*}]
+[{*.zsh,.zsh*,.zlog*,.zprofile*,.zprezto*,zsh*,zprofile,zlog*}]
 indent_size = 2 # for legacy and to visually differentiate from bash
 
 [{*.gitconfig*,.git/config}]
 indent_size = 4
 indent_style = tab # Because that's how git writes files
 
-[*.{js,jsx,ts,tsx,json}]
+[*.{js,jsx,ts,tsx,json,graphql,graphqlconfig}]
 # Javascript interpreter to be invoked by default 'node'
 #bin=node
 indent_size = 2
 
-[*.yaml]
+[*.{yml,yaml}]
 indent_size = 2
 
 [*.css]
