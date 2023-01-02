@@ -12,9 +12,9 @@
 "| ^D       | Directory Structure               | Vim              |
 "| ^E       | Move Caret to Line End            | Vim              |
 "| ^F       | Right                             | Vim              |
-"| ⌥F       | Check Current File                | Vim              |
+"| ⌥F       | Check Current File                | Vim  **TODO**    |
 "| ^G       | Add Selection for Next Occurrence | IDE in n-v modes |
-"| ^H       | Base on This Class                | Vim 🆓           |
+"| ^H       | Base on This Class                | IDE in n-v modes |
 "| ^I       | Implement Methods...              | Vim              |
 "| ^J       | Activate / Cycle AceJump Mode     | Vim              |
 "| ^K       | Cut up to Line End                | Vim              |
@@ -30,7 +30,7 @@
 "| ^V       | VCS Operations                    | Vim              |
 "| ^W       | Show Write Access                 | Vim              |
 "| ⌥X       | Gitmoji                           | Vim              |
-"| ^X       |                                   | Vim              |
+"| ^X       |                                   | Vim  **TODO**    |
 "| ^Y       |                                   | Vim              |
 "| ^Z       |                                   | Vim              |
 
@@ -124,10 +124,11 @@ augroup END
 
 nmap <C-q><C-r> <Action>(IdeaVim.ReloadVimRc.reload)
 
-" Use ^G as an ide shortcut in normal and visual modes
-sethandler <C-G> n-v:ide i:vim
-sethandler <C-X> n-v:ide i:vim
-sethandler <C-Z> a:ide
+" Redirect some shortcuts in certain modes to the IDE
+sethandler <C-g> n-v:ide i:vim
+sethandler <C-h> n-v:ide i:vim
+sethandler <C-x> n-v:ide i:vim
+sethandler <C-z> a:ide
 " This doesn't work:
 "sethandler <C-A> n-v:ide i:vim
 map <C-A> <Action>(osmedile.intellij.stringmanip.IncrementAction)
@@ -157,6 +158,9 @@ map ,ge ]b
 source ~/.vim/init.mappings-surround.vim
 
 " NOTE: yes, "Backward" is actually "Forward"
+" XXX: unfortunately, this means that we can't let JetBrains figure out to actually
+" use C-n and C-p, but that's not possible even if we let JetBrains try to differentiate
+" between movement and completion anyway (unlike VS Code).
 inoremap <C-p> :action HippieCompletion<CR>
 inoremap <C-n> :action HippieBackwardCompletion<CR>
 
