@@ -557,11 +557,10 @@ endif
 """ tcomment {{{2
 
 " Comment in first column
-" XXX `whitespace: no` doesn't work because uncommenting takes away 2 spaces
-"             \ 'whitespace': 'no',
-"             \ 'strip_whitespace': '0'
 let g:tcomment#options = {
             \ 'col': 1,
+            \ 'whitespace': 'no',
+            \ 'strip_whitespace': '0'
             \ }
 " Move the cursor to the next line.
 let g:tcomment#mode_extra = '>|'
