@@ -119,8 +119,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tommcdo/vim-exchange'
 " Take fork for screaming case and to apply to kebab words
-" Plug 'nicwest/vim-camelsnek'
-Plug 'zatchheems/vim-camelsnek'
+Plug 'nicwest/vim-camelsnek'
 Plug 'christoomey/vim-titlecase'
 " abolish: `:Subvert` is good for case-preserving substitute (but not for case conversions)
 Plug 'tpope/vim-abolish'
@@ -494,12 +493,6 @@ nmap gA <Plug>(EasyAlign)
 
 let g:titlecase_map_keys = 0
 let g:titlecase_excluded_words = ["và"]
-
-""" camelsnek {{{2
-
-" XXX: Until this is addressed:
-"   https://github.com/nicwest/vim-camelsnek/pull/1#issuecomment-1293417153
-let g:camelsnek_iskeyword_override = 0
 
 """ ergex {{{2
 
