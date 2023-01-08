@@ -18,7 +18,10 @@ plugin
 syntax
 packages
 plugged
+# OS-specific plugins
+plugged-*
 
 ### For plugins
 
-session
+# host-specific plugins
+session-*

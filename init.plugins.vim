@@ -22,8 +22,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " Specify a directory for plugins
-" - Avoid using standard Vim directory names like 'plugin'
-" - Normallly, for Neovim it would be: ~/.local/share/nvim/plugged
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
 call plug#begin('~/.vim/plugged')
 
 " Conditional activation
@@ -47,12 +49,15 @@ Plug 'mattn/webapi-vim'
 
 """ Plugins {{{2
 
+" OS-specific directory for plugins
+let g:plug_os_dir = expand('~/.vim/plugged-' . g:uname)
+
 " Files
 Plug 'mhinz/vim-startify'
 " plenary: dependency of telescope
 Plug 'nvim-lua/plenary.nvim', Cond(exists('g:nvim'))
 Plug 'nvim-telescope/telescope.nvim', Cond(exists('g:nvim'))
-Plug 'nvim-telescope/telescope-fzf-native.nvim', Cond(exists('g:nvim'), { 'do': 'make' })
+Plug 'nvim-telescope/telescope-fzf-native.nvim', Cond(exists('g:nvim'), { 'dir': g:plug_os_dir . '/telescope-fzf-native.nvim', 'do': 'make'})
 Plug 'kien/ctrlp.vim'
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -88,7 +93,7 @@ Plug 'chriskempson/base16-vim'
 " UI
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 Plug 'kyazdani42/nvim-tree.lua', Cond(exists('g:nvim'))
-Plug 'preservim/nerdtree', Cond(!exists('g:nvim'))
+Plug 'preservim/nerdtree', Cond(!exists('g:nvim'), { 'on': 'NERDTreeToggle' })
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -211,7 +216,7 @@ call plug#end()
 
 """ startify {{{2
 
-let g:startify_session_dir = '~/.vim/session'
+let g:startify_session_dir = expand('$MYVIM/session-') . hostname()
 if exists('g:nvim')
     let g:startify_session_before_save = [ 'silent! tabdo NvimTreeClose' ]
 else
@@ -272,8 +277,8 @@ autocmd VimLeavePre *             silent execute 'SSave! ' . GetUniqueSessionNam
 
 " Need to make sure the session directory exists, or SSave will prompt (and beacuse of the
 " `silent`, you won't see a prompt to create a directory--just a pause
-if !isdirectory(expand('$MYVIM/session/session.vim'))
-    execute "!mkdir -p '" . expand('$MYVIM/session/session.vim') . "'"
+if !isdirectory(g:startify_session_dir)
+    execute "!mkdir -p '" . g:startify_session_dir . "'"
 endif
 
 """ telescope {{{2

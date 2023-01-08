@@ -10,6 +10,9 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Init {{{1
 
+""" "linux" or "darwin"
+let g:uname = tolower(substitute(system('uname'), '\n', '', ''))
+
 """ Find .vim/ relative to .vimrc
 " Usage: vim -u /path/to/portable/vim/.vimrc
 
