@@ -284,7 +284,7 @@ nnoremap <C-q><C-g> <C-g>
 
 " We prefer to add not replace the existing defaults, so we don't use g:VM_maps
 " Because \\gS is hard to remember
-exe 'nnoremap ' . g:NormalizeMetaModifier('<C-g>') . ' <Plug>(VM-Find-Under)'
+nnoremap <C-g> <Plug>(VM-Find-Under)
 nnoremap \\S <Plug>(VM-Reselect-Last)
 exe 'nnoremap ' . g:NormalizeMetaModifier('<M-?>') . ' <Plug>(VM-Start-Regex-Search)'
 exe 'nnoremap ' . g:NormalizeMetaModifier('<M-G>') . ' <Plug>(VM-Select-All)'
