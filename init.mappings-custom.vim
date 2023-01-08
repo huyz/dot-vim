@@ -78,7 +78,7 @@ nnoremap <silent> <Space><Space> @=(foldlevel('.')?'za':'l')<CR>
 vnoremap <Space><Space> zf
 
 " Suspend from any mode, liberating <C-z> for toggling value
-call MapKey('<C-S-z>', '<C-z>')
+call MapKey('<C-q><C-z>', '<C-z>')
 
 " Closing without saving
 nmap Zw <Cmd>bdelete!<CR>
