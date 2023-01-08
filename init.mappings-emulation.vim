@@ -302,11 +302,13 @@ function! VM_Start()
     nnoremap <buffer> <C-S-G> <Plug>(VM-Find-Prev)
     exe 'nnoremap <buffer> ' . g:NormalizeMetaModifier('<M-q>') . ' <Plug>(VM-Skip-Region)'
     exe 'nnoremap <buffer> ' . g:NormalizeMetaModifier('<M-Q>') . ' <Plug>(VM-Remove-Region)'
+    exe 'nnoremap <buffer> ' . g:NormalizeMetaModifier('<M-x>a') . ' <Plug>(VM-Align)'
 endfunction
 function! VM_Exit()
     nunmap <buffer> <C-S-G>
     exe 'nunmap <buffer> ' . g:NormalizeMetaModifier('<M-q>')
     exe 'nunmap <buffer> ' . g:NormalizeMetaModifier('<M-Q>')
+    exe 'nunmap <buffer> ' . g:NormalizeMetaModifier('<M-x>a')
 endfunction
 
 let g:VM_maps["Add Cursor Up"] = '<M-Up>'
