@@ -243,6 +243,18 @@ map <A-©>o :GitViewFileOnRemote
 exmap GitViewHistoryOnRemote obcommand obsidian-git:view-history-on-github
 map <A-©><A-˙> :GitViewHistoryOnRemote
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Smarter o and O (inserting prefix for markdown lists)
+" Source: https://forum.obsidian.md/t/vim-o-and-o-should-respect-current-context/48386/5?u=obsequious
+
+exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
+exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
+nmap &a& :blankAbove
+nmap &b& :blankBelow
+nmap o &b&i
+nmap O &a&i
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
 
