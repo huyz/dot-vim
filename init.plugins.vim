@@ -50,6 +50,7 @@ Plug 'mattn/webapi-vim'
 """ Plugins {{{2
 
 " OS-specific directory for plugins
+" This lets us share the ~/.vim directory using real-time syncing tools like syncthing or Resilio
 let g:plug_os_dir = expand('~/.vim/plugged-' . g:uname)
 
 " Files
@@ -59,8 +60,10 @@ Plug 'nvim-lua/plenary.nvim', Cond(exists('g:nvim'))
 Plug 'nvim-telescope/telescope.nvim', Cond(exists('g:nvim'))
 Plug 'nvim-telescope/telescope-fzf-native.nvim', Cond(exists('g:nvim'), { 'dir': g:plug_os_dir . '/telescope-fzf-native.nvim', 'do': 'make'})
 Plug 'kien/ctrlp.vim'
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" NOTE: we could re-use the fzf that's installed in Homebrew (which is used by zsh), but
+" 1) it's more complicated to figure out where it's installed
+" 2) linuxbrew isn't supported on ARM.
+Plug 'junegunn/fzf', { 'dir': g:plug_os_dir . '/fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 " eunuch: some Unix file commands, e.g. Rename
 Plug 'tpope/vim-eunuch'
@@ -216,7 +219,7 @@ call plug#end()
 
 """ startify {{{2
 
-let g:startify_session_dir = expand('$MYVIM/session-') . hostname()
+let g:startify_session_dir = expand('$MYVIM/session-') . substitute(hostname(), '\..*', '', '')
 if exists('g:nvim')
     let g:startify_session_before_save = [ 'silent! tabdo NvimTreeClose' ]
 else
