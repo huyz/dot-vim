@@ -100,7 +100,7 @@ symlink "$relative_dir" ~/.vim
 ### Contents of base
 
 cd ~
-for i in .vimrc .gvimrc .ideavimrc .exrc .editorconfig; do
+for i in .vimrc .gvimrc .ideavimrc .exrc; do
     target=".vim/$i"
     link_name="$(basename "$target")"
     symlink "$target" "$link_name"
