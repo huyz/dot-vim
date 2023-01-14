@@ -34,13 +34,13 @@ SCRIPT_DIR="$(dirname "$SCRIPT")"
 
 usage()
 {
-  cat <<END >&2
+    cat <<END >&2
 Usage: $SCRIPT_NAME [-h|--help] [-n|--dry-run] [-a value|--argument value] [file...]
-       -h|--help: get help
-       -n|--dry-run: don't make any modifications
-       -f|--force: overwrite symlinks
+    -h|--help: get help
+    -n|--dry-run: don't make any modifications
+    -f|--force: overwrite symlinks
 END
-  exit 1
+    exit 1
 }
 
 ### Option defaults
@@ -55,13 +55,13 @@ opts=$($GETOPT --options hnf --long help,dry-run,force --name "$SCRIPT_NAME" -- 
 eval set -- "$opts"
 
 while true; do
-  case "$1" in
-    -h | --help) usage ;;
-    -n | --dry-run) opt_dry_run=1; shift ;;
-    -f | --force) opt_force=f; shift ;;
-    --) shift; break ;;
-    *) echo "$SCRIPT_NAME: Internal error!" >&2; exit 1 ;;
-  esac
+    case "$1" in
+        -h | --help) usage ;;
+        -n | --dry-run) opt_dry_run=1; shift ;;
+        -f | --force) opt_force=f; shift ;;
+        --) shift; break ;;
+        *) echo "$SCRIPT_NAME: Internal error!" >&2; exit 1 ;;
+    esac
 done
 
 [[ $# -gt 0 ]] && usage
@@ -93,9 +93,11 @@ function symlink {
 
 ### Entire subdir
 
-relative_dir="${SCRIPT_DIR#$HOME/}"
+relative_dir="${SCRIPT_DIR#"$HOME/"}"
 
 symlink "$relative_dir" ~/.vim
+[[ -d ~/.config ]] || mkdir ~/.config
+symlink "$relative_dir" ~/.config/nvim
 
 ### Contents of base
 
@@ -112,7 +114,7 @@ cd "$SCRIPT_DIR"
 
 # This is only for me
 if [[ -e .vimrc.post.gpg && ! -e .vimrc.post ]]; then
-    if command -v gpg &>/dev/null; then 
+    if command -v gpg &>/dev/null; then
         gpg -d -o .vimrc.post .vimrc.post.gpg && touch -r .vimrc.post.gpg .vimrc.post
     else
         echo "$SCRIPT_NAME: warning: gpg not found. Cannot decrypt .vimrc.post.gpg" >&2
