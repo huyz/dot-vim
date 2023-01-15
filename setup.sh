@@ -76,7 +76,7 @@ function symlink {
         link_target="$(readlink "$link_name")"
         if [[ "$link_target" != "$target" ]]; then
             if [[ -z $opt_force ]]; then
-                echo "$SCRIPT_NAME: error: $link_name is pointing to $link_target" >&2
+                echo "$SCRIPT_NAME: error: $link_name is pointing to $link_target instead of $target" >&2
                 return 1
             fi
         else
