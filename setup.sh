@@ -97,7 +97,7 @@ relative_dir="${SCRIPT_DIR#"$HOME/"}"
 
 symlink "$relative_dir" ~/.vim
 [[ -d ~/.config ]] || mkdir ~/.config
-symlink "$relative_dir" ~/.config/nvim
+symlink ~/.vim ~/.config/nvim
 
 ### Contents of base
 
