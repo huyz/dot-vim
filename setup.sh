@@ -113,10 +113,11 @@ done
 cd "$SCRIPT_DIR"
 
 # This is only for me
-if [[ -e .vimrc.post.gpg && ! -e .vimrc.post ]]; then
-    if command -v gpg &>/dev/null; then
-        gpg -d -o .vimrc.post .vimrc.post.gpg && touch -r .vimrc.post.gpg .vimrc.post
+vimrc_post=.vimrc.post
+if [[ -e "$vimrc_post.age" && ! -e "$vimrc_post" ]]; then
+    if command -v age &>/dev/null; then
+        age -d -i ~/.age/github-public-files-key.age -o "$vimrc_post" "$vimrc_post.age"
     else
-        echo "$SCRIPT_NAME: warning: gpg not found. Cannot decrypt .vimrc.post.gpg" >&2
+        echo "$SCRIPT_NAME: warning: age not found. Cannot decrypt $vimrc_post.age" >&2
     fi
 fi
