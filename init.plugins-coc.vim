@@ -199,7 +199,7 @@ let g:coc_global_extensions = [
             \ 'coc-tsserver',
             \ 'coc-vimlsp'
             \ ]
-let g:python3_host_prog = expand("~/.pyenv/versions/py3nvim/bin/python")
+let g:python3_host_prog = expand("~/.pyenv/versions/py3nvim-3.10.9/bin/python")
 
 " Usage: type `:Prettier` to format whole document
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
