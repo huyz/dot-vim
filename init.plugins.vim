@@ -178,6 +178,7 @@ Plug 'folke/trouble.nvim', Cond(exists('g:nvim'))
 
 " vim gets syntastic
 Plug 'scrooloose/syntastic', Cond(!exists('g:nvim'))
+Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 " treesitter: telescope apparently could use it
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " neovim gets coc or mason
