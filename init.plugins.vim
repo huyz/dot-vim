@@ -655,6 +655,8 @@ if exists('g:nvim')
                     \ '.*': { 'takeover': 'once', 'priority': 0 },
                     \ 'https?://(?:[^/]+\.)?(slack|excalidraw|writesonic)\.com/':
                     \    { 'takeover': 'never', 'priority': 1 },
+                    \ 'https?://dev\.to/onboarding':
+                    \    { 'takeover': 'never', 'priority': 1 },
                 \ }
     \ }
 
