@@ -643,16 +643,20 @@ let g:CheatDoNotReplaceKeywordPrg = 1
 
 """ Firenvim {{{2
 
+" Usage:
+" - in browser, I have shift+alt+F set to trigger on
+" - in nvim, hit Ctrl-C to save and exit (like ZZ)
+
 if exists('g:nvim')
     let g:firenvim_config = {
                 \ 'localSettings': {
                     \ '.*': { 'takeover': 'once', 'priority': 0 },
-                    \ 'https?://(?:[^/]+\.)excalidraw\.com/': { 'takeover': 'never', 'priority': 1 },
-                    \ 'https?://[^/]+\.slack\.com/': { 'takeover': 'never', 'priority': 1 }
+                    \ 'https?://(?:[^/]+\.)?(slack|excalidraw|writesonic)\.com/':
+                    \    { 'takeover': 'never', 'priority': 1 },
                 \ }
     \ }
 
-    function! RemapCopyAndPaste()
+    function! FirenvimMappings()
         " Get Copy and Paste working inside the browser
         vnoremap <D-x> "+d
         vnoremap <D-c> "+y
@@ -660,16 +664,21 @@ if exists('g:nvim')
         nnoremap <D-v> "+gP
         cnoremap <D-v> <C-R>+
         inoremap <D-v> <C-R><C-O>+
+
+        " Easy exit
+        nnoremap <C-c> ZZ
+        vnoremap <C-c> ZZ
+        inoremap <C-c> <C-O>ZZ
     endfunction
 
     if exists('g:started_by_firenvim')
-        set laststatus=0
-        call RemapCopyAndPaste()
+        set laststatus=0 shortmess+=F
+        call FirenvimMappings()
     endif
     function! OnUIEnter(event) abort
         if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
             set laststatus=0
-            call RemapCopyAndPaste()
+            call FirenvimMappings()
         endif
     endfunction
     autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
