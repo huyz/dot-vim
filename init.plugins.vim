@@ -175,6 +175,8 @@ Plug 'simrat39/symbols-outline.nvim', Cond(exists('g:nvim'))
 Plug 'RRethy/vim-illuminate'
 " trouble: pretty diagnostics, references, telescope results, …
 Plug 'folke/trouble.nvim', Cond(exists('g:nvim'))
+let copilot_supported = exists('g:nvim') || v:version >= 801
+Plug 'github/copilot.vim', Cond(copilot_supported)
 
 " vim gets syntastic
 Plug 'scrooloose/syntastic', Cond(!exists('g:nvim'))
