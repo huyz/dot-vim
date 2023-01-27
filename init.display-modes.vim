@@ -10,6 +10,11 @@ function! TogglePaste()
         let b:old_signcolumn = &signcolumn
         set signcolumn=no
     endif
+    if exists('g:coc_running')
+        call coc#config('git', {'addGBlameToVirtualText': &paste})
+        " Clear the virtual text on the current line
+        call nvim_buf_clear_namespace(bufnr(), -1, line('.') - 1, line('.'))
+    endif
     set invpaste
     GitGutterToggle
     call CycleEditDisplay(&paste)

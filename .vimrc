@@ -108,6 +108,7 @@ source $MYVIM/init.util.vim
 source $MYVIM/init.options.vim
 source $MYVIM/init.plugins.vim
 if g:coc_or_mason == 'coc' && (exists('g:nvim') || v:version >= 801)
+    let g:coc_running = 1
     source $MYVIM/init.plugins-coc.vim
 endif
 " Load switch config after the vim-switch plugin has loade
