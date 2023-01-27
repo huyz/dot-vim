@@ -11,7 +11,7 @@ function! TogglePaste()
         set signcolumn=no
     endif
     if exists('g:coc_running')
-        call coc#config('git', {'addGBlameToVirtualText': &paste})
+        let g:coc_git_hide_blame_virtual_text = !&paste
         " Clear the virtual text on the current line
         call nvim_buf_clear_namespace(bufnr(), -1, line('.') - 1, line('.'))
     endif
