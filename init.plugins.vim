@@ -653,9 +653,11 @@ if exists('g:nvim')
     let g:firenvim_config = {
                 \ 'localSettings': {
                     \ '.*': { 'takeover': 'once', 'priority': 0 },
-                    \ 'https?://(?:[^/]+\.)?(slack|excalidraw|writesonic)\.com/':
+                    \ 'https://(?:[^/]+\.)?(slack|excalidraw|writesonic)\.com/':
                     \    { 'takeover': 'never', 'priority': 1 },
-                    \ 'https?://dev\.to/onboarding':
+                    \ 'https://translate\.google\.com/':
+                    \    { 'takeover': 'never', 'priority': 1 },
+                    \ 'https://dev\.to/onboarding':
                     \    { 'takeover': 'never', 'priority': 1 },
                 \ }
     \ }
@@ -675,14 +677,12 @@ if exists('g:nvim')
         inoremap <C-c> <C-O>ZZ
     endfunction
 
-    if exists('g:started_by_firenvim')
-        set laststatus=0 shortmess+=F
-        call FirenvimMappings()
-    endif
     function! OnUIEnter(event) abort
         if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
-            set laststatus=0
             call FirenvimMappings()
+            set laststatus=0 shortmess+=F
+            set signcolumn=no
+            set nolist nonumber norelativenumber nocursorline showbreak=  nocursorcolumn
         endif
     endfunction
     autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
