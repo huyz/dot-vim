@@ -1,3 +1,5 @@
 {
-  "git.addGBlameToVirtualText": true
+  "git.addGBlameToVirtualText": true,
+  // TODO: figure out this snippets thing that keeps coming back
+  "snippets.ultisnips.pythonPrompt": false
 }
