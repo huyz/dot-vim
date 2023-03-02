@@ -117,6 +117,8 @@ if has('mac') &&
         " Glow
         call MapAlias('µπ', '<M-m><M-p>')
         "call MapAlias('µ¬', '<M-m><M-l>')
+        " Swap
+        call MapAlias('≈≈', '<M-x><M-x>')
 
         " Move tab first or last
         call MapAlias('<D-”>', '<M-S-D-{>')
