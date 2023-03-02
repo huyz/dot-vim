@@ -107,7 +107,7 @@ if has('mac') &&
     call MapAlias('¿', '<M-?>')
     call MapAlias('÷', '<M-/>')
 
-    if exists('g:gui_macvim')
+    if exists('g:gui_running')
         " TODO: automate these MapAlias whenever they're used
         "   instead of mapping them ahead of time.
         " BrowserSearch
