@@ -652,15 +652,19 @@ let g:CheatDoNotReplaceKeywordPrg = 1
 " - in browser, I have shift+alt+F set to trigger on
 " - in nvim, hit Ctrl-C to save and exit (like ZZ)
 
+" Commenting out to disable automatic execution
+"                    \ '.*': { 'takeover': 'once', 'priority': 0 },
 if exists('g:nvim')
     let g:firenvim_config = {
                 \ 'localSettings': {
-                    \ '.*': { 'takeover': 'once', 'priority': 0 },
-                    \ 'https://(?:[^/]+\.)?(slack|excalidraw|writesonic)\.com/':
+                    \ '.*': { 'takeover': 'never', 'priority': 0 },
+                    \ 'https://([^/]+\.)?((excalidraw|kodezi|slack|writesonic)\.com|open\.ai)/':
                     \    { 'takeover': 'never', 'priority': 1 },
                     \ 'https://translate\.google\.com/':
                     \    { 'takeover': 'never', 'priority': 1 },
                     \ 'https://dev\.to/onboarding':
+                    \    { 'takeover': 'never', 'priority': 1 },
+                    \ 'https://github.com/.*/(edit|new)/':
                     \    { 'takeover': 'never', 'priority': 1 },
                 \ }
     \ }
