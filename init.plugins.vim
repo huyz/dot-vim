@@ -552,9 +552,12 @@ let g:insert_checkbox_prefix = '- '
 
 """ glow {{{2
 
+" FIXME: dunno why I have to specify the style
 if exists('g:nvim')
     lua << EOF
-    require('glow').setup()
+    require('glow').setup({
+        style = "light",
+    })
 EOF
 endif
 
