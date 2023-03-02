@@ -58,43 +58,43 @@ exmap SurroundSquared surround [ ]
 " NOTE: ys) doesnt' work
 nmap ys] :SurroundSquared
 vmap S] :SurroundSquared
-map <A-µ>] :SurroundSquared
+map µ] :SurroundSquared
 
 exmap SurroundParens surround ( )
 " NOTE: ys) doesnt' work
 nmap ys) :SurroundParens
 vmap S) :SurroundParens
-map <A-µ>) :SurroundParens
+map µ) :SurroundParens
 
 exmap SurroundAngled surround < >
 " NOTE: ys> doesnt' work
 nmap ys> :SurroundAngled
-map S> :SurroundAngled
-map <A-µ>> :SurroundAngled
+vmap S> :SurroundAngled
+map µ> :SurroundAngled
 
 exmap SurroundUnderlines surround _ _
 " NOTE: ys_ doesnt' work
 nmap ys_ :SurroundUnderlines
-map S_ :SurroundUnderlines
-map <A-µ>_ :SurroundUnderlines
+vmap S_ :SurroundUnderlines
+map µ_ :SurroundUnderlines
 
 exmap SurroundDoubleQuotes surround " "
 " NOTE: ys" doesnt' work
 nmap ys" :SurroundDoubleQuotes
-map S" :SurroundDoubleQuotes
-map <A-µ>" :SurroundDoubleQuotes
+vmap S" :SurroundDoubleQuotes
+map µ" :SurroundDoubleQuotes
 
 exmap SurroundSingleQuotes surround ' '
 " NOTE: ys' doesnt' work
 nmap ys' :SurroundSingleQuotes
-map S' :SurroundSingleQuotes
-map <A-µ>' :SurroundSingleQuotes
+vmap S' :SurroundSingleQuotes
+map µ' :SurroundSingleQuotes
 
 exmap SurroundBackticks surround ` `
 " NOTE: ys` doesnt' work
 nmap ys` :SurroundBackticks
-map S` :SurroundBackticks
-map <A-µ>` :SurroundBackticks
+vmap S` :SurroundBackticks
+map µ` :SurroundBackticks
 
 """ My own surround additions
 
@@ -102,19 +102,19 @@ exmap SurroundStars surround ** **
 " NOTE: ys* doesnt' work
 nmap ys* :SurroundStars
 vmap s* :SurroundStars
-map <A-µ>* :SurroundStars
+map µ* :SurroundStars
 
 exmap SurroundEquals surround == ==
 " NOTE: ys= doesnt' work
 nmap ys= :SurroundEquals
 vmap s= :SurroundEquals
-map <A-µ>= :SurroundEquals
+map µ= :SurroundEquals
 
 exmap SurroundWiki surround [[ ]]
 " NOTE: ysw doesnt' work
 nmap ysw :SurroundWiki
 vmap sw :SurroundWiki
-map <A-µ>w :SurroundWiki
+map µw :SurroundWiki
 
 
 """ GUI Emulation mappings
@@ -129,119 +129,119 @@ nmap <C-q><C-e> :EditVimrc
 "   we have to get rid of the <A-> and re-test
 
 exmap RenameFile obcommand workspace:edit-file-title
-nmap <A-ç>N :RenameFile
+nmap çN :RenameFile
 
 exmap TransformTitlecase obcommand obsidian-editor-shortcuts:transformToTitlecase
-nmap <A-ç>T :TransformTitlecase
+nmap çT :TransformTitlecase
 " We have to use jscommand to get the selection
 "   See: https://github.com/esm7/obsidian-vimrc-support/issues/99#issuecomment-1128403004
 exmap TransformTitlecaseSelection jscommand { editor.setSelections([selection]); this.app.commands.commands['obsidian-editor-shortcuts:transformToTitlecase'].editorCallback(editor) }
-vmap <A-ç>T :TransformTitlecaseSelection
+vmap çT :TransformTitlecaseSelection
 
 exmap TableControlBar obcommand table-editor-obsidian:table-control-bar
-map <A-µ>t :TableControlBar
+map µt :TableControlBar
 exmap TableFormat obcommand table-editor-obsidian:format-table
-map <A-µ>f :TableFormat
+map µf :TableFormat
 exmap TableInsertColumn obcommand table-editor-obsidian:insert-column
-map <A-µ>i :TableInsertColumn
+map µi :TableInsertColumn
 exmap TableDeleteColumn obcommand table-editor-obsidian:delete-column
-map <A-µ>x :TableDeleteColumn
+map µx :TableDeleteColumn
 exmap TableInsertRow obcommand table-editor-obsidian:insert-row
-map <A-µ>O :TableInsertRow
+map µO :TableInsertRow
 exmap TableDeleteRow obcommand table-editor-obsidian:delete-row
-map <A-µ>d :TableDeleteRow
+map µd :TableDeleteRow
 exmap TableAlignLeft obcommand table-editor-obsidian:left-align-column
-map <A-µ><Left> :TableAlignLeft
+map µ<Left> :TableAlignLeft
 exmap TableAlignCenter obcommand table-editor-obsidian:center-align-column
-map <A-µ><Down> :TableAlignCenter
+map µ<Down> :TableAlignCenter
 exmap TableAlignRight obcommand table-editor-obsidian:right-align-column
-map <A-µ><Right> :TableAlignRight
+map µ<Right> :TableAlignRight
 exmap ExcelToTable obcommand obsidian-excel-to-markdown-table:excel-to-markdown-table
-map <A-µ>X :ExcelToTable
+map µX :ExcelToTable
 
 exmap CodeBlock obcommand code-block-from-selection:e3dea0f5-37f2-4d79-ae58-490af3228069
-nmap <A-µ>C :CodeBlock
+nmap µC :CodeBlock
 exmap CodeBlockSelection jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:e3dea0f5-37f2-4d79-ae58-490af3228069'].callback() }
-vmap <A-µ>C :CodeBlockSelection
+vmap µC :CodeBlockSelection
 exmap CodeBlockBash obcommand code-block-from-selection:06934685-62e1-4ac2-83c2-b42d2d753d6a
-map <A-µ>B :CodeBlockBash
+map µB :CodeBlockBash
 exmap CodeBlockSelectionBash jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:06934685-62e1-4ac2-83c2-b42d2d753d6a'].callback() }
-vmap <A-µ>B :CodeBlockSelectionBash
+vmap µB :CodeBlockSelectionBash
 exmap CodeBlockJS obcommand code-block-from-selection:4ef365c0-8932-4b1e-9947-844a4128ad71
-map <A-µ>J :CodeBlockJS
+map µJ :CodeBlockJS
 exmap CodeBlockSelectionJS jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:4ef365c0-8932-4b1e-9947-844a4128ad71'].callback() }
-vmap <A-µ>J :CodeBlockSelectionJS
+vmap µJ :CodeBlockSelectionJS
 exmap CodeBlockPython obcommand code-block-from-selection:f8b19c3a-9b67-428d-a88b-892811f5707a
-map <A-µ>P :CodeBlockPython
+map µP :CodeBlockPython
 exmap CodeBlockSelectionPython jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:f8b19c3a-9b67-428d-a88b-892811f5707a'].callback() }
-vmap <A-µ>P :CodeBlockSelectionPython
+vmap µP :CodeBlockSelectionPython
 exmap CodeBlockShell obcommand code-block-from-selection:e4a96b24-7cf7-4c34-95e6-30578c8222ce
-map <A-µ>S :CodeBlockShell
+map µS :CodeBlockShell
 exmap CodeBlockSelectionShell jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:e4a96b24-7cf7-4c34-95e6-30578c8222ce'].callback() }
-vmap <A-µ>S :CodeBlockSelectionShell
+vmap µS :CodeBlockSelectionShell
 
 exmap SearchInternet obcommand search-on-internet:search-on-internet
-map <A-ø>w :SearchInternet
+map øw :SearchInternet
 
 exmap OpenDefaultApp obcommand open-with-default-app:open
-nmap <A-ø>o :OpenDefaultApp
+nmap øo :OpenDefaultApp
 exmap RevealInFinder obcommand open-with:show-file-in-explorer
-nmap <A-ø>f :RevealInFinder
+nmap øf :RevealInFinder
 exmap RevealInTerminal obcommand obsidian-shellcommands:shell-command-v6sx70npxw
-nmap <A-ø>t :RevealInTerminal
+nmap øt :RevealInTerminal
 exmap OpenVSCode obcommand open-vscode:open-vscode-via-url
-nmap <A-ø>c :OpenVSCode
+nmap øc :OpenVSCode
 exmap OpenMacVim obcommand open-with:open-file-with-macvim
-nmap <A-ø>v :OpenMacVim
+nmap øv :OpenMacVim
 exmap OpenVimR obcommand open-with:open-file-with-vimr
-nmap <A-ø>V :OpenVimR
+nmap øV :OpenVimR
 exmap OpenMarkText obcommand open-with:open-file-with-marktext
-nmap <A-ø>m :OpenMarkText
+nmap øm :OpenMarkText
 exmap OpenMacDown obcommand open-with:open-file-with-macdown
-nmap <A-ø>M :OpenMacDown
+nmap øM :OpenMacDown
 " XXX: These don't work when we have an image open since Vim mode isn't active. Use Sequence Hotkeys.
 exmap OpenCleanShot obcommand open-with:open-file-with-cleanshotx
-nmap <A-ø>x :OpenCleanShot
+nmap øx :OpenCleanShot
 exmap OpenPreview obcommand open-with:open-file-with-preview
-nmap <A-ø>u :OpenPreview
+nmap øu :OpenPreview
 
 exmap SwitchTheme obcommand theme:switch
-nmap <A-ß>c :SwitchTheme
+nmap ßc :SwitchTheme
 exmap SwitchThemeDark obcommand theme:use-dark
-nmap <A-ß>b :SwitchThemeDark
+nmap ßb :SwitchThemeDark
 exmap SwitchThemeLight obcommand theme:use-light
-nmap <A-ß>B :SwitchThemeLight
+nmap ßB :SwitchThemeLight
 
 exmap ToggleWhitespace obcommand control-characters:toggle
-nmap <A-ß><Space> :ToggleWhitespace
+nmap ß<Space> :ToggleWhitespace
 
 exmap ToggleBacklinks obcommand backlink:toggle-backlinks-in-document
-map <A-ß>/ :ToggleBacklinks
+map ß/ :ToggleBacklinks
 
 exmap GitOpenView obcommand obsidian-git:open-git-view
-map <A-©><A-©> :GitOpenView
+map ©© :GitOpenView
 exmap GitDiff obcommand obsidian-git:open-diff-view
-map <A-©>d :GitDiff
+map ©d :GitDiff
 exmap GitBackupAndClose obcommand obsidian-git:backup-and-close
-map <A-©>u :GitBackupAndClose
+map ©u :GitBackupAndClose
 exmap GitCommit obcommand obsidian-git:commit
-map <A-©><A-S-Ç> :GitCommit
+map ©Ç :GitCommit
 exmap GitCommitStaged obcommand obsidian-git:commit-staged
-map <A-©>c :GitCommitStaged
+map ©c :GitCommitStaged
 exmap GitListChangedFiles obcommand obsidian-git:list-changed-files
-map <A-©>t :GitListChangedFiles
+map ©t :GitListChangedFiles
 exmap GitPull obcommand obsidian-git:pull
-map <A-©>j :GitPull
+map ©j :GitPull
 exmap GitPush obcommand obsidian-git:push
-map <A-©>k :GitPush
+map ©k :GitPush
 exmap GitStageFile obcommand obsidian-git:stage-current-file
-map <A-©>a :GitStageFile
+map ©a :GitStageFile
 exmap GitUnstageFile obcommand obsidian-git:unstage-current-file
-map <A-©>A :GitUnstageFile
+map ©A :GitUnstageFile
 exmap GitViewFileOnRemote obcommand obsidian-git:view-file-on-github
-map <A-©>o :GitViewFileOnRemote
+map ©o :GitViewFileOnRemote
 exmap GitViewHistoryOnRemote obcommand obsidian-git:view-history-on-github
-map <A-©><A-˙> :GitViewHistoryOnRemote
+map ©˙ :GitViewHistoryOnRemote
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
