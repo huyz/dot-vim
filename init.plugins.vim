@@ -178,6 +178,7 @@ Plug 'folke/trouble.nvim', Cond(exists('g:nvim'))
 let copilot_supported = exists('g:nvim') || v:version >= 801
 Plug 'github/copilot.vim', Cond(copilot_supported)
 
+Plug 'LhKipp/nvim-nu'
 " vim gets syntastic
 Plug 'scrooloose/syntastic', Cond(!exists('g:nvim'))
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
