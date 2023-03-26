@@ -104,7 +104,7 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'ryanoasis/vim-devicons', Cond(!exists('g:nvim'))
 Plug 'kyazdani42/nvim-web-devicons', Cond(exists('g:nvim'))
 Plug 'mbbill/undotree'
-Plug 'brglng/vim-im-select'
+Plug 'zhaosheng-pan/vim-im-select'
 " bbye: delete buffer preserving window layout
 Plug 'moll/vim-bbye'
 Plug 'ryvnf/readline.vim'
