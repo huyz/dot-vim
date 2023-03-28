@@ -14,9 +14,9 @@ case "$OSTYPE" in
             echo "$0: error: $READLINK could not be found. Run \`brew install coreutils\`" >&2
             exit 1
         fi
-        GETOPT="$BREW/opt/gnu-getopt/bin/getopt"
+        GETOPT="$BREW/opt/util-linux/bin/getopt"
         if [[ ! -x $GETOPT ]]; then
-            echo "$0: error: $GETOPT could not be found. Run \`brew install gnu-getopt\`" >&2
+            echo "$0: error: $GETOPT could not be found. Run \`brew install util-linux\`" >&2
             exit 1
         fi
         ;;
