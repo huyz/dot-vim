@@ -179,6 +179,10 @@ exmap CodeBlockShell obcommand code-block-from-selection:e4a96b24-7cf7-4c34-95e6
 map µS :CodeBlockShell
 exmap CodeBlockSelectionShell jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:e4a96b24-7cf7-4c34-95e6-30578c8222ce'].callback() }
 vmap µS :CodeBlockSelectionShell
+exmap CodeBlockPowershell obcommand code-block-from-selection:a5afb22c-5d9f-416e-8a43-9ae4a1497bdd
+map µW :CodeBlockPowershell
+exmap CodeBlockSelectionPowershell jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:a5afb22c-5d9f-416e-8a43-9ae4a1497bdd'].callback() }
+vmap µW :CodeBlockSelectionPowershell
 
 exmap SearchInternet obcommand search-on-internet:search-on-internet
 map øw :SearchInternet
