@@ -178,7 +178,7 @@ Plug 'folke/trouble.nvim', Cond(exists('g:nvim'))
 let copilot_supported = exists('g:nvim') || v:version >= 801
 Plug 'github/copilot.vim', Cond(copilot_supported)
 
-Plug 'LhKipp/nvim-nu'
+Plug 'LhKipp/nvim-nu', {'do': ':TSInstall nu'}
 " vim gets syntastic
 Plug 'scrooloose/syntastic', Cond(!exists('g:nvim'))
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
@@ -192,7 +192,9 @@ Plug 'williamboman/mason.nvim', Cond(mason_supported)
 Plug 'williamboman/mason-lspconfig.nvim', Cond(mason_supported)
 Plug 'neovim/nvim-lspconfig', Cond(mason_supported)
 Plug 'mfussenegger/nvim-dap', Cond(mason_supported)
-Plug 'jose-elias-alvarez/null-ls.nvim', Cond(mason_supported)
+" 2023-03-30 No condition needed anymore as we need null-ls for nvim-nu too
+"Plug 'jose-elias-alvarez/null-ls.nvim', Cond(mason_supported)
+Plug 'jose-elias-alvarez/null-ls.nvim'
 
 " Git
 Plug 'rhysd/git-messenger.vim'
@@ -582,6 +584,15 @@ else
 endif
 let g:Hexokinase_ftEnabled = ['vim', 'html', 'css', 'less', 'scss', 'stylus', 'javascript',
             \ 'markwhen']
+
+""" nvim-nu {{{2
+
+if exists('g:nvim')
+    lua << EOF
+    require("nu").setup()
+EOF
+endif
+
 
 """ syntastic {{{2
 
