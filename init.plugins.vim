@@ -63,7 +63,7 @@ Plug 'kien/ctrlp.vim'
 " NOTE: we could re-use the fzf that's installed in Homebrew (which is used by zsh), but
 " 1) it's more complicated to figure out where it's installed
 " 2) linuxbrew isn't supported on ARM.
-Plug 'junegunn/fzf', { 'dir': g:plug_os_dir . '/fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'dir': g:plug_os_dir . '/fzf', 'do': './install --bin --update-rc' }
 Plug 'junegunn/fzf.vim'
 " eunuch: some Unix file commands, e.g. Rename
 Plug 'tpope/vim-eunuch'
