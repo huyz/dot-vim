@@ -356,28 +356,28 @@ if exists('g:nvim')
             -- please take a look at the readme of the extension you want to configure
         }
 
-        " To jump to existing tab.
-        "   https://github.com/nvim-telescope/telescope.nvim/issues/2188#issuecomment-1516861881
-        " 2023-04-21 not yet tested.
-        "buffers = {
-        "    mappings = {
-        "        i = { ["<CR>"] = actions.select_tab_drop }
-        "},
-        "find_files = {
-        "    mappings = {
-        "        i = { ["<CR>"] = actions.select_tab_drop }
-        "    }
-        "},
-        "git_files = {
-        "    mappings = {
-        "        i = { ["<CR>"] = actions.select_tab_drop }
-        "    }
-        "},
-        "old_files = {
-        "    mappings = {
-        "        i = { ["<CR>"] = actions.select_tab_drop }
-        "    }
-        "},
+        --  To jump to existing tab.
+        --    https://github.com/nvim-telescope/telescope.nvim/issues/2188#issuecomment-1516861881
+        --  2023-04-21 not yet tested.
+        -- buffers = {
+        --     mappings = {
+        --         i = { ["<CR>"] = actions.select_tab_drop }
+        -- },
+        -- find_files = {
+        --     mappings = {
+        --         i = { ["<CR>"] = actions.select_tab_drop }
+        --     }
+        -- },
+        -- git_files = {
+        --     mappings = {
+        --         i = { ["<CR>"] = actions.select_tab_drop }
+        --     }
+        -- },
+        -- old_files = {
+        --     mappings = {
+        --         i = { ["<CR>"] = actions.select_tab_drop }
+        --     }
+        -- },
     }
 EOF
 endif
