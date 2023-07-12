@@ -16,6 +16,5 @@ inoremap <Leader>`D <C-R>=system("echo -n $(date -Iseconds)")<CR>
 inoremap <Leader>`t <C-R>=strftime("%T")<CR>
 inoremap <Leader>`u <C-R>=system("echo -n $(date -Idate -u)")<CR>
 inoremap <Leader>`U <C-R>=system("echo -n $(date -Iseconds -u \| sed 's/+00:00/Z/')")<CR>
-iab CRE: created: <C-R>=$LOGNAME<CR> <Leader>`d<CR>updated: <C-R>=$LOGNAME<CR> <Leader>`d
-iab ---: ---<CR>updated: '<Leader>`D'<CR>created: '<Leader>`D'<CR>---
+iab ---: ---<CR>author: <C-R>=$LOGNAME<CR><CR>created: '<Leader>`D'<CR>updated: '<Leader>`D'<CR>---
 
