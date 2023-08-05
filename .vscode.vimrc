@@ -32,6 +32,10 @@ nmap <Space><Space> za
 " Since vim/vscode steals <C-k> for digraphs, we'll make <C-k><C-k> work like it
 inoremap <C-k><C-k> <C-o>D
 
+" 2023-08-05 FIXME: doesn't work so I'm editing keybindings.json instead
+inoremap <C-q><C-i> 	 " Inserts a literal tab
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 2022-11-18 Manual inclusion of init.mappings-surround.vim because `source`
 " not yet implemented.
