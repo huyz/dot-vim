@@ -49,9 +49,10 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'kana/vim-textobj-entire'
 Plug 'machakann/vim-highlightedyank'
 
-Plug 'easymotion/vim-easymotion'
 " NOTE: this is better than the real vim-easymotion because you don't have to hit `<CR>`, thanks to ACE
-nmap - <Plug>(easymotion-s2)
+Plug 'easymotion/vim-easymotion'
+" 2023-08-18 Broken now for some reason
+map - <Plug>(easymotion-s2)
 
 Plug 'terryma/vim-multiple-cursors'
 
@@ -91,7 +92,7 @@ Plug 'terryma/vim-multiple-cursors'
 set which-key
 
 "
-" IdeavVim-customized options
+" IdeaVim-customized options
 "
 
 set ideastatusicon=gray
