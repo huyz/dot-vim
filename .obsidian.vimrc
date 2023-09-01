@@ -245,7 +245,7 @@ map ©A :GitUnstageFile
 exmap GitViewFileOnRemote obcommand obsidian-git:view-file-on-github
 map ©o :GitViewFileOnRemote
 exmap GitViewHistoryOnRemote obcommand obsidian-git:view-history-on-github
-map ©˙ :GitViewHistoryOnRemote
+map ©h :GitViewHistoryOnRemote
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
