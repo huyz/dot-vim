@@ -1,5 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " https://github.com/esm7/obsidian-vimrc-support
+"
+" TIP: to list all Obsidian commands, run `:obcommand` and go to JS console.
 
 " Neovim mappings
 " FIXME: doesn't work
@@ -28,7 +30,7 @@ exmap unfoldall obcommand editor:unfold-all
 nmap zR :unfoldall
 exmap foldall obcommand editor:fold-all
 nmap zM :foldall
-
+uper
 " Space must first be unbound
 unmap <Space>
 nmap <Space><Space> :togglefold
@@ -159,6 +161,8 @@ map µ<Right> :TableAlignRight
 exmap ExcelToTable obcommand obsidian-excel-to-markdown-table:excel-to-markdown-table
 map µX :ExcelToTable
 
+" 2023-09-04 Why is this one `nmap` and the others `map`?
+" And why is there no need for `imap`?
 exmap CodeBlock obcommand code-block-from-selection:e3dea0f5-37f2-4d79-ae58-490af3228069
 nmap µC :CodeBlock
 exmap CodeBlockSelection jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:e3dea0f5-37f2-4d79-ae58-490af3228069'].callback() }
