@@ -30,7 +30,7 @@ exmap unfoldall obcommand editor:unfold-all
 nmap zR :unfoldall
 exmap foldall obcommand editor:fold-all
 nmap zM :foldall
-uper
+
 " Space must first be unbound
 unmap <Space>
 nmap <Space><Space> :togglefold
