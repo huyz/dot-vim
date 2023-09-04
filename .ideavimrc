@@ -1,3 +1,4 @@
+" TIP: Do <C-q><C-r> to reload after editing.
 "
 " Configure jetbrains
 "
@@ -20,9 +21,9 @@
 "| ^K       | Cut up to Line End                | Vim              |
 "| ^L       | Scroll to Center                  | Vim              |
 "| ^M       | Module                            | IDE 🆓           |
-"| ^N       | Cyclic Expand Word (Backward)     | Vim              |
+"| ^N       | Select Next Menu Item             | IDE              |
 "| ^O       | Override Methods…                 | Vim              |
-"| ^P       | Directory                         | Vim              |
+"| ^P       | Select Previous Row               | IDE              |
 "| ^Q       |                                   | Vim              |
 "| ^R       | Show Read Access                  | Vim              |
 "| ^S       | File Structure                    | Vim              |
@@ -51,7 +52,7 @@ Plug 'machakann/vim-highlightedyank'
 
 " NOTE: this is better than the real vim-easymotion because you don't have to hit `<CR>`, thanks to ACE
 Plug 'easymotion/vim-easymotion'
-" 2023-08-18 Broken now for some reason
+" 2023-08-18 Broken now for some reason. But I can use <C-;> for AceJump in both IntelliJ and VS Code.
 map - <Plug>(easymotion-s2)
 
 Plug 'terryma/vim-multiple-cursors'
@@ -128,6 +129,11 @@ nmap <C-q><C-r> <Action>(IdeaVim.ReloadVimRc.reload)
 " Redirect some shortcuts in certain modes to the IDE
 sethandler <C-g> n-v:ide i:vim
 sethandler <C-h> n-v:ide i:vim
+" We want these two navigate completion menus, especially in insert mode. But
+" the normal mappings in vim are pretty useless. So there's no point in keeping
+" them for vim at all
+"sethandler <C-j> n-v:vim i:ide
+"sethandler <C-k> n-v:vim i:ide
 sethandler <C-x> n-v:ide i:vim
 sethandler <C-z> a:ide
 " This doesn't work:
