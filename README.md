@@ -67,7 +67,7 @@ I tend to forgot I defined these mappings:
 | `Zw`                     | Close buffer without saving                                       |
 | `gb`                     | Re-select last pasted block                                       |
 | `Q` `gq` `<M-q>`         | In visual mode, format by `par`, vim                              |
-| `<M-p><C-S-BS>`          | Discard consecutive blank lines                                   |
+| `<M-f><C-S-BS>`          | Discard consecutive blank lines                                   |
 | `<M-x>#-` or `#=` or`#~` | Underline line                                                    |
 | `<D-M-S-->` `<D-M-S-+>`  | Increment/decrement (all-mode alternative to `<C-a>` and `<C-x>`) |
 | i\_`<C-s>`               | Swap last two characters (my own function)                        |
@@ -178,7 +178,7 @@ My more concise shortcuts:
 | Mapping  | Description        |
 | -------- | ------------------ |
 | `:S`     | PCRE2 substitution |
-| `<M-t>/` | Toggle PCRE search |
+| `<M-s>/` | Toggle PCRE search |
 
 ### exchange
 

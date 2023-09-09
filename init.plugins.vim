@@ -531,7 +531,7 @@ nmap gA <Plug>(EasyAlign)
 let g:titlecase_map_keys = 0
 let g:titlecase_excluded_words = ["và"]
 
-""" ergex {{{2
+""" eregex {{{2
 
 " We want `:S` substitutions to be case-sensitive.
 let g:eregex_force_case = 1
