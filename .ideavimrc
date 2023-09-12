@@ -26,7 +26,7 @@
 "| ^P       | Select Previous Row               | IDE              |
 "| ^Q       |                                   | Vim              |
 "| ^R       | Show Read Access                  | Vim              |
-"| ^S       | File Structure                    | Vim              |
+"| ^S       | File Structure                    | IDE              |
 "| ^T       | Service Type                      | Vim              |
 "| ^V       | VCS Operations                    | Vim              |
 "| ^W       | Show Write Access                 | Vim              |
@@ -187,9 +187,11 @@ map <Up> gk
 imap <Down> <C-o>gj
 imap <Up> <C-o>gk
 
+" 2023-09-11 Actually we let JetBrains handle <C-s> to do swap/transpose
+" characters/selections
 nnoremap <C-s> :w<CR>
 " Interestingly, this works better than in vim at the beginning of the line
-inoremap <C-s> <Esc>hxpa
+inoremap <C-s> <Esc>hxpka
 
 " Folding shortcut
 nmap <Space><Space> za

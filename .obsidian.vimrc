@@ -14,7 +14,7 @@ imap <Down> <C-o>gj
 imap <Up> <C-o>gk
 
 " Interestingly, this works better than in vim at the beginning of the line
-imap <C-s> <Esc>hxpa
+imap <C-s> <Esc>hxpka
 
 " Go back and forward with Ctrl+O and Ctrl+I
 " (make sure to remove default Obsidian shortcuts for these to work)

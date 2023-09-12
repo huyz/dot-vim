@@ -21,10 +21,12 @@ map <Up> gk
 imap <Down> <C-o>gj
 imap <Up> <C-o>gk
 
+" 2023-09-11 Actually we let JetBrains handle <C-s> to do swap/transpose
+" characters/selections
 " Doesn't work but could set it in vscode's Keyboard Shortcuts
 nnoremap <C-s> :w<CR><C-l>
 " Interestingly, this works better than in vim at the beginning of the line
-imap <C-s> <Esc>hxpa
+imap <C-s> <Esc>hxpka
 
 " Folding shortcut
 nmap <Space><Space> za

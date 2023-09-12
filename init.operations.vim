@@ -80,10 +80,11 @@ inoremap <silent> <M-x><M-x> <C-\><C-o>:<C-u>call <SID>SwapLastTwoWordsInInsertM
 
 """ Swap last two characters {{{1
 
+" TODO: we want to move the cursor to the right, just like everyone else doe
 " Usage: cursor must be after the last two characters to be swapped.
-"   Unlike emacs' <C-t>, this is useful for typo correctin anywhere in the line.
+"   Unlike emacs' <C-t>, this is useful for typo correction anywhere in the line.
 " NOTE: this is just a more complex version of:
-"     inoremap <C-s> <Esc>hxpa
+"     inoremap <C-s> <Esc>hxpka
 "   but that's buggy at the beginning of the line.
 function! s:SwapTwoLastCharactersInInsertMode()
     let l:beyondeol = 0
