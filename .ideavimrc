@@ -124,6 +124,12 @@ augroup END
 " Key mappings
 "
 
+" NOTE: We have to use control keys for both because of the coarse way that IntelliJ
+" either handles or passes on key events to IdeaVim, which works best for simple control
+" so as to avoid conflicts with IDE bindings
+nmap <C-q><C-l> :set number relativenumber<CR>
+nmap <C-q><C-p> :set norelativenumber<CR>
+
 nmap <C-q><C-r> <Action>(IdeaVim.ReloadVimRc.reload)
 
 " Redirect some shortcuts in certain modes to the IDE
