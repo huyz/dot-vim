@@ -92,7 +92,11 @@ function! g:NormalizeMetaModifier(str) abort
     if exists('g:nvim') && exists('g:kitty_term')
         " FIXME: this only works for a single <M-key> sequence, not multiple
         let l:key = substitute(a:str, '^<M-\(.\)>$', '\1', '')
-        return '<M-' . <SID>ShiftModifierIfNeededForMetaInNeovimInKitty(l:key) . <SID>LowerKey(l:key) . '>'
+        if l:key != a:str
+            return '<M-' . <SID>ShiftModifierIfNeededForMetaInNeovimInKitty(l:key) . <SID>LowerKey(l:key) . '>'
+        else
+            return a:str
+        endif
     elseif exists('g:nvim') || (exists('g:vim') && (exists('g:gui_macvim') && has('macmeta') || exists('g:tui_vim') && g:use_extended_keys_in_terminal))
         return a:str
     endif
