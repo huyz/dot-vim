@@ -161,6 +161,7 @@ Plug 'airblade/vim-gitgutter'
 " polyglot: collection of language packs
 " TODO: how does this interact with coc/mason
 Plug 'sheerun/vim-polyglot'
+" 2023-09-21 NOTE: now ships with vim https://github.com/vim/vim/pull/12902
 Plug 'editorconfig/editorconfig-vim'
 " sleuth: automatic tab/space and indentation
 Plug 'tpope/vim-sleuth'
@@ -182,7 +183,9 @@ Plug 'LhKipp/nvim-nu', {'do': ':TSInstall nu'}
 " vim gets syntastic
 Plug 'scrooloose/syntastic', Cond(!exists('g:nvim'))
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-" treesitter: telescope apparently could use it
+" Would need to pin nvim-treesitter so that Telescope works in VimR, which always lags neovim
+"   https://github.com/qvacua/vimr/issues/1009
+"   So we'll just switch to neovim in Kitty
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " neovim gets coc or mason
 let coc_supported = g:coc_or_mason == 'coc' && (exists('g:nvim') || v:version >= 801)
