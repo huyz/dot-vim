@@ -161,12 +161,13 @@ map µ<Right> :TableAlignRight
 exmap ExcelToTable obcommand obsidian-excel-to-markdown-table:excel-to-markdown-table
 map µX :ExcelToTable
 
+" NOTE: we also have the plugin Sequence Hotkeys installed which also implements the same chords.
 " 2023-09-04 Why is this one `nmap` and the others `map`?
 " And why is there no need for `imap`?
 exmap CodeBlock obcommand code-block-from-selection:e3dea0f5-37f2-4d79-ae58-490af3228069
-nmap µC :CodeBlock
+nmap µM :CodeBlock
 exmap CodeBlockSelection jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:e3dea0f5-37f2-4d79-ae58-490af3228069'].callback() }
-vmap µC :CodeBlockSelection
+vmap µM :CodeBlockSelection
 exmap CodeBlockBash obcommand code-block-from-selection:06934685-62e1-4ac2-83c2-b42d2d753d6a
 map µB :CodeBlockBash
 exmap CodeBlockSelectionBash jscommand { editor.setSelections([selection]); this.app.commands.commands['code-block-from-selection:06934685-62e1-4ac2-83c2-b42d2d753d6a'].callback() }

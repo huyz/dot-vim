@@ -430,15 +430,16 @@ call MapKey('<M-m>p', '<Cmd>MarkdownPreview<CR>')
 call MapKey('<M-m><M-p>', '<Cmd>Glow<CR>')
 
 " Tip: for entire lines, don't use `V`; use `val` from textobj-line to avoid spurious newlines
-call MapSuperKey('C', 'ysiW`', ['nmap'], v:false, v:true)
-call MapSuperKey('C', 'S`', ['vmap'], v:false, v:true)
+call MapSuperKey('M', 'ysiW`', ['nmap'], v:false, v:true)
+call MapSuperKey('M', 'S`', ['vmap'], v:false, v:true)
 
 function! s:MapMarkdown() abort
-    " NOTE: to get this to work in iTerm, I hvae to use ⌃ key instead of ⌘, but because
+    " NOTE: to get this to work in iTerm, I have to use ⌃ key instead of ⌘, but because
     "   I personally reserve <C-S-M-letter> to launch apps (with BetterTouchTool),
-    "   I have to rely on BetterTouchTool to map <M-S-D-C> to <M-C-S-C> as intermediary
-    call MapSuperOrControlKey('M-C', 'O```<Esc>Yjp', ['nmap'], v:false, v:false,  '<buffer>')
-    call MapSuperOrControlKey('M-C', '<Esc>`<lt>O```<Esc>yy`>pgv', ['vmap'], v:false, v:false, '<buffer>')
+    "   I have to rely on BetterTouchTool to map <M-S-D-M> to <M-C-S-M> as intermediary
+    " 2023-09-12 FIXME: broken everywhere
+    call MapSuperOrControlKey('M-M', 'O```<Esc>Yjp', ['nmap'], v:false, v:false,  '<buffer>')
+    call MapSuperOrControlKey('M-M', '<Esc>`<lt>O```<Esc>yy`>pgv', ['vmap'], v:false, v:false, '<buffer>')
 
     " XXX: this markdown plugin doesn't work right:
     " call MapSuperKey('b',   '<Cmd>ruby Markdown::toggle_strong_at_cursor<CR>',    ['nmap'], v:false, v:true, '<buffer>')
@@ -482,7 +483,8 @@ else
                 \ 'cd $_term_dir; unset _term_dir<CR>')
 endif
 
-" XXX Don't know why <M-o><M-t> doesn't work.
+" XXX Don't know why <M-o><M-t> doesn't work, so we have to do `<M-o>T`
+call MapKey('<M-o><M-t>', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
 call MapKey('<M-o>T', '<Cmd>!iterm2-new-tab-with-path %:p:h<CR>')
 
 """ Internal Apps {{{2

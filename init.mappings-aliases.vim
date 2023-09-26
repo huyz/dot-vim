@@ -137,7 +137,10 @@ if has('mac') &&
         " TCommentInline
         call MapAlias('<D-÷>', '<M-D-/>')
         " Markdown code block
-        call MapAlias('<D-Ç>', '<M-S-D-c>')
+        call MapAlias('<D-Â>', '<M-S-D-m>')
+
+        """" Free
+        "call MapAlias('<D-Ç>', '<M-S-D-c>')
     endif
 
 
@@ -287,7 +290,8 @@ elseif exists('g:tui_vim') && exists('g:use_extended_keys_in_terminal') && g:use
         "   to map <M-S-D-c> to <M-C-S-C>.
         " NOTE: manually added that made-up code (added +8 to `<M-S-c>`) in iTerm
         "call MapAlias('[27;12;67~', '<M-S-D-c>')
-        call MapAlias('[27;8;67~', '<M-C-S-c>')
+        "TODO: fix this for `m` instead of `c`.  But how do we invoke it?
+        "call MapAlias('[27;8;67~', '<M-C-S-c>')
 
         " Invoke Startify
         " TODO: not tested
