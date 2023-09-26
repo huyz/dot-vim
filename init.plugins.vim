@@ -214,6 +214,7 @@ Plug 'jamessan/vim-gnupg'
 Plug 'lambdalisue/suda.vim', Cond(exists('g:nvim'))
 
 " Misc
+Plug 'terrastruct/d2-vim'
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'glacambre/firenvim', Cond(exists('g:nvim'), { 'do': { _ -> firenvim#install(0) } })
 
