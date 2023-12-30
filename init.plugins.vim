@@ -59,7 +59,7 @@ Plug 'mhinz/vim-startify'
 Plug 'nvim-lua/plenary.nvim', Cond(exists('g:nvim'))
 Plug 'nvim-telescope/telescope.nvim', Cond(exists('g:nvim'))
 Plug 'nvim-telescope/telescope-fzf-native.nvim', Cond(exists('g:nvim'), { 'dir': g:plug_os_dir . '/telescope-fzf-native.nvim', 'do': 'make'})
-Plug 'ctrlp/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 " NOTE: we could re-use the fzf that's installed in Homebrew (which is used by zsh), but
 " 1) it's more complicated to figure out where it's installed
 " 2) linuxbrew isn't supported on ARM.
