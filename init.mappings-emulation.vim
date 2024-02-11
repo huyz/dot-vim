@@ -518,9 +518,10 @@ call MapKey('<M-o>c', '<Cmd>CodeCurrent<CR>')
 """ System clipboard {{{2
 
 " NOTE: GUI apps should already have the ⌘ versions mapped
-call MapControlKey('C', '"+y', ['vnoremap'])
-call MapControlKey('X', '"+d', ['vnoremap'])
-call MapControlKey('V', '"+gP')
+" NOTE: we can't do <C-q><C-c> because <C-c> interrupts
+call MapKey('<C-q>c', '"+y', ['vnoremap'])
+call MapKey('<C-q>x', '"+d', ['vnoremap'])
+call MapKey('<C-q>v', '"+gP')
 
 """ Settings {{{2
 
