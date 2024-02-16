@@ -50,9 +50,11 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'kana/vim-textobj-entire'
 Plug 'machakann/vim-highlightedyank'
 
-" NOTE: this is better than the real vim-easymotion because you don't have to hit `<CR>`, thanks to ACE
+" Make `-` behave similar to within vim although AceJump's <C-j> is better.
+" NOTE: IdeaVim-EasyMotion is better than the original vim-easymotion because it makes use of
+"   AceJump which doens't require you hit `<CR>` before hitting the shortcut key.
+" NOTE: IdeaVim-EasyMotion plugin must be installed and enabled or you will get weird behavior.
 Plug 'easymotion/vim-easymotion'
-" 2023-08-18 Broken now for some reason. But I can use <C-;> for AceJump in both IntelliJ and VS Code.
 map - <Plug>(easymotion-s2)
 
 Plug 'terryma/vim-multiple-cursors'
