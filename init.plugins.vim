@@ -117,7 +117,8 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'tpope/vim-repeat'
 Plug 'bronson/vim-visual-star-search'
 Plug 'mg979/vim-visual-multi'
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion', Cond(!exists('g:nvim'))
+Plug 'smoka7/hop.nvim', Cond(exists('g:nvim'))
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-surround'
 Plug 'landock/vim-expand-region'
@@ -490,19 +491,72 @@ let g:indent_guides_color_change_percent = 3
 
 """ easymotion {{{2
 
-let g:EasyMotion_smartcase = 1
+if !exists('g:nvim')
+    let g:EasyMotion_smartcase = 1
 
-" n-character search
-nmap - <Plug>(easymotion-sn)
-" visual mode
-xmap - <Plug>(easymotion-sn)
-" operator-pending-mode, e.g. `d-ea`
-" NOTE: `-tn` means the character before the match
-omap - <Plug>(easymotion-tn)
+    " n-character search
+    if exists('g:gui_vim')
+        " NOTE: We don't want to to take over <M-;> because we like to type the … character
+        nmap <D-;> <Plug>(easymotion-sn)
+        " visual mode
+        xmap <D-;> <Plug>(easymotion-sn)
+        " operator-pending-mode, e.g. `d-ea`
+        " NOTE: `-tn` means the character before the match
+        omap <D-;> <Plug>(easymotion-tn)
+    else
+        " NOTE: in iTerm we can still do … because the right option key still works
+        nmap <M-;> <Plug>(easymotion-sn)
+        " visual mode
+        xmap <M-;> <Plug>(easymotion-sn)
+        " operator-pending-mode, e.g. `d-ea`
+        " NOTE: `-tn` means the character before the match
+        omap <M-;> <Plug>(easymotion-tn)
+    endif
 
-" next match
-map  _ <Plug>(easymotion-prev)
-map  + <Plug>(easymotion-next)
+    " 2-character search
+    nmap - <Plug>(easymotion-s2)
+    " visual mode
+    xmap - <Plug>(easymotion-s2)
+    " operator-pending-mode, e.g. `d-ea`
+    " NOTE: `-tn` means the character before the match
+    omap - <Plug>(easymotion-t2)
+
+    " next match
+    map  _ <Plug>(easymotion-prev)
+    map  + <Plug>(easymotion-next)
+endif
+
+""" easymotion {{{2
+
+if exists('g:nvim')
+    lua << EOF
+    require'hop'.setup {
+        uppercase_labels = true,
+    }
+    local hop = require('hop')
+    local directions = require('hop.hint').HintDirection
+
+    -- Remap f,F,t,T commands
+    vim.keymap.set('', 'f', function()
+        hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
+    end, {remap=true})
+    vim.keymap.set('', 'F', function()
+        hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
+    end, {remap=true})
+    vim.keymap.set('', 't', function()
+        hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
+    end, {remap=true})
+    vim.keymap.set('', 'T', function()
+        hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
+    end, {remap=true})
+    vim.keymap.set('', '-', function()
+        hop.hint_char2({})
+    end, {remap=true})
+EOF
+
+    map <C-;> <Cmd>HopPattern<CR>
+    map <C-S-:> <Cmd>HopLine<CR>
+endif
 
 """ CamelCaseMotion {{{2
 
