@@ -4,14 +4,15 @@
 " TIP: to list all Obsidian commands, run `:obcommand` and go to JS console.
 
 " Neovim mappings
-" FIXME: doesn't work
-map <C-l> :nohl
+" FIXME 2024-02-15: doesn't work
+"map <C-l> :nohl
 
 " Have j and k navigate visual lines rather than logical ones
 map <Down> gj
 map <Up> gk
-imap <Down> <C-o>gj
-imap <Up> <C-o>gk
+" FIXME 2024-02-15: don't work
+"imap <Down> <C-o>gj
+"imap <Up> <C-o>gk
 
 " Interestingly, this works better than in vim at the beginning of the line
 imap <C-s> <Esc>hxpka
