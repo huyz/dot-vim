@@ -726,7 +726,10 @@ nmap <Leader>gb <Plug>(git-messenger)
 
 """ gitmoji {{{2
 
+" To automatically pop-up helper. NOTE: this is annoying because there's no way
+"   to customize the triggers
 set completefunc=emoji#complete
+
 " Replace all :emoji_name: into Unicode emojis
 nmap <Leader><C-U> <Cmd>%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
 
