@@ -517,11 +517,14 @@ call MapKey('<M-o>c', '<Cmd>CodeCurrent<CR>')
 
 """ System clipboard {{{2
 
-" NOTE: GUI apps should already have the ⌘ versions mapped
+" NOTE: MacVim and Vimr, but not Neovide, have the ⌘ versions already mapped
 " NOTE: we can't do <C-q><C-c> because <C-c> interrupts
 call MapKey('<C-q>c', '"+y', ['vnoremap'])
 call MapKey('<C-q>x', '"+d', ['vnoremap'])
 call MapKey('<C-q>v', '"+gP')
+call MapKey('<D-c>', '"+y', ['vnoremap'])
+call MapKey('<D-x>', '"+d', ['vnoremap'])
+call MapKey('<D-v>', '"+gP')
 
 """ Settings {{{2
 
