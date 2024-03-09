@@ -119,6 +119,7 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'mg979/vim-visual-multi'
 Plug 'easymotion/vim-easymotion', Cond(!exists('g:nvim'))
 Plug 'smoka7/hop.nvim', Cond(exists('g:nvim'))
+Plug 'ggandor/leap.nvim', Cond(exists('g:nvim'))
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-surround'
 Plug 'landock/vim-expand-region'
@@ -490,6 +491,7 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'startify']
 let g:indent_guides_color_change_percent = 3
 
 """ easymotion {{{2
+" normal mod: - _ + <D-;>
 
 if !exists('g:nvim')
     let g:EasyMotion_smartcase = 1
@@ -526,7 +528,16 @@ if !exists('g:nvim')
     map  + <Plug>(easymotion-next)
 endif
 
-""" easymotion {{{2
+"""" Leap {{{2
+" Faster UX than easymotion, but only for Neovim
+" normal mode: s, S, gs (other windows
+
+if exists('g:nvim')
+    lua require('leap').create_default_mappings()
+endif
+
+""" hop {{{2
+" normal mode: f,F,t,T, <C-;>, <C-S-:>
 
 if exists('g:nvim')
     lua << EOF
