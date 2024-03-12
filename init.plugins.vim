@@ -490,8 +490,11 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'startify']
 
 let g:indent_guides_color_change_percent = 3
 
-""" easymotion {{{2
-" normal mod: - _ + <D-;>
+""" easymotion (vim-only) {{{2
+"   - 2 chars: -
+"     - prev match: _
+"     - next match: +
+"   - n-chars: <D-;>
 
 if !exists('g:nvim')
     let g:EasyMotion_smartcase = 1
@@ -528,16 +531,33 @@ if !exists('g:nvim')
     map  + <Plug>(easymotion-next)
 endif
 
-"""" Leap {{{2
+"""" Leap (neovim-only) {{{2
 " Faster UX than easymotion, but only for Neovim
-" normal mode: s, S, gs (other windows
+" NOTE: this takes some getting used to. After typing the first char, the hint that appears isn't usable yet;
+"   that hint shows in preparation only in the case that your second char will be ambiguous (i.e. multiple matches).
+"   If your second char turns out to be unambiguous (only 1 match), then that hint turned out to be useless.
+"   If your second char turns out to be ambiguous, you will immediately leap to the first match but then that hint
+"   will prove useful to go to that specific match.
+"
+" Bindings:
+"   - 2 chars: s S
+"   - other windods: gs
+"   - s<space><space>: empty lin
+"   - XXX 2024-03-12: s{char}<space> doesn't work for me
+" Since hop takes over f F t T, you may want to use this as altnerative:
+"   - s{char}<enter> and S{char><enter>
+"     - and then keep typing <enter>
 
 if exists('g:nvim')
     lua require('leap').create_default_mappings()
 endif
 
-""" hop {{{2
-" normal mode: f,F,t,T, <C-;>, <C-S-:>
+""" hop (neovim-only) {{{2
+" Bindings:
+"   - 2 chars: -
+"   - 1 char on current line: f F t T
+"   - pattern: <C-;>
+"   - line:  <C-S-:>
 
 if exists('g:nvim')
     lua << EOF
@@ -565,8 +585,8 @@ if exists('g:nvim')
     end, {remap=true})
 EOF
 
-    map <C-;> <Cmd>HopPattern<CR>
-    map <C-S-:> <Cmd>HopLine<CR>
+    call MapControlKey(';', '<Cmd>HopPattern<CR>')
+    call MapControlKey(':', '<Cmd>HopLine<CR>')
 endif
 
 """ CamelCaseMotion {{{2
