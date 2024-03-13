@@ -44,7 +44,7 @@ if exists('g:neovide')
     let g:nvim = 1
 elseif has('gui_running')
     let g:gui_running = 1
-    if g:gui_vimr == 1
+    if exists('g:gui_vimr')
         let g:gui_nvim = 1
         let g:nvim = 1
     elseif has('gui_macvim')
