@@ -59,6 +59,9 @@ function! SetBackgroundDark()
     " Workaround for refreshing indent-guides' color detection
     silent! exe 'IndentGuidesToggle'
     silent! exe 'IndentGuidesToggle'
+
+    " GitHub copilot
+    highlight CopilotSuggestion guifg=#4AA58A ctermfg=8
 endfunction
 
 function! SetBackgroundLight()
@@ -99,6 +102,9 @@ function! SetBackgroundLight()
     " Workaround for refreshing indent-guides' color detection
     silent! exe 'IndentGuidesToggle'
     silent! exe 'IndentGuidesToggle'
+
+    " GitHub copilot
+    highlight CopilotSuggestion guifg=#4AA58A ctermfg=8
 endfunction
 
 function! ToggleBackground()

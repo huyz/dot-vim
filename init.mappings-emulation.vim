@@ -247,8 +247,9 @@ else
     "   normalize to `<Esc>[` which is the prefix of escape sequences
     nnoremap <M-]> >>
     nnoremap <M-[> <<
-    noremap! <M-]> <C-t>
-    noremap! <M-[> <C-d>
+    " We can't use these as they're neded for prev/next copilot suggestion
+    "noremap! <M-]> <C-t>
+    "noremap! <M-[> <C-d>
     vnoremap <M-]> >gv
     vnoremap <M-[> <gv
 endif

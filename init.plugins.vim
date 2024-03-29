@@ -697,6 +697,19 @@ endif
 let g:Hexokinase_ftEnabled = ['vim', 'html', 'css', 'less', 'scss', 'stylus', 'javascript',
             \ 'markwhen']
 
+""" copilot {{{2
+" Bindings:
+" - <M-\> to trigger suggestion
+" - <C-]> to dismiss suggestion
+" - <Tab> to accept suggestion
+" - <M-[> to go to prev suggestion
+" - <M-]> to go to next suggestion
+" - <M-Right> to accept next word
+
+"if exists('copilot_supported')
+"
+"endif
+
 """ nvim-nu {{{2
 
 if exists('g:nvim')
