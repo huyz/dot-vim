@@ -442,6 +442,17 @@ command! -bang -nargs=* RG
     \   .shellescape(<q-args>), 1,
     \   fzf#vim#with_preview(), <bang>0)
 
+""" readline {{{2
+
+" TODO 2024-03-29: figure out how to invoke this at the right time when readline's binding is actually loaded.
+"   Right now we just disable <C-k>
+" To prevent conflict with telescope's menu navigation keys
+"let _readline_c_k_map = maparg('<C-k>', 'c')
+"echo _readline_c_k_map
+"execute 'cnoremap <expr> <C-q><C-k>' . _readline_c_k_map.rhs
+"cunmap <C-k>
+let g:readline_ctrl_k = 0
+
 """ wilder {{{2
 " 2022-10-25 Can't get python options to work in vim or neovim
 
@@ -482,6 +493,7 @@ autocmd BufEnter * if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isT
 """ bbye {{{2
 
 call MapKey('<C-q><C-w>', '<Cmd>Bdelete<CR>')
+
 
 """ indent-guides {{{2
 
