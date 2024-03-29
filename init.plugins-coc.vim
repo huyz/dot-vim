@@ -216,6 +216,7 @@ else
     inoremap <silent><expr> <C-@> coc#refresh()
 endif
 
+" 2024-03-29 This TAB conflicts with GitHub Copilot
 " Map <tab> for trigger completion, completion confirm, snippet expand and jump like VSCode:
 inoremap <silent><expr> <Tab>
     \ coc#pum#visible() ? coc#_select_confirm() :
@@ -224,12 +225,23 @@ inoremap <silent><expr> <Tab>
     \ CheckBackspace() ? "\<Tab>" :
     \ coc#refresh()
 
+" Also, use <C-j> and <C-k> to work like <C-n> and <C-p>
+imap <silent><expr> <C-j>
+    \ coc#pum#visible() ? "\<C-n>" :
+    \ coc#refresh()
+" NOTE: Default mapping for <C-k> would normally be defined in init.mappings-emulation for killing the rest of line
+imap <silent><expr> <C-k>
+    \ coc#pum#visible() ? "\<C-p>":
+    \ "\<C-o>D"
+
+
 " Use <CR> to accept choice instead of <C-y>
 inoremap <expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 
 
 let g:coc_snippet_next = '<tab>'
 
+" Use Shift+Esc to dismiss the completion menu
 inoremap <expr> <S-Esc> coc#pum#cancel()
 
 " For vim, I'm apparently supposed to do handle the linking myself

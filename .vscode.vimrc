@@ -31,8 +31,10 @@ imap <C-s> <Esc>hxpka
 " Folding shortcut
 nmap <Space><Space> za
 
+" FIXME 2024-03-29: Liberate digraph key <C-k>
+inoremap <C-q><C-k> <C-k>
 " Since vim/vscode steals <C-k> for digraphs, we'll make <C-k><C-k> work like it
-inoremap <C-k><C-k> <C-o>D
+inoremap <C-k> <C-o>D
 
 " 2023-08-05 FIXME: doesn't work so I'm editing keybindings.json instead
 inoremap <C-q><C-i> 	 " Inserts a literal tab

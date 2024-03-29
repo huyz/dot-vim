@@ -77,6 +77,12 @@ nnoremap <Leader>t4 <Cmd>set noet<CR><Cmd>set sts=8 sw=8<CR>
 nnoremap <silent> <Space><Space> @=(foldlevel('.')?'za':'l')<CR>
 vnoremap <Space><Space> zf
 
+" Liberate <C-k> in insert mode so we can use it to kill the rest of the line
+" and to navigate Coc menu
+" NOTE: MapKey doesn't work here, but do we even need it?
+"   call MapKey('<C-q><C-k>', '<C-k>', ['imap'])
+inoremap <C-q><C-k> <C-k>
+
 " Suspend from any mode, liberating <C-z> for toggling value
 call MapKey('<C-q><C-z>', '<C-z>')
 

@@ -23,6 +23,12 @@ nnoremap & :&&<CR>
 " starting to use ^X as a leader in normal mode, just like in emacs and vim
 " insert mode.
 
+" Kill rest of the line
+" NOTE: instead of here, we set it in init.plugin-coc.vim because we need trickier logic
+if !exists('coc_supported')
+    inoremap <C-k> <C-o>D
+endif
+
 """ File operations
 
 " Disabled because we don't use emacs and these slow down normal-mode <C-x>
@@ -40,9 +46,6 @@ nnoremap & :&&<CR>
 " nnoremap <C-x>1 <C-w>o
 " nnoremap <C-x>o <C-w>w
 " nnoremap <C-x>+ <C-w>=
-
-" Since vim steals <C-k>, we'll make <C-k><C-k> work like it
-inoremap <C-k><C-k> <C-o>DA
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Emulate Apple HIG {{{1
