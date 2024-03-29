@@ -199,8 +199,9 @@ call MapSuperOrControlKey('M-}', '<Cmd>$tabmove<CR>')
 call MapKey('<Up>', 'gk')
 call MapKey('<Down>', 'gj')
 
-call MapKey('<M-Left>', 'b')
-call MapKey('<M-Right>', 'w')
+" We have to disable insert-mode because <M-right> is used by Copilot
+call MapKey('<M-Left>', 'b', ['nmap', 'vmap'])
+call MapKey('<M-Right>', 'w', ['nmap', 'vmap'])
 
 " Move cursor
 " NOTE: we don't do this in TUIs because <M-Arrow> is reserved for vim-move
