@@ -494,7 +494,6 @@ autocmd BufEnter * if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isT
 
 call MapKey('<C-q><C-w>', '<Cmd>Bdelete<CR>')
 
-
 """ indent-guides {{{2
 
 let g:indent_guides_enable_on_vim_startup = 1
