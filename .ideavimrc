@@ -52,7 +52,7 @@ Plug 'machakann/vim-highlightedyank'
 
 " Make `-` behave similar to within vim although AceJump's <C-j> is better.
 " NOTE: IdeaVim-EasyMotion is better than the original vim-easymotion because it makes use of
-"   AceJump which doens't require you hit `<CR>` before hitting the shortcut key.
+"   AceJump which doesn't require you hit `<CR>` before hitting the shortcut key.
 " NOTE: IdeaVim-EasyMotion plugin must be installed and enabled or you will get weird behavior.
 Plug 'easymotion/vim-easymotion'
 map - <Plug>(easymotion-s2)
