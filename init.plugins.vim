@@ -99,7 +99,9 @@ Plug 'kyazdani42/nvim-tree.lua', Cond(exists('g:nvim'))
 Plug 'preservim/nerdtree', Cond(!exists('g:nvim'), { 'on': 'NERDTreeToggle' })
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'nathanaelkane/vim-indent-guides'
+" 2024-06-13 Until https://github.com/preservim/vim-indent-guides/pull/158 is merged
+"Plug 'preservim/vim-indent-guides'
+Plug 'Boolean263/vim-indent-guides', { 'branch': '154-no-execute' }
 Plug 'wesQ3/vim-windowswap'
 Plug 'ryanoasis/vim-devicons', Cond(!exists('g:nvim'))
 Plug 'kyazdani42/nvim-web-devicons', Cond(exists('g:nvim'))
