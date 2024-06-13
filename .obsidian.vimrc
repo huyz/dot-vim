@@ -36,12 +36,11 @@ nmap zM :foldall
 unmap <Space>
 nmap <Space><Space> :togglefold
 
-" Emulate Tab Switching https://vimhelp.org/tabpage.txt.html#gt
-" requires Cycle Through Panes Plugins https://obsidian.md/plugins?id=cycle-through-panes
-exmap tabnext obcommand cycle-through-panes:cycle-through-panes
-map gt :tabnext
-exmap tabprev obcommand cycle-through-panes:cycle-through-panes-reverse
-map gT :tabprev
+exmap tabnext obcommand workspace:next-tab
+nmap gt :tabnext
+exmap tabprev obcommand workspace:previous-tab
+nmap gT :tabprev
+
 
 exmap FollowLink obcommand editor:follow-link
 nmap gx :FollowLink
