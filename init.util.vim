@@ -127,7 +127,7 @@ function! MapAlias(keys, rhs, modes = 'all', no_insert = v:false) abort
 endfunction
 
 " Maps the key sequence to RHS, optionally with specific modes
-" - modes: 'all' implies: map, imap, tmap (so no cmap or lmap)
+" - modes: 'all' implies: map, imap, tmap (so no smap, cmap or lmap)
 " - no_insert: filters modes to exclude insert-like modes. See s:IsInsertLikeMode
 " - remap: only applies to modes='all'
 function! MapKey(keys, rhs, modes = "all", no_insert = v:false, remap = v:false, map_flag = '') abort

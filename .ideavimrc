@@ -26,7 +26,7 @@
 "| ^P       | Select Previous Row               | IDE              |
 "| ^Q       |                                   | Vim              |
 "| ^R       | Show Read Access                  | Vim              |
-"| ^S       | File Structure                    | IDE              |
+"| ^S       | File Structure                    | IDE in n-i modes |
 "| ^T       | Service Type                      | Vim              |
 "| ^V       | VCS Operations                    | Vim              |
 "| ^W       | Show Write Access                 | Vim              |
@@ -142,6 +142,7 @@ sethandler <C-h> n-v:ide i:vim
 " them for vim at all
 "sethandler <C-j> n-v:vim i:ide
 "sethandler <C-k> n-v:vim i:ide
+sethandler <C-s> n-i:ide v:vim
 sethandler <C-x> n-v:ide i:vim
 sethandler <C-z> a:ide
 " This doesn't work:
@@ -200,6 +201,9 @@ imap <Up> <C-o>gk
 nnoremap <C-s> :w<CR>
 " Interestingly, this works better than in vim at the beginning of the line
 inoremap <C-s> <Esc>hxpka
+" Recover the visual->select command that's normally mapped to <C-g>
+" NOTE 2024-07-16: There is no such Action ID for com.maddyhome.idea.vim.action.motion.select.SelectToggleVisualMode
+vnoremap <C-s> <C-g>
 
 " Folding shortcut
 nmap <Space><Space> za

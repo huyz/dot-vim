@@ -104,7 +104,10 @@ call MapKey('<C-q><C-r>', '<Cmd>so $MYVIM/.vimrc<CR><Cmd>silent! Sleuth<CR><Cmd>
 " NOTE: MacVim and VimR already map <D-s>
 " NOTE: we don't use MapControlKey because we don't want to conflict with <M-s>, which is one of
 "   our chord prefixes
-call MapKey('<C-s>', '<Cmd>write<CR>')
+call MapKey('<C-s>', '<Cmd>write<CR>', ['nmap', 'map!'])
+" Recover the visual->select command that's normally mapped to <C-g>
+" NOTE: `xmap` doesn't work for some reason
+call MapKey('<C-s>', '<C-g>', ['vmap', 'smap'])
 " Save buffer and reload configs
 " NOTE: we don't use MapControlKey because we don't want to conflict with <M-q>
 call MapKey('<C-q><C-s>', '<Cmd>write<CR><C-q><C-r>', 'all', v:false, v:true)
