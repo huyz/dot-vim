@@ -26,7 +26,7 @@
 "| ^P       | Select Previous Row               | IDE              |
 "| ^Q       |                                   | Vim              |
 "| ^R       | Show Read Access                  | Vim              |
-"| ^S       | File Structure                    | IDE in n-i modes |
+"| ^S       | File Structure                    | IDE              |
 "| ^T       | Service Type                      | Vim              |
 "| ^V       | VCS Operations                    | Vim              |
 "| ^W       | Show Write Access                 | Vim              |
@@ -142,7 +142,6 @@ sethandler <C-h> n-v:ide i:vim
 " them for vim at all
 "sethandler <C-j> n-v:vim i:ide
 "sethandler <C-k> n-v:vim i:ide
-sethandler <C-s> n-i:ide v:vim
 sethandler <C-x> n-v:ide i:vim
 sethandler <C-z> a:ide
 " This doesn't work:
@@ -197,13 +196,13 @@ imap <Down> <C-o>gj
 imap <Up> <C-o>gk
 
 " 2023-09-11 Actually we let JetBrains handle <C-s> to do swap/transpose
-" characters/selections
+" characters/selections, so these below don'tapply
 nnoremap <C-s> :w<CR>
 " Interestingly, this works better than in vim at the beginning of the line
 inoremap <C-s> <Esc>hxpka
-" Recover the visual->select command that's normally mapped to <C-g>
+" Recover the visual->select mode command that's normally mapped to <C-g>
 " NOTE 2024-07-16: There is no such Action ID for com.maddyhome.idea.vim.action.motion.select.SelectToggleVisualMode
-vnoremap <C-s> <C-g>
+vnoremap <C-q> <C-g>
 
 " Folding shortcut
 nmap <Space><Space> za
