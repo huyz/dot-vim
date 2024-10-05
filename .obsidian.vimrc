@@ -259,18 +259,17 @@ map ©h :GitViewHistoryOnRemote
 
 exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
 exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
-nmap &a& :blankAbove
-nmap &b& :blankBelow
-nmap o &b&i
-nmap O &a&i
+nmap o :blankBelow<CR>i
+nmap O :blankAbove<CR>i
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
 
-exmap nextHeading jsfile /.obsidian/mdHelpers.js {jumpHeading(true)}
-exmap prevHeading jsfile /.obsidian/mdHelpers.js {jumpHeading(false)}
-nmap ]] :nextHeading
-nmap [[ :prevHeading
+" 2024-10-04 deprecated by https://github.com/esm7/obsidian-vimrc-support/pull/222
+"exmap nextHeading jsfile /.obsidian/mdHelpers.js {jumpHeading(true)}
+"exmap prevHeading jsfile /.obsidian/mdHelpers.js {jumpHeading(false)}
+"nmap ]] :nextHeading
+"nmap [[ :prevHeading
 
 
 " Disabled because of lots of problems: https://github.com/hhhapz/improved-obsidian-vimcursor/issues/1
