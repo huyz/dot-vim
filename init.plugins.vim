@@ -111,6 +111,7 @@ Plug 'mbbill/undotree'
 " bbye: delete buffer preserving window layout
 Plug 'moll/vim-bbye'
 Plug 'ryvnf/readline.vim'
+Plug 'markonm/traces.vim', Cond(!exists('g:nvim'))
 
 " Text
 " you-keep-using-that-word: remap `cw`
