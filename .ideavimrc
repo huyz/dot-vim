@@ -60,6 +60,25 @@ map - <Plug>(easymotion-s2)
 Plug 'terryma/vim-multiple-cursors'
 
 "
+" Enable IntelliJ plugins
+"
+
+set peekaboo
+set functiontextobj
+
+"
+" ideavim-switch plugin
+"
+
+set switch
+" Enable all patterns from multiple groups
+let g:switch_definitions = 'group:basic,group:java,group:javascript,group:markdown'
+
+nmap <C-a> :Switch<CR>
+nmap <C-x> :SwitchReverse<CR>
+
+
+"
 " IdeaVim-specific features
 "
 
@@ -146,7 +165,8 @@ sethandler <C-x> n-v:ide i:vim
 sethandler <C-z> a:ide
 " This doesn't work:
 "sethandler <C-A> n-v:ide i:vim
-map <C-A> <Action>(osmedile.intellij.stringmanip.IncrementAction)
+" 2024-11-26 Disabled in favor of ideavim-switch
+"map <C-A> <Action>(osmedile.intellij.stringmanip.IncrementAction)
 
 " These don't work:
 "sethandler <C-Left> a:ide
