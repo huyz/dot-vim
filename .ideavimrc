@@ -168,6 +168,12 @@ sethandler <C-z> a:ide
 " 2024-11-26 Disabled in favor of ideavim-switch
 "map <C-A> <Action>(osmedile.intellij.stringmanip.IncrementAction)
 
+" Workaround for Copilot plugin bug with Vim normal mode:
+" 2024-12-09 https://github.com/JetBrains/ideavim/discussions/987
+sethandler <S-A-Space> a:vim
+nmap <S-A-Space> i<Action>(OpenInlineChatAction)
+imap <S-A-Space> <Action>(OpenInlineChatAction)
+
 " These don't work:
 "sethandler <C-Left> a:ide
 "sethandler <C-Right> a:ide
