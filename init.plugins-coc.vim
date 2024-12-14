@@ -143,7 +143,7 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
 endif
 
 " 2022-11-10 huy: <C-S> is to save files so use <C-P> instead
-" Use CTRL-S for selections ranges.
+" Use <C-S> for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
 nmap <silent> <C-P> <Plug>(coc-range-select)
 xmap <silent> <C-P> <Plug>(coc-range-select)
