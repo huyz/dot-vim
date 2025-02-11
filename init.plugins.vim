@@ -179,8 +179,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html', 'javascript', 'jsx', 'typescript', 'xml'] }
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
 Plug 'simrat39/symbols-outline.nvim', Cond(exists('g:nvim'))
-" illuminate: highlight other usages
-Plug 'RRethy/vim-illuminate'
 " trouble: pretty diagnostics, references, telescope results, …
 Plug 'folke/trouble.nvim', Cond(exists('g:nvim'))
 let copilot_supported = exists('g:nvim') || v:version >= 801
@@ -194,6 +192,8 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 "   https://github.com/qvacua/vimr/issues/1009
 "   So we'll just switch to neovim in Kitty
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" illuminate: highlight other usages
+Plug 'RRethy/vim-illuminate'
 " neovim gets coc or mason
 let coc_supported = g:coc_or_mason == 'coc' && (exists('g:nvim') || v:version >= 801)
 Plug 'neoclide/coc.nvim', Cond(coc_supported, {'branch': 'release'})
