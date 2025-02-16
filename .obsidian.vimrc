@@ -57,43 +57,43 @@ vunmap s
 vunmap S
 
 exmap SurroundSquared surround [ ]
-" NOTE: ys) doesnt' work
+" NOTE: ys) doesn't work
 nmap ys] :SurroundSquared<CR>
 vmap S] :SurroundSquared<CR>
 map µ] :SurroundSquared<CR>
 
 exmap SurroundParens surround ( )
-" NOTE: ys) doesnt' work
+" NOTE: ys) doesn't work
 nmap ys) :SurroundParens<CR>
 vmap S) :SurroundParens<CR>
 map µ) :SurroundParens<CR>
 
 exmap SurroundAngled surround < >
-" NOTE: ys> doesnt' work
+" NOTE: ys> doesn't work
 nmap ys> :SurroundAngled<CR>
 vmap S> :SurroundAngled<CR>
 map µ> :SurroundAngled<CR>
 
 exmap SurroundUnderlines surround _ _
-" NOTE: ys_ doesnt' work
+" NOTE: ys_ doesn't work
 nmap ys_ :SurroundUnderlines<CR>
 vmap S_ :SurroundUnderlines<CR>
 map µ_ :SurroundUnderlines<CR>
 
 exmap SurroundDoubleQuotes surround " "
-" NOTE: ys" doesnt' work
+" NOTE: ys" doesn't work
 nmap ys" :SurroundDoubleQuotes<CR>
 vmap S" :SurroundDoubleQuotes<CR>
 map µ" :SurroundDoubleQuotes<CR>
 
 exmap SurroundSingleQuotes surround ' '
-" NOTE: ys' doesnt' work
+" NOTE: ys' doesn't work
 nmap ys' :SurroundSingleQuotes<CR>
 vmap S' :SurroundSingleQuotes<CR>
 map µ' :SurroundSingleQuotes<CR>
 
 exmap SurroundBackticks surround ` `
-" NOTE: ys` doesnt' work
+" NOTE: ys` doesn't work
 nmap ys` :SurroundBackticks<CR>
 vmap S` :SurroundBackticks<CR>
 map µ` :SurroundBackticks<CR>
@@ -101,19 +101,19 @@ map µ` :SurroundBackticks<CR>
 """ My own surround additions
 
 exmap SurroundStars surround ** **
-" NOTE: ys* doesnt' work
+" NOTE: ys* doesn't work
 nmap ys* :SurroundStars<CR>
 vmap s* :SurroundStars<CR>
 map µ* :SurroundStars<CR>
 
 exmap SurroundEquals surround == ==
-" NOTE: ys= doesnt' work
+" NOTE: ys= doesn't work
 nmap ys= :SurroundEquals<CR>
 vmap s= :SurroundEquals<CR>
 map µ= :SurroundEquals<CR>
 
 exmap SurroundWiki surround [[ ]]
-" NOTE: ysw doesnt' work
+" NOTE: ysw doesn't work
 nmap ysw :SurroundWiki<CR>
 vmap sw :SurroundWiki<CR>
 map µw :SurroundWiki<CR>
