@@ -10,12 +10,14 @@
 " Have j and k navigate visual lines rather than logical ones
 map <Down> gj
 map <Up> gk
+" NOTE 2025-03-10: Actually seems unnecessary right now it seems to work as expected, perhaps because
+"   of the above keybindings.
 " FIXME 2024-02-15: don't work
 "imap <Down> <C-o>gj
 "imap <Up> <C-o>gk
 
 " Interestingly, this works better than in vim at the beginning of the line
-imap <C-s> <Esc>hxpka
+imap <C-s> <Esc>hxpa
 
 " Go back and forward with Ctrl+O and Ctrl+I
 " (make sure to remove default Obsidian shortcuts for these to work)
