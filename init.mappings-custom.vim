@@ -36,8 +36,11 @@ else
 endif
 
 nmap <F5> <Leader>o1
-" Make pastetoggle also work in insert mode
-set pastetoggle=<F5>
+if !exists('g:nvim')
+    " Make pastetoggle also work in insert mode
+    " 2025-04-01 Unnecessary in neovim: https://neovim.io/doc/user/vim_diff.html#nvim-removed
+    set pastetoggle=<F5>
+endif
 " Free up <C-p> for other uses (2022-11-10 for coc): use <C-F5>
 let g:ctrlp_map = '<C-F5>'
 

@@ -5,7 +5,10 @@ set directory=.,~/tmp,/var/tmp,/tmp
 set backupcopy=yes      " Preserve the birth time of files, at least on macOS
 set nobackup            " gvim-win32 has it on by default
 set autoread            " Reload files changed outside vim
-set browsedir=current   " Make the file browser always open the current directory.
+if !exists('g:nvim')
+    " 2025-04-01 Still missing from neovim: https://neovim.io/doc/user/vim_diff.html#nvim-missing
+    set browsedir=current   " Make the file browser always open the current directory.
+endif
 
 """ Command-line options
 
