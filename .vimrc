@@ -84,6 +84,13 @@ endif
 
 """ Meta options (to configure the behavior of the rest of these config files)
 
+" 2025-04-01 mason vs. CoC, per LLM:
+" If you prefer a modular setup where you control each component of your editor, use Mason +
+" nvim-cmp + other native plugins.
+" If you want stronger autocomplete and VS Code-like features, CoC.nvim is better.
+" Many engineers are moving toward native Lua solutions (Mason + LSP + nvim-cmp), but CoC
+" remains excellent if you want something that "just works" with minimal setup.
+
 "let g:coc_or_mason = 'mason'
 let g:coc_or_mason = 'coc'
 
