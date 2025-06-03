@@ -58,19 +58,19 @@ occasionally.
 
 I tend to forgot I defined these mappings:
 
-| Mapping                  | Description                                                       |
-| ------------------------ | ----------------------------------------------------------------- |
-| `<C-s>`                  | Save buffer                                                       |
-| `<C-q><C-s>`             | Save buffer and reload configs                                    |
-| `<C-q><C-r>`             | Reload configs                                                    |
-| `ZA`                     | Exit vim but prompt for unsaved buffers                           |
-| `Zw`                     | Close buffer without saving                                       |
-| `gb`                     | Re-select last pasted block                                       |
-| `Q` `gq` `<M-q>`         | In visual mode, format by `par`, vim                              |
-| `<M-f><C-S-BS>`          | Discard consecutive blank lines                                   |
-| `<M-x>#-` or `#=` or`#~` | Underline line                                                    |
-| `<D-M-S-->` `<D-M-S-+>`  | Increment/decrement (all-mode alternative to `<C-a>` and `<C-x>`) |
-| i\_`<C-s>`               | Swap last two characters (my own function)                        |
+| Mapping                  | Description                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| `<C-s>`                  | Save buffer                                                                     |
+| `<C-q><C-s>`             | Save buffer and reload configs                                                  |
+| `<C-q><C-r>`             | Reload configs                                                                  |
+| `ZA`                     | Exit vim but prompt for unsaved buffers                                         |
+| `ZM`                     | Save even if nomodifiable (and preserve nomodifiable, thus overriding modeline) |
+| `gb`                     | Re-select last pasted block                                                     |
+| `Q` `gq` `<M-q>`         | In visual mode, format by `par`, vim                                            |
+| `<M-f><C-S-BS>`          | Discard consecutive blank lines                                                 |
+| `<M-x>#-` or `#=` or`#~` | Underline line                                                                  |
+| `<D-M-S-->` `<D-M-S-+>`  | Increment/decrement (all-mode alternative to `<C-a>` and `<C-x>`)               |
+| i\_`<C-s>`               | Swap last two characters (my own function)                                      |
 
 ## Plugins I installed
 

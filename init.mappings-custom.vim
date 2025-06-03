@@ -93,6 +93,8 @@ call MapKey('<C-q><C-z>', '<C-z>')
 nmap Zw <Cmd>bdelete!<CR>
 " Save all and exit
 nmap ZA <Cmd>confirm qall<CR>
+" Save even if nomodifiable (and preserve nomodifiable, thus overriding modeline)
+nmap ZM <Cmd>autocmd BufWritePost <buffer> set modifiable<CR><Cmd>write<CR>
 " Closes buffer without messing up split window
 " (goes to the next buffer first so that the split window is not closed)
 " 2022-10-25 Now use bbye plugin
