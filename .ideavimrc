@@ -87,29 +87,6 @@ nmap <C-x> :SwitchReverse<CR>
 "   I think it's designed for Java and Kotlin
 "set ideajoin
 
-"
-" intellimacs
-"
-
-" 2022-12-08 disabled because someone is adding `unnamed` to clipboard, which is annoying.
-"" if filereadable("~/.intellimacs/spacemacs.vim")
-"    source ~/.intellimacs/spacemacs.vim
-"
-"    " (Optional) Enable other Intellimacs modules
-"    source ~/.intellimacs/extra.vim
-"    source ~/.intellimacs/major.vim
-"    source ~/.intellimacs/hybrid.vim
-"    " Undo some mappings that conflict with our scheme
-"    nunmap <A-x>
-"    iunmap <A-x>
-"    vunmap <A-x>
-"    iunmap <A-f>
-"    iunmap <A-b>
-"
-"    " (Optional) Enable which-key plugin
-"    source ~/.intellimacs/which-key.vim
-"" endif
-
 " Activate the Which-Key plugin
 set which-key
 
