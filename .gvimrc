@@ -5,10 +5,10 @@ if exists('g:gui_running')
   if exists('g:neovide')
     " Default neovide font:
     "set guifont=Fira\ Mono\ for\ Powerline:h12
-    set guifont=MesloLGS\ NF:h12
+    set guifont=MesloLGM\ Nerd\ Font\ Mono:h12
   else
     " To display devicons
-    set guifont=MesloLGS-NF-Regular:h12
+    set guifont=MesloLGMNFM-Regular:h12
     " To make it spaced like in iTerm
     set linespace=1
   endif
