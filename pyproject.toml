@@ -1,0 +1,11 @@
+[tool.mypy]
+# TIP: after changing these, in vscode, run `Mypy: Recheck Workspace`
+exclude = [
+    "(^|/)\\+Archived/",
+    "(^|/)\\.?venv/",
+    "(^|/)plugged/",
+]
+
+#[[tool.mypy.overrides]]
+#module = ["iterm2"]
+#follow_untyped_imports = true
