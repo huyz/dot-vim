@@ -222,6 +222,7 @@ Plug 'lambdalisue/suda.vim', Cond(exists('g:nvim'))
 
 " Misc
 Plug 'terrastruct/d2-vim'
+Plug 'fladson/vim-kitty'
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'glacambre/firenvim', Cond(exists('g:nvim'), { 'do': { _ -> firenvim#install(0) } })
 
