@@ -194,10 +194,10 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " illuminate: highlight other usages
 Plug 'RRethy/vim-illuminate'
-" neovim gets coc or mason
-let coc_supported = g:coc_or_mason == 'coc' && (exists('g:nvim') || v:version >= 801)
+" neovim gets coc or native LSP stack; vim gets coc
+let coc_supported = g:lsp_stack == 'coc' && (exists('g:nvim') || v:version >= 801)
 Plug 'neoclide/coc.nvim', Cond(coc_supported, {'branch': 'release'})
-let mason_supported = g:coc_or_mason == 'mason' && exists('g:nvim')
+let mason_supported = g:lsp_stack == 'native' && exists('g:nvim')
 Plug 'williamboman/mason.nvim', Cond(mason_supported)
 Plug 'williamboman/mason-lspconfig.nvim', Cond(mason_supported)
 Plug 'neovim/nvim-lspconfig', Cond(mason_supported)
@@ -755,7 +755,7 @@ let g:syntastic_python_checkers          = ['python3', 'pylint']
 
 """ mason, lspconfig, null-ls {{{2
 
-if exists('g:nvim') && g:coc_or_mason == 'mason'
+if exists('g:nvim') && g:lsp_stack == 'native'
     lua << EOF
     require("mason").setup({
         ui = {

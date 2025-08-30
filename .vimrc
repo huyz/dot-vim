@@ -84,15 +84,16 @@ endif
 
 """ Meta options (to configure the behavior of the rest of these config files)
 
-" 2025-04-01 mason vs. CoC, per LLM:
-" If you prefer a modular setup where you control each component of your editor, use Mason +
-" nvim-cmp + other native plugins.
-" If you want stronger autocomplete and VS Code-like features, CoC.nvim is better.
+" 2025-04-01 native vs. CoC
+" Per AI:
+" a) `native`: If you prefer a modular setup where you control each component of your editor, use
+"    Mason + " nvim-cmp + other native plugins.
+" b) `coc`: If you want stronger autocomplete and VS Code-like features, CoC.nvim is better.
 " Many engineers are moving toward native Lua solutions (Mason + LSP + nvim-cmp), but CoC
 " remains excellent if you want something that "just works" with minimal setup.
 
-"let g:coc_or_mason = 'mason'
-let g:coc_or_mason = 'coc'
+"let g:lsp_stack = 'native'
+let g:lsp_stack = 'coc'
 
 " This only applies to vim and not neovim, which uses "CSI u" mode..
 " For terminals, set true if you can make your terminal use modifyOtherKeys,
@@ -112,7 +113,7 @@ let g:use_extended_keys_in_terminal = v:true
 source $MYVIM/init.util.vim
 source $MYVIM/init.options.vim
 source $MYVIM/init.plugins.vim
-if g:coc_or_mason == 'coc' && (exists('g:nvim') || v:version >= 801)
+if g:lsp_stack == 'coc' && (exists('g:nvim') || v:version >= 801)
     let g:coc_running = 1
     source $MYVIM/init.plugins-coc.vim
 endif
