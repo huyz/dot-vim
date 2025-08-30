@@ -119,6 +119,8 @@ if has('mac') &&
         "call MapAlias('µ¬', '<M-m><M-l>')
         " Swap
         call MapAlias('≈≈', '<M-x><M-x>')
+        " Copilot completions panel
+        call MapAlias('∂<Space>', '<M-d><Space>')
 
         " Move tab first or last
         call MapAlias('<D-”>', '<M-S-D-{>')

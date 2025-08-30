@@ -722,9 +722,9 @@ let g:Hexokinase_ftEnabled = ['vim', 'html', 'css', 'less', 'scss', 'stylus', 'j
 " - <M-]> to go to next suggestion
 " - <M-Right> to accept next word
 
-"if exists('copilot_supported')
-"
-"endif
+if exists('copilot_supported')
+    call MapKey('<M-d><Space>', '<Cmd>Copilot panel<CR>')
+endif
 
 """ nvim-nu {{{2
 
