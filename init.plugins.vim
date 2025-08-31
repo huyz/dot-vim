@@ -123,6 +123,7 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'mg979/vim-visual-multi'
 Plug 'easymotion/vim-easymotion', Cond(!exists('g:nvim'))
 Plug 'smoka7/hop.nvim', Cond(exists('g:nvim'))
+" TODO(huy) 2025-08-31: fix all the mapping conflicts. To see them, do <C-q><C-r> to reload config
 Plug 'ggandor/leap.nvim', Cond(exists('g:nvim'))
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-surround'
@@ -193,17 +194,33 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " illuminate: highlight other usages
 Plug 'RRethy/vim-illuminate'
+
+" CoC
 " neovim gets coc or native LSP stack; vim gets coc
 let coc_supported = g:lsp_stack == 'coc' && (exists('g:nvim') || v:version >= 801)
 Plug 'neoclide/coc.nvim', Cond(coc_supported, {'branch': 'release'})
-let mason_supported = g:lsp_stack == 'native' && exists('g:nvim')
-Plug 'williamboman/mason.nvim', Cond(mason_supported)
-Plug 'williamboman/mason-lspconfig.nvim', Cond(mason_supported)
-Plug 'neovim/nvim-lspconfig', Cond(mason_supported)
-Plug 'mfussenegger/nvim-dap', Cond(mason_supported)
-" 2023-03-30 No condition needed anymore as we need null-ls for nvim-nu too
-"Plug 'jose-elias-alvarez/null-ls.nvim', Cond(mason_supported)
-Plug 'jose-elias-alvarez/null-ls.nvim'
+
+" Native LSP
+let native_lsp_supported = g:lsp_stack == 'native' && exists('g:nvim')
+Plug 'mason-org/mason.nvim', Cond(native_lsp_supported)
+Plug 'mason-org/mason-lspconfig.nvim', Cond(native_lsp_supported)
+Plug 'neovim/nvim-lspconfig', Cond(native_lsp_supported)
+Plug 'mfussenegger/nvim-dap', Cond(native_lsp_supported)
+" What none-ls (fka null-ls) does: lets you interact with black, eslint, shellcheck, etc., through
+" Neovim’s LSP client, just like pyright or tsserver.
+" So it seems to have been created after CoC but before native LSP servers.
+Plug 'nvimtools/none-ls.nvim', Cond(native_lsp_supported)
+
+" Native LSP: Completions
+Plug 'hrsh7th/cmp-nvim-lsp', Cond(native_lsp_supported)         " LSP completion
+Plug 'hrsh7th/cmp-buffer', Cond(native_lsp_supported)           " Buffer completion
+Plug 'hrsh7th/cmp-path', Cond(native_lsp_supported)             " Path completion
+Plug 'hrsh7th/cmp-cmdline', Cond(native_lsp_supported)          " Command line completion
+Plug 'hrsh7th/nvim-cmp', Cond(native_lsp_supported)             " Completion framework
+" LuaSnip: Follow latest release and install jsregexp.
+"   Replace <CurrentMajor> by the latest released major (first number of latest release)
+Plug 'L3MON4D3/LuaSnip', Cond(native_lsp_supported, {'tag': 'v2.*', 'do': 'make install_jsregexp'})
+Plug 'saadparwaiz1/cmp_luasnip', Cond(native_lsp_supported)     " Snippet completion
 
 " Git
 Plug 'rhysd/git-messenger.vim'
@@ -557,11 +574,11 @@ endif
 "
 " Bindings:
 "   - 2 chars: s S
-"   - other windods: gs
-"   - s<space><space>: empty lin
+"   - other windows: gs
+"   - s<space><space>: empty line
 "   - XXX 2024-03-12: s{char}<space> doesn't work for me
-" Since hop takes over f F t T, you may want to use this as altnerative:
-"   - s{char}<enter> and S{char><enter>
+" Since hop takes over f F t T, you may want to use this as alternative:
+"   - s{char}<enter> and S{char}<enter>
 "     - and then keep typing <enter>
 
 if exists('g:nvim')
@@ -751,30 +768,158 @@ let g:syntastic_python_pylint_post_args  = "--max-line-length=100"
 " on macOS 10.15.7: system "python" is still python2
 let g:syntastic_python_checkers          = ['python3', 'pylint']
 
-""" mason, lspconfig, null-ls {{{2
+""" mason, lspconfig, none-ls {{{2
 
-if exists('g:nvim') && g:lsp_stack == 'native'
+if native_lsp_supported
     lua << EOF
     require("mason").setup({
         ui = {
             keymaps = {
-            apply_language_filter = "<D-f>",
+                apply_language_filter = "<D-f>",
             }
         }
     })
-    require("mason-lspconfig").setup()
 
-    -- After setting up mason-lspconfig you may set up servers via lspconfig
-    -- require("lspconfig").sumneko_lua.setup {}
-    -- require("lspconfig").rust_analyzer.setup {}
-    -- ...
+    local mason_lspconfig = require("mason-lspconfig")
 
-    -- Or just setup all of the installed ones
-    require('mason-lspconfig').setup_handlers({
-        function(server)
-            require('lspconfig')[server].setup({})
-        end
+    mason_lspconfig.setup({
+        -- Run `:LspInstall` to install servers
+        -- TODO: pick a markdown one
+        ensure_installed = {
+            "bashls",
+            "jsonls",
+            "yamlls",
+            --"jinjalsp",
+            "jqls",
+            -- textlsp: for Org-mode
+            "textlsp",
+
+            "ruff",
+            "perlnavigator",
+            --"gopls",
+            "powershell_es",
+
+            "eslint",
+            --"tsserver",
+            --"mdx_analyzer",
+            --"svelte",
+            "html",
+            "cssls",
+            --"tailwindcss",
+
+            "docker_compose_language_service",
+            "dockerls",
+
+            --"java_language_server",
+            --"gradle_ls",
+            --"graphql",
+            -- lemminx: XML
+            --"lemminx",
+        }
     })
+EOF
+endif
+
+""" nvim-cmp & LuaSnip {{{2
+
+" 2025-04-01 WIP
+if native_lsp_supported
+    lua <<EOF
+    -- Set up nvim-cmp.
+    local cmp = require'cmp'
+
+    cmp.setup({
+        snippet = {
+            -- REQUIRED - you must specify a snippet engine
+            expand = function(args)
+                -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+                require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+                -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+                -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+
+                -- For `mini.snippets` users:
+                -- local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
+                -- insert({ body = args.body }) -- Insert at cursor
+                -- cmp.resubscribe({ "TextChangedI", "TextChangedP" })
+                -- require("cmp.config").set_onetime({ sources = {} })
+            end,
+        },
+        window = {
+            -- completion = cmp.config.window.bordered(),
+            -- documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
+        sources = cmp.config.sources({
+            { name = 'nvim_lsp' },
+            -- { name = 'vsnip' }, -- For vsnip users.
+            { name = 'luasnip' }, -- For luasnip users.
+            -- { name = 'ultisnips' }, -- For ultisnips users.
+            -- { name = 'snippy' }, -- For snippy users.
+        }, {
+            { name = 'buffer' },
+        })
+    })
+
+    -- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
+    -- Set configuration for specific filetype.
+    --[[ cmp.setup.filetype('gitcommit', {
+        sources = cmp.config.sources({
+        { name = 'git' },
+        }, {
+        { name = 'buffer' },
+        })
+    })
+    require("cmp_git").setup() ]]--
+
+    -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+        { name = 'buffer' }
+        }
+    })
+
+    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+        { name = 'path' }
+        }, {
+        { name = 'cmdline' }
+        }),
+        matching = { disallow_symbol_nonprefix_matching = false }
+    })
+
+    -- Set up lspconfig.
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+    --require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
+    --    capabilities = capabilities
+    --}
+EOF
+
+    lua <<EOF
+    require("luasnip.loaders.from_vscode").load({ paths = { "~/.config/LuaSnip/snippets" } })
+
+    local ls = require("luasnip")
+
+    vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
+    vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
+    vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
+
+    vim.keymap.set({"i", "s"}, "<C-E>", function()
+        if ls.choice_active() then
+            ls.change_choice(1)
+        end
+    end, {silent = true})
+
 EOF
 endif
 

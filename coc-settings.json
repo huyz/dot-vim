@@ -1,5 +1,11 @@
 {
   "git.addGBlameToVirtualText": true,
   // TODO: figure out this snippets thing that keeps coming back
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "snippets.textmateSnippetsRoots": [
+    // Just like LuaSnip https://github.com/L3MON4D3/LuaSnip/issues/1295
+    // coc-snippets doesn't like snippet files with extension .json instead of .code-snippets.
+    // So we'll reuse the same hack as LuaSnip by pointing to its directory.
+    "~/git/+huy/dot-shared/.config/LuaSnip/snippets"
+  ]
 }

@@ -234,3 +234,26 @@ My more concise shortcuts:
 | -------- | ---------------------------------------- |
 | `<M-c>:` | Trigger completion                       |
 | `\\^U`   | Convert :emoji_name: into unicode emojis |
+
+## Development using native LSP
+
+### nvim-cmp
+
+| Mapping              | Description                              |
+| --------             | ---------------------------------------- |
+| `<C-Space>`          | Show completion pop-up                   |
+| `<C-e>`              | Hide completion pop-up                   |
+| `<C-y>` or `<Enter>` | Accept pop-up completion                 |
+| `<C-p>`              | Previous pop-up completion               |
+| `<C-n>`              | Next pop-up completion                   |
+
+# Development using CoC
+
+| Mapping              | Description                                           |
+| --------             | ----------------------------------------              |
+| `<C-Space>`          | Show completion pop-up (after typing some characters) |
+| `<C-e>`              | Hide completion pop-up                                |
+| `<C-y>` or `<Enter>` | Accept pop-up completion                              |
+| `<C-p>`              | Previous pop-up completion                            |
+| `<C-n>`              | Next pop-up completion                                |
+
