@@ -184,7 +184,6 @@ Plug 'folke/trouble.nvim', Cond(exists('g:nvim'))
 let copilot_supported = exists('g:nvim') || v:version >= 801
 Plug 'github/copilot.vim', Cond(copilot_supported)
 
-Plug 'LhKipp/nvim-nu', {'do': ':TSInstall nu'}
 " vim gets syntastic
 Plug 'scrooloose/syntastic', Cond(!exists('g:nvim'))
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
@@ -732,14 +731,6 @@ let g:Hexokinase_ftEnabled = ['vim', 'html', 'css', 'less', 'scss', 'stylus', 'j
 
 if exists('copilot_supported')
     call MapKey('<M-d><Space>', '<Cmd>Copilot panel<CR>')
-endif
-
-""" nvim-nu {{{2
-
-if exists('g:nvim')
-    lua << EOF
-    require("nu").setup()
-EOF
 endif
 
 
