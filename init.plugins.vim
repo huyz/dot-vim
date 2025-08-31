@@ -800,22 +800,22 @@ if native_lsp_supported
             --"textlsp",
 
             "pylsp",
-            "ruff",
+            --"ruff",
 
             "perlnavigator",
             --"gopls",
             --"powershell_es",
 
-            "eslint",
-            "ts_ls",
+            --"eslint",
+            --"ts_ls",
             --"mdx_analyzer",
             --"svelte",
-            "html",
-            "cssls",
-            "cssmodules-language-server",
+            --"html",
+            --"cssls",
+            --"cssmodules_ls",
             --"tailwindcss",
 
-            "docker_language_server",
+            --"docker_language_server",
             --"docker_compose_language_service",
             --"dockerls",
 
