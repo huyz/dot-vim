@@ -788,27 +788,36 @@ if native_lsp_supported
         ensure_installed = {
             "bashls",
             "jsonls",
+            -- taplo: TOML
+            "taplo",
             "yamlls",
-            --"jinjalsp",
+            "systemd_ls",
+            --"vimls",
+            --"ansiblels",
+            "jinja_lsp",
             "jqls",
             -- textlsp: for Org-mode
-            "textlsp",
+            --"textlsp",
 
+            "pylsp",
             "ruff",
+
             "perlnavigator",
             --"gopls",
-            "powershell_es",
+            --"powershell_es",
 
             "eslint",
-            --"tsserver",
+            "ts_ls",
             --"mdx_analyzer",
             --"svelte",
             "html",
             "cssls",
+            "cssmodules-language-server",
             --"tailwindcss",
 
-            "docker_compose_language_service",
-            "dockerls",
+            "docker_language_server",
+            --"docker_compose_language_service",
+            --"dockerls",
 
             --"java_language_server",
             --"gradle_ls",
