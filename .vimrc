@@ -92,8 +92,8 @@ endif
 " Many engineers are moving toward native Lua solutions (Mason + LSP + nvim-cmp), but CoC
 " remains excellent if you want something that "just works" with minimal setup.
 
-"let g:lsp_stack = 'native'
-let g:lsp_stack = 'coc'
+let g:lsp_stack = 'native'
+"let g:lsp_stack = 'coc'
 
 " This only applies to vim and not neovim, which uses "CSI u" mode..
 " For terminals, set true if you can make your terminal use modifyOtherKeys,
