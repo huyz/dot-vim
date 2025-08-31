@@ -257,3 +257,13 @@ My more concise shortcuts:
 | `<C-p>`              | Previous pop-up completion                            |
 | `<C-n>`              | Next pop-up completion                                |
 
+# Development using GitHub Copilot
+
+| Mapping     | Description                              |
+| --------    | ---------------------------------------- |
+| `<M-\\>`    | Trigger suggestion                       |
+| `<Tab>`     | Accept suggestion                        |
+| `<M-[>`     | Previous suggestion                      |
+| `<M-]>`     | Next suggestion                          |
+| `<M-Right>` | Next suggestion                          |
+

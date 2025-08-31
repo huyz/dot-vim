@@ -11,8 +11,8 @@
 " For iTerm, we assume that
 if has('mac') &&
             \ (exists('g:tui_nvim') && exists('g:kitty_term') ||
-            \ (exists('g:gui_nvim')) ||
-            \ (exists('g:gui_macvim') && !has('macmeta')))
+            \  exists('g:gui_nvim') ||
+            \  exists('g:gui_macvim') && !has('macmeta'))
     " Exceptions for insert mode:
     " - Can't remap `, e, u, i, n as these are used to compose digraph prefixes
     " - Won't remap ∞, ·, –, —, ≈, ≠, ±, ≤, ≥, …  as these are useful special characters even to
@@ -94,7 +94,10 @@ if has('mac') &&
     call MapAlias('”', '<M-{>')
     call MapAlias('‘', '<M-]>')
     call MapAlias('’', '<M-}>')
-    call MapAlias('«', '<M-Bslash>', 'all', v:true)
+    " Unlike », we do give up « so that we can use the typical Copilot mapping for triggering
+    " suggestion
+    call MapAlias('«', '<M-Bslash>')
+    " We don't remap » because we actually use that character a lot
     call MapAlias('»', '<M-Bar>', 'all', v:true)
     call MapAlias('…', '<M-;>')
     call MapAlias('Ú', '<M-:>')
