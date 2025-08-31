@@ -677,6 +677,13 @@ endfun
 " Start out enabled
 call EregexToggle(v:true)
 
+
+""" argumentative {{{2
+
+" Undo the mappings that we don't need and conflict with vim-targets (shows up on :checkhealth)
+" https://github.com/PeterRincker/vim-argumentative/blob/master/plugin/argumentative.vim#L350-L353
+let g:argumentative_no_mappings = v:true
+
 """ checkbox {{{2
 
 let g:checkbox_states = [' ', 'x', '\~']
