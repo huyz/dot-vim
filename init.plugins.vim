@@ -824,6 +824,26 @@ if native_lsp_supported
             --"lemminx",
         }
     })
+
+    -- 2025-09-01 From https://github.com/mason-org/mason.nvim/discussions/1241#discussioncomment-5701984
+    vim.api.nvim_create_user_command("MasonUpdateOutdated", function()
+        local registry = require("mason-registry")
+        registry.refresh()
+        registry.update()
+        local packages = registry.get_all_packages()
+        for _, pkg in ipairs(packages) do
+            if pkg:is_installed() then
+                local ok, result = pcall(function()
+                    pkg:install()
+                end)
+                if not ok then
+                    print("Error while updating package: ", vim.inspect(pkg))
+                end
+            end
+        end
+        -- This is to be invoked at shell CLI
+        vim.cmd("doautocmd User MasonUpdateOutdatedComplete")
+    end, { force = true })
 EOF
 endif
 
