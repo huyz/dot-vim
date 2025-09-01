@@ -177,7 +177,7 @@ My more concise shortcuts:
 
 | Mapping  | Description        |
 | -------- | ------------------ |
-| `:S`     | PCRE2 substitution |
+| `:S///`  | PCRE2 substitution |
 | `<M-s>/` | Toggle PCRE search |
 
 ### exchange
