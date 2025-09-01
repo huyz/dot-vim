@@ -788,16 +788,14 @@ if native_lsp_supported
         ensure_installed = {
             "bashls",
             "jsonls",
-            -- taplo: TOML
-            "taplo",
+            "taplo",  -- TOML
             "yamlls",
             "systemd_ls",
             --"vimls",
             --"ansiblels",
-            "jinja_lsp",
+            --"jinja_lsp",
             "jqls",
-            -- textlsp: for Org-mode
-            --"textlsp",
+            --"textlsp",  -- for Org-mode
 
             "pylsp",
             --"ruff",
