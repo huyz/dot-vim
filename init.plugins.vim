@@ -204,6 +204,9 @@ Plug 'neoclide/coc.nvim', Cond(coc_supported, {'branch': 'release'})
 let native_lsp_supported = g:lsp_stack == 'native' && exists('g:nvim')
 Plug 'mason-org/mason.nvim', Cond(native_lsp_supported)
 Plug 'mason-org/mason-lspconfig.nvim', Cond(native_lsp_supported)
+" This might make it easier to update outdated packages but it's lagging Mason 2.0
+" https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim/issues/79
+"Plug 'WhoIsSethDaniel/mason-tool-installer.nvim', Cond(native_lsp_supported)
 Plug 'neovim/nvim-lspconfig', Cond(native_lsp_supported)
 Plug 'mfussenegger/nvim-dap', Cond(native_lsp_supported)
 " What none-ls (fka null-ls) does: lets you interact with black, eslint, shellcheck, etc., through
