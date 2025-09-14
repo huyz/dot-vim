@@ -512,8 +512,6 @@ if has('mac')
 endif
 call MapKey('<M-o>g', '<Plug>SearchNormal', ['map'])
 call MapKey('<M-o>g', '<Plug>SearchVisual', ['vmap'])
-" NOTE: for some reason `<Cmd>` doesn't work right in visual mode, so use `:`
-"   https://github.com/voldikss/vim-browser-search/issues/28
 call MapKey('<M-o>w', ':BrowserSearch<CR>')
 " FIXME: 2022-11-12 cheat.sh API may have changed
 call MapKey('<M-o>p', '<Leader>KB', 'all', v:false, v:true)
