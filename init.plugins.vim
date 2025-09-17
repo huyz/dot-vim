@@ -69,22 +69,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'henrik/vim-reveal-in-finder'
 
-" wilder
-if exists('g:nvim')
-    function! UpdateRemotePlugins(...)
-        " Needed to refresh runtime files
-        let &rtp=&rtp
-        UpdateRemotePlugins
-    endfunction
-
-    Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
-else
-    Plug 'gelguy/wilder.nvim'
-endif
-" For wilder: To use Python remote plugin features in Vim, can be skipped
-" 2022-10-25 Can't get python options to work in vim or neovim
-" Plug 'roxma/nvim-yarp', Cond(!exists('g:nvim'))
-" Plug 'roxma/vim-hug-neovim-rpc', Cond(!exists('g:nvim'))
+" wilder (No need for neovim)
+Plug 'gelguy/wilder.nvim', Cond(!exists('g:nvim'))
+Plug 'roxma/nvim-yarp', Cond(!exists('g:nvim'))
+Plug 'roxma/vim-hug-neovim-rpc', Cond(!exists('g:nvim'))
 
 " Colorscheme
 " Plug 'f-person/auto-dark-mode.nvim', Cond(exists('g:nvim'))
