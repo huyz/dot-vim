@@ -469,26 +469,28 @@ let g:readline_ctrl_k = 0
 """ wilder {{{2
 " 2022-10-25 Can't get python options to work in vim or neovim
 
-call wilder#setup({
-    \ 'modes': [':', '/', '?'],
-    \ 'next_key': '<C-j>',
-    \ 'previous_key': '<C-k>',
-    \ 'accept_key': '<M-Enter>',
-    \ 'reject_key': '<S-Esc>',
-    \ })
+if !exists("g:nvim")
+    call wilder#setup({
+        \ 'modes': [':', '/', '?'],
+        \ 'next_key': '<C-j>',
+        \ 'previous_key': '<C-k>',
+        \ 'accept_key': '<M-Enter>',
+        \ 'reject_key': '<S-Esc>',
+        \ })
 
 
-call wilder#set_option('pipeline', [
-    \   wilder#branch(
-    \     wilder#cmdline_pipeline({
-    \       'language': 'vim',
-    \       'fuzzy': 1,
-    \       'fuzzy_filter': wilder#vim_fuzzy_filter(),
-    \     }),
-    \   ),
-    \ ])
+    call wilder#set_option('pipeline', [
+        \   wilder#branch(
+        \     wilder#cmdline_pipeline({
+        \       'language': 'vim',
+        \       'fuzzy': 1,
+        \       'fuzzy_filter': wilder#vim_fuzzy_filter(),
+        \     }),
+        \   ),
+        \ ])
 
-call wilder#set_option('renderer', wilder#popupmenu_renderer())
+    call wilder#set_option('renderer', wilder#popupmenu_renderer())
+fi
 
 """ nvim-tree {{{2
 
