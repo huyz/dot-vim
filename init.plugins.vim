@@ -490,7 +490,7 @@ if !exists("g:nvim")
         \ ])
 
     call wilder#set_option('renderer', wilder#popupmenu_renderer())
-fi
+endif
 
 """ nvim-tree {{{2
 
