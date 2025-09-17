@@ -18,6 +18,7 @@ else
     let g:perl_host_prog = "/usr/bin/perl"
 endif
 
+let g:python3_host_prog = expand("~/.pyenv/versions/py3nvim/bin/python")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 endif " exists('g:nvim')
