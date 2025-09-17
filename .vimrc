@@ -110,6 +110,7 @@ let g:use_extended_keys_in_terminal = v:true
 
 """ Splitting .vimrc into smaller files
 
+source $MYVIM/init.neovim.vim
 source $MYVIM/init.util.vim
 source $MYVIM/init.options.vim
 source $MYVIM/init.plugins.vim
@@ -131,7 +132,6 @@ source $MYVIM/init.terminal.vim
 source $MYVIM/init.syntax.vim
 source $MYVIM/init.color.vim
 source $MYVIM/init.syntax-overrides.vim
-source $MYVIM/init.neovim.vim
 
 """ Load up any custom initializations after this file
 
