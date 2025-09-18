@@ -45,10 +45,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tommcdo/vim-exchange'
+Plug 'machakann/vim-highlightedyank'
+" TODO(huy) 2025-09-18: Check out magidc/ideavim-anyobject
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'kana/vim-textobj-entire'
-Plug 'machakann/vim-highlightedyank'
 
 " Make `-` behave similar to within vim although AceJump's <C-j> is better.
 " NOTE: IdeaVim-EasyMotion is better than the original vim-easymotion because it makes use of

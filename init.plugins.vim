@@ -133,6 +133,7 @@ Plug 'tpope/vim-abolish'
 Plug 'https://github.com/ZSaberLv0/eregex.vim.git'
 
 " Text objects
+" TODO(huy) 2025-09-18: Check out chrisgrieser/nvim-various-textobjs
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'kana/vim-textobj-user'  " dependency of textobj-entire
