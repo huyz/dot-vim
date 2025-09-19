@@ -554,8 +554,8 @@ if !exists('g:nvim')
     omap - <Plug>(easymotion-t2)
 
     " next match
-    map  _ <Plug>(easymotion-prev)
-    map  + <Plug>(easymotion-next)
+    map  __ <Plug>(easymotion-prev)
+    map  _+ <Plug>(easymotion-next)
 endif
 
 """" Leap (neovim-only) {{{2
@@ -582,7 +582,7 @@ endif
 """ hop (neovim-only) {{{2
 " Bindings:
 "   - 2 chars: -
-"   - 1 char on current line: f F t T
+"   - 1 char on current line: _f _F _t _T
 "   - pattern: <C-;>
 "   - line:  <C-S-:>
 
@@ -595,16 +595,16 @@ if exists('g:nvim')
     local directions = require('hop.hint').HintDirection
 
     -- Remap f,F,t,T commands
-    vim.keymap.set('', 'f', function()
+    vim.keymap.set('', '_f', function()
         hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
     end, {remap=true})
-    vim.keymap.set('', 'F', function()
+    vim.keymap.set('', '_F', function()
         hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
     end, {remap=true})
-    vim.keymap.set('', 't', function()
+    vim.keymap.set('', '_t', function()
         hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
     end, {remap=true})
-    vim.keymap.set('', 'T', function()
+    vim.keymap.set('', '_T', function()
         hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
     end, {remap=true})
     vim.keymap.set('', '-', function()
@@ -612,7 +612,9 @@ if exists('g:nvim')
     end, {remap=true})
 EOF
 
+    " FIXME(huy) 2025-09-19: Doesn't work in GUI
     call MapControlKey(';', '<Cmd>HopPattern<CR>')
+    " FIXME(huy) 2025-09-19: Doesn't work in TUI or GUI
     call MapControlKey(':', '<Cmd>HopLine<CR>')
 endif
 

@@ -99,15 +99,23 @@ I tend to forgot I defined these mappings:
 | `<C-Down>`         | Add cursor(s) vertically                                       |
 | `\\S` or `\\gS`    | Reselect last                                                  |
 
-### easymotion
+### easymotion (for vim)
 
 | Mapping | Description                                       |
 | ------- | ------------------------------------------------- |
 | `-abc`  | Highlight n-character matches                     |
-| `_`     | Go to previous n-character match                  |
-| `+`     | Go to next n-character match                      |
+| `__`    | Go to previous n-character match                  |
+| `_+`    | Go to next n-character match                      |
 | `\\w`   | Highlight consecutive targets of word motion      |
 | `\\t`   | Highlight consecutive targets of character motion |
+
+### hop (for neovim)
+
+| Mapping             | Description                         |
+| ------------------- | ----------------------------------- |
+| `-ab`               | Highlight 2-character matches       |
+| `_f` `_F` `_t` `_T` | Find next character on current line |
+| `<C-;>`             | Hop to pattern                      |
 
 ### CamelCaseMotion
 
