@@ -576,7 +576,14 @@ endif
 "     - and then keep typing <enter>
 
 if exists('g:nvim')
-    lua require('leap').create_default_mappings()
+    lua <<EOF
+    require('leap')
+
+    -- Sneak-style
+    vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
+    vim.keymap.set({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
+    vim.keymap.set('n',             'gs', '<Plug>(leap-from-window)')
+EOF
 endif
 
 """ hop (neovim-only) {{{2
