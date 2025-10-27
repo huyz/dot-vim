@@ -577,8 +577,6 @@ endif
 
 if exists('g:nvim')
     lua <<EOF
-    require('leap')
-
     -- Sneak-style
     vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
     vim.keymap.set({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
