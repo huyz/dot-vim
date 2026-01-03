@@ -35,7 +35,7 @@ if &t_Co > 2 || exists('g:gui_running') " If we have color
         " Set background based on our environment variable with a default of light
         " (we default to light because dark colors on white are easier to see
         " than light colors on black)
-        if $user_background == "dark"
+        if $DARK_OR_LIGHT == "dark"
             set background=dark
         else
             set background=light

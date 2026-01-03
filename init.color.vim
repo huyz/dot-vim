@@ -137,12 +137,12 @@ call RefreshBackground()
 if exists('g:nvim')
     :lua <<EOF
     require('dark_notify').run({
-        onchange = function(mode)
+        onchange = function(dark_or_light)
             -- optional, you can configure your own things to react to changes.
             -- this is called at startup and every time dark mode is switched,
             -- either via the OS, or because you manually set/toggled the mode.
-            -- mode is either "light" or "dark"
-            if (mode == "dark")
+            -- dark_or_light is either "light" or "dark"
+            if (dark_or_light == "dark")
             then
                 vim.api.nvim_call_function("SetBackgroundDark", {})
             else
