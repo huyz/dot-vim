@@ -791,7 +791,7 @@ if native_lsp_supported
             "jsonls",
             "taplo",  -- TOML
             "yamlls",
-            "systemd_ls",
+            "systemd_lsp",
             --"vimls",
             --"ansiblels",
             --"jinja_lsp",
