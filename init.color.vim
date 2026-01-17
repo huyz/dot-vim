@@ -132,25 +132,27 @@ let g:colorscheme_light = "base16-tomorrow"
 let g:airline_theme = "base16_tomorrow"
 set termguicolors
 
-call RefreshBackground()
-
 if exists('g:nvim')
-    :lua <<EOF
-    require('dark_notify').run({
-        onchange = function(dark_or_light)
-            -- optional, you can configure your own things to react to changes.
-            -- this is called at startup and every time dark mode is switched,
-            -- either via the OS, or because you manually set/toggled the mode.
-            -- dark_or_light is either "light" or "dark"
-            if (dark_or_light == "dark")
-            then
-                vim.api.nvim_call_function("SetBackgroundDark", {})
-            else
-                vim.api.nvim_call_function("SetBackgroundLight", {})
-            end
-        end,
-    })
+    " 2026-01-16 We could let dark_notify change the background of even terminal nvim
+    "   if say macOS goes to dark mode, but these days we prefer to match the terminal's mark.
+    if exists('g:gui_running')
+        :lua <<EOF
+        require('dark_notify').run({
+            onchange = function(dark_or_light)
+                -- optional, you can configure your own things to react to changes.
+                -- this is called at startup and every time dark mode is switched,
+                -- either via the OS, or because you manually set/toggled the mode.
+                -- dark_or_light is either "light" or "dark"
+                if (dark_or_light == "dark")
+                then
+                    vim.api.nvim_call_function("SetBackgroundDark", {})
+                else
+                    vim.api.nvim_call_function("SetBackgroundLight", {})
+                end
+            end,
+        })
 EOF
+    endif
 endif
 
 " if exists('g:nvim')
@@ -171,3 +173,5 @@ endif
 "     auto_dark_mode.init()
 " EOF
 " endif
+
+call RefreshBackground()
