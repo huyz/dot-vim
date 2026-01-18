@@ -115,7 +115,9 @@ Plug 'smoka7/hop.nvim', Cond(exists('g:nvim'))
 Plug 'ggandor/leap.nvim', Cond(exists('g:nvim'))
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-surround'
-Plug 'landock/vim-expand-region'
+" 2026-01-18 Broke for me on neovim, later than people at:
+"   https://github.com/terryma/vim-expand-region/issues/23
+Plug 'landock/vim-expand-region', Cond(!exists('g:nvim'))
 Plug 'matze/vim-move'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
