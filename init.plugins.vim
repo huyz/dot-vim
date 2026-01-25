@@ -71,8 +71,6 @@ Plug 'henrik/vim-reveal-in-finder'
 
 " wilder (No need for neovim)
 Plug 'gelguy/wilder.nvim', Cond(!exists('g:nvim'))
-Plug 'roxma/nvim-yarp', Cond(!exists('g:nvim'))
-Plug 'roxma/vim-hug-neovim-rpc', Cond(!exists('g:nvim'))
 
 " Colorscheme
 " Plug 'f-person/auto-dark-mode.nvim', Cond(exists('g:nvim'))
