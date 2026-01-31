@@ -110,7 +110,7 @@ Plug 'mg979/vim-visual-multi'
 Plug 'easymotion/vim-easymotion', Cond(!exists('g:nvim'))
 Plug 'smoka7/hop.nvim', Cond(exists('g:nvim'))
 " TODO(huy) 2025-08-31: fix all the mapping conflicts. To see them, do <C-q><C-r> to reload config
-Plug 'ggandor/leap.nvim', Cond(exists('g:nvim'))
+Plug 'https://codeberg.org/andyg/leap.nvim', Cond(exists('g:nvim'))
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-surround'
 " 2026-01-18 Broke for me on neovim, later than people at:
