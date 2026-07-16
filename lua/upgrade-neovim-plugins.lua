@@ -21,10 +21,18 @@ vim.api.nvim_create_autocmd("User", {
     end,
 })
 
--- Kick off the async Mason update.
-vim.cmd("MasonUpdate")
--- https://github.com/RubixDev/mason-update-all
-vim.cmd("MasonUpdateAll")
+local commands = vim.api.nvim_get_commands({ builtin = false })
+
+if commands.MasonUpdateAll then
+    print("Starting Mason updates")
+    -- Kick off the async Mason update.
+    vim.cmd("MasonUpdate")
+    vim.cmd("MasonUpdateAll")
+else
+    -- https://github.com/RubixDev/mason-update-all
+    print("MasonUpdateAll not available; skipping mason-update-all")
+    mason_done = true
+end
 
 -- Run Vim-Plug updates.
 vim.cmd([[
