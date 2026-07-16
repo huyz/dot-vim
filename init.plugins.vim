@@ -240,6 +240,22 @@ Plug 'glacambre/firenvim', Cond(exists('g:nvim'), { 'do': { _ -> firenvim#instal
 
 call plug#end()
 
+""" Auto-install missing plugins {{{1
+
+function! s:auto_install_plugins() abort
+    if exists('g:plugs')
+        let missing = filter(values(g:plugs), '!isdirectory(v:val.dir)')
+        if !empty(missing)
+            echo "Installing missing plugins: " . join(missing, ', ')
+            autocmd VimEnter * ++once PlugInstall --sync | source $MYVIMRC
+        endif
+    endif
+endfunction
+
+" Only auto-install plugins if vim is interactive and we're not doing anything special
+if has('gui_running') && argc() == 0
+    call s:auto_install_plugins()
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin options {{{1
