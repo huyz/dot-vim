@@ -15,7 +15,8 @@ end
 vim.api.nvim_create_autocmd("User", {
     pattern = "MasonUpdateAllComplete",
     callback = function()
-        print('mason-update-all has finished')
+        print('mason-update-all has finished; opportunistically running MasonUpdate…')
+        vim.cmd("MasonUpdate")
         mason_done = true
         maybe_quit()
     end,
@@ -24,9 +25,8 @@ vim.api.nvim_create_autocmd("User", {
 local commands = vim.api.nvim_get_commands({ builtin = false })
 
 if commands.MasonUpdateAll then
-    print("Starting Mason updates")
+    print("Starting mason-update-all…")
     -- Kick off the async Mason update.
-    vim.cmd("MasonUpdate")
     vim.cmd("MasonUpdateAll")
 else
     -- https://github.com/RubixDev/mason-update-all
