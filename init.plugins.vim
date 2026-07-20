@@ -262,7 +262,6 @@ endif
 
 """ mason-update-all {{{2
 
-
 if exists('g:nvim')
     lua << EOF
     require("mason-update-all").setup({
