@@ -801,6 +801,20 @@ let g:syntastic_python_pylint_post_args  = "--max-line-length=100"
 " on macOS 10.15.7: system "python" is still python2
 let g:syntastic_python_checkers          = ['python3', 'pylint']
 
+""" nvim-treesitter {{{2
+
+if exists('g:nvim')
+    lua << EOF
+    require('nvim-treesitter').setup {
+    -- Directory to install parsers and queries to (prepended to `runtimepath` to have priority)
+    --   ~/.local/share/nvim/site/parser
+    install_dir = vim.fn.stdpath('data') .. '/site'
+}
+
+    require('nvim-treesitter').install { 'python', 'markdown' }
+EOF
+endif
+
 """ mason, lspconfig, none-ls {{{2
 
 if native_lsp_supported
