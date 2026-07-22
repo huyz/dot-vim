@@ -829,47 +829,53 @@ if native_lsp_supported
 
     local mason_lspconfig = require("mason-lspconfig")
 
+    local ensure_installed_servers = {
+        "bashls",
+        "jsonls",
+        "taplo",  -- TOML
+        "yamlls",
+        --"vimls",
+        --"ansiblels",
+        --"jinja_lsp",
+        "jqls",
+        --"textlsp",  -- for Org-mode
+
+        "pylsp",
+        --"ruff",
+
+        "perlnavigator",
+        --"gopls",
+        --"powershell_es",
+
+        --"eslint",
+        --"ts_ls",
+        --"mdx_analyzer",
+        --"svelte",
+        --"html",
+        --"cssls",
+        --"cssmodules_ls",
+        --"tailwindcss",
+
+        --"docker_language_server",
+        --"docker_compose_language_service",
+        --"dockerls",
+
+        --"java_language_server",
+        --"gradle_ls",
+        --"graphql",
+        -- lemminx: XML
+        --"lemminx",
+    }
+
+    -- 2026-07-22 systemd_lsp fails to install on Ubuntu ARM
+    if not (vim.fn.has("linux") == 1 and vim.fn.system("uname -m"):match("aarch64")) then
+        table.insert(ensure_installed_servers, "systemd_lsp")
+    end
+
     mason_lspconfig.setup({
         -- Run `:LspInstall` to install servers
         -- TODO: pick a markdown one
-        ensure_installed = {
-            "bashls",
-            "jsonls",
-            "taplo",  -- TOML
-            "yamlls",
-            "systemd_lsp",
-            --"vimls",
-            --"ansiblels",
-            --"jinja_lsp",
-            "jqls",
-            --"textlsp",  -- for Org-mode
-
-            "pylsp",
-            --"ruff",
-
-            "perlnavigator",
-            --"gopls",
-            --"powershell_es",
-
-            --"eslint",
-            --"ts_ls",
-            --"mdx_analyzer",
-            --"svelte",
-            --"html",
-            --"cssls",
-            --"cssmodules_ls",
-            --"tailwindcss",
-
-            --"docker_language_server",
-            --"docker_compose_language_service",
-            --"dockerls",
-
-            --"java_language_server",
-            --"gradle_ls",
-            --"graphql",
-            -- lemminx: XML
-            --"lemminx",
-        }
+        ensure_installed = ensure_installed_servers
     })
 EOF
 endif
