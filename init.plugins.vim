@@ -153,6 +153,7 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'ellisonleao/glow.nvim', Cond(exists('g:nvim'))
 " Plug 'RubenVerborgh/vim-markup-assistant'
+"Plug 'obsidian-nvim/obsidian.nvim'
 
 " Dev
 Plug 'airblade/vim-gitgutter'
@@ -200,7 +201,7 @@ Plug 'mason-org/mason-lspconfig.nvim', Cond(native_lsp_supported)
 Plug 'neovim/nvim-lspconfig', Cond(native_lsp_supported)
 Plug 'mfussenegger/nvim-dap', Cond(native_lsp_supported)
 " What none-ls (fka null-ls) does: lets you interact with black, eslint, shellcheck, etc., through
-" Neovim’s LSP client, just like pyright or tsserver.
+" Neovim's LSP client, just like pyright or tsserver.
 " So it seems to have been created after CoC but before native LSP servers.
 Plug 'nvimtools/none-ls.nvim', Cond(native_lsp_supported)
 
